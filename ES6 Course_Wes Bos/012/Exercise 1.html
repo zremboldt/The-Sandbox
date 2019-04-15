@@ -30,7 +30,7 @@
 
     <script>
       // Select all the list items on the page and convert to array
-      const totalTime = Array.from(document.querySelectorAll("li"))
+      const totalTime = Array.from(document.querySelectorAll("[data-time]"))
 
         // Filter for only the elements that contain the word 'Flexbox'
         .filter(item => item.innerText.includes("Flexbox"))
