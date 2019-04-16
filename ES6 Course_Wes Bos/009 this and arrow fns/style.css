@@ -1,0 +1,25 @@
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100%;
+}
+
+.box {
+  margin: 100px auto;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  background-color: mediumspringgreen;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  border-radius: 50px;
+}
+
+.grow {
+  transform: scale(2) rotate(90deg);
+  background-color: rgb(129, 66, 255);
+  border-radius: 0px;
+}
