@@ -1,6 +1,6 @@
 // video 007
 
-const names = ["Zac", "Leah", "Connor", "Benaiah"];
+const names = ["Zac", "Le", "CC", "BB"];
 
 const fullNames = names.map(name => `${name} Remboldt`);
 
