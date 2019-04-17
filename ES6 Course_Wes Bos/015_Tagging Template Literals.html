@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      .hl {
+        background-color: rgb(255, 255, 70);
+        border-radius: 3px;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Tagged Templates
+      // With Tagged Templates you get access to all of the pieces of the template
+      // and it's up to you to put it together and return exactly what you want.
+      // It gives you more control over the templating.
+
+      function highlight(strings, ...values) {
+        let str = "";
+
+        strings.forEach((string, i) => {
+          str += `${string} <span contenteditable class="hl">${values[i] || ""}</span>`;
+        });
+
+        return str;
+      }
+
+      const name = "schnookums";
+      const age = 100;
+      // Here we're tagging the template with the function above. "highlight"
+      const sentence = highlight`My dog's name is ${name} and he is ${age} years old.`;
+      document.body.innerHTML = sentence;
+    </script>
+  </body>
+</html>
