@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>I'm p 01</p>
+    <p>I'm p 02</p>
+    <p>I'm p 03</p>
+    <p>I'm p 04</p>
+    <p>I'm p 05</p>
+    <p>I'm p 06</p>
+    <p>I'm p 07</p>
+    <p>I'm p 08</p>
+    <p>I'm p 09</p>
+    <p>I'm p 10</p>
+
+    <script>
+      const dogs = [
+        'Beasley',
+        'Moose',
+        'Shnookums',
+        'Gidget',
+        'Bowser',
+        'Oreo',
+        'Pete',
+        'Bravo Pup',
+        'Chance'
+      ];
+
+      // for (const dog of dogs) {
+      //   console.log(dog, dogs.indexOf(dog) + 1);
+      // }
+
+      //
+
+      // for (const [i, dog] of dogs.entries()) {
+      //   console.log(`${i + 1}. ${dog}`);
+      // }
+
+      //
+
+      for (const [i, dog] of dogs.entries()) {
+        console.log(`${i + 1} ${'.'.repeat(18 - dog.length)} ${dog}`);
+      }
+
+      //
+
+      const name = 'Zac';
+      for (char of name) console.log(char);
+
+      //
+
+      const ps = document.querySelectorAll('p');
+      for (const p of ps) {
+        p.addEventListener('click', function() {
+          console.log(this.textContent);
+        });
+      }
+
+      //
+
+      function addUpNums() {
+        let total = 0;
+        // Arguments is a special keyword
+        for (const num of arguments) total += num;
+        console.log(total);
+      }
+
+      addUpNums(12, 3, 3, 44, 6, 56, 34, 4, 6, 5, 43, 234, 5, 6, 32);
+    </script>
+  </body>
+</html>
