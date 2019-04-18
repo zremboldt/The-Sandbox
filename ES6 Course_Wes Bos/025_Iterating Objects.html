@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const dog = {
+        name: "Beasley",
+        color: "white",
+        height: 9,
+        weight: 4
+      };
+
+      // Object.entries is new in ES2017
+      for (const prop of Object.entries(dog)) console.log(prop);
+
+      for (const prop of Object.keys(dog)) console.log(prop);
+
+      for (const prop of Object.values(dog)) console.log(prop);
+
+      for (const prop of Object.keys(dog)) {
+        const value = dog[prop];
+        console.log(prop, value);
+      }
+
+      // same thing with forIn
+      for (const prop in dog) {
+        const value = dog[prop];
+        console.log(prop, value);
+      }
+    </script>
+  </body>
+</html>
