@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="people">
+      <p>Jeff</p>
+      <p>Martin</p>
+      <p>Inigo</p>
+    </div>
+
+    <script>
+      const people = Array.from(document.querySelectorAll(".people p"));
+
+      for (const p of people) {
+        p.addEventListener("click", function() {
+          console.log(this.textContent);
+        });
+      }
+
+      const names = people.map(person => person.textContent);
+      console.log(names);
+    </script>
+  </body>
+</html>

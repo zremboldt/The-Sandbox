@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="people">
+      <p>Jeff</p>
+      <p>Martin</p>
+      <p>Inigo</p>
+    </div>
+
+    <script>
+      // This'll create a node list, not an array.
+      const people = document.querySelectorAll(".people p");
+      // Array.from can take a second arg which is a map function.
+      // This allows you to modify the array as you create it.
+      const peopleArray = Array.from(people, person => {
+        console.log(person);
+        console.log(person.textContent);
+      });
+
+      console.log("---------------------------");
+
+      // This can be refined and done all in one go.
+      const peeps = Array.from(document.querySelectorAll(".people p"), person => {
+        console.log(person.textContent);
+      });
+
+      console.log("---------------------------");
+
+      // The arguments keyword gives you an object not an array.
+      // So if you'd like to use an array method like reduce you have to convert it to an array.
+      function sumAll() {
+        const nums = Array.from(arguments);
+        const sum = nums.reduce((prev, next) => (prev += next));
+        console.log(sum);
+      }
+
+      sumAll(4, 1, 43, 214, 1235, 5, 1, 34, 321, 4, 321, 4);
+    </script>
+  </body>
+</html>
