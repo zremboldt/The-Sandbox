@@ -27,12 +27,15 @@
     </style>
   </head>
   <body>
-    <h2 class="jump">Spread!</h2>
+    <h2 class="jump">Spreads!</h2>
 
     <script>
-      const text = [...document.querySelector('.jump').textContent];
-      const spanify = text.map(char => `<span>${char}</span>`).join('');
-      document.body.innerHTML = `<h2 class="jump">${spanify}</h2>`;
+      const heading = document.querySelector('.jump');
+      heading.innerHTML = spanify(heading.textContent);
+
+      function spanify(word) {
+        return [...word].map(char => `<span>${char}</span>`).join('');
+      }
     </script>
   </body>
 </html>
