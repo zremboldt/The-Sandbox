@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="people">
+      <p>Jeff</p>
+      <p>Martin</p>
+      <p>Inigo</p>
+    </div>
+
+    <script>
+      // You can use spread instead of Array.from here.
+      const people = [...document.querySelectorAll('.people p')];
+      const names = people.map(person => person.textContent);
+      console.log(names);
+
+      // --------------------
+
+      const deepDish = {
+        pizzaName: 'Deep Dish',
+        size: 'Medium',
+        ingredients: ['Marinara', 'Italian Sausage', 'Dough', 'Cheese']
+      };
+
+      // Spread makes a true copy, not a reference to the object.
+      const shoppingList = ['Milk', 'Flour', ...deepDish.ingredients];
+      console.log(shoppingList);
+
+      // --------------------
+
+      // Let's say we want to delete the mean comment...
+      const comments = [
+        { id: 123456, text: 'I love your dog!' },
+        { id: 134567, text: 'Pizza is delish!' },
+        { id: 125678, text: 'Welcome to the jungle!' },
+        { id: 167890, text: 'Delete this mean comment!' },
+        { id: 653665, text: 'Maximum Power!' }
+      ];
+      console.log(comments);
+
+      // We have the id of the comment we want to delete. We need the index...
+      const id = 167890;
+      const commentIndex = comments.findIndex(comment => comment.id === id);
+      // Now we have the index, how do we remove the comment?
+      const newComments = [...comments.slice(0, commentIndex), ...comments.slice(commentIndex + 1)];
+      console.log(newComments);
+    </script>
+  </body>
+</html>
