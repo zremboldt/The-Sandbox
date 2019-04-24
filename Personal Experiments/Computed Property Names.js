@@ -1,10 +1,9 @@
-const key = 'pocketColor';
+const key = 'favoriteColor';
 const value = '#ffc600';
 
-const tShirt = {
-  [key]: value
-};
+const tShirt = { [key]: value };
 
+// tShirt = { favoriteColor: #ffc600 }
 console.log(tShirt);
 
 // --------------------
