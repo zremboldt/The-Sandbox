@@ -7,12 +7,26 @@
     <title>Document</title>
   </head>
   <body>
+    <div id="app"></div>
+
     <script>
+      const app = document.getElementById('app');
+
       const pokemon = 'https://pokeapi.co/api/v2/pokemon/charmander/';
 
-      const pokePromise = fetch(pokemon);
+      const data = fetch(pokemon)
+        .then(data => data.json())
+        .then(data => {
+          let img = document.createElement('img');
+          let h3 = document.createElement('h3');
+          img.src = data.sprites.front_default;
+          h3.innerHTML = data.name;
+          app.appendChild(img);
+          app.appendChild(h3);
 
-      pokePromise.then(data => data.json().then(data => console.log(data)));
+          console.log(data);
+        })
+        .catch(err => console.log(err));
     </script>
   </body>
 </html>
