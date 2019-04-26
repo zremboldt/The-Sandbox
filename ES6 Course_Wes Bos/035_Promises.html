@@ -12,30 +12,23 @@
     <script>
       const app = document.getElementById('app');
 
-      const pokemon = 'https://pokeapi.co/api/v2/generation/1/';
+      let arr = [];
+      for (let i = 1; i <= 151; i++) arr.push(i);
 
-      const data = fetch(pokemon)
-        .then(data => data.json())
-        .then(data => {
-          // let img = document.createElement('img');
-          // let h3 = document.createElement('h3');
-          // img.src = data.sprites.front_default;
-          // h3.innerHTML = data.name;
-          // app.appendChild(img);
-          // app.appendChild(h3);
-
-          // let ul = document.createElement('ul');
-          // app.appendChild(ul);
-
-          data.pokemon_species.map(poke => {
-            let p = document.createElement('p');
-            p.innerHTML = poke.name;
-            app.appendChild(p);
-          });
-
-          console.log(data.pokemon_species);
-        })
-        .catch(err => console.log(err));
+      arr.forEach(id => {
+        fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
+          .then(data => data.json())
+          .then(data => {
+            let img = document.createElement('img');
+            // let p = document.createElement('p');
+            img.src = data.sprites.front_default;
+            // p.innerHTML = data.name;
+            app.appendChild(img);
+            // app.appendChild(p);
+            console.log(data);
+          })
+          .catch(err => console.log(err));
+      });
     </script>
   </body>
 </html>
