@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Proomises can be useful in cases where you want to do some really intensive processes.
+      // Use them for tasks that would be "blocking" if placed on the call stack.
+      const p = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve('Yeah!');
+        }, 1000);
+      });
+
+      p.then(data => {
+        console.log(data);
+      });
+    </script>
+  </body>
+</html>
