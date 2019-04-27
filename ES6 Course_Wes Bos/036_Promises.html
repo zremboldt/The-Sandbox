@@ -12,7 +12,7 @@
       // Use them for tasks that would be "blocking" if placed on the call stack.
       const p = new Promise((resolve, reject) => {
         setTimeout(() => {
-          resolve('Yeah!');
+          resolve('Promise Resolved!');
         }, 1000);
       });
 
