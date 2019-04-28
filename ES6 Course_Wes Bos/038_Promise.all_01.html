@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const weather = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve({ temp: 29, conditions: 'Sunny with Clouds' });
+        }, 2000);
+      });
+
+      const tweets = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(['I like icecream.', 'Pizza is even better!']);
+        }, 500);
+      });
+
+      // When using Promise.all, the slowest request determines the request length for all.
+      Promise.all([weather, tweets]).then(responses => {
+        console.log(responses);
+      });
+    </script>
+  </body>
+</html>

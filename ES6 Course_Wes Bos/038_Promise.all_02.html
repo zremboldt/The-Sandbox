@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const pokeApi = fetch('https://pokeapi.co/api/v2/pokemon/charizard/');
+      const datausaApi = fetch('https://datausa.io/api/data?drilldowns=Nation&measures=Population');
+
+      Promise.all([pokeApi, datausaApi])
+        .then(responses => {
+          return Promise.all(responses.map(res => res.json()));
+        })
+        .then(responses => {
+          console.log(responses);
+        });
+    </script>
+  </body>
+</html>
