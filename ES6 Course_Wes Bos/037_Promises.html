@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // We're going to pretend these two sets are database tables.
+      // -----------------------
+
+      const posts = [
+        { title: 'I love JavaScript', author: 'Zac Remboldt', id: 1 },
+        { title: 'JavaScript!', author: 'Wes Bos', id: 2 },
+        { title: 'Dev tool tricks', author: 'Addy Osmani', id: 3 }
+      ];
+
+      const authors = [
+        {
+          name: 'Zac Remboldt',
+          twitter: '@zremboldt',
+          bio: 'Designer turned JavaScript developer'
+        },
+        { name: 'Wes Bos', twitter: '@wesbos', bio: 'Canadian developer' },
+        { name: 'Addy Osmani', twitter: '@addyosmani', bio: 'Googler' }
+      ];
+
+      // -----------------------
+
+      function getPostById(id) {
+        // Create a new promise
+        return new Promise((resolve, reject) => {
+          // Use a setTimeout to simulate a database
+          setTimeout(() => {
+            // Find the post we want
+            const post = posts.find(post => post.id === id);
+            if (post) {
+              resolve(post);
+            } else {
+              reject(Error('There is no post with this id.'));
+            }
+          }, 1000);
+        });
+      }
+
+      getPostById(2).then(post => console.log(post));
+    </script>
+  </body>
+</html>
