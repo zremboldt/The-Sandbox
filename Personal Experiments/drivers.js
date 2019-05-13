@@ -13,11 +13,43 @@ const input = [
 // Dan: 39 miles @ 47 mph
 // Bob: 0 miles
 
-function trackDrivingHistory() {
-  // look at each line in the given input
-  // determine which command was given at the beginning of that line
-  // if `Driver` register a new driver in the app. So store driver in an object?
-  // if `Trip` record the trip stats along with the appropriate driver.
+// This is what I want the initial records to look like
+records = {
+  Dan: [['07:15', '07:45', '17.3'], ['06:12', '06:32', '21.8']],
+  Alex: [['12:01', '13:16', '42.0']],
+  Bob: []
+};
+// In the end this'll be the data
+records = {
+  Dan: {
+    milesDriven: 39,
+    averageSpeed: 47
+  },
+  Alex: {
+    milesDriven: 42,
+    averageSpeed: 34
+  },
+  Bob: {
+    milesDriven: 0,
+    averageSpeed: 0
+  }
+};
+
+function trackDrivingHistory(data) {
+  // records will store all of the relevant data
+  let records = {};
+
+  for (const line of data) {
+    const entries = line.split(' ');
+    const [cmd, name, start, stop, miles] = entries; // start stop & miles are undefined when cmd == 'Driver'
+
+    if (cmd === 'Driver') {
+      records = { ...records, [name]: [] }; // add driver's name as a key in the records object.
+    } else {
+      records[name] = [...records[name], ...[{ start, stop, miles }]];
+    }
+  }
+  console.log(records);
 }
 
 trackDrivingHistory(input);
