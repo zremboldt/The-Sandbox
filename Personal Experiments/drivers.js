@@ -35,7 +35,23 @@ records = {
   }
 };
 
-function trackDrivingHistory(data) {
+// Examples
+// Let's say you rode your bike 2 hours and traveled 24 miles.
+// What is your rate of speed? Use the formula r = d/t.
+// Your rate is 24 miles divided by 2 hours, so:
+// r = 24 miles / 2 hours = 12 miles per hour.
+
+// const convertToMinutes = time => {
+//   const [hours, minutes] = time.split(':');
+//   return hours * 60 + parseInt(minutes); // parseInt minutes otherwise the `+` will concatenate.
+// };
+
+const convertToHours = time => {
+  const [hours, minutes] = time.split(':');
+  return minutes / 60 + parseInt(hours); // parseInt hours otherwise the `+` will concatenate.
+};
+
+const trackDrivingHistory = data => {
   // records will store all of the relevant data
   let records = {};
 
@@ -46,10 +62,16 @@ function trackDrivingHistory(data) {
     if (cmd === 'Driver') {
       records = { ...records, [name]: [] }; // add driver's name as a key in the records object.
     } else {
-      records[name] = [...records[name], ...[{ start, stop, miles }]];
+      const driveTime = convertToHours(stop) - convertToHours(start); // calculate how long the drive lasted.
+      const avgSpeed = miles / driveTime; // calculate and round average speed.
+      if (avgSpeed < 5 || avgSpeed > 100) continue; // Discard any trips that average a speed of less than 5 mph or greater than 100 mph.
+      records[name] = [...records[name], ...[{ avgSpeed, miles }]];
     }
   }
+  // Generate a report containing each driver with total miles driven and average speed.
+  // Sort the output by most miles driven to least.
+  // Round miles and miles per hour to the nearest integer.
   console.log(records);
-}
+};
 
 trackDrivingHistory(input);
