@@ -13,39 +13,6 @@ const input = [
 // Dan: 39 miles @ 47 mph
 // Bob: 0 miles
 
-// This is what I want the initial records to look like
-records = {
-  Dan: [['07:15', '07:45', '17.3'], ['06:12', '06:32', '21.8']],
-  Alex: [['12:01', '13:16', '42.0']],
-  Bob: []
-};
-// In the end this'll be the data
-records = {
-  Dan: {
-    milesDriven: 39,
-    averageSpeed: 47
-  },
-  Alex: {
-    milesDriven: 42,
-    averageSpeed: 34
-  },
-  Bob: {
-    milesDriven: 0,
-    averageSpeed: 0
-  }
-};
-
-// Examples
-// Let's say you rode your bike 2 hours and traveled 24 miles.
-// What is your rate of speed? Use the formula r = d/t.
-// Your rate is 24 miles divided by 2 hours, so:
-// r = 24 miles / 2 hours = 12 miles per hour.
-
-// const convertToMinutes = time => {
-//   const [hours, minutes] = time.split(':');
-//   return hours * 60 + parseInt(minutes); // parseInt minutes otherwise the `+` will concatenate.
-// };
-
 const convertToHours = time => {
   const [hours, minutes] = time.split(':');
   return minutes / 60 + parseInt(hours); // parseInt hours otherwise the `+` will concatenate.
