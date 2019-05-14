@@ -38,7 +38,18 @@ const trackDrivingHistory = data => {
   // Generate a report containing each driver with total miles driven and average speed.
   // Sort the output by most miles driven to least.
   // Round miles and miles per hour to the nearest integer.
-  console.log(records);
+
+  for (const driver of Object.entries(records)) {
+    console.log(driver[1]);
+  }
+
+  // console.log(records);
 };
 
 trackDrivingHistory(input);
+
+// {
+//   Dan: [[34.6, '17.3'], [65.4, '21.8']],
+//   Alex: [[33.6, '42.0']],
+//   Bob: []
+// };
