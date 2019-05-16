@@ -20,27 +20,31 @@ const convertToHours = time => {
 
 const trackDrivingHistory = data => {
   // records will store all of the relevant data
-  let records = {};
+  let driverData = {};
 
   for (const line of data) {
     const entries = line.split(' ');
     const [cmd, name, start, stop, miles] = entries; // start stop & miles are undefined when cmd == 'Driver'
 
     if (cmd === 'Driver') {
-      records = { ...records, [name]: [] }; // add driver's name as a key in the records object.
+      driverData = { ...driverData, [name]: [] }; // add driver's name as a key in the driverData object.
     } else {
       const driveTime = convertToHours(stop) - convertToHours(start); // calculate how long the drive lasted.
       const avgSpeed = miles / driveTime; // calculate and round average speed.
       if (avgSpeed < 5 || avgSpeed > 100) continue; // Discard any trips that average a speed of less than 5 mph or greater than 100 mph.
-      records[name] = [...records[name], ...[{ avgSpeed, miles }]];
+      driverData[name] = [...driverData[name], ...[{ avgSpeed, miles }]];
     }
   }
   // Generate a report containing each driver with total miles driven and average speed.
   // Sort the output by most miles driven to least.
   // Round miles and miles per hour to the nearest integer.
 
-  for (const driver of Object.entries(records)) {
-    console.log(driver[1]);
+  for (const driverEntry of Object.entries(driverData)) {
+    const [name, records] = driverEntry;
+
+    const driverTotals = records.reduce((prev, current) => console.log(prev, current));
+
+    records.forEach(record => console.log(record));
   }
 
   // console.log(records);
