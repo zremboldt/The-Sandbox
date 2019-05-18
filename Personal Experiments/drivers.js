@@ -39,14 +39,29 @@ const trackDrivingHistory = data => {
   // Sort the output by most miles driven to least.
   // Round miles and miles per hour to the nearest integer.
 
+  let temp = [];
+
   for (const driverEntry of Object.entries(driverData)) {
+    let entries = 0;
+    let avgSpeed = 0;
+    let miles = 0;
     const [name, records] = driverEntry;
 
-    const driverTotals = records.reduce((prev, current) => console.log(prev, current));
+    // const driverTotals = records.reduce((prev, current) => console.log(prev, current));
 
-    records.forEach(record => console.log(record));
+    records.forEach(record => {
+      console.log(record);
+      entries++;
+      avgSpeed += record.avgSpeed;
+      miles += record.miles;
+    });
+
+    temp.push(name);
+    temp.push(Math.round(avgSpeed / entries));
+    temp.push(Math.round(parseInt(miles) / entries));
   }
 
+  // console.log(temp);
   // console.log(records);
 };
 
