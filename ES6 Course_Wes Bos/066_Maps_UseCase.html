@@ -22,14 +22,14 @@
   <body>
     <h3>Drink Flavors</h3>
 
-    <button>Apple 🍎</button>
-    <button>Orange 🍊</button>
-    <button>Peach 🍑</button>
-    <button>Cherry 🍒</button>
-    <button>Pineapple 🍍</button>
-    <button>Watermellon 🍉</button>
-    <button>Bananna 🍌</button>
-    <button>Coconut 🥥</button>
+    <button>Apple 🍎<span></span></button>
+    <button>Orange 🍊<span></span></button>
+    <button>Peach 🍑<span></span></button>
+    <button>Cherry 🍒<span></span></button>
+    <button>Pineapple 🍍<span></span></button>
+    <button>Watermellon 🍉<span></span></button>
+    <button>Bananna 🍌<span></span></button>
+    <button>Coconut 🥥<span></span></button>
 
     <script>
       // Here's a use case for Map where you want to store some kind of metadata
@@ -47,7 +47,9 @@
           // because we used a regular fn here, the value of 'this' is going to be the current button
           const value = clickCounts.get(this);
           clickCounts.set(this, value + 1);
-          console.log(clickCounts);
+          console.log(this.textContent, clickCounts.get(this));
+          // this.firstElementChild.textContent = clickCounts.get(this);
+          // console.log(clickCounts);
         });
       });
     </script>
