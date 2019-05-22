@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // It would be fun to create a list of famous people in history.
+
+      // Here we define Animal traits
+      class Animal {
+        constructor(name) {
+          this.name = name;
+          this.thirst = 100;
+          this.belly = [];
+        }
+        drink() {
+          this.thirst -= 10;
+          return this.thirst;
+        }
+        eat(food) {
+          this.belly.push(food);
+          return this.belly;
+        }
+      }
+
+      // Here we extend animal and add some additional traits specific to dogs.
+      class Dog extends Animal {
+        constructor(name, breed) {
+          super(name); // super calls whatever you're extending. Animal in this case.
+          this.breed = breed;
+        }
+        bark() {
+          console.log('Bark Bark! Ruff de ruff!');
+        }
+        run() {
+          this.thirst += 10;
+          return this.thirst;
+        }
+      }
+
+      const rhino = new Animal('Maximilian');
+      const beasley = new Dog('Beasley', 'Mutt');
+    </script>
+  </body>
+</html>
