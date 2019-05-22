@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Here's grabbing data with a native Promise
+      fetch('https://api.github.com/users/zacaree')
+        .then(res => res.json())
+        .then(res => console.log(res))
+        .catch(err => {
+          console.error('Noooooooo!');
+          console.error(err);
+        });
+    </script>
+  </body>
+</html>
