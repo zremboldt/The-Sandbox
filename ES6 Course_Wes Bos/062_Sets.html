@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      ///////////////////////////////////////////////////////////////
+      // Basics of Sets
+      const people = new Set();
+      people.add('Ronald');
+      people.add('Aaron');
+      people.add('Zac');
+
+      // people.add('Shelley') will add Shelley to the list
+      // people.delete('Zac') will remove Zac from the set
+      // people.clear() will empty the set
+      // people.has('Aaron') will check if Aaron is in the set
+      // people.size will tell you how many items are in the set
+
+      ///////////////////////////////////////////////////////////////
+      // Sets are iterable
+      for (const person of people) {
+        if (person !== 'Zac') console.log(person);
+      }
+
+      ///////////////////////////////////////////////////////////////
+      // If you want to declare the values when you create the set you can do this:
+      const students = new Set(['Matthew', 'Randy', 'Thomas']);
+
+      ///////////////////////////////////////////////////////////////
+      // You can also pass the Set an existing array:
+      const tools = ['shovel', 'rake', 'hoe'];
+      const toolSet = new Set(tools);
+
+      ///////////////////////////////////////////////////////////////
+      // Every item in a Set will always be unique
+      const nums = [1, 8, 8, 8, 8, 8, 8, 3, 3, 2, 6, 1, 1, 1, 4, 1, 2];
+      const uniqueNums = new Set(nums);
+
+      // Now if you want to sort the uniqueNums you'd have to put them back into an array
+      // because there isn't a sort method on Set
+      const sortedUniqueNums = [...uniqueNums].sort((a, b) => a - b);
+    </script>
+  </body>
+</html>
