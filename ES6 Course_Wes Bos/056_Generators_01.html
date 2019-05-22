@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // This is a generator function.
+      // Syntax: function* is starred
+      // Syntax: instead of return use yield.
+      function* listPeople() {
+        yield 'Harry';
+        yield 'Marv';
+        yield 'Kevin';
+      }
+
+      // Now each time you call .next() on people it'll give (yield) you the next value.
+      // You could also tack on .value at the end if you don't care about the "done" status.
+      // Example: people.next().value
+      const people = listPeople();
+    </script>
+  </body>
+</html>
