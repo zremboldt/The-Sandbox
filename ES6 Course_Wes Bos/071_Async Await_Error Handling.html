@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // We're going to use a Higher Order Function here for
+      // error handling in Async Await.
+
+      // Higher Order Function
+      // Definition: A function that takes in a function as an argument
+      // and returns a new (and improved) function.
+
+      function heartbeat(delay) {
+        return new Promise((resolve, reject) => {
+          if (delay <= 0) reject('😵Done beating');
+          setTimeout(() => resolve(`❤️ Heartbeat lasted ${delay}ms`), delay);
+        });
+      }
+
+      // Here's the Higher Order Function
+      function catchErrors(fn) {
+        return function(...args) {
+          return fn(...args).catch(err => console.error(err));
+        };
+      }
+
+      async function beat(name) {
+        console.log(`${name} is hooked up to a heartbeat monitor.`);
+        console.log(await heartbeat(1000));
+        console.log(await heartbeat(900));
+        console.log(await heartbeat(800));
+        console.log(await heartbeat(700));
+        console.log(await heartbeat(600));
+        console.log(await heartbeat(500));
+        console.log(await heartbeat(400));
+        console.log(await heartbeat(300));
+        console.log(await heartbeat(200));
+        console.log(await heartbeat(100));
+        console.log(await heartbeat(100));
+        console.log(await heartbeat(100));
+        console.log(await heartbeat(100));
+        console.log(await heartbeat(0));
+      }
+
+      const wrappedFn = catchErrors(beat);
+      wrappedFn('Puddles');
+    </script>
+  </body>
+</html>
