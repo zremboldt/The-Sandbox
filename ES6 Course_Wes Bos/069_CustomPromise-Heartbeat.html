@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function heartbeat(delay) {
+        return new Promise((resolve, reject) => {
+          if (delay <= 0) reject('😵Done beating');
+          setTimeout(() => resolve(`❤️ Heartbeat lasted ${delay}ms`), delay);
+        });
+      }
+
+      heartbeat(1000)
+        .then(res => {
+          console.log(res);
+          return heartbeat(900);
+        })
+        .then(res => {
+          console.log(res);
+          return heartbeat(800);
+        })
+        .then(res => {
+          console.log(res);
+          return heartbeat(700);
+        })
+        .then(res => {
+          console.log(res);
+          return heartbeat(600);
+        })
+        .then(res => {
+          console.log(res);
+          return heartbeat(500);
+        })
+        .then(res => {
+          console.log(res);
+          return heartbeat(400);
+        })
+        .then(res => {
+          console.log(res);
+          return heartbeat(300);
+        })
+        .then(res => {
+          console.log(res);
+          return heartbeat(200);
+        })
+        .then(res => {
+          console.log(res);
+          return heartbeat(100);
+        })
+        .then(res => {
+          console.log(res);
+          return heartbeat(100);
+        })
+        .then(res => {
+          console.log(res);
+          return heartbeat(100);
+        })
+        .then(res => {
+          console.log(res);
+          return heartbeat(100);
+        })
+        .then(res => {
+          console.log(res);
+          return heartbeat(0);
+        })
+        .catch(err => console.log(err));
+    </script>
+  </body>
+</html>
