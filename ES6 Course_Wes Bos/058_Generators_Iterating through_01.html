@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function* landmarksAlongOregonTrail() {
+        yield `Independence, Missouri`;
+        yield `Chimney Rock`;
+        yield `Fort Laramie`;
+        yield `Independence Rock`;
+        yield `Fort Bridger`;
+        yield `Soda Springs`;
+        yield `Fort Hall`;
+        yield `Old Fort Boise`;
+        yield `Whitman Mission`;
+        yield `The Dalles`;
+        yield `Oregon City`;
+      }
+
+      const landmarks = landmarksAlongOregonTrail();
+
+      for (const landmark of landmarks) {
+        console.log(landmark);
+      }
+    </script>
+  </body>
+</html>
