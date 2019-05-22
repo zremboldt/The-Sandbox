@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      body {
+        padding: 10px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      button {
+        margin-right: 6px;
+        padding: 6px 16px;
+        border-radius: 4px;
+        font-size: 1.2rem;
+        outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>Drink Flavors</h3>
+
+    <button>Apple 🍎</button>
+    <button>Orange 🍊</button>
+    <button>Peach 🍑</button>
+    <button>Cherry 🍒</button>
+    <button>Pineapple 🍍</button>
+    <button>Watermellon 🍉</button>
+    <button>Bananna 🍌</button>
+    <button>Coconut 🥥</button>
+
+    <script>
+      // Here's a use case for Map where you want to store some kind of metadata
+      // and you don't want to store it on the object (like a counter in the button)
+      // you want to store data about the object. (even if the button is removed from the dom the data will persist)
+
+      const clickCounts = new Map();
+      const buttons = document.querySelectorAll('button');
+
+      buttons.forEach(button => {
+        // here we're setting the key to the button element itself
+        clickCounts.set(button, 0);
+        // Now everytime a button is clicked we'll increment its counter
+        button.addEventListener('click', function() {
+          // because we used a regular fn here, the value of 'this' is going to be the current button
+          const value = clickCounts.get(this);
+          clickCounts.set(this, value + 1);
+          console.log(clickCounts);
+        });
+      });
+    </script>
+  </body>
+</html>
