@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      ///////////////////////////////////////////////////////////////
+      // Scenario: People are coming in to eat at a restaurant
+
+      const restaurant = new Set();
+
+      // People start arriving and queue up in line
+      restaurant.add('Ronald');
+      restaurant.add('Aaron');
+      restaurant.add('Zac');
+
+      // The restaurant is ready to open and people are called to be seated
+      const line = restaurant.values();
+      console.log(line.next().value);
+      console.log(line.next().value);
+
+      // More people arrive and get in line
+      restaurant.add('Shelley');
+      restaurant.add('Tyler');
+      restaurant.add('Andrew');
+      restaurant.add('Dennis');
+      restaurant.add('Isaiah');
+
+      // More people are called to be seated
+      console.log(line.next().value);
+      console.log(line.next().value);
+      console.log(line.next().value);
+    </script>
+  </body>
+</html>
