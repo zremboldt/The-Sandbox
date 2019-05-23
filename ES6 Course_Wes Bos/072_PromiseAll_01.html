@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      async function getProfiles() {
+        const p1 = fetch('https://api.github.com/users/zacaree').then(r => r.json());
+        const p2 = fetch('https://api.github.com/users/stolinski').then(r => r.json());
+
+        // wait for both to come back
+        const [zac, scott] = await Promise.all([p1, p2]);
+        console.table(zac);
+        console.table(scott);
+      }
+      getProfiles();
+    </script>
+  </body>
+</html>
