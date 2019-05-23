@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+
+      nums.forEach(num => {
+        // padStart and padEnd only works on a string so we have to convert
+        // the number using toString first.
+        // 1st arg is the number of chars to print.
+        // 2nd arg is the pad char or chars to use to fill the extra space.
+        console.log(num.toString().padStart(3, 0));
+      });
+    </script>
+  </body>
+</html>
