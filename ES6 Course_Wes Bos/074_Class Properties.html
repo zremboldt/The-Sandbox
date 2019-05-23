@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Here we define Animal traits
+      class Animal {
+        constructor(name) {
+          this.name = name;
+          this.thirst = 100;
+          this.belly = [];
+        }
+
+        drink() {
+          this.thirst -= 10;
+          return this.thirst;
+        }
+        eat(food) {
+          this.belly.push(food);
+          return this.belly;
+        }
+      }
+
+      // Here we extend animal and add some additional traits specific to dogs.
+      class Dog extends Animal {
+        constructor(name, breed) {
+          super(name); // super calls whatever you're extending. Animal in this case.
+          this.breed = breed;
+        }
+
+        ////////////////////////////////////////////////////////////////
+        // class property ↓
+        // In React, this is like saying   state = {}.
+        // This is only available in Babel for now. Not officially part of JS.
+        // This is the ability to declare properties outside of the constructor.
+        barks = 0;
+        ////////////////////////////////////////////////////////////////
+
+        bark() {
+          console.log('Bark Bark! Ruff de ruff!');
+          this.barks += 1;
+          console.log(`${this.name} has barked ${this.barks} times.`);
+        }
+        run() {
+          this.thirst += 10;
+          return this.thirst;
+        }
+      }
+
+      const beasley = new Dog('Beasley', 'Mutt');
+      const bowser = new Dog('Bowser', 'Bulldog');
+    </script>
+  </body>
+</html>
