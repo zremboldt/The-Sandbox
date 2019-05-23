@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Dog {
+        constructor(name, breed) {
+          this.name = name;
+          this.breed = breed;
+        }
+
+        bark() {
+          console.log(`Bark Bark! My name is ${this.name}`);
+        }
+
+        cuddle() {
+          console.log('I love you owner.');
+        }
+        static info() {
+          console.log(
+            `because info is a static method`,
+            `it only shows up on the base class (Dog in this case).`,
+            `It won't appear on snickers or bowser.`,
+            `so Dog.info()`
+          );
+        }
+        // getters and setters (getter here ↓)
+        get description() {
+          return `${this.name} is a ${this.breed} type of dog.`;
+        }
+        // setter ↓
+        set nicknames(value) {
+          this.nick = value.trim();
+        }
+        get nicknames() {
+          return this.nick.toUpperCase();
+        }
+      }
+
+      const snickers = new Dog('Snickers', 'King Charles');
+      const bowser = new Dog('Bowser', 'Bulldog');
+    </script>
+  </body>
+</html>
