@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const inventory = {
+        backpacks: 10,
+        jeans: 23,
+        hoodies: 4,
+        shoes: 11
+      };
+
+      // Here are some methods for working with objects
+      const keys = Object.keys(inventory);
+      const values = Object.values(inventory);
+      const entries = Object.entries(inventory);
+
+      // make a nav for the inventory
+      const nav = Object.keys(inventory)
+        .map(key => `<li>${key}</li>`)
+        .join('');
+
+      // how many items do we have in inventory (total)
+      const inventoryTotal = Object.values(inventory).reduce((prev, current) => prev + current);
+
+      // print an inventory list with both items and numbers (map).
+      Object.entries(inventory).map(([key, val]) => {
+        console.log(`Item: ${key} Quantity: ${val}`);
+      });
+
+      // print an inventory list with both items and numbers (for-of).
+      // The advantage to a for-of loop over forEach or map is you can break or continue.
+      // for-of works with any iterable, not just arrays
+      for (const [key, val] of Object.entries(inventory)) {
+        if (key === 'hoodies') continue;
+        console.log(`Item: ${key} Quantity: ${val}`);
+      }
+    </script>
+  </body>
+</html>
