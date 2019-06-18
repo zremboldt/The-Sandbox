@@ -12,13 +12,29 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        background-color: #000;
         font-family: sans-serif;
+      }
+      p {
+        color: mediumspringgreen;
+      }
+      span {
+        padding: 2px 8px;
+        /* background-color: mediumspringgreen; */
+      }
+      .background {
+        background-color: mediumspringgreen;
       }
     </style>
   </head>
   <body>
     <script type="application/javascript">
-      getIP = json => document.write(`My public IP address is: ${json.ip}`);
+      function getIP(json) {
+        document.body.innerHTML = `
+          <p>My public IP address is: &nbsp;</p>
+          <span id="ip">${json.ip}</span>
+        `;
+      }
     </script>
 
     <!-- Ad blockers will disrupt this so It won't work in every case. -->
@@ -26,5 +42,13 @@
       type="application/javascript"
       src="https://api.ipify.org?format=jsonp&callback=getIP"
     ></script>
+
+    <script>
+      const ipSpan = document.getElementById('ip');
+
+      setInterval(function() {
+        ipSpan.classList.toggle('background');
+      }, 1000);
+    </script>
   </body>
 </html>
