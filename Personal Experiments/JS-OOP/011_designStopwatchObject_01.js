@@ -15,30 +15,39 @@
 
 function Stopwatch() {
   let duration = 0;
-  let currentStart = 0;
-  let currentStop = 0;
+  let startTime = 0;
+  let endTime = 0;
+  let running = false;
 
   this.start = function() {
-    if (currentStart !== 0) throw new Error('Reset the stopwatch before starting again.');
-    currentStart = Date.now();
+    if (running) throw new Error('Stopwatch is already running');
+    if (startTime !== 0) throw new Error('Reset the stopwatch before starting again.');
+    startTime = Date.now();
+    running = true;
+    console.log('Stopwatch is running.');
   };
 
   this.stop = function() {
-    if (currentStart === 0) throw new Error('You must start before you can stop.');
-    if (currentStop !== 0) throw new Error('Stopwatch is already stopped.');
-    currentStop = Date.now();
-    duration = currentStop - currentStart;
+    if (!running) throw new Error("Stopwatch isn't running");
+    if (endTime !== 0) throw new Error('Stopwatch is already stopped.');
+    endTime = Date.now();
+    running = false;
+    const seconds = (endTime - startTime) / 1000;
+    duration += seconds;
+    console.log('Stopwatch has stopped.');
   };
 
   this.reset = function() {
     duration = 0;
-    currentStart = 0;
-    currentStop = 0;
+    startTime = 0;
+    endTime = 0;
+    running = false;
+    console.log('Stopwatch has been reset.');
   };
 
   Object.defineProperty(this, 'duration', {
     get: function() {
-      return duration;
+      return `${duration} seconds`;
     }
   });
 }
