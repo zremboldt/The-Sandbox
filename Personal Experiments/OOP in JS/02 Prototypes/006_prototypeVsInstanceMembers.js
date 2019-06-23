@@ -1,8 +1,6 @@
 function Circle(radius) {
   this.radius = radius;
-  // this.draw = function() {
-  //   console.log(`Radius of ${this.radius}`);
-  // };
+  this.move = () => console.log(`move`);
 }
 
 const c1 = new Circle(1);
@@ -15,7 +13,10 @@ console.log(Object.getPrototypeOf(c1));
 
 /////////////////////////////////////////////////////////////////
 
-// GOLD NUGGET ↓
+// ========================
+//  💰GOLD NUGGETS BELOW ↓
+// ========================
+
 // c1 and c2 both have an independent (copied) draw method taking up space in memory.
 // Let's imagine we had 1000 circles made from Circle.
 // They'd all have their own copy of draw().
@@ -49,4 +50,12 @@ function Square(width) {
 // This will be a Prototype property
 Square.prototype.height = 4;
 
-// Paused lesson at the 3 minute mark...
+/////////////////////////////////////////////////////////////////
+
+// Every object has the toString method. Let's take what we just learned and
+// override toString to do something different on the prototype of our Circle objects.
+
+Circle.prototype.toString = function() {
+  this.move(); // ← You can even reference instance methods from the prototype
+  return `This circle has a radius of ${this.radius}`;
+};
