@@ -7,6 +7,9 @@ function Circle(radius) {
 // Circle by default will inherit from `Object.prototype` which is the JS root object.
 // We want Circle to inherit from Shape. Here's how we can do that:
 Circle.prototype = Object.create(Shape.prototype);
+// Whenever you reset the prototype as shown above,
+// it's best practice to reset the constructor as well.
+Circle.prototype.constructor = Circle;
 
 // Now we can add a method to Shape and any type of shape we want to make
 // will inherit that method. (Circle, Square, Triangle, etc.)
