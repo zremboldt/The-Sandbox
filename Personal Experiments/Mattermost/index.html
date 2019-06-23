@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      header {
+        position: relative;
+        z-index: 10;
+        height: 100px;
+        width: 100%;
+        padding: 20px 30px;
+        color: #fff;
+      }
+
+      .bg {
+        position: absolute;
+        left: 0;
+        top: -15%;
+        width: 100%;
+        height: 100%;
+        -moz-transform: skew(0deg, -5deg);
+        -ms-transform: skew(0deg, -5deg);
+        -webkit-transform: skew(0deg, -5deg);
+        transform: skew(0deg, -5deg);
+        background-image: linear-gradient(-135deg, #1ba4f7 0%, #4641ff 100%);
+      }
+
+      .bg:before {
+        background: url('./img/introBgTop.svg') no-repeat;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 300px;
+      }
+
+      .bg:after {
+        background: url('./img/introBgBottom.svg') no-repeat;
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 600px;
+        height: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="./"
+        ><img src="img/logo--white.svg" class="logo__white" alt="Mattermost Logo" width="212px"
+      /></a>
+    </header>
+    <div class="bg"></div>
+  </body>
+</html>
