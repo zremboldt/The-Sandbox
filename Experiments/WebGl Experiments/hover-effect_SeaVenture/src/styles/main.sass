@@ -1,0 +1,203 @@
+
+// *********
+// Variables
+// *********
+
+// Colors Variables
+$g1: #64E1FF
+$g2: #3E46FF
+$deepBlue: #070C19
+$border: #1C243E
+
+$gradient0: linear-gradient(to right, $g2 0%, $g1 100%)
+$gradient45: linear-gradient(45deg, $g2 0%, $g1 100%)
+
+// Easing
+$zease:       cubic-bezier(0.165, 0.84, 0.44, 1)
+$easeOutBack: cubic-bezier(0.175, 0.885, 0.32, 1.275)
+
+
+
+// ******
+// Mixins
+// ******
+
+=aspectRatio($percentage)
+  width: 100%
+  height: auto
+  padding: $percentage 0 0 0  // 34.37% = 100 / (w / h) = 100 / (640 / 220)
+
+
+
+// *************
+// Initial Setup
+// *************
+
+html
+  box-sizing: border-box
+  font-size: 10px // Globally sets rems to increments of 10px. 1rem = 10px.
+  margin: 0
+
+*, *:before, *:after
+  box-sizing: inherit
+
+body
+  margin: 0
+  padding: 0
+
+ul
+  margin: 0
+  padding: 0
+  list-style-type: none
+  
+
+
+
+// ****************
+// Project Specific
+// ****************
+  
+body
+  background-color: $deepBlue
+
+nav
+  position: fixed
+  z-index: 10
+  top: 0
+  left: 0
+  right: 0
+  background-color: transparentize($deepBlue, 0.08)
+  border-bottom: 1px solid $border
+  
+  .navWrap
+    max-width: 800px
+    margin: 0 auto
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+  .navLeft
+    width: 26rem
+
+  .navRight
+    display: flex
+    margin-right: -15px
+    
+    .navLink
+      display: block
+      position: relative
+      padding: 2.6rem 2rem
+      opacity: 0.5
+      cursor: pointer
+      transition: opacity 0.3s $zease
+
+      &:hover
+        opacity: 1
+
+    .active
+      opacity: 1
+
+      &:before
+        content: ''
+        position: absolute
+        bottom: 0
+        left: 0
+        height: 5px
+        width: 100%
+        border-radius: 10px 10px 0 0
+        background-color: $g1
+        background-image: $gradient0
+      
+
+
+main
+  margin: 14rem auto 0
+  max-width: 800px
+
+.filterBar
+  display: flex
+  align-items: center
+  margin-bottom: 6rem
+  padding: 0.6rem
+  border: 1px solid $border
+  border-radius: 6rem
+
+  .filterLabel
+    padding: 1.2rem 3rem
+    margin-right: 2rem
+    background-color: $g1
+    background-image: $gradient45
+    border-radius: 6rem
+    text-shadow: 0 1px 2px hsla(0,0%,0%,0.4)
+
+  .filterList
+    display: flex
+    flex: 1
+    justify-content: space-between
+    padding: 0
+
+    li
+      padding: 1.2rem 3rem
+      background-color: hsla(0,0%,100%,0.0)
+      border-radius: 6rem
+      cursor: pointer
+      transition: 0.3s $zease
+
+      &:hover
+        background-color: hsla(210,40%,30%,0.3)
+
+
+
+.card
+  position: relative
+  +aspectRatio(57%)
+  margin-bottom: 6rem
+  border-radius: 2rem
+  cursor: pointer
+  overflow: hidden
+
+  .content
+    position: absolute
+    bottom: 0
+    left: 0
+    padding: 3rem
+    pointer-events: none
+    text-shadow: 0 2px 6px black
+    transition: 0.7s $zease
+    transform: translateY(2rem)
+
+  .secondaryContent
+    transition: opacity 0.3s $zease
+    opacity: 0
+
+  .rating
+    display: flex
+    align-items: center
+    margin-left: -4px
+
+    span
+      margin-left: 4px
+
+  .cardImg
+    position: absolute
+    top: 0
+    bottom: 0
+    width: 100%
+
+    // Gradient overlay. Gives contrast to text.
+    &:before
+      content: ''
+      position: absolute
+      top: 0
+      bottom: 0
+      width: 100%
+      background-image: linear-gradient(to top, hsla(0,0%,0%,.8) 10%, hsla(0,0%,0%,0) 50%)
+
+  &:hover
+    .content
+      transform: translateY(0)
+    
+    .secondaryContent
+      opacity: 1
+
+    

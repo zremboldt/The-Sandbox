@@ -1,0 +1,12 @@
+body {
+  display: flex;
+  justify-content: center;
+  background-color: #070c19;
+}
+
+#img1 {
+  width: 800px;
+  height: 460px;
+  border-radius: 20px;
+  overflow: hidden;
+}
