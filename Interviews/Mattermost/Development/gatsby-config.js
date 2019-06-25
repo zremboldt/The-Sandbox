@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `I Love Root`,
-    description: `Just put together a quick "hello, Root! Draft me for your team!" page.`,
+    title: `Hello Mattermost`,
+    description: `Just put together a quick "hello, Mattermost! Draft me for your team!" page.`,
     author: `@zremboldt`,
   },
   plugins: [
@@ -18,11 +18,11 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `I Love Root`,
-        short_name: `I<3Root`,
+        name: `Hello Mattermost`,
+        short_name: `Hello Mattermost`,
         start_url: `/`,
-        background_color: `#FF5715`,
-        theme_color: `#FF5715`,
+        background_color: `#3685fc`,
+        theme_color: `#3685fc`,
         display: `minimal-ui`,
         icon: `src/images/favicon.png`, // This path is relative to the root of the site.
       },
@@ -32,4 +32,4 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
-}
+};
