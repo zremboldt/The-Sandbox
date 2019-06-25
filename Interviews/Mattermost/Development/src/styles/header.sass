@@ -1,0 +1,33 @@
+
+.header
+  position: relative
+  min-height: 900px
+  min-height: 100vh
+
+.headerBg
+  position: absolute
+  left: 0
+  top: -15%
+  width: 100%
+  height: 100%
+  transform: skew(0deg, -5deg)
+  background-image: linear-gradient(-135deg, #1ba4f7 0%, #4641ff 100%)
+
+  &::before
+    background: url('../images/introBgTop.svg') no-repeat
+    content: ''
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 300px
+
+
+  &::after
+    background: url('../images/introBgBottom.svg') no-repeat
+    content: ''
+    position: absolute
+    bottom: 0
+    right: 0
+    width: 600px
+    height: 300px

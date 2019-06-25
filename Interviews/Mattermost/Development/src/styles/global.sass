@@ -1,0 +1,180 @@
+// *********
+// Variables
+// *********
+
+// Colors
+$primary: hsla(216, 97%, 60%, 1)
+$offWhite:   hsla(214, 100%, 98%, 1)
+$border: hsla(225, 37%, 82%, 1)
+$dark:  hsla(223, 22%, 41%, 1)
+$g1: #1ba4f7
+$g2: #4641ff
+
+
+// Gradients
+$gradient: linear-gradient(-135deg, $g1 0%, $g2 100%)
+
+
+// Shadows
+$shadowCard: 0px 10px 60px hsla(226, 85%, 27%, 0.15)
+$shadowHeaderText: 0px 3px 6px hsla(235, 100%, 31%, 0.3)
+
+
+// Easing
+$zease:       cubic-bezier(0.165, 0.84, 0.44, 1)
+$easeOutBack: cubic-bezier(0.175, 0.885, 0.32, 1.275)
+
+
+
+// *************
+// Initial Setup
+// *************
+
+html
+  box-sizing: border-box
+  font-size: 10px // Globally sets rems to increments of 10px. 1rem = 10px.
+  margin: 0
+
+*, *:before, *:after
+  box-sizing: inherit
+
+body
+  position: relative
+  margin: 0
+  padding: 0
+  background-color: $offWhite
+
+section
+  margin-bottom: 10rem
+
+// a
+//   display: block
+//   text-decoration: none
+//   cursor: pointer
+
+
+
+// **********
+// Typography
+// **********
+
+h1, h2, h3, h4, h5, h6, p, span, li, button
+  margin: 0
+  color: $dark
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+h1, h2, h3, h4, h5, h6
+  font-family: 'Montserrat', Helvetica Neue, arial, sans-serif
+  // font-weight: normal
+
+p, span, li, button
+  font-family: 'Montserrat', Helvetica Neue, arial, sans-serif
+
+.marBot2
+  margin-bottom: 2rem
+.marBot4
+  margin-bottom: 4rem
+
+.trackingPos
+  letter-spacing: 0.15px
+.trackingNeg
+  letter-spacing: -0.05px
+
+// Modular type scale (below) taken from the Root design system specs.
+h1
+  font-size: 4.8rem
+  line-height: 5.2rem
+h2
+  font-size: 3.2rem
+  line-height: 3.6rem
+
+p, span, li
+  font-size: 1.8rem
+  line-height: 3rem
+
+// .p1
+//   margin-bottom: 1rem
+//   font-size: 3.2rem
+//   line-height: 3.6rem
+// .p2
+//   font-size: 1.8rem
+//   line-height: 2.4rem
+// .p3
+//   font-size: 1.6rem
+//   line-height: 2.1rem
+button
+  font-size: 1.8rem
+  line-height: 2.2rem
+
+@media screen and (max-width: 350px)
+  h1
+    font-size: 4rem
+    line-height: 4.4rem
+  h2
+    font-size: 2.8rem
+    line-height: 3.2rem
+
+  p, span, li
+    font-size: 1.6rem
+    line-height: 2.8rem
+
+  // .p1
+  //   font-size: 2.8rem
+  //   line-height: 3.2rem
+  // .p2
+  //   font-size: 1.6rem
+  //   line-height: 2.1rem
+  // .p3
+  //   font-size: 1.6rem
+  //   line-height: 2.1rem
+  button
+    font-size: 1.6rem
+    line-height: 2rem
+
+
+
+
+// ********
+// Elements
+// ********
+
+// button
+//   display: inline-block
+//   width: 100%
+//   margin: 0
+//   padding: 21px 3rem // 21px top/bottom padding + 18px text line-height = 60px total height.
+//   border: none
+//   cursor: pointer
+//   text-align: center
+//   text-decoration: none
+//   transition: background 150ms ease-in-out
+//   -webkit-appearance: none
+//   -moz-appearance: none
+
+// .btnPrimary
+//   background-color: $primary
+//   border-radius: 4px
+//   color: white
+//   font-weight: 700
+
+//   &:hover,
+//   &:active
+//     background-color: adjust-hue($primary, -5deg)
+
+
+// .accentBar
+//   width: 90px
+//   height: 6px
+//   margin: 50px 0 18px
+//   background-color: $primary
+
+.card
+  margin-bottom: 1.6rem
+  background-color: white
+  border-radius: 1rem
+  box-shadow: $shadowCard
+
+
+
+

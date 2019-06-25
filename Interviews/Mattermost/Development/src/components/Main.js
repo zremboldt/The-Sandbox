@@ -1,0 +1,94 @@
+import React from "react";
+// import jestLogo from "../images/jestLogo.svg";
+// import IconPhone from "../images/IconPhone";
+// import IconCode from "../images/IconCode";
+// import IconResume from "../images/IconResume";
+// import IconPersonalSite from "../images/IconPersonalSite";
+
+const Main = () => (
+  <main className="main">
+    <section className="sectionBio">
+      <div className="card">
+        <div className="avatar"></div>
+        <h2>Bio</h2>
+        <p>
+          I am a self-taught Front end web developer with a 10 year background
+          in visual design. Over the past 4 years I’ve gone from zero
+          programming experience to designing, developing & deploying production
+          web apps for my current employer, one of which recently generated over
+          3/4 of a million dollars in just its first year!
+        </p>
+      </div>
+    </section>
+
+    <section className="sectionWorkWithMe">
+      <div className="card">
+        <h2>What’s it like to work with me?</h2>
+        <p>
+          I am a driven self starter. God has blessed me with talent and ideas.
+          I work hard and have a history of excelling wherever I put my focus.
+          I’ve been acknowledged by senior leadership for successfully
+          influencing/leading technical and visual direction, inspiring
+          forward-thinking, ideas and fostering growth/unity among teams. Below
+          are a few quotes from my performance reviews over the past couple of
+          years:
+        </p>
+      </div>
+      <div className="card quoteCard">
+        {/* <iconQuote /> */}
+        <p className="superQuote marBot2">
+          Zac produces excellent results. It doesn’t matter if it’s a design
+          project or a new area such as video. He continually blows expectations
+          away.
+        </p>
+        <p>Andrew Braun - Director of Marketing</p>
+      </div>
+      <div className="card quoteCard">
+        {/* <iconQuote /> */}
+        <p className="superQuote marBot2">
+          Responsive, helpful, thinks about and researches relevant details.
+          Gathers data before making decisions. Zac is always positive and
+          enthusiastic.
+        </p>
+        <p>Jackie Lopez – Marketing Manager</p>
+      </div>
+      <div className="card quoteCard">
+        {/* <iconQuote /> */}
+        <p className="superQuote marBot2">
+          Critical judgement is a strong point – able to process complex info
+          and suggests improvement to current approaches. Seeks information to
+          make decisions. I love Zac’s initiative and willingness to take on and
+          learn new things.
+        </p>
+        <p>Jackie Lopez – Marketing Manager</p>
+      </div>
+    </section>
+
+    <section className="sectionTools">
+      <div className="card">
+        <h2>Preferred tools</h2>
+      </div>
+    </section>
+
+    <section className="sectionExperience">
+      <div className="card">
+        <h2>Other experience</h2>
+      </div>
+    </section>
+
+    <section className="sectionWhatNext">
+      <div className="card">
+        <h2>What’s next?</h2>
+        <ol>
+          <li>
+            Take a look at www.zacremboldt.com (links to my resume, GitHub,
+            CodePen, etc.)
+          </li>
+          <li>Like what you see? Give me a call! (620) 266-6987</li>
+        </ol>
+      </div>
+    </section>
+  </main>
+);
+
+export default Main;
