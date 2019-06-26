@@ -31,7 +31,7 @@ const Main = () => (
           influencing/ leading technical and visual direction, inspiring
           forward-thinking, ideas and fostering growth/ unity among teams. Below
           are a few quotes from my performance reviews over the past couple of
-          years:
+          years.
         </p>
       </div>
       <div className="card quoteCard">
@@ -67,12 +67,53 @@ const Main = () => (
     <section className="sectionTools">
       <div className="card">
         <h2>Preferred tools</h2>
+        <ul>
+          <li className="line">
+            <p>ES6/7+</p>
+            <p>Express</p>
+          </li>
+          <li className="line">
+            <p>React</p>
+            <p>Sass</p>
+          </li>
+          <li className="line">
+            <p>Gatsby.js</p>
+            <p>GraphQL (Apollo client)</p>
+          </li>
+          <li className="line">
+            <p>Jest</p>
+            <p>Netlify</p>
+          </li>
+          <li className="line">
+            <p>Node.js</p>
+            <p>MongoDB</p>
+          </li>
+        </ul>
       </div>
     </section>
 
     <section className="sectionExperience">
       <div className="card">
         <h2>Other experience</h2>
+        <ul>
+          <li className="line">
+            Animation using GSAP, React Spring, or pure CSS
+          </li>
+          <li className="line">
+            CMS data modeling using Contentful, GraphCMS, and Sanity.io
+          </li>
+          <li className="line">
+            Strong skills with the Adobe suite (e.g. Photoshop/ Illustrator/ XD/
+            AfterEffects), Figma, and working with SVG
+          </li>
+          <li className="line">
+            Visual design, layout, prototyping, user testing, etc. (UI, UX)
+          </li>
+          <li className="line">
+            Currently exploring some of the amazing possibilities afforded by
+            WebGL using three.js
+          </li>
+        </ul>
       </div>
     </section>
 
@@ -84,7 +125,7 @@ const Main = () => (
             Take a look at www.zacremboldt.com (links to my resume, GitHub,
             CodePen, etc.)
           </li>
-          <li>Like what you see? Give me a call! (620) 266-6987</li>
+          <li>Like what you see? Give me a call: (620) 266-6987</li>
         </ol>
       </div>
     </section>
