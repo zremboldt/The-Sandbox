@@ -1,9 +1,7 @@
 import React from "react";
-// import jestLogo from "../images/jestLogo.svg";
 import IconQuote from "../images/IconQuote";
-// import IconCode from "../images/IconCode";
-// import IconResume from "../images/IconResume";
-// import IconPersonalSite from "../images/IconPersonalSite";
+import accentLg from "../images/accent-big-square.svg";
+import accentSm from "../images/accent-small-square.svg";
 
 const Main = () => (
   <main className="main">
@@ -16,12 +14,13 @@ const Main = () => (
           in visual design. Over the past 4 years I’ve gone from zero
           programming experience to designing, developing &amp; deploying
           production web apps for my current employer, one of which recently
-          generated over 3/4 of a million dollars in just its first year!
+          generated nearly one million dollars in just its first year!
         </p>
       </div>
     </section>
 
     <section className="sectionWorkWithMe">
+      <img src={accentLg} alt="" />
       <div className="card">
         <h2>What’s it like to work with me?</h2>
         <p>
@@ -65,6 +64,7 @@ const Main = () => (
     </section>
 
     <section className="sectionTools">
+      <img src={accentSm} alt="" />
       <div className="card">
         <h2>Preferred tools</h2>
         <ul>
@@ -93,6 +93,7 @@ const Main = () => (
     </section>
 
     <section className="sectionExperience">
+      <img src={accentLg} alt="" />
       <div className="card">
         <h2>Other experience</h2>
         <ul>
