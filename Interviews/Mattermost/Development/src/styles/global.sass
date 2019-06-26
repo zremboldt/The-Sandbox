@@ -7,7 +7,7 @@ $primary: hsla(216, 97%, 60%, 1)
 $offWhite:   hsla(214, 100%, 98%, 1)
 $border: hsla(225, 37%, 82%, 1)
 $dark:  hsla(223, 22%, 41%, 1)
-$dark:  hsla(223, 22%, 41%, .05)
+// $dark:  hsla(223, 22%, 41%, .05)
 $g1: #1ba4f7
 $g2: #4641ff
 
@@ -85,7 +85,7 @@ p, span, li, button
 // Modular type scale (below) taken from the Root design system specs.
 h1
   font-size: 4.8rem
-  line-height: 5.2rem
+  line-height: 6rem
 h2
   font-size: 3.2rem
   line-height: 3.6rem
@@ -95,12 +95,6 @@ p, span, li
 .p1
   font-size: 2rem
   line-height: 3.2rem
-// .p2
-//   font-size: 1.8rem
-//   line-height: 2.4rem
-// .p3
-//   font-size: 1.6rem
-//   line-height: 2.1rem
 button
   font-size: 1.8rem
   line-height: 2.2rem
@@ -108,7 +102,7 @@ button
 @media screen and (max-width: 350px)
   h1
     font-size: 4rem
-    line-height: 4.4rem
+    line-height: 5.4rem
   h2
     font-size: 2.8rem
     line-height: 3.2rem
@@ -118,12 +112,6 @@ button
   .p1
     font-size: 1.8rem
     line-height: 3rem
-  // .p2
-  //   font-size: 1.6rem
-  //   line-height: 2.1rem
-  // .p3
-  //   font-size: 1.6rem
-  //   line-height: 2.1rem
   button
     font-size: 1.6rem
     line-height: 2rem
@@ -166,12 +154,15 @@ button
 //   background-color: $primary
 
 .card
+  position: relative
   margin-bottom: 1.6rem
   padding: 5rem 4rem
   background-color: white
   border-radius: 1rem
   box-shadow: $shadowCard
 
+  h2
+    margin-bottom: 2.4rem
 
 
 

@@ -1,6 +1,6 @@
 import React from "react";
 // import jestLogo from "../images/jestLogo.svg";
-// import IconPhone from "../images/IconPhone";
+import IconQuote from "../images/IconQuote";
 // import IconCode from "../images/IconCode";
 // import IconResume from "../images/IconResume";
 // import IconPersonalSite from "../images/IconPersonalSite";
@@ -14,9 +14,9 @@ const Main = () => (
         <p>
           I am a self-taught Front end web developer with a 10 year background
           in visual design. Over the past 4 years I’ve gone from zero
-          programming experience to designing, developing & deploying production
-          web apps for my current employer, one of which recently generated over
-          3/4 of a million dollars in just its first year!
+          programming experience to designing, developing &amp; deploying
+          production web apps for my current employer, one of which recently
+          generated over 3/4 of a million dollars in just its first year!
         </p>
       </div>
     </section>
@@ -28,24 +28,24 @@ const Main = () => (
           I am a driven self starter. God has blessed me with talent and ideas.
           I work hard and have a history of excelling wherever I put my focus.
           I’ve been acknowledged by senior leadership for successfully
-          influencing/leading technical and visual direction, inspiring
-          forward-thinking, ideas and fostering growth/unity among teams. Below
+          influencing/ leading technical and visual direction, inspiring
+          forward-thinking, ideas and fostering growth/ unity among teams. Below
           are a few quotes from my performance reviews over the past couple of
           years:
         </p>
       </div>
       <div className="card quoteCard">
-        {/* <iconQuote /> */}
-        <p className="superQuote marBot2">
-          Zac produces excellent results. It doesn’t matter if it’s a design
-          project or a new area such as video. He continually blows expectations
-          away.
+        <IconQuote />
+        <p className="quoteText marBot2">
+          Zac produces excellent results. <br />
+          It doesn’t matter if it’s a design project or a new area such as
+          video. He continually blows expectations away.
         </p>
         <p>Andrew Braun - Director of Marketing</p>
       </div>
       <div className="card quoteCard">
-        {/* <iconQuote /> */}
-        <p className="superQuote marBot2">
+        <IconQuote />
+        <p className="quoteText marBot2">
           Responsive, helpful, thinks about and researches relevant details.
           Gathers data before making decisions. Zac is always positive and
           enthusiastic.
@@ -53,8 +53,8 @@ const Main = () => (
         <p>Jackie Lopez – Marketing Manager</p>
       </div>
       <div className="card quoteCard">
-        {/* <iconQuote /> */}
-        <p className="superQuote marBot2">
+        <IconQuote />
+        <p className="quoteText marBot2">
           Critical judgement is a strong point – able to process complex info
           and suggests improvement to current approaches. Seeks information to
           make decisions. I love Zac’s initiative and willingness to take on and
