@@ -122,10 +122,12 @@ const Main = () => (
         <h2>What’s next?</h2>
         <ol>
           <li>
-            Take a look at www.zacremboldt.com (links to my resume, GitHub,
-            CodePen, etc.)
+            Take a look at <a href="">www.zacremboldt.com</a> <br /> (links to
+            my resume, GitHub, CodePen, etc.)
           </li>
-          <li>Like what you see? Give me a call: (620) 266-6987</li>
+          <li>
+            Like what you see? Give me a call: <strong>(620) 266-6987</strong>
+          </li>
         </ol>
       </div>
     </section>

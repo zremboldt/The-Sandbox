@@ -1,9 +1,8 @@
 import React from "react";
-// import ImgStar from "../images/ImgStar";
 
 const Footer = () => (
   <footer className="footer">
-    <span>Footer</span>
+    <div className="footerBg"></div>
   </footer>
 );
 
