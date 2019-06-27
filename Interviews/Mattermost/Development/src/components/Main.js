@@ -40,7 +40,7 @@ const Main = () => {
     <main className="main">
       <section className="sectionBio">
         <div className="card">
-          <div className="avatar"></div>
+          <div className="avatar" />
           <h2>Bio</h2>
           <p>
             I am a self-taught Front end web developer with a 10 year background
@@ -53,7 +53,7 @@ const Main = () => {
       </section>
 
       <section className="sectionWorkWithMe">
-        <img src={accentLg} alt="" />
+        <img className="accentSquare" src={accentLg} alt="" />
         <div ref={ref1} className={`card ${inView1 ? "" : "hide"}`}>
           <h2>What’s it like to work with me?</h2>
           <p>
@@ -100,7 +100,7 @@ const Main = () => {
       </section>
 
       <section className="sectionTools">
-        <img src={accentSm} alt="" />
+        <img className="accentSquare" src={accentSm} alt="" />
         <div ref={ref5} className={`card ${inView5 ? "" : "hide"}`}>
           <h2>Preferred tools</h2>
           <ul>
@@ -129,7 +129,7 @@ const Main = () => {
       </section>
 
       <section className="sectionExperience">
-        <img src={accentLg} alt="" />
+        <img className="accentSquare" src={accentLg} alt="" />
         <div ref={ref6} className={`card ${inView6 ? "" : "hide"}`}>
           <h2>Other experience</h2>
           <ul>
