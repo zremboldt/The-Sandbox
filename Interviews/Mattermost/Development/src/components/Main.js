@@ -9,7 +9,7 @@ const Main = () => {
     /* Optional options */
     root: null, // 'null' sets it to default value: viewport
     rootMargin: "600px 0px 0px", // I'm adding 600px to the top of the bounds, 0 to sides and 0 to bottom.
-    threshold: 0.4, // isIntersecting triggers when 90% of observed object is visible.
+    threshold: 0.2, // isIntersecting triggers when 90% of observed object is visible.
   });
   const [ref2, inView2] = useInView({
     rootMargin: "600px 0px 0px",
