@@ -7,7 +7,7 @@ $primary: hsla(216, 97%, 60%, 1)
 $offWhite:   hsla(214, 100%, 98%, 1)
 $border: hsla(225, 37%, 82%, 1)
 $dark:  hsla(223, 22%, 41%, 1)
-$dark:  hsla(223, 22%, 41%, .05)
+// $dark:  hsla(223, 22%, 41%, .05)
 $g1: #1ba4f7
 $g2: #4641ff
 
@@ -133,36 +133,6 @@ button
 // Elements
 // ********
 
-// button
-//   display: inline-block
-//   width: 100%
-//   margin: 0
-//   padding: 21px 3rem // 21px top/bottom padding + 18px text line-height = 60px total height.
-//   border: none
-//   cursor: pointer
-//   text-align: center
-//   text-decoration: none
-//   transition: background 150ms ease-in-out
-//   -webkit-appearance: none
-//   -moz-appearance: none
-
-// .btnPrimary
-//   background-color: $primary
-//   border-radius: 4px
-//   color: white
-//   font-weight: 700
-
-//   &:hover,
-//   &:active
-//     background-color: adjust-hue($primary, -5deg)
-
-
-// .accentBar
-//   width: 90px
-//   height: 6px
-//   margin: 50px 0 18px
-//   background-color: $primary
-
 .card
   position: relative
   margin-bottom: 1.6rem
@@ -170,9 +140,18 @@ button
   background-color: white
   border-radius: 1rem
   box-shadow: $shadowCard
+  // These work toghter with .hide below ↓
+  will-change: transform, scale, opacity
+  transition: all 1.5s $zease
+  opacity: 1
+  transform: translateY(0) scale(1)
 
   h2
     margin-bottom: 2.4rem
-
-
+    
+// Intersection Observer applies this hide when offscreen
+.hide
+  opacity: 0
+  transform: translateY(6rem) scale(0.93)
+  
 

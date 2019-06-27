@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="78" height="78" viewBox="0 0 78 78">
-  <g fill="#FFF" opacity=".196">
+  <g fill="#DADFE7">
     <polygon points="0 45 3 45 3 48 0 48" transform="matrix(0 1 1 0 -45 45)"/>
     <polygon points="0 60 3 60 3 63 0 63" transform="matrix(0 1 1 0 -60 60)"/>
     <polygon points="0 75 3 75 3 78 0 78" transform="matrix(0 1 1 0 -75 75)"/>
