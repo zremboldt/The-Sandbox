@@ -1,14 +1,4 @@
 
-.main
-  position: relative
-  z-index: 2
-  max-width: 740px
-  margin: -28rem auto // Fallback
-  margin: -27vh auto
-  padding: 20px
-
-
-
 .sectionBio
 
   .card
@@ -25,6 +15,13 @@
       background-image: url('../images/avatar.jpg')
       background-size: 105%
       background-position: center
+
+@media screen and (max-width: 500px)
+  .sectionBio
+    .card
+      padding-left: 4rem
+      .avatar
+        display: none
 
 
 
@@ -55,6 +52,13 @@
     color: $primary
     font-weight: 700
 
+@media screen and (max-width: 500px)
+  .sectionWorkWithMe
+    .card
+      padding-left: 4rem
+      .iconQuote
+        display: none
+
 
 
 .sectionTools
@@ -77,6 +81,7 @@
     margin: 1.2rem 0 1.2rem 1.5rem
 
 
+  
 .sectionExperience
   position: relative
 
@@ -92,6 +97,8 @@
     &:last-of-type
       border-bottom: none
 
+
+  
 .sectionWhatNext
 
   li
@@ -99,3 +106,6 @@
 
     &:last-of-type
       margin-bottom: 0
+
+  a
+    font-weight: 700

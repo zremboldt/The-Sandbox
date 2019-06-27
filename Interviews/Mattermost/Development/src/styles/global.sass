@@ -7,7 +7,6 @@ $primary: hsla(216, 97%, 60%, 1)
 $offWhite:   hsla(214, 100%, 98%, 1)
 $border: hsla(225, 37%, 82%, 1)
 $dark:  hsla(223, 22%, 41%, 1)
-// $dark:  hsla(223, 22%, 41%, .05)
 $g1: #1ba4f7
 $g2: #4641ff
 
@@ -44,6 +43,7 @@ body
   margin: 0
   padding: 0
   background-color: $offWhite
+  overflow-x: hidden
 
 section
   margin-bottom: 10rem
@@ -58,10 +58,14 @@ ol
   padding-left: 2rem
 
 a
-  // display: block
-  // text-decoration: none
+  text-decoration: none
   color: $primary
   cursor: pointer
+  border-bottom: 2px solid white
+  transition: 0.1s ease-in-out
+
+  &:hover
+    border-bottom: 2px solid $primary
 
 
 
@@ -81,6 +85,11 @@ h1, h2, h3, h4, h5, h6
 
 p, span, li, button
   font-family: 'Montserrat', Helvetica Neue, arial, sans-serif
+
+.caption
+  color: lighten($dark, 20%)
+  font-size: 15px
+  line-height: 24px
 
 .marBot2
   margin-bottom: 1.8rem
@@ -133,6 +142,14 @@ button
 // Elements
 // ********
 
+.main
+  position: relative
+  z-index: 2
+  max-width: 740px
+  margin: -28rem auto // Fallback
+  margin: -27vh auto
+  padding: 20px
+
 .card
   position: relative
   margin-bottom: 1.6rem
@@ -153,5 +170,13 @@ button
 .hide
   opacity: 0
   transform: translateY(6rem) scale(0.93)
-  
 
+
+
+
+@media screen and (max-width: 500px)
+  .main
+    padding: 10px
+
+  .card
+    padding: 4rem 3rem

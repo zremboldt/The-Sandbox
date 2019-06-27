@@ -25,15 +25,15 @@ const Main = () => {
   });
   const [ref5, inView5] = useInView({
     rootMargin: "600px 0px 0px",
-    threshold: 0.4,
+    threshold: 0.3,
   });
   const [ref6, inView6] = useInView({
     rootMargin: "600px 0px 0px",
-    threshold: 0.4,
+    threshold: 0.3,
   });
   const [ref7, inView7] = useInView({
     rootMargin: "600px 0px 0px",
-    threshold: 0.4,
+    threshold: 0,
   });
 
   return (
@@ -160,11 +160,14 @@ const Main = () => {
           <ol>
             <li>
               Take a look at{" "}
-              <a href="https://www.zacremboldt.com/">www.zacremboldt.com</a>{" "}
-              <br /> (links to my resume, GitHub, CodePen, etc.)
+              <a href="https://www.zacremboldt.com/">www.zacremboldt.com</a>
+              <p className="caption">
+                (links to my resume, GitHub, CodePen, etc.)
+              </p>
             </li>
             <li>
-              Like what you see? Give me a call: <strong>(620) 266-6987</strong>
+              Like what you see? Give me a call.{" "}
+              <strong style={{ whiteSpace: "nowrap" }}>(620) 266-6987</strong>
             </li>
           </ol>
         </div>
