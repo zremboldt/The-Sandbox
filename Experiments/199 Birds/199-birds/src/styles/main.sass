@@ -1,0 +1,30 @@
+
+
+// *****
+// Styles relevant to the workings of the grid
+// *****
+
+.grid
+  display: flex
+  flex-wrap: wrap
+  margin: 0 -15px
+  
+.card
+  width: calc(33.33% - 30px)
+  margin: 15px
+
+  @media (max-width: 1000px)
+    width: calc(50% - 30px)
+  @media (max-width: 600px)
+    width: calc(100% - 30px)
+
+
+  .cardImg
+    width: 100%
+    height: 160px
+    border-radius: 1rem 1rem 0 0
+    border-bottom: 1px solid #eee
+    overflow: hidden
+
+  .info
+    padding: 2rem
