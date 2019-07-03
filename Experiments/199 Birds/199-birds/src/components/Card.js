@@ -1,16 +1,15 @@
 import React from "react"
-import Img from "gatsby-image"
+import Image from "./Image"
 
-const Card = ({ image }) => {
+const Card = ({ img, name }) => {
   return (
     <div className="card">
       <div className="cardImg">
-        <Img fluid={image.childImageSharp.fluid} alt="image name here" />
+        <Image imgName={img} />
       </div>
-      <figcaption>
-        {/* <h3>{name}</h3> */}
-        {/* <Copy>{copy}</Copy> */}
-      </figcaption>
+      <div className="birdName">
+        <h3>{name}</h3>
+      </div>
     </div>
   )
 }
