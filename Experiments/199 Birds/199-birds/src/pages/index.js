@@ -9,7 +9,7 @@ const IndexPage = () => {
     <>
       <SEO title="Home" />
       <main className="main">
-        <h1 style={{ margin: "1rem 0" }}>...</h1>
+        <h1 style={{ margin: "1rem 0" }}>199 Birds</h1>
 
         <div className="grid">
           {birdData.map((bird, i) => (

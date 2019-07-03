@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import Image from "./Image"
 import Modal from "./Modal"
 
-const Card = ({ img, name, video }) => {
+const Card = ({ img, name, videoId }) => {
   const [modalOpen, setModalOpen] = useState(false)
 
   const handleClick = () => {
@@ -20,7 +20,7 @@ const Card = ({ img, name, video }) => {
         </div>
       </div>
 
-      {modalOpen && <Modal video={video} handleClick={handleClick} />}
+      {modalOpen && <Modal videoId={videoId} handleClick={handleClick} />}
     </>
   )
 }

@@ -30,8 +30,9 @@
   .birdName
     padding: 2rem
 
-.bgModal
+.modal
   position: fixed
+  z-index: 2
   top: 0
   left: 0
   right: 0
@@ -39,10 +40,22 @@
   display: flex
   align-items: center
   justify-content: center
-  background-color: hsla(0, 0%, 0%, 0.9)
+  
+  .bgModal
+    position: absolute
+    width: 100%
+    height: 100%
+    background-color: hsla(0, 0%, 0%, 0.9)
 
   .ctrVideo
+    position: relative
+    z-index: 3
     width: 800px
     height: 480px
-    background-color: gray
+    background-color: black
     border-radius: 10px
+    overflow: hidden
+
+    .video
+      width: 100%
+      height: 100%
