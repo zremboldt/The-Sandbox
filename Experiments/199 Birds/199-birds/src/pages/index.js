@@ -13,7 +13,7 @@ const IndexPage = () => {
 
         <div className="grid">
           {birdData.map((bird, i) => (
-            <Card {...bird} i key={i} />
+            <Card {...bird} key={i} />
           ))}
         </div>
       </main>
