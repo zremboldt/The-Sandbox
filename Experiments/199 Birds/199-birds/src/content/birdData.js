@@ -31,8 +31,48 @@ export const birdData = [
     videoId: "C91s-TQlCPM",
   },
   {
-    name: "Emperor Penguin",
-    img: "gatsby-astronaut.png",
-    videoId: "QLFqdRRqjrs",
+    name: "Duck",
+    img: "duck.jpg",
+    videoId: "",
   },
+  {
+    name: "Duckling",
+    img: "duckling.jpg",
+    videoId: "",
+  },
+  {
+    name: "Partridge",
+    img: "partridge.jpg",
+    videoId: "",
+  },
+  {
+    name: "Pheasant",
+    img: "pheasant.jpg",
+    videoId: "",
+  },
+  {
+    name: "Rooster",
+    img: "rooster.jpg",
+    videoId: "",
+  },
+  {
+    name: "Woodpecker",
+    img: "woodpecker.jpg",
+    videoId: "",
+  },
+  {
+    name: "Turkey",
+    img: "turkey.jpg",
+    videoId: "",
+  },
+  {
+    name: "Barn-owl",
+    img: "barn-owl.jpg",
+    videoId: "",
+  },
+  // {
+  //   name: "Emperor Penguin",
+  //   img: "gatsby-astronaut.png",
+  //   videoId: "QLFqdRRqjrs",
+  // },
 ]

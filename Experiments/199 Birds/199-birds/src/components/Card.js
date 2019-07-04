@@ -16,7 +16,7 @@ const Card = ({ img, name, videoId }) => {
           <Image imgName={img} />
         </div>
         <div className="birdName">
-          <h3>{name}</h3>
+          <p>{name}</p>
         </div>
       </div>
 

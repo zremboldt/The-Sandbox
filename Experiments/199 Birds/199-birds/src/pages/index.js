@@ -8,9 +8,11 @@ const IndexPage = () => {
   return (
     <>
       <SEO title="Home" />
+      <div className="header">
+        <h1 className="titleText">199</h1>
+        <h2 className="titleText">Birds</h2>
+      </div>
       <main className="main">
-        <h1 style={{ margin: "1rem 0" }}>199 Birds</h1>
-
         <div className="grid">
           {birdData.map((bird, i) => (
             <Card {...bird} key={i} />

@@ -4,9 +4,9 @@
 
 // Colors
 $primary: hsla(216, 97%, 60%, 1)
-$offWhite:   hsla(214, 100%, 98%, 1)
-$border: hsla(225, 37%, 82%, 1)
-$dark:  hsla(223, 22%, 41%, 1)
+$offWhite: hsl(42, 100%, 95%)
+$border: hsla(180, 13%, 30%, .2)
+$dark:  hsl(180, 13%, 28%)
 $g1: #1ba4f7
 $g2: #4641ff
 
@@ -108,6 +108,9 @@ h1
 h2
   font-size: 3.2rem
   line-height: 3.6rem
+h3
+  font-size: 2rem
+  line-height: 2.2rem
 p, span, li
   font-size: 1.8rem
   line-height: 3rem
@@ -144,7 +147,7 @@ button
 
 .main
   position: relative
-  max-width: 740px
+  max-width: 840px
   margin: 0 auto
   padding: 20px
   min-height: 100vh
@@ -153,8 +156,9 @@ button
   position: relative
   cursor: pointer
   margin-bottom: 1.6rem
-  background-color: white
+  background-color: hsl(86, 24%, 78%)
   border-radius: 1rem
+  border: 1px solid $border
   box-shadow: $shadowCard
   // These work toghter with .hide below ↓
   will-change: transform, scale, opacity
@@ -185,6 +189,3 @@ button
 @media screen and (max-width: 500px)
   .main
     padding: 10px
-
-  .card
-    padding: 4rem 3rem
