@@ -13,7 +13,7 @@ const Image = ({ imgName }) => (
         allImageSharp {
           edges {
             node {
-              fluid(maxWidth: 500) {
+              fluid(maxWidth: 400) {
                 ...GatsbyImageSharpFluid
                 originalName
               }

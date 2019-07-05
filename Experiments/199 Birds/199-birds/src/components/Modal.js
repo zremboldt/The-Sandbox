@@ -7,10 +7,11 @@ const Modal = ({ handleClick, videoId }) => {
       <div className="ctrVideo">
         <iframe
           className="video"
+          title={videoId}
           src={`https://www.youtube.com/embed/${videoId}`}
-          frameborder="0"
+          frameBorder="0"
           allow="autoplay; encrypted-media;"
-          allowfullscreen
+          allowFullScreen
         ></iframe>
       </div>
     </div>

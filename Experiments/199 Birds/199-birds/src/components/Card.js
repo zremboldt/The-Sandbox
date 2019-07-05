@@ -15,9 +15,7 @@ const Card = ({ img, name, videoId }) => {
         <div className="cardImg">
           <Image imgName={img} />
         </div>
-        <div className="birdName">
-          <p>{name}</p>
-        </div>
+        <p className="birdName">{name}</p>
       </div>
 
       {modalOpen && <Modal videoId={videoId} handleClick={handleClick} />}

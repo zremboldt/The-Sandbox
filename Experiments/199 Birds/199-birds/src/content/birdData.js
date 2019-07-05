@@ -66,7 +66,7 @@ export const birdData = [
     videoId: "",
   },
   {
-    name: "Barn-owl",
+    name: "Barn owl",
     img: "barn-owl.jpg",
     videoId: "",
   },
