@@ -6,20 +6,26 @@ import SEO from "../components/seo"
 
 const IndexPage = () => {
   const [birdsList, setBirdsList] = useState(birdData)
-  const [searchQuery, setSearchQuery] = useState("uck")
+  const [searchQuery, setSearchQuery] = useState("")
 
   useEffect(() => {
-    searchQuery && // if searchQuery isn't falsy, set birdsList to whatever gets filtered.
-      setBirdsList(
-        birdData.filter(data => {
-          return data.name.includes(searchQuery)
-        })
-      )
-  }, [])
+    searchQuery === ""
+      ? setBirdsList(birdData)
+      : setBirdsList(
+          birdData.filter(data => {
+            const birdToLowerCase = data.name.toLowerCase()
+            return birdToLowerCase.includes(searchQuery)
+          })
+        )
+  }, [searchQuery])
 
   return (
     <>
-      <input type="text" onChange={e => setSearchQuery(e.target.value)} />
+      <input
+        className="searchInput"
+        type="text"
+        onChange={e => setSearchQuery(e.target.value)}
+      />
       <SEO title="Home" />
       <div className="header">
         <h1 className="titleText">199</h1>
