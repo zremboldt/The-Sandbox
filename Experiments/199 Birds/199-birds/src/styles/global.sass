@@ -83,7 +83,7 @@ h1, h2, h3, h4, h5, h6
   font-family: 'Montserrat', Helvetica Neue, arial, sans-serif
   // font-weight: normal
 
-p, span, li, button
+p, span, li, button, input
   font-family: 'Montserrat', Helvetica Neue, arial, sans-serif
 
 .caption
@@ -111,7 +111,7 @@ h2
 h3
   font-size: 2rem
   line-height: 2.2rem
-p, span, li
+p, span, li, input
   font-size: 1.8rem
   line-height: 3rem
 .p1
@@ -128,7 +128,7 @@ button
   h2
     font-size: 2.8rem
     line-height: 3.2rem
-  p, span, li
+  p, span, li, input
     font-size: 1.6rem
     line-height: 2.8rem
   .p1
@@ -152,35 +152,8 @@ button
   padding: 20px
   min-height: 100vh
 
-.card
-  position: relative
-  cursor: pointer
-  margin-bottom: 1.6rem
-  background-color: hsl(86, 24%, 78%)
-  border-radius: 1rem
-  border: 1px solid $border
-  box-shadow: $shadowCard
-  // These work toghter with .hide below ↓
-  will-change: transform, scale, opacity
-  transition: all 0.2s $zease
-  opacity: 1
-  transform: translateY(0) scale(1)
 
-  &:hover
-    transform: translateY(2px)
-
-  h2
-    margin-bottom: 2.4rem
     
-// Intersection Observer applies this hide when offscreen
-.hide
-  opacity: 0
-  transform: translateY(6rem) scale(0.93)
-
-
-
-
-
 
 
 
