@@ -14,24 +14,24 @@ const IndexPage = () => {
       : setBirdsList(
           birdData.filter(data => {
             const birdToLowerCase = data.name.toLowerCase()
-            return birdToLowerCase.includes(searchQuery)
+            return birdToLowerCase.includes(searchQuery.toLowerCase())
           })
         )
   }, [searchQuery])
 
   return (
     <>
-      <input
-        className="searchInput"
-        type="text"
-        onChange={e => setSearchQuery(e.target.value)}
-      />
       <SEO title="Home" />
       <div className="header">
         <h1 className="titleText">199</h1>
         <h2 className="titleText">Birds</h2>
       </div>
       <main className="main">
+        <input
+          className="searchInput"
+          type="text"
+          onChange={e => setSearchQuery(e.target.value)}
+        />
         <div className="grid">
           {birdsList.map((bird, i) => (
             <Card {...bird} key={i} />
