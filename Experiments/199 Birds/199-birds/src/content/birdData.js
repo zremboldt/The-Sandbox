@@ -1,12 +1,3 @@
-// export const birdData = [
-//   {
-//     name: "Test title",
-//     img: "gatsby-astronaut.png",
-//
-//     videoId: "https://youtu.be/3oYbCpxwECQ",
-//   },
-// ]
-
 export const birdData = [
   {
     name: "Mandarin Duck",
