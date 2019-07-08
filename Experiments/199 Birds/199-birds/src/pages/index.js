@@ -32,16 +32,18 @@ const IndexPage = () => {
     <>
       <SEO title="Home" />
       <div className="header">
-        <h1 className="titleText">199</h1>
-        <h2 className="titleText">Birds</h2>
+        <div className="heroText">
+          <h1>199</h1>
+          <h2>Birds</h2>
+        </div>
       </div>
       <div
         className="searchBar"
         ref={ref}
         style={{
           backgroundColor: atTop
-            ? "hsla(180, 30%, 74%, .97)"
-            : "hsla(180, 13%, 30%, 0)",
+            ? "hsla(72, 55%, 68%, .94)"
+            : "hsla(0, 0%, 100%, 0)",
         }}
       >
         <input
@@ -51,13 +53,16 @@ const IndexPage = () => {
           onChange={e => setSearchQuery(e.target.value)}
         />
       </div>
-      <img className="imgLeaves" src={leaves} alt="" />
+
       <main className="main">
-        <div className="grid">
-          {birdsList.map((bird, i) => (
-            <Card {...bird} key={i} />
-          ))}
-        </div>
+        {birdsList.length && <img className="imgLeaves" src={leaves} alt="" />}
+        <section id="sectionRainforest">
+          <div className="grid">
+            {birdsList.map((bird, i) => (
+              <Card {...bird} key={i} />
+            ))}
+          </div>
+        </section>
       </main>
     </>
   )

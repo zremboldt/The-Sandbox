@@ -1,50 +1,28 @@
-
-.searchBar
-  position: sticky
-  top: 0
-  z-index: 10
-  padding: 1rem 2rem
-  margin-bottom: 2rem
-  transition: 0.08s ease-in-out
-
-
-.searchInput
-  // position: fixed
-  // top: 30px
-  // left: 30px
-  // z-index: 5
-  display: block
-  margin: 0 auto
-  padding: 1rem 2rem
-  width: 100%
-  max-width: 54rem
-  background-color: white
-  border-radius: 10rem
-  border: 1px solid hsla(180, 20%, 64%, .50)
-  // border: none
-  outline: none
-
-  &::placeholder
-    color: hsla(180, 13%, 30%, .5)
-
-@media screen and (max-width: 500px)
-  .searchBar
-    padding: .8rem 1rem
-  .searchInput
-    padding: .5rem 1.5rem
-
+.main
+  position: relative
+  min-height: 100vh
 
 .imgLeaves
-  position: absolute
+  display: block
+  position: relative
+  bottom: -1px
+  
+section
+  display: flex
+  flex-direction: column
+  align-items: center
+  background-image: linear-gradient(to bottom, $green 0%, $offWhite 100%)
 
-.main
-  // background-color: $green
 
 
+  
 .grid
+  position: relative
   display: flex
   flex-wrap: wrap
-  margin: 0 -15px
+  width: 100%
+  max-width: 840px
+  margin: -10rem 0 0
   
 .card
   width: calc(33.33% - 30px)
@@ -78,34 +56,11 @@
     padding: 1rem
     text-align: center
 
+
+
+
+
+
+
+
   
-
-.modal
-  position: fixed
-  z-index: 2
-  top: 0
-  left: 0
-  right: 0
-  bottom: 0
-  display: flex
-  align-items: center
-  justify-content: center
-  
-  .bgModal
-    position: absolute
-    width: 100%
-    height: 100%
-    background-color: hsla(0, 0%, 0%, 0.9)
-
-  .ctrVideo
-    position: relative
-    z-index: 3
-    width: 800px
-    height: 480px
-    background-color: black
-    border-radius: 10px
-    overflow: hidden
-
-    .video
-      width: 100%
-      height: 100%
