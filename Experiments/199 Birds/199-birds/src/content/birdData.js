@@ -70,9 +70,249 @@ export const birdData = [
     img: "barn-owl.jpg",
     videoId: "",
   },
-  // {
-  //   name: "Emperor Penguin",
-  //   img: "gatsby-astronaut.png",
-  //   videoId: "QLFqdRRqjrs",
-  // },
+  {
+    name: "Emperor Penguin",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Falcon",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Kestrel",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Condor",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Red Kite",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Bald Eagle",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Osprey",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Merlin",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Burrowing Owl",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Great Horned Owl",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Nighthawk",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Spotted Owl",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "European Nightjar",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Owlet-Nightjar",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Raggiana Bird of Paradise",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Grey Parrot",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Crimson Topaz Hummingbird",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Moustached Babbler",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Broadbill",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Wilson's Bird of Paradise",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Quetzal",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Great Hornbill",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Harpy Eagle",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Hermit Hummingbird",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Red-Fan Parrot",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Toucan",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Oriental Dwarf Kingfisher",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Flowerpecker",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Blue-and-Yellow Macaw",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Hyacinth Macaw",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Red-and-Green Macaw",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Spectacled Owl",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "White Cockatoo",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Lory",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Mealy Amazon",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Cassowary",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Starling",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Song Thrush",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Robin",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Yellow Hammer",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Greenfinch",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Goldfinch",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Chaffinch",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Wood Pigeon",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Wren",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Sparrow",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Magpie",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Long-Tailed Fit",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
+  {
+    name: "Blue Fit",
+    img: "gatsby-astronaut.png",
+    videoId: "QLFqdRRqjrs",
+  },
 ]

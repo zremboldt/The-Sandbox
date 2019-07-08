@@ -1,4 +1,12 @@
 
+.searchBar
+  position: sticky
+  top: 0
+  z-index: 10
+  padding: 1rem 2rem
+  margin-bottom: 2rem
+  transition: 0.08s ease-in-out
+
 
 .searchInput
   // position: fixed
@@ -6,17 +14,32 @@
   // left: 30px
   // z-index: 5
   display: block
-  margin: 0 auto 3rem
+  margin: 0 auto
   padding: 1rem 2rem
   width: 100%
   max-width: 54rem
-  background-color: hsla(0,0%,100%, .94)
+  background-color: white
   border-radius: 10rem
-  border: 1px solid $border
-  border: none
-  box-shadow: inset 1px 2px 4px hsla(0,0%,0%,0.26)
-  color: $dark
+  border: 1px solid hsla(180, 20%, 64%, .50)
+  // border: none
   outline: none
+
+  &::placeholder
+    color: hsla(180, 13%, 30%, .5)
+
+@media screen and (max-width: 500px)
+  .searchBar
+    padding: .8rem 1rem
+  .searchInput
+    padding: .5rem 1.5rem
+
+
+.imgLeaves
+  position: absolute
+
+.main
+  // background-color: $green
+
 
 .grid
   display: flex
