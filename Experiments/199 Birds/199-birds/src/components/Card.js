@@ -2,18 +2,25 @@ import React, { useState } from "react"
 import Image from "./Image"
 import Modal from "./Modal"
 
-const Card = ({ img, name, videoId }) => {
+const Card = ({ name, videoId }) => {
   const [modalOpen, setModalOpen] = useState(false)
 
   const handleClick = () => {
     setModalOpen(!modalOpen)
   }
 
+  const imgName = () => {
+    const spaceToDash = name.split(" ").join("-")
+    const noComma = spaceToDash.split("'").join("")
+    const lowerCase = noComma.toLowerCase()
+    return `${lowerCase}.jpg`
+  }
+
   return (
     <>
       <div className="card" onClick={handleClick}>
         <div className="cardImg">
-          <Image imgName={img} />
+          <Image imgName={imgName()} />
         </div>
         <p className="birdName">{name}</p>
       </div>
