@@ -306,4 +306,9 @@ export const birdData = [
     img: "gatsby-astronaut.png",
     videoId: "QLFqdRRqjrs",
   },
+  {
+    name: "Mandarin Duck",
+    img: "mandarin.jpg",
+    videoId: "XtDu3dMsvXA",
+  },
 ]

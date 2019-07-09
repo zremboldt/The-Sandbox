@@ -38,13 +38,13 @@ const IndexPage = () => {
         </div>
       </div>
       <div
-        className="searchBar"
+        className={`searchBar ${atTop ? "barActive" : ""}`}
         ref={ref}
-        style={{
-          backgroundColor: atTop
-            ? "hsla(72, 55%, 68%, .94)"
-            : "hsla(0, 0%, 100%, 0)",
-        }}
+        // style={{
+        //   backgroundColor: atTop
+        //     ? "hsla(72, 55%, 68%, .94)"
+        //     : "hsla(0, 0%, 100%, 0)",
+        // }}
       >
         <input
           className="searchInput"
