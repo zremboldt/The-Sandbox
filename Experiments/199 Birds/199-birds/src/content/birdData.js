@@ -217,174 +217,174 @@ export const birdData = [
     name: "Barn owl",
     videoId: "",
   },
-  {
-    name: "Emperor Penguin",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Falcon",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Kestrel",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Condor",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Red Kite",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Bald Eagle",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Osprey",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Merlin",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Burrowing Owl",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Great Horned Owl",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Nighthawk",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Spotted Owl",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "European Nightjar",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Owlet-Nightjar",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Raggiana Bird of Paradise",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Grey Parrot",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Crimson Topaz Hummingbird",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Moustached Babbler",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Broadbill",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Wilson's Bird of Paradise",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Quetzal",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Great Hornbill",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Harpy Eagle",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Hermit Hummingbird",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Red-Fan Parrot",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Toucan",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Oriental Dwarf Kingfisher",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Flowerpecker",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Blue-and-Yellow Macaw",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Hyacinth Macaw",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Red-and-Green Macaw",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Spectacled Owl",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "White Cockatoo",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Lory",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Mealy Amazon",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Cassowary",
-    videoId: "QLFqdRRqjrs",
-  },
+  // {
+  //   name: "Emperor Penguin",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Falcon",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Kestrel",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Condor",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Red Kite",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Bald Eagle",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Osprey",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Merlin",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Burrowing Owl",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Great Horned Owl",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Nighthawk",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Spotted Owl",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "European Nightjar",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Owlet-Nightjar",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Raggiana Bird of Paradise",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Grey Parrot",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Crimson Topaz Hummingbird",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Moustached Babbler",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Broadbill",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Wilson's Bird of Paradise",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Quetzal",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Great Hornbill",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Harpy Eagle",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Hermit Hummingbird",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Red-Fan Parrot",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Toucan",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Oriental Dwarf Kingfisher",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Flowerpecker",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Blue-and-Yellow Macaw",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Hyacinth Macaw",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Red-and-Green Macaw",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Spectacled Owl",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "White Cockatoo",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Lory",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Mealy Amazon",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Cassowary",
+  //   videoId: "QLFqdRRqjrs",
+  // },
   {
     name: "Starling",
     videoId: "QLFqdRRqjrs",
   },
-  {
-    name: "Song Thrush",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Robin",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Yellow Hammer",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Greenfinch",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Goldfinch",
-    videoId: "QLFqdRRqjrs",
-  },
+  // {
+  //   name: "Song Thrush",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Robin",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Yellow Hammer",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Greenfinch",
+  //   videoId: "QLFqdRRqjrs",
+  // },
+  // {
+  //   name: "Goldfinch",
+  //   videoId: "QLFqdRRqjrs",
+  // },
   {
     name: "Chaffinch",
     videoId: "QLFqdRRqjrs",
@@ -403,14 +403,6 @@ export const birdData = [
   },
   {
     name: "Magpie",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Long-Tailed Fit",
-    videoId: "QLFqdRRqjrs",
-  },
-  {
-    name: "Blue Fit",
     videoId: "QLFqdRRqjrs",
   },
 ]
