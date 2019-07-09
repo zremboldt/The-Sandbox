@@ -8,7 +8,7 @@ const Modal = ({ handleClick, videoId }) => {
         <iframe
           className="video"
           title={videoId}
-          src={`https://www.youtube.com/embed/${videoId}`}
+          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&iv_load_policy=3&loop=1&playlist=${videoId}&modestbranding=1&rel=0`}
           frameBorder="0"
           allow="autoplay; encrypted-media;"
           allowFullScreen

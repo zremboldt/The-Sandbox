@@ -19,15 +19,15 @@ export const birdData = [
   },
   {
     name: "Bittern",
-    videoId: "",
+    videoId: "ze1uzC7h8UE",
   },
   {
     name: "Black Guillemot",
-    videoId: "",
+    videoId: "7eClNZa8-Jw",
   },
   {
     name: "Blackbird",
-    videoId: "",
+    videoId: "DnClUsa1i_E",
   },
   {
     name: "Blue-Footed Booby",
@@ -39,15 +39,15 @@ export const birdData = [
   },
   {
     name: "Bullfinch",
-    videoId: "",
+    videoId: "wrCdLXqBMOk",
   },
   {
     name: "Cassins Auklet",
-    videoId: "",
+    videoId: "", // Can't find a good video for this...
   },
   {
     name: "Collared Dove",
-    videoId: "",
+    videoId: "3Km-jtXueTw",
   },
   {
     name: "Common Tern",
