@@ -24,8 +24,8 @@ const IndexPage = () => {
   const [ref, atTop] = useInView({
     /* Optional options */
     root: null, // 'null' sets it to default value: viewport
-    rootMargin: "0px 0px -99.8%", // I'm adding 600px to the top of the bounds, 0 to sides and 0 to bottom.
-    threshold: 0.01, // isIntersecting triggers when 90% of observed object is visible.
+    rootMargin: "0px 0px -99.8%", // This makes the root a very tiny sliver across the top of the page.
+    threshold: 0.01, // atTop triggers when at least .01% of the observed object is visible.
   })
 
   return (
@@ -34,7 +34,7 @@ const IndexPage = () => {
       <div className="header">
         <div className="heroText">
           <h1>199</h1>
-          <h2>Birds</h2>
+          <h1>Birds</h1>
         </div>
       </div>
       <div className={`searchBar ${atTop ? "barActive" : ""}`} ref={ref}>
@@ -47,14 +47,14 @@ const IndexPage = () => {
       </div>
 
       <main className="main">
-        {birdsList.length > 0 && (
-          <img className="imgLeaves" src={leaves} alt="" />
-        )}
         {birdsList.length === 0 && (
           <div className="noMatchMessage">
             <h1>No Matches</h1>
             <p>There aren't any birds that match your search.</p>
           </div>
+        )}
+        {birdsList.length > 0 && (
+          <img className="imgLeaves" src={leaves} alt="" />
         )}
         <section id="sectionRainforest">
           <div className="grid">

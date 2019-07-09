@@ -9,10 +9,10 @@ const Card = ({ name, videoId }) => {
     setModalOpen(!modalOpen)
   }
 
-  const imgName = () => {
-    const spaceToDash = name.split(" ").join("-")
-    const noComma = spaceToDash.split("'").join("")
-    const lowerCase = noComma.toLowerCase()
+  const formatImgName = () => {
+    const spacesToDashes = name.split(" ").join("-")
+    const noCommas = spacesToDashes.split("'").join("")
+    const lowerCase = noCommas.toLowerCase()
     return `${lowerCase}.jpg`
   }
 
@@ -20,7 +20,7 @@ const Card = ({ name, videoId }) => {
     <>
       <div className="card" onClick={handleClick}>
         <div className="cardImg">
-          <Image imgName={imgName()} />
+          <Image imgName={formatImgName()} />
         </div>
         <p className="birdName">{name}</p>
       </div>
