@@ -47,7 +47,15 @@ const IndexPage = () => {
       </div>
 
       <main className="main">
-        {birdsList.length && <img className="imgLeaves" src={leaves} alt="" />}
+        {birdsList.length > 0 && (
+          <img className="imgLeaves" src={leaves} alt="" />
+        )}
+        {birdsList.length === 0 && (
+          <div className="noMatchMessage">
+            <h1>No Matches</h1>
+            <p>There aren't any birds that match your search.</p>
+          </div>
+        )}
         <section id="sectionRainforest">
           <div className="grid">
             {birdsList.map((bird, i) => (
