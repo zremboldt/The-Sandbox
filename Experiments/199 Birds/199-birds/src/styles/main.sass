@@ -42,7 +42,8 @@ section
   @media (max-width: 1000px)
     width: calc(50% - 30px)
   @media (max-width: 600px)
-    width: calc(100% - 30px)
+    width: calc(100% - 20px)
+    margin: 15px 10px
 
   .cardImg
     margin: .6rem .6rem 0
@@ -54,9 +55,19 @@ section
     .gatsby-image-wrapper
       top: -2rem
 
+    @media (max-width: 1000px)
+      height: 260px
+
+      .gatsby-image-wrapper
+        top: 0rem
+
+    @media (max-width: 600px)
+      height: 288px
+
   .birdName
     padding: 1rem
     text-align: center
+
 
 
 
