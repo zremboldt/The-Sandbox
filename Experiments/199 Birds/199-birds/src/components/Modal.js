@@ -1,21 +1,41 @@
-import React from "react"
+import React, { useEffect } from "react";
 
-const Modal = ({ handleClick, videoId }) => {
+const Modal = ({ toggleModal, videoId }) => {
+  useEffect(() => {
+    window.addEventListener("keydown", keyPress);
+    return () => window.removeEventListener("keydown", keyPress); // Return a cleanup function from useEffect so you don't have tons of listeners running for every modal you've opened.
+  }, []);
+
+  const keyPress = e => {
+    if (e.key === "Escape" || e.keyCode === 27) toggleModal();
+  };
+
+  const playerParams = [
+    "autoplay=1", // Autoplays the video when loaded
+    "iv_load_policy=3", // Removes annotations
+    "loop=1", // Plays the video again after it's finished. Requires the next param "playlist...".
+    `playlist=${videoId}`, // A required param if you want the video to loop.
+    "modestbranding=1", // Removes the YouTube logo
+    "rel=0", // Only displays suggested videos from the current channel rather than all of YouTube.
+  ];
+
+  const playerParamsString = playerParams.join("&"); // Insert an ampersand between each param.
+
   return (
     <div className="modal">
-      <div className="bgModal" onClick={handleClick}></div>
+      <div className="bgModal" onClick={toggleModal}></div>
       <div className="ctrVideo">
         <iframe
           className="video"
           title={videoId}
-          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&iv_load_policy=3&loop=1&playlist=${videoId}&modestbranding=1&rel=0`}
+          src={`https://www.youtube.com/embed/${videoId}?${playerParamsString}`}
           frameBorder="0"
           allow="autoplay; encrypted-media;"
           allowFullScreen
         ></iframe>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Modal
+export default Modal;
