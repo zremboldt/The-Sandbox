@@ -16,6 +16,7 @@ Since it's just for us I didn't have to worry about browser compatability issues
 - Search results dynamically update as you enter each character so finding the flamingo is as easy as typing "fl".
 - Adding a bird is as easy as adding an object to `birdData.js`. Just give it a name and the YouTube video ID. You can also assign an optional video start and end time.
 - App is designed to work great on all device sizes from desktop to mobile.
+- Lighthouse score...
 
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <!-- <p align="center">
