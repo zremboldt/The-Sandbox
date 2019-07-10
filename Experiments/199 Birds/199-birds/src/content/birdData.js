@@ -2,8 +2,6 @@ export const birdData = [
   {
     name: "Mandarin Duck",
     videoId: "XtDu3dMsvXA",
-    vidStart: "15",
-    vidStop: "22",
   },
   {
     name: "Flamingo",
@@ -20,6 +18,8 @@ export const birdData = [
   {
     name: "Bittern",
     videoId: "ze1uzC7h8UE",
+    vidStart: "8",
+    // vidStop: "",
   },
   {
     name: "Black Guillemot",
