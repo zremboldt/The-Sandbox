@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Image from "./Image";
 import Modal from "./Modal";
 
-const Card = ({ name, videoId }) => {
+const Card = ({ name, ...vidProps }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const toggleModal = () => {
@@ -25,7 +25,7 @@ const Card = ({ name, videoId }) => {
         <p className="birdName">{name}</p>
       </div>
 
-      {modalOpen && <Modal videoId={videoId} toggleModal={toggleModal} />}
+      {modalOpen && <Modal {...vidProps} toggleModal={toggleModal} />}
     </>
   );
 };
