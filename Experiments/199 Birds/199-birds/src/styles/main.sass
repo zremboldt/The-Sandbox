@@ -32,18 +32,7 @@ section
   margin-bottom: 1.6rem
   background-color: hsla(0, 0%, 100%, 1)
   border-radius: 1rem
-  // border: 1px solid $border
   box-shadow: $shadowCard
-  transition: all 0.2s $zease
-
-  &:hover
-    transform: translateY(2px)
-
-  @media (max-width: 1000px)
-    width: calc(50% - 30px)
-  @media (max-width: 600px)
-    width: calc(100% - 20px)
-    margin: 15px 10px
 
   .cardImg
     margin: .6rem .6rem 0
@@ -52,9 +41,28 @@ section
     border-bottom: 1px solid $border
     overflow: hidden
 
-    .gatsby-image-wrapper
-      top: -2rem
+  .gatsby-image-wrapper
+    top: -2rem
+    transition: transform 0.5s $zease
 
+  &:hover .gatsby-image-wrapper
+    transform: scale(1.1)
+
+  .birdName
+    padding: 1rem
+    text-align: center
+
+
+
+// Media Queries ↓
+.card
+  @media (max-width: 1000px)
+    width: calc(50% - 30px)
+  @media (max-width: 600px)
+    width: calc(100% - 20px)
+    margin: 15px 10px
+
+  .cardImg
     @media (max-width: 1000px)
       height: 260px
 
@@ -63,12 +71,6 @@ section
 
     @media (max-width: 600px)
       height: 288px
-
-  .birdName
-    padding: 1rem
-    text-align: center
-
-
 
 
 
