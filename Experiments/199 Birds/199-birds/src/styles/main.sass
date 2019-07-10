@@ -1,19 +1,12 @@
-.main
+main
   position: relative
 
-.imgLeaves
-  display: block
-  position: relative
-  bottom: -1px
-  
 section
   display: flex
   flex-direction: column
   align-items: center
-  background-image: linear-gradient(to bottom, $green 0%, $offWhite 100%)
-
-
-
+  // background-image: linear-gradient(to bottom, $green 0%, $offWhite 100%)
+  background-color: $green
 
 .grid
   position: relative
@@ -54,30 +47,44 @@ section
 
 
 
-// Media Queries ↓
-.card
-  @media (max-width: 1000px)
-    width: calc(50% - 30px)
-  @media (max-width: 600px)
-    width: calc(100% - 20px)
-    margin: 15px 10px
-
-  .cardImg
-    @media (max-width: 1000px)
-      height: 260px
-
-      .gatsby-image-wrapper
-        top: 0rem
-
-    @media (max-width: 600px)
-      height: 288px
-
-
-
-
 .noMatchMessage
   margin: 8rem 1rem
   text-align: center
+
+
+
+// Media Queries ↓
+@media (max-width: 1000px)
+  .grid
+    margin: -6rem 0 0
+
+  .card
+    width: calc(50% - 30px)
+
+    .cardImg
+      height: 260px
+
+    .gatsby-image-wrapper
+      top: 0rem
+
+@media (max-width: 600px)
+  .grid
+    margin: -3rem 0 0
+
+  .card
+    width: calc(100% - 20px)
+    margin: 15px 10px
+
+    .cardImg
+      height: 288px
+    
+
+      
+
+
+
+
+
 
 
 

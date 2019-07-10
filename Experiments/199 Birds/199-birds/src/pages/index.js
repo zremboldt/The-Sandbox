@@ -3,6 +3,7 @@ import "../styles/index.sass";
 import { useInView } from "react-intersection-observer";
 import { birdData } from "../content/birdData";
 import leaves from "../images/leaves.svg";
+import ImgLeaves from "../images/ImgLeaves";
 import Card from "../components/Card";
 import SEO from "../components/seo";
 
@@ -32,6 +33,10 @@ const IndexPage = () => {
     <>
       <SEO title="Home" />
 
+      <picture className="imgLeaves imgLeavesTop">
+        <ImgLeaves />
+      </picture>
+
       <header className="heroText">
         <h1>199</h1>
         <h1>Birds</h1>
@@ -42,6 +47,7 @@ const IndexPage = () => {
         ref={ref}
         role="search"
       >
+        <div className="searchBG" ref={ref}></div>
         <input
           className="searchInput"
           type="text"
@@ -50,16 +56,20 @@ const IndexPage = () => {
         />
       </fieldset>
 
-      <main className="main">
+      <main>
         {birdsList.length === 0 && (
           <div className="noMatchMessage">
             <h1>No Matches</h1>
             <p>There aren't any birds that match your search.</p>
           </div>
         )}
+
         {birdsList.length > 0 && (
-          <img className="imgLeaves" src={leaves} alt="" />
+          <picture className="imgLeaves imgLeavesBottom">
+            <ImgLeaves />
+          </picture>
         )}
+
         <section id="sectionRainforest">
           <div className="grid">
             {birdsList.map((bird, i) => (
