@@ -44,17 +44,6 @@
   z-index: 10
   padding: 1rem
 
-.searchBG
-  position: absolute
-  z-index: -1
-  top: 0
-  left: 0
-  right: 0
-  bottom: 0
-  background-color: transparentize($offWhite, 0.04)
-  transition: opacity 0.3s $zease
-  opacity: 0
-
 .searchInput
   display: block
   margin: 0 auto
@@ -70,6 +59,17 @@
   &::placeholder
     color: hsla(30, 13%, 30%, .5)
 
+.searchBG
+  position: absolute
+  z-index: -1
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  background-color: transparentize($offWhite, 0.04)
+  transition: opacity 0.3s $zease
+  opacity: 0
+  
 .barActive .searchBG
   opacity: 1
 

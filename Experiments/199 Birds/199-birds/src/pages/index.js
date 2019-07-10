@@ -47,13 +47,13 @@ const IndexPage = () => {
         ref={ref}
         role="search"
       >
-        <div className="searchBG" ref={ref}></div>
         <input
           className="searchInput"
           type="text"
           placeholder="Search"
           onChange={e => setSearchQuery(e.target.value)}
         />
+        <div className="searchBG" ref={ref}></div>
       </fieldset>
 
       <main>
