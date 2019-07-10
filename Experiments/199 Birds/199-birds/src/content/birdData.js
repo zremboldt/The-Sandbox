@@ -31,11 +31,11 @@ export const birdData = [
   },
   {
     name: "Blue-Footed Booby",
-    videoId: "",
+    videoId: "z922by9_6Fw",
   },
   {
     name: "Bluetit",
-    videoId: "",
+    videoId: "seXURXJr0CY",
   },
   {
     name: "Bullfinch",
@@ -51,51 +51,51 @@ export const birdData = [
   },
   {
     name: "Common Tern",
-    videoId: "",
+    videoId: "ruRUsa3Ls34",
   },
   {
     name: "Cormorant",
-    videoId: "",
+    videoId: "UyC95DUDMqc",
   },
   {
     name: "Crested Auklet",
-    videoId: "",
+    videoId: "QAHawigrH9w",
   },
   {
     name: "Eurasian Wigeon",
-    videoId: "",
+    videoId: "MB3aZAoiPIg",
   },
   {
     name: "European Greenfinch",
-    videoId: "",
+    videoId: "tVHuZ5ng3Gc",
   },
   {
     name: "European Herring Gull",
-    videoId: "",
+    videoId: "Eqtx4e5CV-g",
   },
   {
     name: "European Robin",
-    videoId: "",
+    videoId: "SVNilOwikJ8",
   },
   {
     name: "Gannet",
-    videoId: "",
+    videoId: "EwPrXOtBoVg",
   },
   {
     name: "Great Black-Backed Gull",
-    videoId: "",
+    videoId: "q15NMqOrzpg",
   },
   {
     name: "Grebe",
-    videoId: "",
+    videoId: "ZbRrxw-H6xA",
   },
   {
     name: "Heron",
-    videoId: "",
+    videoId: "6HQ0bCqCzEk",
   },
   {
     name: "Horned Puffin",
-    videoId: "",
+    videoId: "zTOUcBPKRIQ",
   },
   {
     name: "Junco",
@@ -405,4 +405,4 @@ export const birdData = [
     name: "Magpie",
     videoId: "QLFqdRRqjrs",
   },
-]
+];
