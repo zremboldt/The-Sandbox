@@ -108,15 +108,16 @@ export const birdData = [
   },
   {
     name: "Junco",
-    videoId: "",
+    videoId: "vlJUsAl4YCA",
   },
   {
     name: "Least Auklet",
-    videoId: "",
+    videoId: "fWDWcIPWBkk",
   },
   {
     name: "Long Tailed Tit",
-    videoId: "",
+    videoId: "Tx8rJJfZ5Ak",
+    vidStart: "36",
   },
   {
     name: "Loon",
