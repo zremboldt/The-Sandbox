@@ -37,14 +37,18 @@ const IndexPage = () => {
         <h1>Birds</h1>
       </header>
 
-      <div className={`searchBar ${atTop ? "barActive" : ""}`} ref={ref}>
+      <fieldset
+        className={`searchBar ${atTop ? "barActive" : ""}`}
+        ref={ref}
+        role="search"
+      >
         <input
           className="searchInput"
           type="text"
           placeholder="Search"
           onChange={e => setSearchQuery(e.target.value)}
         />
-      </div>
+      </fieldset>
 
       <main className="main">
         {birdsList.length === 0 && (

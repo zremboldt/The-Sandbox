@@ -14,6 +14,7 @@ export const birdData = [
   {
     name: "Mallard Duck",
     videoId: "C91s-TQlCPM",
+    vidStart: "85",
   },
   {
     name: "Bittern",
@@ -32,10 +33,14 @@ export const birdData = [
   {
     name: "Blue-Footed Booby",
     videoId: "z922by9_6Fw",
+    vidStart: "8",
+    vidStop: "178",
   },
   {
     name: "Bluetit",
     videoId: "seXURXJr0CY",
+    vidStart: "7",
+    vidStop: "12",
   },
   {
     name: "Bullfinch",
@@ -48,6 +53,7 @@ export const birdData = [
   {
     name: "Collared Dove",
     videoId: "3Km-jtXueTw",
+    vidStart: "10",
   },
   {
     name: "Common Tern",
@@ -60,6 +66,7 @@ export const birdData = [
   {
     name: "Crested Auklet",
     videoId: "QAHawigrH9w",
+    vidStart: "34",
   },
   {
     name: "Eurasian Wigeon",
@@ -72,6 +79,7 @@ export const birdData = [
   {
     name: "European Herring Gull",
     videoId: "Eqtx4e5CV-g",
+    vidStart: "35",
   },
   {
     name: "European Robin",
@@ -80,10 +88,11 @@ export const birdData = [
   {
     name: "Gannet",
     videoId: "EwPrXOtBoVg",
+    vidStart: "45",
   },
   {
     name: "Great Black-Backed Gull",
-    videoId: "q15NMqOrzpg",
+    videoId: "q15NMqOrzpg", // Video isn't working...
   },
   {
     name: "Grebe",
@@ -91,7 +100,7 @@ export const birdData = [
   },
   {
     name: "Heron",
-    videoId: "6HQ0bCqCzEk",
+    videoId: "6HQ0bCqCzEk", // Video isn't working...
   },
   {
     name: "Horned Puffin",
