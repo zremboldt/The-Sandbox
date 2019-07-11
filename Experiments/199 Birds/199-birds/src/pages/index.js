@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "../styles/index.sass";
 import { useInView } from "react-intersection-observer";
 import { birdData } from "../content/birdData";
-import leaves from "../images/leaves.svg";
 import ImgLeaves from "../images/ImgLeaves";
 import Card from "../components/Card";
 import SEO from "../components/seo";
