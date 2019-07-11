@@ -29,7 +29,7 @@ const IndexPage = () => {
   });
 
   return (
-    <>
+    <div className="pageWrap">
       <SEO title="Home" />
 
       <picture className="imgLeaves imgLeavesTop">
@@ -79,7 +79,7 @@ const IndexPage = () => {
       </main>
 
       {birdsList.length > 0 && <footer></footer>}
-    </>
+    </div>
   );
 };
 
