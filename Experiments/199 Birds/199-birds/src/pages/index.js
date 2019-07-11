@@ -78,6 +78,8 @@ const IndexPage = () => {
           </div>
         </section>
       </main>
+
+      {birdsList.length > 0 && <footer></footer>}
     </>
   );
 };
