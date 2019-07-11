@@ -92,7 +92,8 @@ export const birdData = [
   },
   {
     name: "Great Black-Backed Gull",
-    videoId: "q15NMqOrzpg", // Video isn't working...
+    videoId: "6CL6NunnYkI",
+    vidStart: "38",
   },
   {
     name: "Grebe",
@@ -100,7 +101,7 @@ export const birdData = [
   },
   {
     name: "Heron",
-    videoId: "6HQ0bCqCzEk", // Video isn't working...
+    videoId: "_c24Tqx8SyQ",
   },
   {
     name: "Horned Puffin",
@@ -121,55 +122,65 @@ export const birdData = [
   },
   {
     name: "Loon",
-    videoId: "",
+    videoId: "U7CSWlNO9c4",
   },
   {
     name: "Malachite Kingfisher",
-    videoId: "",
+    videoId: "veQ2ilQrzMU",
+    vidStart: "19",
   },
   {
     name: "Moorhen",
-    videoId: "",
+    videoId: "BtC-QorasAc",
+    vidStart: "1",
   },
   {
     name: "Mute Swan",
-    videoId: "",
+    videoId: "TTGpMSXKE8A",
   },
   {
     name: "Oystercatcher",
-    videoId: "",
+    videoId: "wv0ukHz1WUk",
+    vidStart: "49",
   },
   {
     name: "Painted Stork",
-    videoId: "",
+    videoId: "bklSltY2XXc",
+    vidStart: "32",
   },
   {
     name: "Pelican",
-    videoId: "",
+    videoId: "BfEboMmwAMw",
+    vidStart: "5",
   },
   {
     name: "Pigeon Guillemot",
-    videoId: "",
+    videoId: "2IGzDdDSkdA",
+    vidStart: "578",
   },
   {
     name: "Pintail",
-    videoId: "",
+    videoId: "gKU42FkOd2o",
   },
   {
     name: "Razorbill",
-    videoId: "",
+    videoId: "7LuHNiC7fms",
+    vidStart: "52",
   },
   {
     name: "Red-Throated Diver",
-    videoId: "",
+    videoId: "Mf7qfg0ljfo",
+    vidStart: "10",
   },
   {
     name: "Rhinoceros Auklet",
-    videoId: "",
+    videoId: "V4Oh3ZgST38",
+    vidStart: "1",
   },
   {
     name: "Ring-Billed Gull",
-    videoId: "",
+    videoId: "6wrvr7MwCWA",
+    vidStart: "102",
   },
   {
     name: "Shelduck",
@@ -193,38 +204,6 @@ export const birdData = [
   },
   {
     name: "Yellowhammer",
-    videoId: "",
-  },
-  {
-    name: "Duck",
-    videoId: "",
-  },
-  {
-    name: "Duckling",
-    videoId: "",
-  },
-  {
-    name: "Partridge",
-    videoId: "",
-  },
-  {
-    name: "Pheasant",
-    videoId: "",
-  },
-  {
-    name: "Rooster",
-    videoId: "",
-  },
-  {
-    name: "Woodpecker",
-    videoId: "",
-  },
-  {
-    name: "Turkey",
-    videoId: "",
-  },
-  {
-    name: "Barn owl",
     videoId: "",
   },
   // {
@@ -411,8 +390,8 @@ export const birdData = [
     name: "Sparrow",
     videoId: "QLFqdRRqjrs",
   },
-  {
-    name: "Magpie",
-    videoId: "QLFqdRRqjrs",
-  },
+  // {
+  //   name: "Magpie",
+  //   videoId: "QLFqdRRqjrs",
+  // },
 ];
