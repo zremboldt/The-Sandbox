@@ -1,40 +1,34 @@
 export const birdData = [
+  ///////////////////////////////////////////
+  // Gardens and meadows
+  ///////////////////////////////////////////
   {
-    name: "Mandarin Duck",
-    videoId: "XtDu3dMsvXA",
+    name: "Magpie",
+    videoId: "QLFqdRRqjrs",
   },
   {
-    name: "Flamingo",
-    videoId: "QLV_K7DVeyU",
+    name: "Chaffinch",
+    videoId: "QLFqdRRqjrs",
   },
   {
-    name: "Eurasian Kingfisher",
-    videoId: "3zzJp9MQb3c",
+    name: "Wood Pigeon",
+    videoId: "QLFqdRRqjrs",
   },
   {
-    name: "Mallard Duck",
-    videoId: "C91s-TQlCPM",
-    vidStart: "85",
+    name: "Yellow Hammer",
+    videoId: "",
   },
   {
-    name: "Bittern",
-    videoId: "ze1uzC7h8UE",
-    vidStart: "8",
-    // vidStop: "",
+    name: "Bullfinch",
+    videoId: "wrCdLXqBMOk",
   },
   {
-    name: "Black Guillemot",
-    videoId: "7eClNZa8-Jw",
+    name: "Wren",
+    videoId: "QLFqdRRqjrs",
   },
   {
-    name: "Blackbird",
-    videoId: "DnClUsa1i_E",
-  },
-  {
-    name: "Blue-Footed Booby",
-    videoId: "z922by9_6Fw",
-    vidStart: "8",
-    vidStop: "178",
+    name: "Sparrow",
+    videoId: "QLFqdRRqjrs",
   },
   {
     name: "Bluetit",
@@ -43,17 +37,124 @@ export const birdData = [
     vidStop: "12",
   },
   {
-    name: "Bullfinch",
-    videoId: "wrCdLXqBMOk",
+    name: "Long Tailed Tit",
+    videoId: "Tx8rJJfZ5Ak",
+    vidStart: "36",
   },
   {
-    name: "Cassins Auklet",
-    videoId: "", // Can't find a good video for this...
+    name: "Whitethroat",
+    videoId: "",
+  },
+  {
+    name: "European Greenfinch",
+    videoId: "tVHuZ5ng3Gc",
+  },
+  {
+    name: "European Robin",
+    videoId: "SVNilOwikJ8",
+  },
+  {
+    name: "Junco",
+    videoId: "vlJUsAl4YCA",
+  },
+  {
+    name: "Starling",
+    videoId: "QLFqdRRqjrs",
   },
   {
     name: "Collared Dove",
     videoId: "3Km-jtXueTw",
     vidStart: "10",
+  },
+  {
+    name: "Blackbird",
+    videoId: "DnClUsa1i_E",
+  },
+
+  ///////////////////////////////////////////
+  // Rivers and lakes
+  ///////////////////////////////////////////
+  {
+    name: "Eurasian Wigeon",
+    videoId: "MB3aZAoiPIg",
+  },
+  {
+    name: "Mandarin Duck",
+    videoId: "XtDu3dMsvXA",
+  },
+  {
+    name: "Moorhen",
+    videoId: "BtC-QorasAc",
+    vidStart: "1",
+  },
+  {
+    name: "Bittern",
+    videoId: "ze1uzC7h8UE",
+    vidStart: "8",
+  },
+  {
+    name: "Flamingo",
+    videoId: "QLV_K7DVeyU",
+  },
+  {
+    name: "Malachite Kingfisher",
+    videoId: "veQ2ilQrzMU",
+    vidStart: "19",
+  },
+  {
+    name: "Pintail",
+    videoId: "gKU42FkOd2o",
+  },
+  {
+    name: "Painted Stork",
+    videoId: "bklSltY2XXc",
+    vidStart: "32",
+  },
+  {
+    name: "Mallard Duck",
+    videoId: "C91s-TQlCPM",
+    vidStart: "85",
+  },
+  {
+    name: "Eurasian Kingfisher",
+    videoId: "3zzJp9MQb3c",
+  },
+  {
+    name: "Mute Swan",
+    videoId: "TTGpMSXKE8A",
+  },
+  {
+    name: "Heron",
+    videoId: "_c24Tqx8SyQ",
+  },
+  {
+    name: "Tufted Duck",
+    videoId: "",
+  },
+  {
+    name: "Grebe",
+    videoId: "ZbRrxw-H6xA",
+  },
+
+  ///////////////////////////////////////////
+  //
+  ///////////////////////////////////////////
+
+  {
+    name: "Black Guillemot",
+    videoId: "7eClNZa8-Jw",
+  },
+
+  {
+    name: "Blue-Footed Booby",
+    videoId: "z922by9_6Fw",
+    vidStart: "8",
+    vidStop: "178",
+  },
+
+  {
+    name: "Cassins Auklet",
+    videoId: "", // Can't find a good video for this...
   },
   {
     name: "Common Tern",
@@ -68,22 +169,11 @@ export const birdData = [
     videoId: "QAHawigrH9w",
     vidStart: "34",
   },
-  {
-    name: "Eurasian Wigeon",
-    videoId: "MB3aZAoiPIg",
-  },
-  {
-    name: "European Greenfinch",
-    videoId: "tVHuZ5ng3Gc",
-  },
+
   {
     name: "European Herring Gull",
     videoId: "Eqtx4e5CV-g",
     vidStart: "35",
-  },
-  {
-    name: "European Robin",
-    videoId: "SVNilOwikJ8",
   },
   {
     name: "Gannet",
@@ -95,59 +185,28 @@ export const birdData = [
     videoId: "6CL6NunnYkI",
     vidStart: "38",
   },
-  {
-    name: "Grebe",
-    videoId: "ZbRrxw-H6xA",
-  },
-  {
-    name: "Heron",
-    videoId: "_c24Tqx8SyQ",
-  },
+
   {
     name: "Horned Puffin",
     videoId: "zTOUcBPKRIQ",
   },
-  {
-    name: "Junco",
-    videoId: "vlJUsAl4YCA",
-  },
+
   {
     name: "Least Auklet",
     videoId: "fWDWcIPWBkk",
   },
-  {
-    name: "Long Tailed Tit",
-    videoId: "Tx8rJJfZ5Ak",
-    vidStart: "36",
-  },
+
   {
     name: "Loon",
     videoId: "U7CSWlNO9c4",
   },
-  {
-    name: "Malachite Kingfisher",
-    videoId: "veQ2ilQrzMU",
-    vidStart: "19",
-  },
-  {
-    name: "Moorhen",
-    videoId: "BtC-QorasAc",
-    vidStart: "1",
-  },
-  {
-    name: "Mute Swan",
-    videoId: "TTGpMSXKE8A",
-  },
+
   {
     name: "Oystercatcher",
     videoId: "wv0ukHz1WUk",
     vidStart: "49",
   },
-  {
-    name: "Painted Stork",
-    videoId: "bklSltY2XXc",
-    vidStart: "32",
-  },
+
   {
     name: "Pelican",
     videoId: "BfEboMmwAMw",
@@ -158,10 +217,7 @@ export const birdData = [
     videoId: "2IGzDdDSkdA",
     vidStart: "578",
   },
-  {
-    name: "Pintail",
-    videoId: "gKU42FkOd2o",
-  },
+
   {
     name: "Razorbill",
     videoId: "7LuHNiC7fms",
@@ -190,18 +246,12 @@ export const birdData = [
     name: "Thick Billed Murre",
     videoId: "",
   },
-  {
-    name: "Tufted Duck",
-    videoId: "",
-  },
+
   {
     name: "Tufted Puffin",
     videoId: "",
   },
-  {
-    name: "Whitethroat",
-    videoId: "",
-  },
+
   {
     name: "Yellowhammer",
     videoId: "",
@@ -350,48 +400,22 @@ export const birdData = [
   //   name: "Cassowary",
   //   videoId: "QLFqdRRqjrs",
   // },
+
   {
-    name: "Starling",
-    videoId: "QLFqdRRqjrs",
-  },
-  // {
-  //   name: "Song Thrush",
-  //   videoId: "QLFqdRRqjrs",
-  // },
-  // {
-  //   name: "Robin",
-  //   videoId: "QLFqdRRqjrs",
-  // },
-  // {
-  //   name: "Yellow Hammer",
-  //   videoId: "QLFqdRRqjrs",
-  // },
-  // {
-  //   name: "Greenfinch",
-  //   videoId: "QLFqdRRqjrs",
-  // },
-  // {
-  //   name: "Goldfinch",
-  //   videoId: "QLFqdRRqjrs",
-  // },
-  {
-    name: "Chaffinch",
-    videoId: "QLFqdRRqjrs",
+    name: "Song Thrush",
+    videoId: "",
   },
   {
-    name: "Wood Pigeon",
-    videoId: "QLFqdRRqjrs",
+    name: "Robin",
+    videoId: "",
+  },
+
+  {
+    name: "Greenfinch",
+    videoId: "",
   },
   {
-    name: "Wren",
-    videoId: "QLFqdRRqjrs",
+    name: "Goldfinch",
+    videoId: "",
   },
-  {
-    name: "Sparrow",
-    videoId: "QLFqdRRqjrs",
-  },
-  // {
-  //   name: "Magpie",
-  //   videoId: "QLFqdRRqjrs",
-  // },
 ];
