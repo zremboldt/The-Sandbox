@@ -26,20 +26,20 @@ section
   background-color: hsla(0, 0%, 100%, 1)
   border-radius: 1rem
   box-shadow: $shadowCard
+  transition: transform 0.5s $zease
+
+  &:hover
+    transform: scale(1.05)
 
   .cardImg
     margin: .6rem .6rem 0
     height: 200px
     border-radius: .6rem
-    border-bottom: 1px solid $border
+    background-color: $border
     overflow: hidden
 
   .gatsby-image-wrapper
     top: -2rem
-    transition: transform 0.5s $zease
-
-  &:hover .gatsby-image-wrapper
-    transform: scale(1.1)
 
   .birdName
     padding: 1rem
