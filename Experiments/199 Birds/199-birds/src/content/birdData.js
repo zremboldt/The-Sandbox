@@ -15,7 +15,7 @@ export const birdData = [
     videoId: "QLFqdRRqjrs",
   },
   {
-    name: "Yellow Hammer",
+    name: "Yellowhammer",
     videoId: "",
   },
   {
@@ -37,7 +37,7 @@ export const birdData = [
     vidStop: "12",
   },
   {
-    name: "Long Tailed Tit",
+    name: "Long-Tailed Tit",
     videoId: "Tx8rJJfZ5Ak",
     vidStart: "36",
   },
