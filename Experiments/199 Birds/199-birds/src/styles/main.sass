@@ -18,7 +18,7 @@ section
   display: flex
   flex-wrap: wrap
   width: 100%
-  max-width: 840px
+  max-width: 1140px
   margin: -10rem 0 0
   
 .card
@@ -38,13 +38,10 @@ section
 
   .cardImg
     margin: .6rem .6rem 0
-    height: 200px
+    width: calc(100% - 1.2rem)
     border-radius: .6rem
     background-color: $border
     overflow: hidden
-
-  .gatsby-image-wrapper
-    top: -2rem
 
   .birdName
     padding: 1rem
@@ -74,12 +71,6 @@ footer
   .card
     width: calc(50% - 30px)
 
-    .cardImg
-      height: 260px
-
-    .gatsby-image-wrapper
-      top: 0rem
-
 @media (max-width: 600px)
   .grid
     margin: -3rem 0 0
@@ -90,9 +81,6 @@ footer
 
     &:hover
       transform: scale(0.97)
-
-    .cardImg
-      height: 288px
     
 
       
