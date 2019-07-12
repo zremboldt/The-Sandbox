@@ -137,101 +137,13 @@ export const birdData = [
   },
 
   ///////////////////////////////////////////
-  //
+  // By the sea
   ///////////////////////////////////////////
 
-  {
-    name: "Black Guillemot",
-    videoId: "7eClNZa8-Jw",
-  },
-
-  {
-    name: "Blue-Footed Booby",
-    videoId: "z922by9_6Fw",
-    vidStart: "8",
-    vidStop: "178",
-  },
-
-  {
-    name: "Cassins Auklet",
-    videoId: "", // Can't find a good video for this...
-  },
-  {
-    name: "Common Tern",
-    videoId: "ruRUsa3Ls34",
-  },
-  {
-    name: "Cormorant",
-    videoId: "UyC95DUDMqc",
-  },
   {
     name: "Crested Auklet",
     videoId: "QAHawigrH9w",
     vidStart: "34",
-  },
-
-  {
-    name: "European Herring Gull",
-    videoId: "Eqtx4e5CV-g",
-    vidStart: "35",
-  },
-  {
-    name: "Gannet",
-    videoId: "EwPrXOtBoVg",
-    vidStart: "45",
-  },
-  {
-    name: "Great Black-Backed Gull",
-    videoId: "6CL6NunnYkI",
-    vidStart: "38",
-  },
-
-  {
-    name: "Horned Puffin",
-    videoId: "zTOUcBPKRIQ",
-  },
-
-  {
-    name: "Least Auklet",
-    videoId: "fWDWcIPWBkk",
-  },
-
-  {
-    name: "Loon",
-    videoId: "U7CSWlNO9c4",
-  },
-
-  {
-    name: "Oystercatcher",
-    videoId: "wv0ukHz1WUk",
-    vidStart: "49",
-  },
-
-  {
-    name: "Pelican",
-    videoId: "BfEboMmwAMw",
-    vidStart: "5",
-  },
-  {
-    name: "Pigeon Guillemot",
-    videoId: "2IGzDdDSkdA",
-    vidStart: "578",
-  },
-
-  {
-    name: "Razorbill",
-    videoId: "7LuHNiC7fms",
-    vidStart: "52",
-  },
-  {
-    name: "Red-Throated Diver",
-    videoId: "Mf7qfg0ljfo",
-    vidStart: "10",
-  },
-  {
-    name: "Rhinoceros Auklet",
-    videoId: "V4Oh3ZgST38",
-    vidStart: "1",
   },
   {
     name: "Ring-Billed Gull",
@@ -239,23 +151,220 @@ export const birdData = [
     vidStart: "102",
   },
   {
-    name: "Shelduck",
+    name: "Rhinoceros Auklet",
+    videoId: "V4Oh3ZgST38",
+    vidStart: "1",
+  },
+  {
+    name: "Pigeon Guillemot",
+    videoId: "2IGzDdDSkdA",
+    vidStart: "578",
+  },
+  {
+    name: "Cormorant",
+    videoId: "UyC95DUDMqc",
+  },
+  {
+    name: "Oystercatcher",
+    videoId: "wv0ukHz1WUk",
+    vidStart: "49",
+  },
+  {
+    name: "Red-Throated Diver",
+    videoId: "Mf7qfg0ljfo",
+    vidStart: "10",
+  },
+  {
+    name: "Tufted Puffin",
     videoId: "",
+  },
+  {
+    name: "Common Tern",
+    videoId: "ruRUsa3Ls34",
+  },
+  {
+    name: "Loon",
+    videoId: "U7CSWlNO9c4",
+  },
+  {
+    name: "Blue-Footed Booby",
+    videoId: "z922by9_6Fw",
+    vidStart: "8",
+    vidStop: "178",
+  },
+  {
+    name: "Pelican",
+    videoId: "BfEboMmwAMw",
+    vidStart: "5",
+  },
+  {
+    name: "European Herring Gull",
+    videoId: "Eqtx4e5CV-g",
+    vidStart: "35",
+  },
+  {
+    name: "Horned Puffin",
+    videoId: "zTOUcBPKRIQ",
   },
   {
     name: "Thick Billed Murre",
     videoId: "",
   },
+  {
+    name: "Razorbill",
+    videoId: "7LuHNiC7fms",
+    vidStart: "52",
+  },
+  {
+    name: "Cassins Auklet",
+    videoId: "", // Can't find a good video for this...
+  },
+  {
+    name: "Black Guillemot",
+    videoId: "7eClNZa8-Jw",
+  },
+  {
+    name: "Shelduck",
+    videoId: "",
+  },
+  {
+    name: "Least Auklet",
+    videoId: "fWDWcIPWBkk",
+  },
+  {
+    name: "Great Black-Backed Gull",
+    videoId: "6CL6NunnYkI",
+    vidStart: "38",
+  },
+  {
+    name: "Gannet",
+    videoId: "EwPrXOtBoVg",
+    vidStart: "45",
+  },
+
+  ///////////////////////////////////////////
+  // Desert birds
+  ///////////////////////////////////////////
 
   {
-    name: "Tufted Puffin",
+    name: "Broad-Billed Hummingbird",
+    videoId: "",
+  },
+  {
+    name: "Gilded Flicker",
+    videoId: "",
+  },
+  {
+    name: "Elf Owl",
+    videoId: "",
+  },
+  {
+    name: "Cactus Pygmy Owl",
+    videoId: "",
+  },
+  {
+    name: "Roadrunner",
+    videoId: "",
+  },
+  {
+    name: "Gambel's Quail",
     videoId: "",
   },
 
+  ///////////////////////////////////////////
+  // Australian birds
+  ///////////////////////////////////////////
+
   {
-    name: "Yellowhammer",
+    name: "Noisy Miner",
     videoId: "",
   },
+  {
+    name: "Kookaburra",
+    videoId: "",
+  },
+  {
+    name: "Emu",
+    videoId: "",
+  },
+  {
+    name: "Fruit Dove",
+    videoId: "",
+  },
+  {
+    name: "Magpie Goose",
+    videoId: "",
+  },
+  {
+    name: "Galah",
+    videoId: "",
+  },
+
+  ///////////////////////////////////////////
+  // Savanna birds
+  ///////////////////////////////////////////
+
+  {
+    name: "Helmeted Guineafowl",
+    videoId: "",
+  },
+  {
+    name: "Saddle-Billed Stork",
+    videoId: "",
+  },
+  {
+    name: "Wattled Crane",
+    videoId: "",
+  },
+  {
+    name: "Red-Billed Hornbill",
+    videoId: "",
+  },
+  {
+    name: "Brown Quail",
+    videoId: "",
+  },
+  {
+    name: "Vulturine Guineafowl",
+    videoId: "",
+  },
+  {
+    name: "Ostrich",
+    videoId: "",
+  },
+  {
+    name: "Motmot",
+    videoId: "",
+  },
+  {
+    name: "Egyptian Goose",
+    videoId: "",
+  },
+  {
+    name: "Secretary Bird",
+    videoId: "",
+  },
+  {
+    name: "Short-Eared Owl",
+    videoId: "",
+  },
+  {
+    name: "Blue-Winged Parrotlet",
+    videoId: "",
+  },
+  {
+    name: "Lilac-Breasted Roller",
+    videoId: "",
+  },
+  {
+    name: "European Roller",
+    videoId: "",
+  },
+
+  ///////////////////////////////////////////
+  // Ice and snow
+  ///////////////////////////////////////////
+
   // {
   //   name: "Emperor Penguin",
   //   videoId: "",
