@@ -470,162 +470,353 @@ export const birdData = [
   // In a rainforest
   ///////////////////////////////////////////
 
-  // {
-  //   name: "Falcon",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Kestrel",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Condor",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Red Kite",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Bald Eagle",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Osprey",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Merlin",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Burrowing Owl",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Great Horned Owl",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Nighthawk",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Spotted Owl",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "European Nightjar",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Owlet-Nightjar",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Raggiana Bird of Paradise",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Grey Parrot",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Crimson Topaz Hummingbird",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Moustached Babbler",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Broadbill",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Wilson's Bird of Paradise",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Quetzal",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Great Hornbill",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Harpy Eagle",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Hermit Hummingbird",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Red-Fan Parrot",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Toucan",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Oriental Dwarf Kingfisher",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Flowerpecker",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Blue-and-Yellow Macaw",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Hyacinth Macaw",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Red-and-Green Macaw",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Spectacled Owl",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "White Cockatoo",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Lory",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Mealy Amazon",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Cassowary",
-  //   videoId: "",
-  // },
+  {
+    name: "Raggiana Bird of Paradise",
+    videoId: "",
+  },
+  {
+    name: "Grey Parrot",
+    videoId: "",
+  },
+  {
+    name: "Crimson Topaz Hummingbird",
+    videoId: "",
+  },
+  {
+    name: "Moustached Babbler",
+    videoId: "",
+  },
+  {
+    name: "Broadbill",
+    videoId: "",
+  },
+  {
+    name: "Wilson's Bird of Paradise",
+    videoId: "",
+  },
+  {
+    name: "Quetzal",
+    videoId: "",
+  },
+  {
+    name: "Great Hornbill",
+    videoId: "",
+  },
+  {
+    name: "Harpy Eagle",
+    videoId: "",
+  },
+  {
+    name: "Hermit Hummingbird",
+    videoId: "",
+  },
+  {
+    name: "Red-Fan Parrot",
+    videoId: "",
+  },
+  {
+    name: "Toucan",
+    videoId: "",
+  },
+  {
+    name: "Oriental Dwarf Kingfisher",
+    videoId: "",
+  },
+  {
+    name: "Flowerpecker",
+    videoId: "",
+  },
+  {
+    name: "Blue-and-Yellow Macaw",
+    videoId: "",
+  },
+  {
+    name: "Hyacinth Macaw",
+    videoId: "",
+  },
+  {
+    name: "Red-and-Green Macaw",
+    videoId: "",
+  },
+  {
+    name: "Spectacled Owl",
+    videoId: "",
+  },
+  {
+    name: "White Cockatoo",
+    videoId: "",
+  },
+  {
+    name: "Lory",
+    videoId: "",
+  },
+  {
+    name: "Mealy Amazon",
+    videoId: "",
+  },
+  {
+    name: "Cassowary",
+    videoId: "",
+  },
 
-  // {
-  //   name: "Song Thrush",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Robin",
-  //   videoId: "",
-  // },
+  ///////////////////////////////////////////
+  // Forests and woodlands
+  ///////////////////////////////////////////
 
-  // {
-  //   name: "Greenfinch",
-  //   videoId: "",
-  // },
-  // {
-  //   name: "Goldfinch",
-  //   videoId: "",
-  // },
+  {
+    name: "Green Woodpecker",
+    videoId: "",
+  },
+  {
+    name: "Crossbill",
+    videoId: "",
+  },
+  {
+    name: "Cuckoo",
+    videoId: "",
+  },
+  {
+    name: "Pheasant",
+    videoId: "",
+  },
+  {
+    name: "Wood Warbler",
+    videoId: "",
+  },
+  {
+    name: "Blue Jay",
+    videoId: "",
+  },
+  {
+    name: "Lewis' Woodpecker",
+    videoId: "",
+  },
+  {
+    name: "Long-Eared Owl",
+    videoId: "",
+  },
+  {
+    name: "Eurasian Crane",
+    videoId: "",
+  },
+  {
+    name: "Northern Goshawk",
+    videoId: "",
+  },
+  {
+    name: "Cardinal",
+    videoId: "",
+  },
+  {
+    name: "Tawny Owl",
+    videoId: "",
+  },
+  {
+    name: "Great Spotted Woodpecker",
+    videoId: "",
+  },
+  {
+    name: "Black Woodpecker",
+    videoId: "",
+  },
+  {
+    name: "Pileated Woodpecker",
+    videoId: "",
+  },
+  {
+    name: "Grouse",
+    videoId: "",
+  },
+  {
+    name: "Song Thrush",
+    videoId: "",
+  },
+  {
+    name: "Clark's Nutcracker",
+    videoId: "",
+  },
+  {
+    name: "European Goldfinch",
+    videoId: "",
+  },
+  {
+    name: "Kea",
+    videoId: "",
+  },
+  {
+    name: "Sharp-Shinned Hawk",
+    videoId: "",
+  },
+  {
+    name: "Mockingbird",
+    videoId: "",
+  },
+
+  ///////////////////////////////////////////
+  // On the farm
+  ///////////////////////////////////////////
+
+  {
+    name: "Silver Campine Rooster",
+    videoId: "",
+  },
+  {
+    name: "Rouen Duck",
+    videoId: "",
+  },
+  {
+    name: "Embden Goose",
+    videoId: "",
+  },
+  {
+    name: "Indian Game Hen",
+    videoId: "",
+  },
+  {
+    name: "Barn Owl",
+    videoId: "",
+  },
+  {
+    name: "Bourbon Red Turkey",
+    videoId: "",
+  },
+  {
+    name: "Bronze Turkey",
+    videoId: "",
+  },
+  {
+    name: "Yokohama Rooster",
+    videoId: "",
+  },
+  {
+    name: "Welsummer Rooster",
+    videoId: "",
+  },
+  {
+    name: "White Leghorn Rooster",
+    videoId: "",
+  },
+  {
+    name: "Silkie Hen",
+    videoId: "",
+  },
+  {
+    name: "Gray Partridge",
+    videoId: "",
+  },
+
+  ///////////////////////////////////////////
+  // Pet birds at home
+  ///////////////////////////////////////////
+
+  {
+    name: "Budgerigar",
+    videoId: "",
+  },
+  {
+    name: "Peach-Faced Lovebird",
+    videoId: "",
+  },
+  {
+    name: "Indian Ring-Necked Parakeet",
+    videoId: "",
+  },
+  {
+    name: "Yellow Collared Lovebird",
+    videoId: "",
+  },
+  {
+    name: "Splendid Grass Parakeet",
+    videoId: "",
+  },
+  {
+    name: "Gouldian Finch",
+    videoId: "",
+  },
+  {
+    name: "Canary",
+    videoId: "",
+  },
+  {
+    name: "Palm Cockatoo",
+    videoId: "",
+  },
+  {
+    name: "Cockatiel",
+    videoId: "",
+  },
+  {
+    name: "Rooster",
+    videoId: "",
+  },
+  {
+    name: "Chick",
+    videoId: "",
+  },
+  {
+    name: "Hen",
+    videoId: "",
+  },
+
+  ///////////////////////////////////////////
+  // Birds of Prey
+  ///////////////////////////////////////////
+
+  {
+    name: "Falcon",
+    videoId: "",
+  },
+  {
+    name: "Kestrel",
+    videoId: "",
+  },
+  {
+    name: "Condor",
+    videoId: "",
+  },
+  {
+    name: "Red Kite",
+    videoId: "",
+  },
+  {
+    name: "Bald Eagle",
+    videoId: "",
+  },
+  {
+    name: "Osprey",
+    videoId: "",
+  },
+  {
+    name: "Merlin",
+    videoId: "",
+  },
+
+  ///////////////////////////////////////////
+  // Night birds
+  ///////////////////////////////////////////
+
+  {
+    name: "Burrowing Owl",
+    videoId: "",
+  },
+  {
+    name: "Great Horned Owl",
+    videoId: "",
+  },
+  {
+    name: "Nighthawk",
+    videoId: "",
+  },
+  {
+    name: "Spotted Owl",
+    videoId: "",
+  },
+  {
+    name: "European Nightjar",
+    videoId: "",
+  },
+  {
+    name: "Owlet-Nightjar",
+    videoId: "",
+  },
 ];
