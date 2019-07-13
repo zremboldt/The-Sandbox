@@ -365,10 +365,111 @@ export const birdData = [
   // Ice and snow
   ///////////////////////////////////////////
 
-  // {
-  //   name: "Emperor Penguin",
-  //   videoId: "",
-  // },
+  {
+    name: "Buzzard",
+    videoId: "",
+  },
+  {
+    name: "Atlantic Puffin",
+    videoId: "",
+  },
+  {
+    name: "Albatross",
+    videoId: "",
+  },
+  {
+    name: "Blue-Eyed Shag",
+    videoId: "",
+  },
+  {
+    name: "Fulmar",
+    videoId: "",
+  },
+  {
+    name: "Snowy Owl",
+    videoId: "",
+  },
+  {
+    name: "Arctic Tern",
+    videoId: "",
+  },
+  {
+    name: "Eider",
+    videoId: "",
+  },
+  {
+    name: "Arctic Redpoll",
+    videoId: "",
+  },
+  {
+    name: "Snow Petrel",
+    videoId: "",
+  },
+  {
+    name: "Giant Petrel",
+    videoId: "",
+  },
+  {
+    name: "Little Auk",
+    videoId: "",
+  },
+  {
+    name: "Ptarmigan",
+    videoId: "",
+  },
+  {
+    name: "Magellanic Penguin",
+    videoId: "",
+  },
+  {
+    name: "Gentoo Penguin",
+    videoId: "",
+  },
+  {
+    name: "King Penguin",
+    videoId: "",
+  },
+  {
+    name: "Adelie Penguin",
+    videoId: "",
+  },
+  {
+    name: "Macaroni Penguin",
+    videoId: "",
+  },
+  {
+    name: "Snares Crested Penguin",
+    videoId: "",
+  },
+  {
+    name: "African Penguin",
+    videoId: "",
+  },
+  {
+    name: "Emperor Penguin",
+    videoId: "",
+  },
+  {
+    name: "Little Penguin",
+    videoId: "",
+  },
+  {
+    name: "Rockhopper Penguin",
+    videoId: "",
+  },
+  {
+    name: "Chinstrap Penguin",
+    videoId: "",
+  },
+  {
+    name: "Humboldt Penguin",
+    videoId: "",
+  },
+
+  ///////////////////////////////////////////
+  // In a rainforest
+  ///////////////////////////////////////////
+
   // {
   //   name: "Falcon",
   //   videoId: "",
