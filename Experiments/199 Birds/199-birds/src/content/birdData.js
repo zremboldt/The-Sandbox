@@ -287,11 +287,12 @@ export const birdData = [
 
   {
     name: "Noisy Miner",
-    videoId: "",
+    videoId: "602FT4hDJPE",
   },
   {
     name: "Kookaburra",
-    videoId: "",
+    videoId: "TZ9RyWz__6s",
+    vidStart: "90",
   },
   {
     name: "Emu",
