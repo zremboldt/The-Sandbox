@@ -4,19 +4,21 @@ export const birdData = [
   ///////////////////////////////////////////
   {
     name: "Magpie",
-    videoId: "",
+    videoId: "Za9kK1IFX88",
+    vidStart: "155",
   },
   {
     name: "Chaffinch",
-    videoId: "",
+    videoId: "qpg9noRrQek",
   },
   {
     name: "Wood Pigeon",
-    videoId: "",
+    videoId: "AWet9qFT15M",
+    vidStart: "40",
   },
   {
     name: "Yellowhammer",
-    videoId: "",
+    videoId: "Wpu4mkzSh6A",
   },
   {
     name: "Bullfinch",
@@ -24,11 +26,11 @@ export const birdData = [
   },
   {
     name: "Wren",
-    videoId: "",
+    videoId: "IvmVzZ3mjOE",
   },
   {
     name: "Sparrow",
-    videoId: "",
+    videoId: "PkOnpk8Wmow",
   },
   {
     name: "Bluetit",
@@ -43,7 +45,7 @@ export const birdData = [
   },
   {
     name: "Whitethroat",
-    videoId: "",
+    videoId: "Tub7-_dLP7E",
   },
   {
     name: "European Greenfinch",
@@ -59,7 +61,8 @@ export const birdData = [
   },
   {
     name: "Starling",
-    videoId: "",
+    videoId: "V4f_1_r80RY",
+    vidStart: "33",
   },
   {
     name: "Collared Dove",
@@ -129,7 +132,8 @@ export const birdData = [
   },
   {
     name: "Tufted Duck",
-    videoId: "",
+    videoId: "sIbMh-VEPrg",
+    vidStart: "70",
   },
   {
     name: "Grebe",
@@ -176,7 +180,8 @@ export const birdData = [
   },
   {
     name: "Tufted Puffin",
-    videoId: "",
+    videoId: "8vQAQLnwZl8",
+    vidStart: "31",
   },
   {
     name: "Common Tern",
@@ -208,7 +213,7 @@ export const birdData = [
   },
   {
     name: "Thick Billed Murre",
-    videoId: "",
+    videoId: "hdKky3o6Gig",
   },
   {
     name: "Razorbill",
@@ -225,7 +230,8 @@ export const birdData = [
   },
   {
     name: "Shelduck",
-    videoId: "",
+    videoId: "GcGe3iFQYhM",
+    vidStart: "21",
   },
   {
     name: "Least Auklet",
@@ -248,27 +254,31 @@ export const birdData = [
 
   {
     name: "Broad-Billed Hummingbird",
-    videoId: "",
+    videoId: "04CwRLMwmEc",
+    vidStart: "131",
   },
   {
     name: "Gilded Flicker",
-    videoId: "",
+    videoId: "qSzk0nBS5Zc",
+    vidStart: "10",
   },
   {
     name: "Elf Owl",
-    videoId: "",
+    videoId: "h5MbKpNi3oY",
   },
   {
     name: "Cactus Pygmy Owl",
-    videoId: "",
+    videoId: "fcL47Kiyuj0",
+    vidStart: "90",
   },
   {
     name: "Roadrunner",
-    videoId: "",
+    videoId: "U7nzSs3OBbg",
   },
   {
     name: "Gambel's Quail",
-    videoId: "",
+    videoId: "Lzf0y84PbS4",
+    vidStart: "9",
   },
 
   ///////////////////////////////////////////
@@ -556,7 +566,7 @@ export const birdData = [
   },
   {
     name: "Cassowary",
-    videoId: "",
+    videoId: "AA2LkrR0_dw",
   },
 
   ///////////////////////////////////////////
@@ -780,7 +790,7 @@ export const birdData = [
   },
   {
     name: "Bald Eagle",
-    videoId: "",
+    videoId: "FZ_chD2mUV8",
   },
   {
     name: "Osprey",
@@ -797,7 +807,8 @@ export const birdData = [
 
   {
     name: "Burrowing Owl",
-    videoId: "",
+    videoId: "7wepVbSeprE",
+    vidStart: "27",
   },
   {
     name: "Great Horned Owl",
