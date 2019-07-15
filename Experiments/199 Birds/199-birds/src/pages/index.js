@@ -59,7 +59,12 @@ const IndexPage = () => {
         {birdsList.length === 0 && (
           <div className="noMatchMessage">
             <h1>No Matches</h1>
-            <p>There aren't any birds that match your search. 😢</p>
+            <p>
+              There aren't any birds that match your search.{" "}
+              <span role="img" aria-label="sad face">
+                😢
+              </span>
+            </p>
           </div>
         )}
 
