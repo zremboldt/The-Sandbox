@@ -32,18 +32,35 @@
           .join('_');
         console.log(searchQuery);
 
-        const endpoint = `https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=${searchQuery}`;
+        const params = [
+          'action=parse',
+          'format=json',
+          `page=1804`,
+          'origin=*',
+          'prop=wikitext',
+          'section=1'
+          // `titles=${searchQuery}`,
+          // 'prop=info',
+          // 'prop=description',
+          // 'prop=links'
+        ];
+
+        // const endpoint = `https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=${searchQuery}`;
+        // const endpoint = `https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&titles=${searchQuery}&prop=info`;
+        const endpoint = `https://en.wikipedia.org/w/api.php?${params.join('&')}`;
 
         function displayResults(results) {
           resultsSection.innerHTML = `<ul>${results
-            .map(entry => `<li>${entry.snippet}</li>`)
+            .map(entry => `<li>${entry}</li>`)
             .join('')}</ul>`;
+          // resultsSection.innerHTML = `<p>${results}</p>`;
         }
 
         fetch(endpoint)
           .then(response => response.json())
           .then(data => {
-            const results = data.query.search;
+            console.log(data);
+            const results = data.parse.wikitext;
             displayResults(results);
           })
           .catch(() => console.log('Error occured'));
