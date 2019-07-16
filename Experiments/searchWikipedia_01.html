@@ -30,12 +30,12 @@
           .trim()
           .split(' ')
           .join('_');
-        console.log(searchQuery);
+        // console.log(searchQuery);
 
         const params = [
           'action=parse',
           'format=json',
-          `page=1804`,
+          `page=${searchQuery}`,
           'origin=*',
           'prop=wikitext',
           'section=1'
@@ -50,16 +50,29 @@
         const endpoint = `https://en.wikipedia.org/w/api.php?${params.join('&')}`;
 
         function displayResults(results) {
-          resultsSection.innerHTML = `<ul>${results
+          // resultsSection.innerHTML = `<ul>${results
+          //   .map(entry => `<li>${entry}</li>`)
+          //   .join('')}</ul>`;
+
+          const blob = results[Object.keys(results)[0]];
+          const nosquareBrackets = blob
+            .split('[[')
+            .join('')
+            .split(']]')
+            .join('');
+          const rawEvents = nosquareBrackets.split('*');
+          resultsSection.innerHTML = `<ul>${rawEvents
             .map(entry => `<li>${entry}</li>`)
             .join('')}</ul>`;
-          // resultsSection.innerHTML = `<p>${results}</p>`;
+
+          // resultsSection.innerHTML = `<p>${blob}</p>`;
+          // console.log(blob);
         }
 
         fetch(endpoint)
           .then(response => response.json())
           .then(data => {
-            console.log(data);
+            // console.log(data);
             const results = data.parse.wikitext;
             displayResults(results);
           })
