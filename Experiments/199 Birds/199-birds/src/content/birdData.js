@@ -296,19 +296,23 @@ export const birdData = [
   },
   {
     name: "Emu",
-    videoId: "",
+    videoId: "Aaq0Ynd8mjY",
+    vidStart: "125",
   },
   {
     name: "Fruit Dove",
-    videoId: "",
+    videoId: "8ZDwuTag61w",
+    vidStart: "20",
   },
   {
     name: "Magpie Goose",
-    videoId: "",
+    videoId: "lb8UZ2bFyrI",
+    vidStart: "77",
   },
   {
     name: "Galah",
-    videoId: "",
+    videoId: "DH6NPcwxQqM",
+    vidStart: "4",
   },
 
   ///////////////////////////////////////////
