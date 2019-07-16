@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      body {
+        padding: 20px;
+      }
+      #root {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <p>Search Unsplash for an image</p>
+    <input type="text" placeholder="eg: dog, city, etc..." />
+    <button type="submit">Submit</button>
+
+    <div id="root"></div>
+
+    <script>
+      const input = document.querySelector('input[type=text]');
+      const submit = document.querySelector('button[type=submit]');
+      const rootElement = document.getElementById('root');
+
+      function handleClick() {
+        rootElement.innerHTML = `<img src="https://source.unsplash.com/800x600/?${
+          input.value
+        }" alt="${input.value}">`;
+      }
+
+      submit.addEventListener('click', () => handleClick());
+    </script>
+  </body>
+</html>
+
+<!-- Ray White app -->
