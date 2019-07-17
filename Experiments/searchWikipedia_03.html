@@ -15,9 +15,9 @@
     </style>
   </head>
   <body>
-    <p>Find notable events from a particular year:</p>
+    <!-- <p>Find notable events from a particular year:</p>
     <input type="text" placeholder="Enter a year" />
-    <button type="submit">Search</button>
+    <button type="submit">Search</button> -->
     <section id="results"></section>
 
     <script src="https://unpkg.com/wtf_wikipedia">
@@ -30,11 +30,22 @@
       const submitBtn = document.querySelector('button[type=submit]');
       const resultsSection = document.getElementById('results');
 
+      function calcRandomYear() {
+        const yearMin = 1000;
+        const yearMax = 1960;
+        const numOfYearsInRange = yearMax - yearMin;
+        const randomYear = Math.floor(Math.random() * numOfYearsInRange);
+        return (randomYear + yearMin).toString();
+      }
+
+      const randomYear = calcRandomYear();
+      console.log(randomYear);
+
       function displayResults(res) {
         resultsSection.innerHTML = res;
       }
 
-      wtf.fetch('1904').then(doc => {
+      wtf.fetch(randomYear).then(doc => {
         const collections = [];
 
         // Categorize Events
@@ -63,6 +74,8 @@
           return Object.values(collection)[0].length > 0;
         });
 
+        const mainEvents = Object.values(filteredCollections[0])[0];
+
         // Put it all together in a single array
         let allEvents = [];
         const collectAllEvents = filteredCollections.forEach(list => {
@@ -71,32 +84,28 @@
           allEvents.push(...events.map(event => `${eventType}: ${event}`));
         });
 
-        console.log(allEvents);
+        const clues = [];
+        const totalClueCount = 5;
+        const minNumOfmainEvents = 2;
 
-        const generatedHTML = filteredCollections
-          .map(list => {
-            const eventType = Object.keys(list)[0];
-            const events = Object.values(list)[0];
+        new Array(totalClueCount).fill(0).forEach((clue, i) => {
+          if (i <= minNumOfmainEvents - 1) {
+            const randomNumInMainEvents = Math.floor(Math.random() * mainEvents.length);
+            clues.push(mainEvents[randomNumInMainEvents]);
+          } else {
+            const randomNumInRange = Math.floor(Math.random() * allEvents.length);
+            clues.push(allEvents[randomNumInRange]);
+          }
+        });
 
-            const eventSection = `
-              <h2>${eventType}</h2>
-              <ul>
-                ${events.map(li => `<li><strong>${eventType}:</strong> ${li}</li>`).join('')}
-              </ul>
-            `;
-
-            return eventSection;
+        const generateHtml = clues
+          .map(clue => {
+            // console.log(clue);
+            return `<li>${clue}</li>`;
           })
           .join('');
 
-        displayResults(generatedHTML);
-
-        // const listing = doc
-        //   .lists()
-        //   .map(list => list.html())
-        //   .join('------');
-
-        // displayResults(listing);
+        displayResults(generateHtml);
       });
     </script>
   </body>
