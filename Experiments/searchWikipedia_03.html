@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>The Ray White App</title>
+    <style>
+      body {
+        padding: 20px;
+      }
+      #root {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <p>Find notable events from a particular year:</p>
+    <input type="text" placeholder="Enter a year" />
+    <button type="submit">Search</button>
+    <section id="results"></section>
+
+    <script src="https://unpkg.com/wtf_wikipedia">
+      // Read the documentation here:
+      // https://github.com/spencermountain/wtf_wikipedia
+    </script>
+
+    <script>
+      const input = document.querySelector('input[type=text]');
+      const submitBtn = document.querySelector('button[type=submit]');
+      const resultsSection = document.getElementById('results');
+
+      function displayResults(res) {
+        resultsSection.innerHTML = res;
+      }
+
+      wtf.fetch('1904').then(doc => {
+        // const deaths = doc.sections().filter(section => section._title.includes('Deaths'));
+        // const births = doc.sections().filter(section => section._title.includes('Births'));
+
+        const test = doc.sections().forEach((section, i) => {
+          let newSection = 0;
+          const collections = [];
+
+          if (section.depth === 0) {
+            console.log(i, section._title);
+            collections.push();
+          } else {
+            console.log(i, section._title);
+          }
+        });
+        // console.log(test);
+
+        const list = doc
+          .lists()
+          .map(list => list.html())
+          .join('------');
+
+        displayResults(list);
+      });
+    </script>
+  </body>
+</html>

@@ -30,50 +30,20 @@
           .trim()
           .split(' ')
           .join('_');
-        // console.log(searchQuery);
+        console.log(searchQuery);
 
-        const params = [
-          'action=parse',
-          'format=json',
-          `page=${searchQuery}`,
-          'origin=*',
-          'prop=wikitext',
-          'section=1'
-          // `titles=${searchQuery}`,
-          // 'prop=info',
-          // 'prop=description',
-          // 'prop=links'
-        ];
-
-        // const endpoint = `https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=${searchQuery}`;
-        // const endpoint = `https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&titles=${searchQuery}&prop=info`;
-        const endpoint = `https://en.wikipedia.org/w/api.php?${params.join('&')}`;
+        const endpoint = `https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=${searchQuery}`;
 
         function displayResults(results) {
-          // resultsSection.innerHTML = `<ul>${results
-          //   .map(entry => `<li>${entry}</li>`)
-          //   .join('')}</ul>`;
-
-          const blob = results[Object.keys(results)[0]];
-          const nosquareBrackets = blob
-            .split('[[')
-            .join('')
-            .split(']]')
-            .join('');
-          const rawEvents = nosquareBrackets.split('*');
-          resultsSection.innerHTML = `<ul>${rawEvents
-            .map(entry => `<li>${entry}</li>`)
+          resultsSection.innerHTML = `<ul>${results
+            .map(entry => `<li>${entry.snippet}</li>`)
             .join('')}</ul>`;
-
-          // resultsSection.innerHTML = `<p>${blob}</p>`;
-          // console.log(blob);
         }
 
         fetch(endpoint)
           .then(response => response.json())
           .then(data => {
-            // console.log(data);
-            const results = data.parse.wikitext;
+            const results = data.query.search;
             displayResults(results);
           })
           .catch(() => console.log('Error occured'));

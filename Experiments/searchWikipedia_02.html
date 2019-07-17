@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      body {
+        padding: 20px;
+      }
+      #root {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <p>Search Wikipedia</p>
+    <input type="text" placeholder="eg: dog, city, etc..." />
+    <button type="submit">Search</button>
+    <section id="results"></section>
+
+    <script>
+      const input = document.querySelector('input[type=text]');
+      const submitBtn = document.querySelector('button[type=submit]');
+      const resultsSection = document.getElementById('results');
+
+      function fetchResults() {
+        const searchQuery = input.value
+          .trim()
+          .split(' ')
+          .join('_');
+        // console.log(searchQuery);
+
+        const params = [
+          'action=parse',
+          'format=json',
+          `page=${searchQuery}`,
+          'origin=*',
+          'prop=wikitext',
+          'section=1'
+          // `titles=${searchQuery}`,
+          // 'prop=info',
+          // 'prop=description',
+          // 'prop=links'
+        ];
+
+        // const endpoint = `https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=${searchQuery}`;
+        // const endpoint = `https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&titles=${searchQuery}&prop=info`;
+        const endpoint = `https://en.wikipedia.org/w/api.php?${params.join('&')}`;
+
+        function displayResults(results) {
+          // resultsSection.innerHTML = `<ul>${results
+          //   .map(entry => `<li>${entry}</li>`)
+          //   .join('')}</ul>`;
+
+          const blob = results[Object.keys(results)[0]];
+          const nosquareBrackets = blob
+            .split('[[')
+            .join('')
+            .split(']]')
+            .join('');
+          const rawEvents = nosquareBrackets.split('*');
+          resultsSection.innerHTML = `<ul>${rawEvents
+            .map(entry => `<li>${entry}</li>`)
+            .join('')}</ul>`;
+
+          // resultsSection.innerHTML = `<p>${blob}</p>`;
+          // console.log(blob);
+        }
+
+        fetch(endpoint)
+          .then(response => response.json())
+          .then(data => {
+            // console.log(data);
+            const results = data.parse.wikitext;
+            displayResults(results);
+          })
+          .catch(() => console.log('Error occured'));
+      }
+
+      submitBtn.addEventListener('click', fetchResults);
+    </script>
+  </body>
+</html>
+
+<!-- Ray White app -->
