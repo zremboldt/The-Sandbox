@@ -35,28 +35,51 @@
       }
 
       wtf.fetch('1904').then(doc => {
-        // const deaths = doc.sections().filter(section => section._title.includes('Deaths'));
-        // const births = doc.sections().filter(section => section._title.includes('Births'));
+        const collections = [];
 
-        const test = doc.sections().forEach((section, i) => {
-          let newSection = 0;
-          const collections = [];
-
+        // Categorize Events
+        doc.sections().forEach((section, i) => {
           if (section.depth === 0) {
-            console.log(i, section._title);
-            collections.push();
+            // Create a new event category (events, births, deaths, etc.)
+            // that will contain events.
+            collections.push({ [section._title]: [] });
           } else {
-            console.log(i, section._title);
+            // Select the latest event object and add the current event to it.
+            const lastInArray = collections[collections.length - 1];
+            const sectionEventsArr = lastInArray[Object.keys(lastInArray)[0]];
+            sectionEventsArr.push(section.html());
           }
         });
-        // console.log(test);
 
-        const list = doc
-          .lists()
-          .map(list => list.html())
-          .join('------');
+        const filteredCollections = collections.filter(collection => {
+          return Object.values(collection)[0].length > 0;
+          // if (Object.values(collection)[0].length > 0) {
+          //   console.log(Object.keys(collection));
+          //   console.log(Object.values(collection)[0]);
+          // }
+        });
 
-        displayResults(list);
+        console.log(filteredCollections);
+
+        const generatedHTML = filteredCollections.map(list => {
+          const eventSection = `
+            <h2>${Object.keys(list)[0]}</h2>
+            <ul>
+              ${Object.values(list).map(li => `<li>${li}</li>`)}  
+            </ul>
+          `;
+          console.log(eventSection);
+          return eventSection;
+        });
+
+        displayResults(generatedHTML);
+
+        // const listing = doc
+        //   .lists()
+        //   .map(list => list.html())
+        //   .join('------');
+
+        // displayResults(listing);
       });
     </script>
   </body>
