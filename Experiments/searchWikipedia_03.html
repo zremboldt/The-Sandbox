@@ -47,30 +47,47 @@
             // Select the latest event object and add the current event to it.
             const lastInArray = collections[collections.length - 1];
             const sectionEventsArr = lastInArray[Object.keys(lastInArray)[0]];
-            sectionEventsArr.push(section.html());
+
+            section.lists().forEach(items => {
+              items.data.forEach(item => {
+                const line = item.text();
+                // Remove cases where a date is on a line by itself.
+                if (line.length > 15) return sectionEventsArr.push(line);
+              });
+            });
           }
         });
 
+        // Remove empty categories
         const filteredCollections = collections.filter(collection => {
           return Object.values(collection)[0].length > 0;
-          // if (Object.values(collection)[0].length > 0) {
-          //   console.log(Object.keys(collection));
-          //   console.log(Object.values(collection)[0]);
-          // }
         });
 
-        console.log(filteredCollections);
-
-        const generatedHTML = filteredCollections.map(list => {
-          const eventSection = `
-            <h2>${Object.keys(list)[0]}</h2>
-            <ul>
-              ${Object.values(list).map(li => `<li>${li}</li>`)}  
-            </ul>
-          `;
-          console.log(eventSection);
-          return eventSection;
+        // Put it all together in a single array
+        let allEvents = [];
+        const collectAllEvents = filteredCollections.forEach(list => {
+          const eventType = Object.keys(list)[0];
+          const events = Object.values(list)[0];
+          allEvents.push(...events.map(event => `${eventType}: ${event}`));
         });
+
+        console.log(allEvents);
+
+        const generatedHTML = filteredCollections
+          .map(list => {
+            const eventType = Object.keys(list)[0];
+            const events = Object.values(list)[0];
+
+            const eventSection = `
+              <h2>${eventType}</h2>
+              <ul>
+                ${events.map(li => `<li><strong>${eventType}:</strong> ${li}</li>`).join('')}
+              </ul>
+            `;
+
+            return eventSection;
+          })
+          .join('');
 
         displayResults(generatedHTML);
 
