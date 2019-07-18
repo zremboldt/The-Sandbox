@@ -33,6 +33,11 @@ li {
   -moz-osx-font-smoothing: grayscale;
 }
 
+h1 {
+  color: hsla(223, 22%, 21%, 0.7);
+  font-size: 2.6rem;
+}
+
 .form {
   width: 100%;
   max-width: 400px;
