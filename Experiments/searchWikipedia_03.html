@@ -7,17 +7,19 @@
     <title>The Ray White App</title>
     <style>
       body {
-        padding: 20px;
+        padding: 30px;
       }
-      #root {
-        margin-top: 20px;
+      .ctr {
+        margin-bottom: 30px;
       }
     </style>
   </head>
   <body>
-    <input id="min" type="number" placeholder="Min Year" />
-    <input id="max" type="number" placeholder="Max Year" />
-    <button type="submit">generate questions</button>
+    <div class="ctr">
+      <input id="min" type="number" placeholder="Min Year" />
+      <input id="max" type="number" placeholder="Max Year" />
+      <button type="submit">generate questions</button>
+    </div>
     <section id="results"></section>
 
     <script src="https://unpkg.com/wtf_wikipedia">
@@ -34,13 +36,13 @@
       submitBtn.addEventListener('click', () => generateQuestions());
 
       function generateQuestions() {
-        console.log(inputMin.value);
+        const yearMin = parseInt(inputMin.value);
+        const yearMax = parseInt(inputMax.value);
+
         function calcRandomYear() {
-          const yearMin = inputMin.value;
-          const yearMax = inputMax.value;
           const numOfYearsInRange = yearMax - yearMin;
-          const randomYear = Math.floor(Math.random() * numOfYearsInRange);
-          return (randomYear + yearMin).toString();
+          const randomYr = Math.floor(Math.random() * numOfYearsInRange);
+          return (randomYr + yearMin).toString();
         }
 
         const randomYear = calcRandomYear();
