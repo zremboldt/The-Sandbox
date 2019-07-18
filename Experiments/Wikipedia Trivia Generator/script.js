@@ -1,3 +1,6 @@
+// regex to find dates
+//    /\b[1-2]\d{3}\b/gm
+
 const inputMin = document.getElementById('min');
 const inputMax = document.getElementById('max');
 const submitBtn = document.querySelector('button[type=submit]');
@@ -56,7 +59,7 @@ function generateQuestions() {
     // Put it all together in a single array
     let allEvents = [];
     filteredCollections.forEach(list => {
-      const eventType = Object.keys(list)[0];
+      const eventType = Object.keys(list)[0]; // events, births, deaths
       const events = Object.values(list)[0];
       allEvents.push(...events.map(event => `${eventType}: ${event}`));
     });
