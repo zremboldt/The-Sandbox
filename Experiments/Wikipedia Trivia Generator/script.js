@@ -69,6 +69,7 @@ const generateClues = () => {
         return Object.values(collection)[0].length > 0;
       });
 
+      // TODO: This line is intermittently causing an error. Look into it.
       const mainEvents = Object.values(filteredCollections[0])[0];
 
       // Put it all together in a single array
@@ -87,18 +88,31 @@ const generateClues = () => {
       });
 
       const clues = [];
-      const totalClueCount = 5;
-      const minNumOfmainEvents = 2;
+      const desiredClueCount = 5;
+      const desiredMainEvents = 2;
 
-      new Array(totalClueCount).fill(0).forEach((clue, i) => {
-        if (i <= minNumOfmainEvents - 1) {
-          const randomNumInMainEvents = Math.floor(Math.random() * mainEvents.length);
-          clues.push(allEvents[randomNumInMainEvents]);
+      const genRandomNums = () => {
+        let nums = [];
+        if (allEvents.length < desiredClueCount + desiredMainEvents) {
+          while (nums.length < allEvents.length) {
+            console.log('fewer than desired num of clues');
+            let random = Math.floor(Math.random() * allEvents.length);
+            if (nums.indexOf(random) === -1) nums.push(random); // The indexOf() method returns the first index at which a given element can be found in the array, or -1 if it is not present.
+          }
         } else {
-          const randomNumInRange = Math.floor(Math.random() * allEvents.length);
-          clues.push(allEvents[randomNumInRange]);
+          while (nums.length < desiredMainEvents) {
+            let random = Math.floor(Math.random() * mainEvents.length);
+            if (nums.indexOf(random) === -1) nums.push(random); // The indexOf() method returns the first index at which a given element can be found in the array, or -1 if it is not present.
+          }
+          while (nums.length < desiredClueCount) {
+            let random = Math.floor(Math.random() * allEvents.length);
+            if (nums.indexOf(random) === -1) nums.push(random); // The indexOf() method returns the first index at which a given element can be found in the array, or -1 if it is not present.
+          }
         }
-      });
+        return nums;
+      };
+
+      genRandomNums().forEach(num => clues.push(allEvents[num]));
 
       const generateHtml = clues.map(clue => `<li>${clue}</li>`).join('');
 
