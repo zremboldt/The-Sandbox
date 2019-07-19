@@ -1,33 +1,34 @@
-// regex to find dates
-//    /\b[1-2]\d{3}\b/gm
-
+const resultsSection = document.getElementById('results');
 const inputMin = document.getElementById('min');
 const inputMax = document.getElementById('max');
 const submitBtn = document.querySelector('button[type=submit]');
-const resultsSection = document.getElementById('results');
+const ctrRevealAnswer = document.getElementById('ctrRevealAnswer');
 const selectDates = /\b[1-2]\d{3}\b/gm;
-
-const dates = '1234-5968-2348593-2111-123-54389';
-console.log(dates.match(selectDates));
 
 submitBtn.addEventListener('click', () => generateClues());
 
-function generateClues() {
+const generateClues = () => {
   const yearMin = parseInt(inputMin.value);
   const yearMax = parseInt(inputMax.value);
 
-  function calcRandomYear() {
+  const calcRandomYear = () => {
     const numOfYearsInRange = yearMax - yearMin;
     const randomYr = Math.floor(Math.random() * numOfYearsInRange);
     return (randomYr + yearMin).toString();
-  }
+  };
 
   const randomYear = calcRandomYear();
-  console.log(randomYear);
+  // console.log(randomYear);
 
-  function displayResults(res) {
+  const displayResults = res => {
     resultsSection.innerHTML = res;
-  }
+    // Create a reveal answer button
+    ctrRevealAnswer.innerHTML = '<button id="revealAnswerBtn">Reveal Answer</button>';
+    const revealAnswerBtn = document.getElementById('revealAnswerBtn');
+    revealAnswerBtn.addEventListener('click', function() {
+      this.innerHTML = randomYear;
+    });
+  };
 
   //////////////////////////////////////////////
   // Get clues from Wikipedia ↓
@@ -43,7 +44,7 @@ function generateClues() {
       const collections = [];
 
       // Categorize Events
-      doc.sections().forEach((section, i) => {
+      doc.sections().forEach(section => {
         if (section.depth === 0) {
           // Create a new event category (events, births, deaths, etc.)
           // that will contain events.
@@ -75,7 +76,12 @@ function generateClues() {
       filteredCollections.forEach(list => {
         const eventType = Object.keys(list)[0]; // events, births, deaths
         const events = Object.values(list)[0];
-        allEvents.push(...events.map(event => `${eventType}: ${event}`));
+        const formatClues = events.map(event => {
+          const labelEventType = `${eventType}: ${event}`;
+          const hideDates = labelEventType.replace(selectDates, '[DATE_HIDDEN]');
+          return hideDates;
+        });
+        allEvents.push(...formatClues);
       });
 
       const clues = [];
@@ -85,21 +91,16 @@ function generateClues() {
       new Array(totalClueCount).fill(0).forEach((clue, i) => {
         if (i <= minNumOfmainEvents - 1) {
           const randomNumInMainEvents = Math.floor(Math.random() * mainEvents.length);
-          clues.push(mainEvents[randomNumInMainEvents]);
+          clues.push(allEvents[randomNumInMainEvents]);
         } else {
           const randomNumInRange = Math.floor(Math.random() * allEvents.length);
           clues.push(allEvents[randomNumInRange]);
         }
       });
 
-      const generateHtml = clues
-        .map(clue => {
-          // console.log(clue);
-          return `<li>${clue}</li>`;
-        })
-        .join('');
+      const generateHtml = clues.map(clue => `<li>${clue}</li>`).join('');
 
       displayResults(generateHtml);
     });
   }
-}
+};
