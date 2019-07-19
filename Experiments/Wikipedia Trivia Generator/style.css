@@ -40,10 +40,16 @@ li {
   text-align: center;
 }
 
+.eventType {
+  font-weight: bold;
+  display: block;
+}
+
 li {
+  margin-bottom: 4rem;
+  line-height: 2.7rem;
   list-style-type: none;
   text-align: center;
-  margin-bottom: 2.8rem;
 }
 
 h1 {

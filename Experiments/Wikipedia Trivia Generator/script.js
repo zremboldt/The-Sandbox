@@ -3,7 +3,7 @@ const inputMin = document.getElementById('min');
 const inputMax = document.getElementById('max');
 const submitBtn = document.querySelector('button[type=submit]');
 const ctrRevealAnswer = document.getElementById('ctrRevealAnswer');
-const selectDates = /\b[1-2]\d{3}\b/gm;
+const selectDates = /\b[1-2]\d{3}\b/gm; // Regex that selects 4 digit numbers starting with 1 or 2.
 
 submitBtn.addEventListener('click', () => generateClues());
 
@@ -76,8 +76,10 @@ const generateClues = () => {
       filteredCollections.forEach(list => {
         const eventType = Object.keys(list)[0]; // events, births, deaths
         const events = Object.values(list)[0];
+        const eventTypeSingular = eventType.slice(0, -1);
+
         const formatClues = events.map(event => {
-          const labelEventType = `${eventType}: ${event}`;
+          const labelEventType = `<span class="eventType">-- ${eventTypeSingular} --</span> ${event}`;
           const hideDates = labelEventType.replace(selectDates, '[DATE_HIDDEN]');
           return hideDates;
         });
