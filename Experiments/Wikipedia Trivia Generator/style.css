@@ -33,6 +33,19 @@ li {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.btnAbout {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  margin: 0;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btnAbout:hover {
+  background-color: hsla(223, 22%, 21%, 0.1);
+}
+
 #results {
   max-width: 80rem;
   margin-bottom: 7rem;
