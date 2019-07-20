@@ -55,6 +55,22 @@ const IndexPage = () => {
         <div className="searchBG" ref={ref}></div>
       </fieldset>
 
+      <nav>
+        <button classname="btnMeadows">Gardens &amp; meadows</button>
+        <button classname="btnRivers">Rivers &amp; lakes</button>
+        <button classname="btnSea">Sea birds</button>
+        <button classname="btnDesert">Desert birds</button>
+        <button classname="btnAustralia">Australian birds</button>
+        <button classname="btnSavanna">Savanna birds</button>
+        <button classname="btnIce">Ice &amp; snow</button>
+        <button classname="btnRainforest">Rainforest birds</button>
+        <button classname="btnForest">Forest &amp; woodlands</button>
+        <button classname="btnFarm">Farm birds</button>
+        <button classname="btnPets">Pet birds</button>
+        <button classname="btnBirdsOfPrey">Birds of prey</button>
+        <button classname="btnNight">Night birds</button>
+      </nav>
+
       <main>
         {birdsList.length === 0 && (
           <div className="noMatchMessage">
