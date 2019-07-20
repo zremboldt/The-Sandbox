@@ -49,7 +49,7 @@ const IndexPage = () => {
         <input
           className="searchInput"
           type="text"
-          placeholder="Search"
+          placeholder="Search all birds"
           onChange={e => setSearchQuery(e.target.value)}
         />
         <div className="searchBG" ref={ref}></div>
