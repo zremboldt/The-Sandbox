@@ -1,3 +1,6 @@
+const desiredClueCount = 5; // How many clues do you want?
+const desiredMainEvents = 2; // Minimum number of main events to be included. (i.e. not births, deaths, etc.)
+
 const resultsSection = document.getElementById('results');
 const inputMin = document.getElementById('min');
 const inputMax = document.getElementById('max');
@@ -12,13 +15,15 @@ const generateClues = () => {
   const yearMax = parseInt(inputMax.value);
 
   const calcRandomYear = () => {
-    const numOfYearsInRange = yearMax - yearMin;
+    const numOfYearsInRange = Math.abs(yearMax - yearMin); // Math.abs() is great because no matter which num is larger, it returns the same positive number.
+    console.log(numOfYearsInRange);
     const randomYr = Math.floor(Math.random() * numOfYearsInRange);
-    return (randomYr + yearMin).toString();
+    if (yearMin < yearMax) return (randomYr + yearMin).toString(); // These take into account that someone may put the greater number in the wrong input.
+    if (yearMin >= yearMax) return (randomYr + yearMax).toString();
   };
 
   const randomYear = calcRandomYear();
-  // console.log(randomYear);
+  console.log(randomYear);
 
   const displayResults = res => {
     resultsSection.innerHTML = res;
@@ -69,7 +74,10 @@ const generateClues = () => {
         return Object.values(collection)[0].length > 0;
       });
 
-      // TODO: This line is intermittently causing an error. Look into it.
+      // This solves a problem where certain years (i.e. 1196) were coming back
+      // without any data. If that happens this line will start over and try again.
+      if (filteredCollections.length === 0) generateClues();
+
       const mainEvents = Object.values(filteredCollections[0])[0];
 
       // Put it all together in a single array
@@ -87,32 +95,26 @@ const generateClues = () => {
         allEvents.push(...formatClues);
       });
 
-      const clues = [];
-      const desiredClueCount = 5;
-      const desiredMainEvents = 2;
-
-      const genRandomNums = () => {
+      // Returns an array of unique random numbers.
+      const randomNums = () => {
         let nums = [];
+
+        const pickRandomNums = numberOfEvents => {
+          const random = Math.floor(Math.random() * numberOfEvents);
+          if (nums.indexOf(random) === -1) nums.push(random); // The indexOf() method returns the first index at which a given element can be found in the array, or -1 if it is not present.
+        };
+
         if (allEvents.length < desiredClueCount + desiredMainEvents) {
-          while (nums.length < allEvents.length) {
-            console.log('fewer than desired num of clues');
-            let random = Math.floor(Math.random() * allEvents.length);
-            if (nums.indexOf(random) === -1) nums.push(random); // The indexOf() method returns the first index at which a given element can be found in the array, or -1 if it is not present.
-          }
+          while (nums.length < allEvents.length) pickRandomNums(allEvents.length);
         } else {
-          while (nums.length < desiredMainEvents) {
-            let random = Math.floor(Math.random() * mainEvents.length);
-            if (nums.indexOf(random) === -1) nums.push(random); // The indexOf() method returns the first index at which a given element can be found in the array, or -1 if it is not present.
-          }
-          while (nums.length < desiredClueCount) {
-            let random = Math.floor(Math.random() * allEvents.length);
-            if (nums.indexOf(random) === -1) nums.push(random); // The indexOf() method returns the first index at which a given element can be found in the array, or -1 if it is not present.
-          }
+          while (nums.length < desiredMainEvents) pickRandomNums(mainEvents.length);
+          while (nums.length < desiredClueCount) pickRandomNums(allEvents.length);
         }
         return nums;
       };
 
-      genRandomNums().forEach(num => clues.push(allEvents[num]));
+      const clues = [];
+      randomNums().forEach(num => clues.push(allEvents[num]));
 
       const generateHtml = clues.map(clue => `<li>${clue}</li>`).join('');
 

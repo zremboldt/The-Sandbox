@@ -11,8 +11,8 @@
     <section id="results"><h1>Enter a date range to begin!</h1></section>
     <div class="form">
       <fieldset>
-        <input id="min" type="number" placeholder="Min Year" />
-        <input id="max" type="number" placeholder="Max Year" />
+        <input id="min" type="text" maxlength="4" pattern="\d*" placeholder="Min Year" />
+        <input id="max" type="text" maxlength="4" pattern="\d*" placeholder="Max Year" />
       </fieldset>
       <button type="submit">Generate Questions</button>
       <div id="ctrRevealAnswer"></div>
