@@ -7,8 +7,25 @@ import Card from "../components/Card";
 import SEO from "../components/seo";
 
 const IndexPage = () => {
-  // This is the master list that is mapped over and displays birds
-  const [birdsList, setBirdsList] = useState(birdData);
+  // This list gets populated by birdsSelected and is then mapped over to display the birds.
+  const [displayBirds, setDisplayBirds] = useState([]);
+
+  //////////////////////////////////
+  // Bird type selection (buttons)
+  //////////////////////////////////
+  const [birdsSelected, setBirdsSelected] = useState("rainforest");
+
+  useEffect(() => {
+    setDisplayBirds(
+      birdData.filter(data => {
+        return data.type.includes(birdsSelected);
+      })
+    );
+  }, [birdsSelected]);
+
+  const filterCategory = e => {
+    if (e.target.nodeName === "BUTTON") setBirdsSelected(e.target.id);
+  };
 
   //////////////////////////////////
   // Search
@@ -16,9 +33,15 @@ const IndexPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
+    // If query is blank reset list to whatever category has been most recently selected.
+    // Otherwise set it to birds whose names match the search query.
     searchQuery === ""
-      ? setBirdsList(birdData)
-      : setBirdsList(
+      ? setDisplayBirds(
+          birdData.filter(data => {
+            return data.type.includes(birdsSelected);
+          })
+        )
+      : setDisplayBirds(
           birdData.filter(data => {
             const birdToLowerCase = data.name.toLowerCase();
             return birdToLowerCase.includes(searchQuery.toLowerCase());
@@ -35,23 +58,6 @@ const IndexPage = () => {
     rootMargin: "0px 0px -99.8%", // This makes the root a very tiny sliver across the top of the page.
     threshold: 0.01, // atTop triggers when at least .01% of the observed object is visible.
   });
-
-  //////////////////////////////////
-  // Bird type selection (buttons)
-  //////////////////////////////////
-  const [birdsSelected, setBirdsSelected] = useState("rainforest");
-
-  useEffect(() => {
-    setBirdsList(
-      birdData.filter(data => {
-        return data.type.includes(birdsSelected);
-      })
-    );
-  }, [birdsSelected]);
-
-  const filterCategory = e => {
-    if (e.target.nodeName === "BUTTON") setBirdsSelected(e.target.id);
-  };
 
   //////////////////////////////////
   // ↓ Markup begins ↓
@@ -101,7 +107,7 @@ const IndexPage = () => {
       </nav>
 
       <main>
-        {birdsList.length === 0 && (
+        {displayBirds.length === 0 && (
           <div className="noMatchMessage">
             <h1>No Matches</h1>
             <p>
@@ -113,7 +119,7 @@ const IndexPage = () => {
           </div>
         )}
 
-        {birdsList.length > 0 && (
+        {displayBirds.length > 0 && (
           <picture className="imgLeaves imgLeavesBottom">
             <ImgLeaves />
           </picture>
@@ -121,14 +127,14 @@ const IndexPage = () => {
 
         <section id="sectionRainforest">
           <div className="grid">
-            {birdsList.map((bird, i) => (
+            {displayBirds.map((bird, i) => (
               <Card {...bird} key={i} />
             ))}
           </div>
         </section>
       </main>
 
-      {birdsList.length > 0 && <footer></footer>}
+      {displayBirds.length > 0 && <footer></footer>}
     </div>
   );
 };
