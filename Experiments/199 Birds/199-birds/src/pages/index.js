@@ -7,7 +7,12 @@ import Card from "../components/Card";
 import SEO from "../components/seo";
 
 const IndexPage = () => {
+  // This is the master list that is mapped over and displays birds
   const [birdsList, setBirdsList] = useState(birdData);
+
+  //////////////////////////////////
+  // Search
+  //////////////////////////////////
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
@@ -21,12 +26,36 @@ const IndexPage = () => {
         );
   }, [searchQuery]);
 
+  //////////////////////////////////
+  // Triggers the search bar background to fade on/off
+  //////////////////////////////////
   const [ref, atTop] = useInView({
     /* Optional options */
     root: null, // 'null' sets it to default value: viewport
     rootMargin: "0px 0px -99.8%", // This makes the root a very tiny sliver across the top of the page.
     threshold: 0.01, // atTop triggers when at least .01% of the observed object is visible.
   });
+
+  //////////////////////////////////
+  // Bird type selection (buttons)
+  //////////////////////////////////
+  const [birdsSelected, setBirdsSelected] = useState("rainforest");
+
+  useEffect(() => {
+    setBirdsList(
+      birdData.filter(data => {
+        return data.type.includes(birdsSelected);
+      })
+    );
+  }, [birdsSelected]);
+
+  const filterCategory = e => {
+    if (e.target.nodeName === "BUTTON") setBirdsSelected(e.target.id);
+  };
+
+  //////////////////////////////////
+  // ↓ Markup begins ↓
+  //////////////////////////////////
 
   return (
     <div className="pageWrap">
@@ -55,20 +84,20 @@ const IndexPage = () => {
         <div className="searchBG" ref={ref}></div>
       </fieldset>
 
-      <nav>
-        <button classname="btnMeadows">Gardens &amp; meadows</button>
-        <button classname="btnRivers">Rivers &amp; lakes</button>
-        <button classname="btnSea">Sea birds</button>
-        <button classname="btnDesert">Desert birds</button>
-        <button classname="btnAustralia">Australian birds</button>
-        <button classname="btnSavanna">Savanna birds</button>
-        <button classname="btnIce">Ice &amp; snow</button>
-        <button classname="btnRainforest">Rainforest birds</button>
-        <button classname="btnForest">Forest &amp; woodlands</button>
-        <button classname="btnFarm">Farm birds</button>
-        <button classname="btnPets">Pet birds</button>
-        <button classname="btnBirdsOfPrey">Birds of prey</button>
-        <button classname="btnNight">Night birds</button>
+      <nav onClick={filterCategory}>
+        <button id="meadows">Gardens &amp; meadows</button>
+        <button id="rivers">Rivers &amp; lakes</button>
+        <button id="sea">Sea birds</button>
+        <button id="desert">Desert birds</button>
+        <button id="aussie">Australian birds</button>
+        <button id="savanna">Savanna birds</button>
+        <button id="snow">Ice &amp; snow</button>
+        <button id="rainforest">Rainforest birds</button>
+        <button id="woodlands">Forest &amp; woodlands</button>
+        <button id="farm">Farm birds</button>
+        <button id="pet">Pet birds</button>
+        <button id="birdOfPrey">Birds of prey</button>
+        <button id="night">Night birds</button>
       </nav>
 
       <main>
