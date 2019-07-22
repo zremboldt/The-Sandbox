@@ -496,7 +496,7 @@ export const birdData = [
     vidStart: "90",
   },
   {
-    name: "Ice & snowy Owl",
+    name: "Snowy Owl",
     biome: "Ice & snow",
     videoId: "Uf5IQiLOQK0",
     vidStart: "46",
@@ -520,7 +520,7 @@ export const birdData = [
     vidStart: "53",
   },
   {
-    name: "Ice & snow Petrel",
+    name: "Snow Petrel",
     biome: "Ice & snow",
     videoId: "",
     vidStart: "",
