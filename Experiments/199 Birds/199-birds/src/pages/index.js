@@ -4,28 +4,27 @@ import { useInView } from "react-intersection-observer";
 import { birdData } from "../content/birdData";
 import ImgLeaves from "../images/ImgLeaves";
 import Card from "../components/Card";
+import BtnBiome from "../components/BtnBiome";
 import SEO from "../components/seo";
+
+const biomes = Array.from(new Set(birdData.map(data => data.biome)));
 
 const IndexPage = () => {
   // This list gets populated by birdsSelected and is then mapped over to display the birds.
   const [displayBirds, setDisplayBirds] = useState([]);
 
   //////////////////////////////////
-  // Bird type selection (buttons)
+  // Bird biome selection (buttons)
   //////////////////////////////////
-  const [birdsSelected, setBirdsSelected] = useState("rainforest");
+  const [birdsSelected, setBirdsSelected] = useState("Rainforest birds");
 
   useEffect(() => {
     setDisplayBirds(
       birdData.filter(data => {
-        return data.type.includes(birdsSelected);
+        return data.biome.includes(birdsSelected);
       })
     );
   }, [birdsSelected]);
-
-  const filterCategory = e => {
-    if (e.target.nodeName === "BUTTON") setBirdsSelected(e.target.id);
-  };
 
   //////////////////////////////////
   // Search
@@ -38,7 +37,7 @@ const IndexPage = () => {
     searchQuery === ""
       ? setDisplayBirds(
           birdData.filter(data => {
-            return data.type.includes(birdsSelected);
+            return data.biome.includes(birdsSelected);
           })
         )
       : setDisplayBirds(
@@ -90,20 +89,15 @@ const IndexPage = () => {
         <div className="searchBG" ref={ref}></div>
       </fieldset>
 
-      <nav onClick={filterCategory}>
-        <button id="meadows">Gardens &amp; meadows</button>
-        <button id="rivers">Rivers &amp; lakes</button>
-        <button id="sea">Sea birds</button>
-        <button id="desert">Desert birds</button>
-        <button id="aussie">Australian birds</button>
-        <button id="savanna">Savanna birds</button>
-        <button id="snow">Ice &amp; snow</button>
-        <button id="rainforest">Rainforest birds</button>
-        <button id="woodlands">Forest &amp; woodlands</button>
-        <button id="farm">Farm birds</button>
-        <button id="pet">Pet birds</button>
-        <button id="birdOfPrey">Birds of prey</button>
-        <button id="night">Night birds</button>
+      <nav>
+        {biomes.map((biome, i) => (
+          <BtnBiome
+            handleClick={() => setBirdsSelected(biome)}
+            biome={biome}
+            birdsSelected={birdsSelected}
+            key={i}
+          />
+        ))}
       </nav>
 
       <main>
@@ -125,7 +119,7 @@ const IndexPage = () => {
           </picture>
         )}
 
-        <section id="sectionRainforest">
+        <section>
           <div className="grid">
             {displayBirds.map((bird, i) => (
               <Card {...bird} key={i} />
