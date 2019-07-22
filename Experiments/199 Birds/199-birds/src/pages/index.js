@@ -7,6 +7,7 @@ import Card from "../components/Card";
 import BtnBiome from "../components/BtnBiome";
 import SEO from "../components/seo";
 
+// An array of biomes (categories) from birdData
 const biomes = Array.from(new Set(birdData.map(data => data.biome)));
 
 const IndexPage = () => {
