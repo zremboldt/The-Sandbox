@@ -403,57 +403,62 @@ export const birdData = [
   {
     name: "Red-Billed Hornbill",
     biome: "Savanna birds",
-    videoId: "",
+    videoId: "L_RBOZ5hwiw",
   },
   {
     name: "Brown Quail",
     biome: "Savanna birds",
-    videoId: "",
+    videoId: "jgnsGkNiUO0",
+    vidStop: "22",
   },
   {
     name: "Vulturine Guineafowl",
     biome: "Savanna birds",
-    videoId: "",
+    videoId: "EcoxUSnC_7U",
+    vidStart: "4",
   },
   {
     name: "Ostrich",
     biome: "Savanna birds",
-    videoId: "",
+    videoId: "OBRppKPXKuU",
   },
   {
     name: "Motmot",
     biome: "Savanna birds",
-    videoId: "",
+    videoId: "Pn5ABdswPns",
+    vidStart: "30",
   },
   {
     name: "Egyptian Goose",
     biome: "Savanna birds",
-    videoId: "",
+    videoId: "kQRzIxgmnag",
   },
   {
     name: "Secretary Bird",
     biome: "Savanna birds",
-    videoId: "",
+    videoId: "7itwHJiNRz4",
+    vidStart: "6",
   },
   {
     name: "Short-Eared Owl",
     biome: "Savanna birds",
-    videoId: "",
+    videoId: "yLXCcAMivMc",
   },
   {
     name: "Blue-Winged Parrotlet",
     biome: "Savanna birds",
-    videoId: "",
+    videoId: "UKm_CBbNPp4",
+    vidStart: "24",
   },
   {
     name: "Lilac-Breasted Roller",
     biome: "Savanna birds",
-    videoId: "",
+    videoId: "qFxkGSAc3r8",
   },
   {
     name: "European Roller",
     biome: "Savanna birds",
-    videoId: "",
+    videoId: "dxfIKcE4bz0",
   },
 
   ///////////////////////////////////////////
