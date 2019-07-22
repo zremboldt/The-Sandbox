@@ -269,7 +269,8 @@ export const birdData = [
   {
     name: "Cassins Auklet",
     biome: "Sea birds",
-    videoId: "", // Can't find a good video for this...
+    videoId: "qESQK07mOWg",
+    vidStart: "5",
   },
   {
     name: "Black Guillemot",
@@ -386,17 +387,18 @@ export const birdData = [
   {
     name: "Helmeted Guineafowl",
     biome: "Savanna birds",
-    videoId: "",
+    videoId: "v4npWdf_hng",
   },
   {
     name: "Saddle-Billed Stork",
     biome: "Savanna birds",
-    videoId: "",
+    videoId: "LqhDAnYdv2o",
+    vidStart: "8",
   },
   {
     name: "Wattled Crane",
     biome: "Savanna birds",
-    videoId: "",
+    videoId: "rXpFPUSjbEM",
   },
   {
     name: "Red-Billed Hornbill",
