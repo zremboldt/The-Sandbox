@@ -32,24 +32,17 @@
     font-size: 11rem
     line-height: 13rem
     text-align: center
-    
 
 
-
-.searchBar
-  position: sticky
-  top: 0
-  left: 0
-  right: 0
-  z-index: 10
-  padding: 0.8rem
-  margin-bottom: 3rem
 
 .searchInput
+  position: sticky
+  top: 1rem
+  z-index: 10
   display: block
-  margin: 0 auto
+  margin: 0 1rem 3rem
   padding: 1rem 2rem
-  width: 100%
+  width: calc(100% - 2rem)
   max-width: 54rem
   background-color: white
   border-radius: 10rem
@@ -60,20 +53,6 @@
   &::placeholder
     color: hsla(30, 13%, 30%, .5)
 
-.searchBG
-  position: absolute
-  z-index: -1
-  top: 0
-  left: 0
-  right: 0
-  bottom: 0
-  background-color: transparentize($offWhite, 0.04)
-  transition: opacity 0.3s $zease
-  opacity: 0
-  
-.barActive .searchBG
-  opacity: 1
-
 
 
 nav
@@ -81,7 +60,6 @@ nav
   flex-wrap: wrap
   justify-content: center
   max-width: 1140px
-  margin: 0 auto
 
   button
     margin: 8px

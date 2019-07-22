@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "../styles/index.sass";
-import { useInView } from "react-intersection-observer";
 import { birdData } from "../content/birdData";
 import ImgLeaves from "../images/ImgLeaves";
 import Card from "../components/Card";
 import BtnBiome from "../components/BtnBiome";
 import SEO from "../components/seo";
 
-// An array of biomes (categories) from birdData
+// An array of biomes (categories) from birdData. (`Set` keeps only unique values)
 const biomes = Array.from(new Set(birdData.map(data => data.biome)));
 
 const IndexPage = () => {
@@ -50,19 +49,8 @@ const IndexPage = () => {
   }, [searchQuery]);
 
   //////////////////////////////////
-  // Triggers the search bar background to fade on/off
-  //////////////////////////////////
-  const [ref, atTop] = useInView({
-    /* Optional options */
-    root: null, // 'null' sets it to default value: viewport
-    rootMargin: "0px 0px -99.8%", // This makes the root a very tiny sliver across the top of the page.
-    threshold: 0.01, // atTop triggers when at least .01% of the observed object is visible.
-  });
-
-  //////////////////////////////////
   // ↓ Markup begins ↓
   //////////////////////////////////
-
   return (
     <div className="pageWrap">
       <SEO title="Home" />
@@ -76,19 +64,12 @@ const IndexPage = () => {
         <h1>Birds</h1>
       </header>
 
-      <fieldset
-        className={`searchBar ${atTop ? "barActive" : ""}`}
-        ref={ref}
-        role="search"
-      >
-        <input
-          className="searchInput"
-          type="text"
-          placeholder="Search all birds"
-          onChange={e => setSearchQuery(e.target.value)}
-        />
-        <div className="searchBG" ref={ref}></div>
-      </fieldset>
+      <input
+        className="searchInput"
+        type="text"
+        placeholder="Search all birds"
+        onChange={e => setSearchQuery(e.target.value)}
+      />
 
       <nav>
         {biomes.map((biome, i) => (
