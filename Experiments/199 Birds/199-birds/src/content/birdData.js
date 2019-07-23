@@ -685,32 +685,29 @@ export const birdData = [
   {
     name: "Harpy Eagle",
     biome: "Rainforest birds",
-    videoId: "",
-    vidStart: "",
+    videoId: "Og0OKvMmnAc",
+    vidStart: "6",
   },
   {
     name: "Hermit Hummingbird",
     biome: "Rainforest birds",
-    videoId: "",
-    vidStart: "",
+    videoId: "fNigPzEuN2A", // I didn't find a great video option so I made a substitute.
   },
   {
     name: "Red-Fan Parrot",
     biome: "Rainforest birds",
-    videoId: "",
-    vidStart: "",
+    videoId: "wGiifAPW8qE",
+    vidStart: "25",
   },
   {
     name: "Toucan",
     biome: "Rainforest birds",
-    videoId: "",
-    vidStart: "",
+    videoId: "gv5z8Uv9V28",
   },
   {
     name: "Oriental Dwarf Kingfisher",
     biome: "Rainforest birds",
-    videoId: "",
-    vidStart: "",
+    videoId: "3FveQiJh1zo",
   },
   {
     name: "Flowerpecker",
