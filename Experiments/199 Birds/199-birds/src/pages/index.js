@@ -16,12 +16,14 @@ const IndexPage = () => {
   //////////////////////////////////
   // Bird biome selection (buttons)
   //////////////////////////////////
-  const [birdsSelected, setBirdsSelected] = useState("Savanna birds");
+  const [birdsSelected, setBirdsSelected] = useState("favorites");
 
   useEffect(() => {
     setDisplayBirds(
       birdData.filter(data => {
-        return data.biome.includes(birdsSelected);
+        if (birdsSelected === "favorites") {
+          return data.favorite === true;
+        } else return data.biome.includes(birdsSelected);
       })
     );
   }, [birdsSelected]);
@@ -37,7 +39,9 @@ const IndexPage = () => {
     searchQuery === ""
       ? setDisplayBirds(
           birdData.filter(data => {
-            return data.biome.includes(birdsSelected);
+            if (birdsSelected === "favorites") {
+              return data.favorite === true;
+            } else return data.biome.includes(birdsSelected);
           })
         )
       : setDisplayBirds(
@@ -80,6 +84,12 @@ const IndexPage = () => {
             key={i}
           />
         ))}
+        <button
+          onClick={() => setBirdsSelected("favorites")}
+          className={birdsSelected === "favorites" ? "btnSelected" : ""}
+        >
+          Favorites
+        </button>
       </nav>
 
       <main>

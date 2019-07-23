@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Image from "./Image";
 import Modal from "./Modal";
+import Heart from "../images/heart";
 
-const Card = ({ name, ...vidProps }) => {
+const Card = ({ name, favorite, ...vidProps }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const toggleModal = () => {
@@ -19,6 +20,11 @@ const Card = ({ name, ...vidProps }) => {
   return (
     <>
       <div className="card" onClick={toggleModal}>
+        {favorite && (
+          <button className="btnFavorite">
+            <Heart />
+          </button>
+        )}
         <div className="cardImg">
           <Image imgName={formatImgName()} />
         </div>
