@@ -16,7 +16,7 @@ const IndexPage = () => {
   //////////////////////////////////
   // Bird biome selection (buttons)
   //////////////////////////////////
-  const [birdsSelected, setBirdsSelected] = useState("Rainforest birds");
+  const [birdsSelected, setBirdsSelected] = useState("Savanna birds");
 
   useEffect(() => {
     setDisplayBirds(

@@ -535,98 +535,99 @@ export const birdData = [
   {
     name: "Snow Petrel",
     biome: "Ice & snow",
-    videoId: "",
-    vidStart: "",
+    videoId: "PNevWH71AgY",
+    vidStart: "95",
   },
   {
     name: "Giant Petrel",
     biome: "Ice & snow",
-    videoId: "",
-    vidStart: "",
+    videoId: "Z7PlUGbsXlQ",
+    vidStart: "31",
   },
   {
     name: "Little Auk",
     biome: "Ice & snow",
-    videoId: "",
-    vidStart: "",
+    videoId: "9vdBNthN2LM",
+    vidStart: "29",
   },
   {
     name: "Ptarmigan",
     biome: "Ice & snow",
-    videoId: "",
-    vidStart: "",
+    videoId: "8cF2JMDSh-U",
   },
   {
     name: "Magellanic Penguin",
     biome: "Ice & snow",
-    videoId: "",
-    vidStart: "",
+    videoId: "elIxxCyyhXo",
+    vidStart: "15",
   },
   {
     name: "Gentoo Penguin",
     biome: "Ice & snow",
-    videoId: "",
-    vidStart: "",
+    videoId: "cZvfN4AAolI",
+    vidStart: "32",
+    favorite: true,
   },
   {
     name: "King Penguin",
     biome: "Ice & snow",
-    videoId: "",
-    vidStart: "",
+    videoId: "r1_8rRDHtQ8",
+    vidStart: "100",
+    favorite: true,
   },
   {
     name: "Adelie Penguin",
     biome: "Ice & snow",
     videoId: "Z-bxsuS88n4",
     vidStart: "2",
+    favorite: true,
   },
   {
     name: "Macaroni Penguin",
     biome: "Ice & snow",
-    videoId: "",
-    vidStart: "",
+    videoId: "6LBOPRwWrhY",
+    vidStart: "165",
+    vidStop: "370",
   },
   {
     name: "Snares Crested Penguin",
     biome: "Ice & snow",
-    videoId: "",
-    vidStart: "",
+    videoId: "_sPK92Oddig",
+    vidStart: "121",
   },
   {
     name: "African Penguin",
     biome: "Ice & snow",
-    videoId: "",
-    vidStart: "",
+    videoId: "vYHWbI46Q5I",
   },
   {
     name: "Emperor Penguin",
     biome: "Ice & snow",
-    videoId: "",
-    vidStart: "",
+    videoId: "QLFqdRRqjrs",
   },
   {
     name: "Little Penguin",
     biome: "Ice & snow",
-    videoId: "",
-    vidStart: "",
+    videoId: "oaQWwhG2sz4",
+    vidStart: "32",
   },
   {
     name: "Rockhopper Penguin",
     biome: "Ice & snow",
-    videoId: "",
-    vidStart: "",
+    videoId: "FwPdmK2EYEk",
+    vidStart: "12",
   },
   {
     name: "Chinstrap Penguin",
     biome: "Ice & snow",
-    videoId: "",
-    vidStart: "",
+    videoId: "jIG5ech3P2Y",
+    vidStart: "20",
+    vidStop: "42",
   },
   {
     name: "Humboldt Penguin",
     biome: "Ice & snow",
-    videoId: "",
-    vidStart: "",
+    videoId: "JYNA0-aqYZY",
   },
 
   ///////////////////////////////////////////
@@ -766,382 +767,382 @@ export const birdData = [
     vidStart: "",
   },
 
-  ///////////////////////////////////////////
-  // Forests and woodlands
-  ///////////////////////////////////////////
+  // ///////////////////////////////////////////
+  // // Forests and woodlands
+  // ///////////////////////////////////////////
 
-  {
-    name: "Green Woodpecker",
-    biome: "Forest & woodlands",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Crossbill",
-    biome: "Forest & woodlands",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Cuckoo",
-    biome: "Forest & woodlands",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Pheasant",
-    biome: "Forest & woodlands",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Wood Warbler",
-    biome: "Forest & woodlands",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Blue Jay",
-    biome: "Forest & woodlands",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Lewis' Woodpecker",
-    biome: "Forest & woodlands",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Long-Eared Owl",
-    biome: "Forest & woodlands",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Eurasian Crane",
-    biome: "Forest & woodlands",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Northern Goshawk",
-    biome: "Forest & woodlands",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Cardinal",
-    biome: "Forest & woodlands",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Tawny Owl",
-    biome: "Forest & woodlands",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Great Spotted Woodpecker",
-    biome: "Forest & woodlands",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Black Woodpecker",
-    biome: "Forest & woodlands",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Pileated Woodpecker",
-    biome: "Forest & woodlands",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Grouse",
-    biome: "Forest & woodlands",
-    videoId: "qvEsiwnaQVc",
-    vidStart: "805",
-  },
-  {
-    name: "Song Thrush",
-    biome: "Forest & woodlands",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Clark's Nutcracker",
-    biome: "Forest & woodlands",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "European Goldfinch",
-    biome: "Forest & woodlands",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Kea",
-    biome: "Forest & woodlands",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Sharp-Shinned Hawk",
-    biome: "Forest & woodlands",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Mockingbird",
-    biome: "Forest & woodlands",
-    videoId: "",
-    vidStart: "",
-  },
+  // {
+  //   name: "Green Woodpecker",
+  //   biome: "Forest & woodlands",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Crossbill",
+  //   biome: "Forest & woodlands",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Cuckoo",
+  //   biome: "Forest & woodlands",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Pheasant",
+  //   biome: "Forest & woodlands",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Wood Warbler",
+  //   biome: "Forest & woodlands",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Blue Jay",
+  //   biome: "Forest & woodlands",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Lewis' Woodpecker",
+  //   biome: "Forest & woodlands",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Long-Eared Owl",
+  //   biome: "Forest & woodlands",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Eurasian Crane",
+  //   biome: "Forest & woodlands",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Northern Goshawk",
+  //   biome: "Forest & woodlands",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Cardinal",
+  //   biome: "Forest & woodlands",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Tawny Owl",
+  //   biome: "Forest & woodlands",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Great Spotted Woodpecker",
+  //   biome: "Forest & woodlands",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Black Woodpecker",
+  //   biome: "Forest & woodlands",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Pileated Woodpecker",
+  //   biome: "Forest & woodlands",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Grouse",
+  //   biome: "Forest & woodlands",
+  //   videoId: "qvEsiwnaQVc",
+  //   vidStart: "805",
+  // },
+  // {
+  //   name: "Song Thrush",
+  //   biome: "Forest & woodlands",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Clark's Nutcracker",
+  //   biome: "Forest & woodlands",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "European Goldfinch",
+  //   biome: "Forest & woodlands",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Kea",
+  //   biome: "Forest & woodlands",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Sharp-Shinned Hawk",
+  //   biome: "Forest & woodlands",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Mockingbird",
+  //   biome: "Forest & woodlands",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
 
-  ///////////////////////////////////////////
-  // On the farm
-  ///////////////////////////////////////////
+  // ///////////////////////////////////////////
+  // // On the farm
+  // ///////////////////////////////////////////
 
-  {
-    name: "Silver Campine Rooster",
-    biome: "Farm birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Rouen Duck",
-    biome: "Farm birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Embden Goose",
-    biome: "Farm birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Indian Game Hen",
-    biome: "Farm birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Barn Owl",
-    biome: "Farm birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Bourbon Red Turkey",
-    biome: "Farm birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Bronze Turkey",
-    biome: "Farm birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Yokohama Rooster",
-    biome: "Farm birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Welsummer Rooster",
-    biome: "Farm birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "White Leghorn Rooster",
-    biome: "Farm birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Silkie Hen",
-    biome: "Farm birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Gray Partridge",
-    biome: "Farm birds",
-    videoId: "",
-    vidStart: "",
-  },
+  // {
+  //   name: "Silver Campine Rooster",
+  //   biome: "Farm birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Rouen Duck",
+  //   biome: "Farm birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Embden Goose",
+  //   biome: "Farm birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Indian Game Hen",
+  //   biome: "Farm birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Barn Owl",
+  //   biome: "Farm birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Bourbon Red Turkey",
+  //   biome: "Farm birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Bronze Turkey",
+  //   biome: "Farm birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Yokohama Rooster",
+  //   biome: "Farm birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Welsummer Rooster",
+  //   biome: "Farm birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "White Leghorn Rooster",
+  //   biome: "Farm birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Silkie Hen",
+  //   biome: "Farm birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Gray Partridge",
+  //   biome: "Farm birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
 
-  ///////////////////////////////////////////
-  // Pet birds at home
-  ///////////////////////////////////////////
+  // ///////////////////////////////////////////
+  // // Pet birds at home
+  // ///////////////////////////////////////////
 
-  {
-    name: "Budgerigar",
-    biome: "Pet birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Peach-Faced Lovebird",
-    biome: "Pet birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Indian Ring-Necked Parakeet",
-    biome: "Pet birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Yellow Collared Lovebird",
-    biome: "Pet birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Splendid Grass Parakeet",
-    biome: "Pet birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Gouldian Finch",
-    biome: "Pet birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Canary",
-    biome: "Pet birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Palm Cockatoo",
-    biome: "Pet birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Cockatiel",
-    biome: "Pet birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Rooster",
-    biome: "Pet birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Chick",
-    biome: "Pet birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Hen",
-    biome: "Pet birds",
-    videoId: "",
-    vidStart: "",
-  },
+  // {
+  //   name: "Budgerigar",
+  //   biome: "Pet birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Peach-Faced Lovebird",
+  //   biome: "Pet birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Indian Ring-Necked Parakeet",
+  //   biome: "Pet birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Yellow Collared Lovebird",
+  //   biome: "Pet birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Splendid Grass Parakeet",
+  //   biome: "Pet birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Gouldian Finch",
+  //   biome: "Pet birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Canary",
+  //   biome: "Pet birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Palm Cockatoo",
+  //   biome: "Pet birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Cockatiel",
+  //   biome: "Pet birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Rooster",
+  //   biome: "Pet birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Chick",
+  //   biome: "Pet birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Hen",
+  //   biome: "Pet birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
 
-  ///////////////////////////////////////////
-  // Birds of prey
-  ///////////////////////////////////////////
+  // ///////////////////////////////////////////
+  // // Birds of prey
+  // ///////////////////////////////////////////
 
-  {
-    name: "Falcon",
-    biome: "Birds of prey",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Kestrel",
-    biome: "Birds of prey",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Condor",
-    biome: "Birds of prey",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Red Kite",
-    biome: "Birds of prey",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Bald Eagle",
-    biome: "Birds of prey",
-    videoId: "FZ_chD2mUV8",
-    vidStart: "",
-  },
-  {
-    name: "Osprey",
-    biome: "Birds of prey",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Merlin",
-    biome: "Birds of prey",
-    videoId: "",
-    vidStart: "",
-  },
+  // {
+  //   name: "Falcon",
+  //   biome: "Birds of prey",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Kestrel",
+  //   biome: "Birds of prey",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Condor",
+  //   biome: "Birds of prey",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Red Kite",
+  //   biome: "Birds of prey",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Bald Eagle",
+  //   biome: "Birds of prey",
+  //   videoId: "FZ_chD2mUV8",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Osprey",
+  //   biome: "Birds of prey",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Merlin",
+  //   biome: "Birds of prey",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
 
-  ///////////////////////////////////////////
-  // Night birds
-  ///////////////////////////////////////////
+  // ///////////////////////////////////////////
+  // // Night birds
+  // ///////////////////////////////////////////
 
-  {
-    name: "Burrowing Owl",
-    biome: "Night birds",
-    videoId: "7wepVbSeprE",
-    vidStart: "27",
-  },
-  {
-    name: "Great Horned Owl",
-    biome: "Night birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Nighthawk",
-    biome: "Night birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Spotted Owl",
-    biome: "Night birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "European Nightjar",
-    biome: "Night birds",
-    videoId: "",
-    vidStart: "",
-  },
-  {
-    name: "Owlet-Nightjar",
-    biome: "Night birds",
-    videoId: "",
-    vidStart: "",
-  },
+  // {
+  //   name: "Burrowing Owl",
+  //   biome: "Night birds",
+  //   videoId: "7wepVbSeprE",
+  //   vidStart: "27",
+  // },
+  // {
+  //   name: "Great Horned Owl",
+  //   biome: "Night birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Nighthawk",
+  //   biome: "Night birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Spotted Owl",
+  //   biome: "Night birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "European Nightjar",
+  //   biome: "Night birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
+  // {
+  //   name: "Owlet-Nightjar",
+  //   biome: "Night birds",
+  //   videoId: "",
+  //   vidStart: "",
+  // },
 ];
