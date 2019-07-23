@@ -66,6 +66,7 @@ export const birdData = [
     name: "European Robin",
     biome: "Gardens & meadows",
     videoId: "SVNilOwikJ8",
+    favorite: true,
   },
   {
     name: "Junco",
@@ -77,6 +78,7 @@ export const birdData = [
     biome: "Gardens & meadows",
     videoId: "V4f_1_r80RY",
     vidStart: "33",
+    favorite: true,
   },
   {
     name: "Collared Dove",
@@ -114,17 +116,20 @@ export const birdData = [
     biome: "Rivers & lakes",
     videoId: "ze1uzC7h8UE",
     vidStart: "8",
+    favorite: true,
   },
   {
     name: "Flamingo",
     biome: "Rivers & lakes",
     videoId: "QLV_K7DVeyU",
+    favorite: true,
   },
   {
     name: "Malachite Kingfisher",
     biome: "Rivers & lakes",
     videoId: "veQ2ilQrzMU",
     vidStart: "19",
+    favorite: true,
   },
   {
     name: "Pintail",
@@ -299,6 +304,7 @@ export const birdData = [
     biome: "Sea birds",
     videoId: "EwPrXOtBoVg",
     vidStart: "45",
+    favorite: true,
   },
 
   ///////////////////////////////////////////
@@ -327,6 +333,7 @@ export const birdData = [
     biome: "Desert birds",
     videoId: "fcL47Kiyuj0",
     vidStart: "90",
+    favorite: true,
   },
   {
     name: "Roadrunner",
@@ -378,6 +385,7 @@ export const birdData = [
     biome: "Australian birds",
     videoId: "DH6NPcwxQqM",
     vidStart: "4",
+    favorite: true,
   },
 
   ///////////////////////////////////////////
@@ -394,6 +402,7 @@ export const birdData = [
     biome: "Savanna birds",
     videoId: "LqhDAnYdv2o",
     vidStart: "9",
+    favorite: true,
   },
   {
     name: "Wattled Crane",
@@ -421,6 +430,7 @@ export const birdData = [
     name: "Ostrich",
     biome: "Savanna birds",
     videoId: "OBRppKPXKuU",
+    favorite: true,
   },
   {
     name: "Motmot",
@@ -438,6 +448,7 @@ export const birdData = [
     biome: "Savanna birds",
     videoId: "7itwHJiNRz4",
     vidStart: "10",
+    favorite: true,
   },
   {
     name: "Short-Eared Owl",
@@ -454,6 +465,7 @@ export const birdData = [
     name: "Lilac-Breasted Roller",
     biome: "Savanna birds",
     videoId: "qFxkGSAc3r8",
+    favorite: true,
   },
   {
     name: "European Roller",
@@ -482,6 +494,7 @@ export const birdData = [
     biome: "Ice & snow",
     videoId: "LwwVnUekpeE",
     vidStart: "129",
+    favorite: true,
   },
   {
     name: "Blue-Eyed Shag",
