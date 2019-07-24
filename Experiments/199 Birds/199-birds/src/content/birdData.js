@@ -122,6 +122,7 @@ export const birdData = [
     name: "Flamingo",
     biome: "Rivers & lakes",
     videoId: "QLV_K7DVeyU",
+    vidStart: "68",
     favorite: true,
   },
   {
@@ -638,13 +639,14 @@ export const birdData = [
     name: "Raggiana Bird of Paradise",
     biome: "Rainforest birds",
     videoId: "BJtacDpUJgc",
-    vidStart: "",
+    vidStart: "5",
   },
   {
     name: "Grey Parrot",
     biome: "Rainforest birds",
     videoId: "xOeNmzp_8qc",
     vidStart: "45",
+    favorite: true,
   },
   {
     name: "Crimson Topaz Hummingbird",
@@ -816,12 +818,13 @@ export const birdData = [
     name: "Eurasian Crane",
     biome: "Forest & woodlands",
     videoId: "t_hvBnU3PP4",
-    vidStart: "6",
+    vidStart: "7",
   },
   {
     name: "Northern Goshawk",
     biome: "Forest & woodlands",
     videoId: "Knqo9OVLBvs",
+    vidStart: "6",
   },
   {
     name: "Cardinal",
