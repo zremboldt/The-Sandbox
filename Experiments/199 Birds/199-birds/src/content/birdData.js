@@ -1055,20 +1055,19 @@ export const birdData = [
   {
     name: "Kestrel",
     biome: "Birds of prey",
-    videoId: "",
+    videoId: "54HJdMHZpgs",
     vidStart: "",
   },
   {
     name: "Condor",
     biome: "Birds of prey",
-    videoId: "",
-    vidStart: "",
+    videoId: "gLD7OFjgPUk",
   },
   {
     name: "Red Kite",
     biome: "Birds of prey",
-    videoId: "",
-    vidStart: "",
+    videoId: "3sB_-cBAUZ8",
+    vidStart: "16",
   },
   {
     name: "Bald Eagle",
@@ -1079,14 +1078,13 @@ export const birdData = [
   {
     name: "Osprey",
     biome: "Birds of prey",
-    videoId: "",
-    vidStart: "",
+    videoId: "DkzF5UjZNX0",
+    vidStart: "11",
   },
   {
     name: "Merlin",
     biome: "Birds of prey",
-    videoId: "",
-    vidStart: "",
+    videoId: "VRy9V7LGTXA",
   },
 
   ///////////////////////////////////////////
@@ -1103,31 +1101,29 @@ export const birdData = [
     name: "Great Horned Owl",
     biome: "Night birds",
     videoId: "bt3X8MJgJWo",
-    vidStart: "",
   },
   {
     name: "Nighthawk",
     biome: "Night birds",
-    videoId: "",
-    vidStart: "",
+    videoId: "XqDL-HzrfA4",
   },
   {
     name: "Spotted Owl",
     biome: "Night birds",
-    videoId: "",
-    vidStart: "",
+    videoId: "ifXMpuNk9RA",
+    vidStart: "7",
   },
   {
     name: "European Nightjar",
     biome: "Night birds",
-    videoId: "",
-    vidStart: "",
+    videoId: "0zbgICX9oyo",
+    vidStart: "3",
   },
   {
     name: "Owlet-Nightjar",
     biome: "Night birds",
-    videoId: "",
-    vidStart: "",
+    videoId: "opxLvlh6p4M",
+    vidStart: "3",
   },
 ];
 
