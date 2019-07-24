@@ -1073,7 +1073,7 @@ export const birdData = [
     name: "Bald Eagle",
     biome: "Birds of prey",
     videoId: "FZ_chD2mUV8",
-    vidStart: "",
+    favorite: true,
   },
   {
     name: "Osprey",
