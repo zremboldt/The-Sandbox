@@ -1,6 +1,6 @@
-import React from "react"
-import { Link } from "gatsby"
-import styles from "./header.module.css"
+import React from 'react';
+import { Link } from 'gatsby';
+import styles from './header.module.css';
 
 const Header = () => (
   <header className={styles.header}>
@@ -19,15 +19,15 @@ const Header = () => (
         <Link to="/" className={styles[`header__link`]}>
           Home
         </Link>
-        <Link to="/app/profile" className={styles[`header__link`]}>
+        <Link to="/support/profile" className={styles[`header__link`]}>
           Profile
         </Link>
-        <Link to="/app/details" className={styles[`header__link`]}>
+        <Link to="/support/details" className={styles[`header__link`]}>
           Details
         </Link>
       </nav>
     </div>
   </header>
-)
+);
 
-export default Header
+export default Header;

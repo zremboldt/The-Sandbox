@@ -1,8 +1,8 @@
-import React from "react"
-import { Link } from "gatsby"
-import Layout from "../components/Layout"
-import View from "../components/View"
-import Status from "../components/Status"
+import React from 'react';
+import { Link } from 'gatsby';
+import Layout from '../components/Layout';
+import View from '../components/View';
+import Status from '../components/Status';
 
 const Index = () => (
   <Layout>
@@ -21,10 +21,10 @@ const Index = () => (
       <p>
         For the full experience, go to
         {` `}
-        <Link to="/app/profile">your profile</Link>.
+        <Link to="/support/profile">your profile</Link>.
       </p>
     </View>
   </Layout>
-)
+);
 
-export default Index
+export default Index;
