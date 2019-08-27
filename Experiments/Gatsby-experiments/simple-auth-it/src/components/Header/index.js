@@ -12,18 +12,15 @@ const Header = () => (
             styles[`header__link--home`]
           }`}
         >
-          Gatsby Profiles
+          LOGO
         </Link>
       </h1>
       <nav role="main" className={styles[`header__nav`]}>
         <Link to="/" className={styles[`header__link`]}>
-          Home
+          Login
         </Link>
-        <Link to="/support/profile" className={styles[`header__link`]}>
-          Profile
-        </Link>
-        <Link to="/support/details" className={styles[`header__link`]}>
-          Details
+        <Link to="/support" className={styles[`header__link`]}>
+          Support
         </Link>
       </nav>
     </div>

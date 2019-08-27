@@ -11,9 +11,9 @@ const Support = () => (
   <Layout>
     <Status />
     <Router>
-      <PrivateRoute path="/support/profile" component={Home} />
+      <PrivateRoute path="/support" component={Home} />
       <PrivateRoute path="/support/details" component={Details} />
-      <Login path="/support/login" />
+      <Login path="support/login" />
     </Router>
   </Layout>
 );

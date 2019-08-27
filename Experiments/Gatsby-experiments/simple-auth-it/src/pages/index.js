@@ -1,30 +1,21 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { Router } from '@reach/router';
 import Layout from '../components/Layout';
-import View from '../components/View';
+// import Details from '../components/Details';
+import Home from '../components/Home';
+import Login from '../components/Login';
+import PrivateRoute from '../components/PrivateRoute';
 import Status from '../components/Status';
 
-const Index = () => (
+const Support = () => (
   <Layout>
     <Status />
-    <View title="Simple Authentication Example">
-      <p>
-        This is a simple example of creating dynamic apps with Gatsby that
-        require user authentication. It uses concepts from the
-        {` `}
-        <a href="https://www.gatsbyjs.org/docs/building-apps-with-gatsby/#client-only-routes">
-          client-only routes section
-        </a>
-        {` `}
-        of the “Building Apps with Gatsby” documentation.
-      </p>
-      <p>
-        For the full experience, go to
-        {` `}
-        <Link to="/support/profile">your profile</Link>.
-      </p>
-    </View>
+    <Router>
+      <PrivateRoute path="/support" component={Home} />
+      {/* <PrivateRoute path="/support/details" component={Details} /> */}
+      <Login path="/" />
+    </Router>
   </Layout>
 );
 
-export default Index;
+export default Support;

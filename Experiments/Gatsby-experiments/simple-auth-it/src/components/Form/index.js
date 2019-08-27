@@ -1,14 +1,14 @@
-import React from "react"
-import styles from "./form.module.css"
-import { navigate } from "@reach/router"
+import React from 'react';
+import styles from './form.module.css';
+import { navigate } from '@reach/router';
 
 export default ({ handleSubmit, handleUpdate }) => (
   <form
     className={styles.form}
     method="post"
     onSubmit={event => {
-      handleSubmit(event)
-      navigate(`/app/profile`)
+      handleSubmit(event);
+      navigate(`/support`);
     }}
   >
     <p className={styles[`form__instructions`]}>
@@ -35,4 +35,4 @@ export default ({ handleSubmit, handleUpdate }) => (
     </label>
     <input className={styles[`form__button`]} type="submit" value="Log In" />
   </form>
-)
+);
