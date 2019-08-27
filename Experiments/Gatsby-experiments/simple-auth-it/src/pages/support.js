@@ -10,6 +10,7 @@ import Status from '../components/Status';
 const Support = () => (
   <Layout>
     <Status />
+    <h1>different component</h1>
     <Router>
       <PrivateRoute path="/support" component={Home} />
       <PrivateRoute path="/support/details" component={Details} />
