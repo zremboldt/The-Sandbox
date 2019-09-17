@@ -2,7 +2,7 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
+import Image from "gatsby-image"
 import SEO from "../components/seo"
 
 const IndexPage = ({ data }) => {
@@ -13,12 +13,12 @@ const IndexPage = ({ data }) => {
 
       {data.allSanityProducts.edges.map(({ node }, i) => (
         <div key={i}>
-          <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-            <p>{node.heroProductImage.asset.path}</p>
-            <img src={node.heroProductImage.asset.path} alt="" />
+          <div style={{ maxWidth: `300px`, margin: `4rem 0 0` }}>
+            <Image fluid={node.heroProductImage.asset.fluid} />
           </div>
-          <h2>{node.name}</h2>
-          <p>{node.valueStatement}</p>
+          <h2 style={{ marginBottom: "8px" }}>{node.name}</h2>
+          <p style={{ marginBottom: "4px" }}>{node.valueStatement}</p>
+          <p>Starting at ${node.startingPrice}</p>
         </div>
       ))}
       <Link to="/page-2/">Go to page 2</Link>
@@ -30,7 +30,7 @@ export default IndexPage
 
 export const query = graphql`
   query {
-    allSanityProducts {
+    allSanityProducts(sort: { fields: startingPrice, order: ASC }) {
       edges {
         node {
           name
@@ -39,9 +39,16 @@ export const query = graphql`
           slug {
             current
           }
+          # heroProductImage {
+          #   asset {
+          #     url
+          #   }
+          # }
           heroProductImage {
             asset {
-              path
+              fluid {
+                ...GatsbySanityImageFluid
+              }
             }
           }
         }

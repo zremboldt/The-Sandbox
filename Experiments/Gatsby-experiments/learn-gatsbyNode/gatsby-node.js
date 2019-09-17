@@ -49,6 +49,48 @@ exports.createPages = async ({ graphql, actions }) => {
   console.log(JSON.stringify(result, null, 2))
 }
 
-// exports.createPages = async ({graphql, actions}) => {
-//   const {createPage}
-// }
+//
+//
+//
+
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions
+
+  // ne: short for not equal
+  const result = await graphql(`
+    {
+      allSanityProducts(filter: { slug: { current: { ne: null } } }) {
+        edges {
+          node {
+            name
+            valueStatement
+            startingPrice
+            slug {
+              current
+            }
+            heroProductImage {
+              asset {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  if (result.errors) {
+    throw result.errors
+  }
+
+  const products = result.data.allSanityProducts.edges || []
+  products.forEach(({ node }) => {
+    const path = `/product/${node.slug.current}`
+
+    createPage({
+      path,
+      component: require.resolve("./src/templates/product.js"),
+      context: { slug: node.slug.current },
+    })
+  })
+}
