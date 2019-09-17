@@ -46,7 +46,7 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   })
-  console.log(JSON.stringify(result, null, 2))
+  // console.log(JSON.stringify(result, null, 2))
 }
 
 //
@@ -79,7 +79,10 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
+  console.log(JSON.stringify(result, null, 2))
+
   if (result.errors) {
+    console.log(result.errors)
     throw result.errors
   }
 

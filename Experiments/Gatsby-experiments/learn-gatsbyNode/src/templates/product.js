@@ -7,15 +7,18 @@ export default ({ data }) => {
   console.log(post)
   return (
     <Layout>
-      {/* <h1>{post.frontmatter.title}</h1> */}
-      {/* <div dangerouslySetInnerHTML={{ __html: post.html }} /> */}
+      <div style={{ margin: '5rem 0' }}>
+        <h2>{post.name}</h2>
+        <p>{post.valueStatement}</p>
+        <p>{post.startingPrice}</p>
+      </div>
     </Layout>
   )
 }
 
 export const query = graphql`
   query($slug: String!) {
-    sanityProducts(filter: { slug: { eq: $slug } }) {
+    sanityProducts(slug: { eq: $slug }) {
       name
       valueStatement
       startingPrice
@@ -25,6 +28,15 @@ export const query = graphql`
     }
   }
 `
+
+
+
+
+
+
+
+
+
 
 // export const query = graphql`
 //   query($slug: String!) {
