@@ -1,0 +1,44 @@
+.productGrid
+  display: grid
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr)
+  .product
+    display: block
+    margin: 3rem 1rem
+
+  .ctr__productImage
+    margin: 0 4rem
+
+  .card
+    margin-top: -8rem
+    padding: 7rem 2rem 2rem
+    background-color: $white
+    border-radius: 5px
+    box-shadow: $shadowSoft
+
+  .valueStatement
+    white-space: nowrap
+    text-overflow: ellipsis
+    overflow: hidden
+    display: inherit
+
+
+/////////////////
+// Product page
+/////////////////
+
+.ctr__heroBackgroundImage
+  position: relative
+  z-index: -1
+  max-height: 600px
+  overflow: hidden
+
+.ctr__heroProductImage
+  position: relative
+  margin: 0 auto
+  height: 28rem
+  max-width: 80rem
+
+  .heroProductImage
+    position: absolute
+    width: 100%
+    bottom: 0

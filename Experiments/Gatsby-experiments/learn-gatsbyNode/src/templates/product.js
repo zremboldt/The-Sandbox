@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
+import Image from "gatsby-image"
 import Layout from "../components/layout"
 
 export default ({ data }) => {
@@ -7,23 +8,43 @@ export default ({ data }) => {
   console.log(post)
   return (
     <Layout>
-      <div style={{ margin: '5rem 0' }}>
+      <section className="ctr__heroBackgroundImage">
+        <Image fluid={post.heroBackgroundImage.asset.fluid} />
+      </section>
+      <section className="ctr__heroProductImage">
+        <div className="heroProductImage"><Image fluid={post.heroProductImage.asset.fluid} /></div>
+      </section>
+      <div className="productPage wrap">
         <h2>{post.name}</h2>
         <p>{post.valueStatement}</p>
-        <p>{post.startingPrice}</p>
+        <p>${post.startingPrice}</p>
       </div>
     </Layout>
   )
 }
 
-export const query = graphql`
+export const productQuery = graphql`
   query($slug: String!) {
-    sanityProducts(slug: { eq: $slug }) {
+    sanityProducts(slug: {current: {eq: $slug}}) {
       name
       valueStatement
       startingPrice
       slug {
         current
+      }
+      heroBackgroundImage {
+        asset {
+          fluid {
+            ...GatsbySanityImageFluid
+          }
+        }
+      }
+      heroProductImage {
+        asset {
+          fluid {
+            ...GatsbySanityImageFluid
+          }
+        }
       }
     }
   }
@@ -34,17 +55,3 @@ export const query = graphql`
 
 
 
-
-
-
-
-// export const query = graphql`
-//   query($slug: String!) {
-//     markdownRemark(fields: { slug: { eq: $slug } }) {
-//       html
-//       frontmatter {
-//         title
-//       }
-//     }
-//   }
-// `

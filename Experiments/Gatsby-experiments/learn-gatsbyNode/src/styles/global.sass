@@ -1,0 +1,166 @@
+// *********
+// Variables
+// *********
+
+// Primary
+$goldenrod: #FFC324
+$saffron: #FEE86B
+
+// Secondary
+$green: #25e8c8
+$red: hsl(340,100%, 58%)
+
+// Neutrals
+$deepSpace: #20242B
+$carbon:    #363C47
+$slate:     #5F6673
+$steel:     #A6ABB3
+$storm:     #DADDE3
+$glacier:   #F0F2F5
+$white:     #FFFFFF
+
+// Gradients
+$gradientX: linear-gradient(to right, $goldenrod 0%, $saffron 100%)
+$gradientY: linear-gradient(to bottom, $goldenrod 0%, $saffron 100%)
+
+// Shadows
+$shadowSoft: 0px 5px 2px -2px hsla(0, 0%, 60%, 0.06), 0px 4px 25px hsla(0, 0%, 60%, 0.14)
+$shadowBlue: 0px 6px 20px -2px transparentize($goldenrod, 0.3)
+
+// Easing
+$zease:          cubic-bezier(0.165, 0.84, 0.44, 1)
+$easeOutBack:    cubic-bezier(0.175, 0.885, 0.32, 1.275)
+$easeOutBack-Lg: cubic-bezier(.17,.89,.46,1.69)
+
+// Border radius
+$radius: 5px
+
+
+
+
+
+// *************
+// Initial Setup
+// *************
+
+html
+  box-sizing: border-box
+  font-size: 10px // Globally sets rems to increments of 10px. 1rem = 10px.
+  margin: 0
+
+*, *:before, *:after
+  box-sizing: inherit
+
+body
+  position: relative
+  margin: 0
+  padding: 0
+  background-color: $glacier
+
+
+
+
+// **********
+// Typography
+// **********
+
+h1, h2, h3, h4, h5, h6, p, span, a, li, label, input, textarea, button, footer
+  margin: 0
+  color: $carbon
+  font-family: 'Lato', Helvetica Neue, arial, sans-serif
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+h1, h2, h3, h4, h5, h6
+  font-weight: 900
+
+h1, h2
+  color: $deepSpace
+
+h1
+  font-size: 7.2rem
+  line-height: 8.6rem
+h2
+  font-size: 4.2rem
+  line-height: 5rem
+h4
+  font-size: 2rem
+  line-height: 2.8rem
+
+p, span, h4, a, li, input, label, textarea
+  font-size: 2rem
+  line-height: 2.8rem
+
+.p2
+  font-size: 1.6rem
+  line-height: 2.2rem
+
+// Nice for adding space between text sections
+.marbot2
+  margin-bottom: 2rem
+.marbot3
+  margin-bottom: 3rem
+.marbot4
+  margin-bottom: 4rem
+
+
+
+// @media screen and (max-width: 350px)
+//   h1
+//     font-size: 7.2rem
+//     line-height: 7.6rem
+
+
+
+
+
+// **************
+// General Resets
+// **************
+
+button, img
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+
+button
+  margin: 0
+  padding: 0
+  text-decoration: none
+  -webkit-appearance: none
+  -moz-appearance: none
+  &::-moz-focus-inner
+    border: 0
+
+hr
+  border: 0
+  margin: 0
+  padding: 0
+  border-top: 1px solid $steel
+
+ul
+  list-style: none
+  margin: 0
+  padding: 0
+
+svg
+  fill: $carbon
+  min-width: 24px
+  min-height: 24px
+
+img
+  margin: 0
+
+
+
+
+
+// **************
+// General Shared Styling
+// **************
+
+.wrap
+  margin: 0 auto
+  max-width: 1200px
+  padding: 0 2rem

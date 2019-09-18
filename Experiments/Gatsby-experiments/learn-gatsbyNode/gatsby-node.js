@@ -20,7 +20,11 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   // **Note:** The graphql function call returns a Promise
   // Using the graphql function to query the markdown slugs we created above ↑
-  const result = await graphql(`
+
+  /////////////////
+  // Blog Posts
+  /////////////////
+  const blogPostSlugs = await graphql(`
     query {
       allMarkdownRemark {
         edges {
@@ -34,7 +38,7 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+  blogPostSlugs.data.allMarkdownRemark.edges.forEach(({ node }) => {
     createPage({
       path: node.fields.slug,
       // When creating a page, you need to specify which component to use.
@@ -47,31 +51,18 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
   // console.log(JSON.stringify(result, null, 2))
-}
 
-//
-//
-//
-
-exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions
-
+  /////////////////
+  // Product Pages
+  /////////////////
   // ne: short for not equal
-  const result = await graphql(`
+  const productSlugs = await graphql(`
     {
       allSanityProducts(filter: { slug: { current: { ne: null } } }) {
         edges {
           node {
-            name
-            valueStatement
-            startingPrice
             slug {
               current
-            }
-            heroProductImage {
-              asset {
-                url
-              }
             }
           }
         }
@@ -79,16 +70,14 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  console.log(JSON.stringify(result, null, 2))
-
-  if (result.errors) {
-    console.log(result.errors)
-    throw result.errors
+  if (productSlugs.errors) {
+    console.log(productSlugs.errors)
+    throw productSlugs.errors
   }
 
-  const products = result.data.allSanityProducts.edges || []
+  const products = productSlugs.data.allSanityProducts.edges || []
   products.forEach(({ node }) => {
-    const path = `/product/${node.slug.current}`
+    const path = `/products/${node.slug.current}`
 
     createPage({
       path,
@@ -97,3 +86,9 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 }
+
+//
+//
+//
+
+

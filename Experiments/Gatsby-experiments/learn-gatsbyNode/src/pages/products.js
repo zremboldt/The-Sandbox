@@ -10,18 +10,20 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Home" />
+      <div className="wrap productGrid">
 
-      {data.allSanityProducts.edges.map(({ node }, i) => (
-        <div key={i}>
-          <div style={{ maxWidth: `300px`, margin: `4rem 0 0` }}>
-            <Image fluid={node.heroProductImage.asset.fluid} />
-          </div>
-          <h2 style={{ marginBottom: "8px" }}>{node.name}</h2>
-          <p style={{ marginBottom: "4px" }}>{node.valueStatement}</p>
-          <p>Starting at ${node.startingPrice}</p>
-        </div>
-      ))}
-      <Link to="/page-2/">Go to page 2</Link>
+        {data.allSanityProducts.edges.map(({ node }, i) => (
+          <Link className="product" to={`/products/${node.slug.current}`} key={i}>
+            <div className="ctr__productImage">
+              <Image fluid={node.heroProductImage.asset.fluid} />
+            </div>
+            <div className="card">
+              <h2 style={{ marginBottom: "8px" }}>{node.name}</h2>
+              <p className="valueStatement" style={{ marginBottom: "4px" }}>{node.valueStatement}</p>
+            </div>
+          </Link>
+        ))}
+      </div>
     </Layout>
   )
 }
@@ -39,11 +41,6 @@ export const query = graphql`
           slug {
             current
           }
-          # heroProductImage {
-          #   asset {
-          #     url
-          #   }
-          # }
           heroProductImage {
             asset {
               fluid {
