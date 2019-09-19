@@ -9,7 +9,10 @@ const Header = ({ siteTitle }) => (
       <Link to="/">
         <img className="hustlerLogo" src={hustlerLogo} alt="" />
       </Link>
-      <Link to="/products/">Products</Link>
+      <nav>
+        <Link to="/products/">Products</Link>
+        <Link to="/blog/">Blog</Link>
+      </nav>
     </div>
   </header>
 )
@@ -23,4 +26,3 @@ Header.defaultProps = {
 }
 
 export default Header
-

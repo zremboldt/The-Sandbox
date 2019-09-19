@@ -10,20 +10,25 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Home" />
-      <div className="wrap productGrid">
-
+      <section className="wrap productGrid">
         {data.allSanityProducts.edges.map(({ node }, i) => (
-          <Link className="product" to={`/products/${node.slug.current}`} key={i}>
+          <Link
+            className="product"
+            to={`/products/${node.slug.current}`}
+            key={i}
+          >
             <div className="ctr__productImage">
               <Image fluid={node.heroProductImage.asset.fluid} />
             </div>
             <div className="card">
               <h2 style={{ marginBottom: "8px" }}>{node.name}</h2>
-              <p className="valueStatement" style={{ marginBottom: "4px" }}>{node.valueStatement}</p>
+              <p className="valueStatement" style={{ marginBottom: "4px" }}>
+                {node.valueStatement}
+              </p>
             </div>
           </Link>
         ))}
-      </div>
+      </section>
     </Layout>
   )
 }
