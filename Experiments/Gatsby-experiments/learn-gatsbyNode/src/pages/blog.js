@@ -7,11 +7,11 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Blog" />
-      <section className="wrap">
+      <section className="wrap marTop10">
         <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
 
         {data.allMarkdownRemark.edges.map(({ node }, i) => (
-          <div key={i} id={node.id}>
+          <div key={i} id={node.id} style={{ marginBottom: '2rem', maxWidth: '76rem' }}>
             <Link to={node.fields.slug}>
               <h2>
                 <span>{node.frontmatter.title}</span>
