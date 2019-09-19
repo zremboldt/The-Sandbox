@@ -21,7 +21,7 @@ const IndexPage = ({ data }) => {
               <Image fluid={node.heroProductImage.asset.fluid} />
             </div>
             <div className="card">
-              <h2 style={{ marginBottom: "8px" }}>{node.name}</h2>
+              <h3 style={{ marginBottom: "8px" }}>{node.name}</h3>
               <p className="valueStatement" style={{ marginBottom: "4px" }}>
                 {node.valueStatement}
               </p>

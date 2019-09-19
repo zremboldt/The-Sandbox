@@ -6,8 +6,8 @@ export default ({ data }) => {
   const post = data.markdownRemark
   return (
     <Layout>
-      <section className="wrap marTop10">
-        <h1>{post.frontmatter.title}</h1>
+      <section className="wrap marTop10" style={{ maxWidth: '80rem' }}>
+        <h2>{post.frontmatter.title}</h2>
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
       </section>
     </Layout>

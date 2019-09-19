@@ -8,18 +8,13 @@ const IndexPage = ({ data }) => {
     <Layout>
       <SEO title="Blog" />
       <section className="wrap marTop10">
-        <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
+        <h4 style={{ marginBottom: '2rem' }}>{data.allMarkdownRemark.totalCount} Posts</h4>
 
         {data.allMarkdownRemark.edges.map(({ node }, i) => (
-          <div key={i} id={node.id} style={{ marginBottom: '2rem', maxWidth: '76rem' }}>
+          <div key={i} id={node.id} style={{ marginBottom: '4rem', maxWidth: '80rem' }}>
             <Link to={node.fields.slug}>
-              <h2>
-                <span>{node.frontmatter.title}</span>
-                <span style={{ color: "#999" }}>
-                  {" "}
-                  – {node.frontmatter.date}
-                </span>
-              </h2>
+              <h3>{node.frontmatter.title}</h3>
+              <h5 style={{ color: "gray" }}>{node.frontmatter.date}</h5>
               <p>{node.excerpt}</p>
             </Link>
           </div>
