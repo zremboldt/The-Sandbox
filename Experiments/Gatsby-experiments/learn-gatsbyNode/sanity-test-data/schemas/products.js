@@ -28,6 +28,47 @@ export default {
       type: "number",
     },
     {
+      title: "Product type",
+      name: "productType",
+      type: "string",
+      description:
+        "In what category would you like this product to be displayed in places like the main menu on hustlerturf.com?",
+      options: {
+        list: [
+          { title: "Residential", value: "residential" },
+          { title: "Commercial", value: "commercial" },
+          { title: "Stand On", value: "standOn" },
+          { title: "Walk Behind", value: "walkBehind" },
+          { title: "Utility Vehicle", value: "utilityVehicle" },
+          { title: "Pressure Washer", value: "pressureWasher" },
+          { title: "Generator", value: "generator" },
+        ],
+        layout: "radio",
+      },
+      validation: Rule => Rule.required(),
+    },
+    // Creates a set of checkboxes ↓
+    // {
+    //   title: "Product type",
+    //   name: "productType",
+    //   type: "array",
+    //   description:
+    //     "In what category would you like this product to be displayed in places like the main menu on hustlerturf.com?",
+    //   of: [{ type: "string" }],
+    //   options: {
+    //     layout: "tags",
+    //     list: [
+    //       { title: "Residential", value: "residential" },
+    //       { title: "Commercial", value: "commercial" },
+    //       { title: "Stand On", value: "standOn" },
+    //       { title: "Walk Behind", value: "walkBehind" },
+    //       { title: "Utility Vehicle", value: "utilityVehicle" },
+    //       { title: "Pressure Washer", value: "pressureWasher" },
+    //       { title: "Generator", value: "generator" },
+    //     ],
+    //   },
+    // },
+    {
       title: "Marketing copy",
       name: "marketingCopy",
       type: "array",
@@ -39,15 +80,6 @@ export default {
           lists: [],
         },
       ],
-    },
-    {
-      title: "Tags",
-      name: "tags",
-      type: "array",
-      of: [{ type: "string" }],
-      options: {
-        layout: "tags",
-      },
     },
     {
       title: "Hero product image",
@@ -74,6 +106,34 @@ export default {
           title: "Studio image",
           name: "studioImage",
           type: "image",
+          fields: [
+            {
+              title: "Title",
+              name: "title",
+              type: "string",
+              options: {
+                isHighlighted: true, // <-- make this field easily accessible
+              },
+            },
+            {
+              title: "Caption",
+              name: "caption",
+              type: "string",
+              options: {
+                isHighlighted: true, // <-- make this field easily accessible
+              },
+            },
+            {
+              title: "Alt text",
+              name: "altText",
+              type: "string",
+              description:
+                "Include a description of the image to improve SEO and accessibility.",
+              options: {
+                isHighlighted: true, // <-- make this field easily accessible
+              },
+            },
+          ],
         },
       ],
       options: { layout: "list", editModal: "fullscreen" },
@@ -87,6 +147,34 @@ export default {
           title: "Lifestyle image",
           name: "lifestyleImage",
           type: "image",
+          fields: [
+            {
+              title: "Title",
+              name: "title",
+              type: "string",
+              options: {
+                isHighlighted: true, // <-- make this field easily accessible
+              },
+            },
+            {
+              title: "Caption",
+              name: "caption",
+              type: "string",
+              options: {
+                isHighlighted: true, // <-- make this field easily accessible
+              },
+            },
+            {
+              title: "Alt text",
+              name: "altText",
+              type: "string",
+              description:
+                "Include a description of the image to improve SEO and accessibility.",
+              options: {
+                isHighlighted: true, // <-- make this field easily accessible
+              },
+            },
+          ],
         },
       ],
       options: { layout: "list", editModal: "fullscreen" },
@@ -115,6 +203,16 @@ export default {
               title: "Caption",
               name: "caption",
               type: "string",
+              options: {
+                isHighlighted: true, // <-- make this field easily accessible
+              },
+            },
+            {
+              title: "Alt text",
+              name: "altText",
+              type: "string",
+              description:
+                "Include a description of the image to improve SEO and accessibility.",
               options: {
                 isHighlighted: true, // <-- make this field easily accessible
               },
