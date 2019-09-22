@@ -71,16 +71,21 @@ export default {
     {
       title: "Marketing copy",
       name: "marketingCopy",
-      type: "array",
-      of: [
-        {
-          title: "Block",
-          type: "block",
-          styles: [{ title: "Normal", value: "normal" }],
-          lists: [],
-        },
-      ],
+      type: "text",
     },
+    // {
+    //   title: "Marketing copy",
+    //   name: "marketingCopy",
+    //   type: "array",
+    //   of: [
+    //     {
+    //       title: "Block",
+    //       type: "block",
+    //       styles: [{ title: "Normal", value: "normal" }],
+    //       lists: [],
+    //     },
+    //   ],
+    // },
     {
       title: "Hero product image",
       name: "heroProductImage",
