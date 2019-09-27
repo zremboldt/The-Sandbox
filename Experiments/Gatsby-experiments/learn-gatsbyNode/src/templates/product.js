@@ -8,27 +8,45 @@ export default ({ data }) => {
   console.log(product)
   return (
     <Layout>
+      <section className="ctr__heroProductContent">
+        <div className="wrap">
+          <div className="heroProductContent">
+            <h2>{product.name}</h2>
+            <h6>{product.valueStatement}</h6>
+            <p>
+              <strong>Starting at ${product.startingPrice}</strong>
+            </p>
+          </div>
+        </div>
+      </section>
+
       <section className="ctr__heroBackgroundImage">
         <Image fluid={product.heroBackgroundImage.asset.fluid} />
       </section>
+
       <section className="ctr__heroProductImage">
-        <div className="heroProductImage"><Image fluid={product.heroProductImage.asset.fluid} /></div>
+        <div className="heroProductImage">
+          <Image fluid={product.heroProductImage.asset.fluid} />
+        </div>
       </section>
-      <div className="productPage wrap">
-        <h2>{product.name}</h2>
-        <p>{product.valueStatement}</p>
-        <p>${product.startingPrice}</p>
-      </div>
-      {/* <section className="features wrap">
-        
-      </section> */}
+
+      <section className="ctr__productFeatures wrap">
+        <div className="productFeaturesGrid">
+          <div className="feature"></div>
+          <div className="feature"></div>
+          <div className="feature"></div>
+          <div className="feature"></div>
+          <div className="feature"></div>
+          <div className="feature"></div>
+        </div>
+      </section>
     </Layout>
   )
 }
 
 export const productQuery = graphql`
   query($slug: String!) {
-    sanityProducts(slug: {current: {eq: $slug}}) {
+    sanityProducts(slug: { current: { eq: $slug } }) {
       name
       valueStatement
       startingPrice
@@ -52,9 +70,3 @@ export const productQuery = graphql`
     }
   }
 `
-
-
-
-
-
-

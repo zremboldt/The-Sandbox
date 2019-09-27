@@ -29,6 +29,26 @@
 // Product page
 /////////////////
 
+.ctr__heroProductContent
+  position: absolute
+  left: 0
+  right: 0
+  padding: 10rem 0
+  
+  .heroProductContent
+    margin-right: 700px
+    min-width: 300px
+    color: $white
+
+    h2, h6, p
+      color: white
+
+    h2
+      margin-bottom: 2rem
+
+    h6
+      margin-bottom: 1rem
+
 .ctr__heroBackgroundImage
   position: relative
   z-index: -1
@@ -46,7 +66,23 @@
     width: 100%
     bottom: 0
 
-
 @media screen and (max-width: 800px)
   .ctr__heroProductImage
     height: 35vw
+
+
+
+
+
+.ctr__productFeatures
+  margin: 10rem auto
+
+  .productFeaturesGrid
+    display: grid
+    grid-template-columns: 1fr 1fr 1fr
+    
+    .feature
+      margin: 1rem
+      height: 240px
+      background-color: $storm
+      border-radius: 5px

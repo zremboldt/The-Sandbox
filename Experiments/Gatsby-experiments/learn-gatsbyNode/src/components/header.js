@@ -49,10 +49,18 @@ const Header = () => {
             <div className="dropdown__products">
               <div className="typeSelection">
                 <div className="typeSelectionWrap">
-                  <button className="btn btn__select btn__select--Residential">Residential Zero-Turns</button>
-                  <button className="btn btn__select btn__select--Commercial">Commercial Zero-Turns</button>
-                  <button className="btn btn__select btn__select--UtilityVehicles">Utility Vehicles</button>
-                  <button className="btn btn__select btn__select--PowerEquipment">Power Equipment</button>
+                  <button className="btn btn__select btn__select--Residential">
+                    Residential Zero-Turns
+                  </button>
+                  <button className="btn btn__select btn__select--Commercial">
+                    Commercial Zero-Turns
+                  </button>
+                  <button className="btn btn__select btn__select--UtilityVehicles">
+                    Utility Vehicles
+                  </button>
+                  <button className="btn btn__select btn__select--PowerEquipment">
+                    Power Equipment
+                  </button>
                 </div>
               </div>
 

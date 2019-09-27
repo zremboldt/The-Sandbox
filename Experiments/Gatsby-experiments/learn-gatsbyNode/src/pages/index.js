@@ -8,6 +8,16 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Home" />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "calc(100vh - 8rem)",
+        }}
+      >
+        <h1>Home page</h1>
+      </div>
     </Layout>
   )
 }
