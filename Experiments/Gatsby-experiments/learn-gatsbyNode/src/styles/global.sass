@@ -92,13 +92,9 @@ h5
   font-size: 3rem
   line-height: 4rem
 
-p, span, a, li, input, label, textarea
-  font-size: 1.8rem
-  line-height: 2.6rem
-
-.p2
+p, span, a, button, li, input, label, textarea
   font-size: 1.6rem
-  line-height: 2.2rem
+  line-height: 2.4rem
 
 
 
@@ -125,6 +121,8 @@ button, img
 button
   margin: 0
   padding: 0
+  border: none
+  outline: none
   text-decoration: none
   -webkit-appearance: none
   -moz-appearance: none
@@ -173,3 +171,11 @@ img
 
 .marTop10
   margin-top: 10rem
+
+.btn
+  cursor: pointer
+
+  &__select
+
+    &:hover
+      background-color: $glacier

@@ -19,6 +19,7 @@
 
     a, .navItem
       padding: 1.5rem
+      font-size: 18px
       user-select: none
 
       &:hover
@@ -33,13 +34,31 @@
     background-color: $white
     border: 1px solid $storm
 
-    &--wrap
+    .typeSelection
+      border-bottom: 1px solid $storm
+      
+    .typeSelectionWrap
       margin: 0 auto
       max-width: 1200px
       padding: 0 2rem
+      display: flex
+      justify-content: space-around
+      
+      .btn__select
+        flex: 1
+        padding: 1rem
+
+    .productsWrap
+      margin: 0 auto
+      max-width: 1200px
+      padding: 0 2rem
+
+    .productsGrid
       display: grid
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr
 
     .product
-      margin: 10px
+      margin: 3rem 1rem
       text-align: center
+
+    

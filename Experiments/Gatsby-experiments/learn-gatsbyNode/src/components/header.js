@@ -38,26 +38,38 @@ const Header = () => {
           <img className="hustlerLogo" src={hustlerLogo} alt="" />
         </Link>
         <nav>
-          <span
+          <button
             onClick={() => setDropdownOpen(!dropdownOpen)}
-            className="navItem"
+            className="btn navItem"
           >
             Products
-          </span>
+          </button>
           <Link to="/blog/">Blog</Link>
           {dropdownOpen && (
             <div className="dropdown__products">
-              <div className="dropdown__products--wrap">
-                {data.allSanityProducts.edges.map(({ node }, i) => (
-                  <Link
-                    to={`/products/${node.slug.current}`}
-                    className="product"
-                    key={i}
-                  >
-                    <Image fluid={node.heroProductImage.asset.fluid} />
-                    <h5>{node.name}</h5>
-                  </Link>
-                ))}
+              <div className="typeSelection">
+                <div className="typeSelectionWrap">
+                  <button className="btn btn__select btn__select--Residential">Residential Zero-Turns</button>
+                  <button className="btn btn__select btn__select--Commercial">Commercial Zero-Turns</button>
+                  <button className="btn btn__select btn__select--UtilityVehicles">Utility Vehicles</button>
+                  <button className="btn btn__select btn__select--PowerEquipment">Power Equipment</button>
+                </div>
+              </div>
+
+              <div className="productsWrap">
+                <div className="productsGrid">
+                  {data.allSanityProducts.edges.map(({ node }, i) => (
+                    <Link
+                      to={`/products/${node.slug.current}`}
+                      className="product"
+                      key={i}
+                    >
+                      <Image fluid={node.heroProductImage.asset.fluid} />
+                      <h5>{node.name}</h5>
+                      <p>Starting at ${node.startingPrice}</p>
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           )}
