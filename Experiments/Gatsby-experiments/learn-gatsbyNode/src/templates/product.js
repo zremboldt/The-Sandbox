@@ -2,12 +2,14 @@ import React from "react"
 import { graphql } from "gatsby"
 import Image from "gatsby-image"
 import Layout from "../components/layout"
+import SEO from "../components/seo"
 
 export default ({ data }) => {
   const product = data.sanityProducts
   console.log(product)
   return (
     <Layout>
+      <SEO title={product.name} />
       <section className="ctr__heroProductContent">
         <div className="wrap">
           <div className="heroProductContent">
