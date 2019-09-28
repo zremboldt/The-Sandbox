@@ -20,7 +20,10 @@ module.exports = {
         dataset: "production",
         // a token with read permissions is required
         // if you have a private dataset
-        // token: process.env.MY_SANITY_TOKEN,
+        token:
+          "skA9vTDW4clkP2KG5lnVkDmAWE7EVQR5d8kB5I6LuEuihWIRca562w7MjbkpPB45qvOL0LtDT9JFZ4y31wGss8EOwaTjXaqgDlCWGVvdJrBQtUTX74N7xqVDsUWv8CzInwf3nznMeiCEns4x51Km95sJu07ykKZPrFvbw8LsgweJTLcdgtLq",
+        overlayDrafts: true,
+        watchMode: true,
       },
     },
     `gatsby-transformer-sharp`,
