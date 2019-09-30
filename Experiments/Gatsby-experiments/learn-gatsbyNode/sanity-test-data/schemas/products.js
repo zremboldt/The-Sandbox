@@ -47,6 +47,173 @@ export default {
       },
       validation: Rule => Rule.required(),
     },
+    {
+      title: "Marketing copy",
+      name: "marketingCopy",
+      type: "text",
+    },
+    {
+      title: "Hero product image",
+      name: "heroProductImage",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+    },
+    {
+      title: "Hero background image",
+      name: "heroBackgroundImage",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+    },
+    {
+      title: "Test",
+      name: "test",
+      type: "string",
+    },
+    {
+      title: "Studio images",
+      name: "studioImages",
+      type: "array",
+      of: [
+        {
+          title: "Studio image",
+          name: "studioImage",
+          type: "imageWithContent",
+        },
+        // {
+        //   title: "Studio image",
+        //   name: "studioImage",
+        //   type: "image",
+        //   fields: [
+        //     {
+        //       title: "Title",
+        //       name: "title",
+        //       type: "string",
+        //       options: {
+        //         isHighlighted: true, // <-- make this field easily accessible
+        //       },
+        //     },
+        //     {
+        //       title: "Caption",
+        //       name: "caption",
+        //       type: "string",
+        //       options: {
+        //         isHighlighted: true, // <-- make this field easily accessible
+        //       },
+        //     },
+        //     {
+        //       title: "Alt text",
+        //       name: "altText",
+        //       type: "string",
+        //       description:
+        //         "Include a description of the image to improve SEO and accessibility.",
+        //       options: {
+        //         isHighlighted: true, // <-- make this field easily accessible
+        //       },
+        //     },
+        //   ],
+        // },
+      ],
+      options: { layout: "list", editModal: "fullscreen" },
+    },
+    {
+      title: "Lifestyle images",
+      name: "lifestyleImages",
+      type: "array",
+      of: [
+        {
+          title: "Lifestyle image",
+          name: "lifestyleImage",
+          type: "imageWithContent",
+        },
+        // {
+        //   title: "Lifestyle image",
+        //   name: "lifestyleImage",
+        //   type: "image",
+        //   fields: [
+        //     {
+        //       title: "Title",
+        //       name: "title",
+        //       type: "string",
+        //       options: {
+        //         isHighlighted: true, // <-- make this field easily accessible
+        //       },
+        //     },
+        //     {
+        //       title: "Caption",
+        //       name: "caption",
+        //       type: "string",
+        //       options: {
+        //         isHighlighted: true, // <-- make this field easily accessible
+        //       },
+        //     },
+        //     {
+        //       title: "Alt text",
+        //       name: "altText",
+        //       type: "string",
+        //       description:
+        //         "Include a description of the image to improve SEO and accessibility.",
+        //       options: {
+        //         isHighlighted: true, // <-- make this field easily accessible
+        //       },
+        //     },
+        //   ],
+        // },
+      ],
+      options: { layout: "list", editModal: "fullscreen" },
+    },
+    {
+      title: "Features",
+      name: "features",
+      description:
+        "Add feature images, then click each to add a title and caption.",
+      type: "array",
+      of: [
+        {
+          title: "Feature",
+          name: "feature",
+          type: "imageWithContent",
+        },
+        // {
+        //   title: "Feature",
+        //   name: "feature",
+        //   type: "image",
+        //   fields: [
+        //     {
+        //       title: "Title",
+        //       name: "title",
+        //       type: "string",
+        //       options: {
+        //         isHighlighted: true, // <-- make this field easily accessible
+        //       },
+        //     },
+        //     {
+        //       title: "Caption",
+        //       name: "caption",
+        //       type: "string",
+        //       options: {
+        //         isHighlighted: true, // <-- make this field easily accessible
+        //       },
+        //     },
+        //     {
+        //       title: "Alt text",
+        //       name: "altText",
+        //       type: "string",
+        //       description:
+        //         "Include a description of the image to improve SEO and accessibility.",
+        //       options: {
+        //         isHighlighted: true, // <-- make this field easily accessible
+        //       },
+        //     },
+        //   ],
+        // },
+      ],
+      options: { layout: "list" },
+    },
+
     // Creates a set of checkboxes ↓
     // {
     //   title: "Product type",
@@ -68,11 +235,7 @@ export default {
     //     ],
     //   },
     // },
-    {
-      title: "Marketing copy",
-      name: "marketingCopy",
-      type: "text",
-    },
+
     // {
     //   title: "Marketing copy",
     //   name: "marketingCopy",
@@ -86,147 +249,6 @@ export default {
     //     },
     //   ],
     // },
-    {
-      title: "Hero product image",
-      name: "heroProductImage",
-      type: "image",
-      options: {
-        hotspot: true,
-      },
-    },
-    {
-      title: "Hero background image",
-      name: "heroBackgroundImage",
-      type: "image",
-      options: {
-        hotspot: true,
-      },
-    },
-    {
-      title: "Studio images",
-      name: "studioImages",
-      type: "array",
-      of: [
-        {
-          title: "Studio image",
-          name: "studioImage",
-          type: "image",
-          fields: [
-            {
-              title: "Title",
-              name: "title",
-              type: "string",
-              options: {
-                isHighlighted: true, // <-- make this field easily accessible
-              },
-            },
-            {
-              title: "Caption",
-              name: "caption",
-              type: "string",
-              options: {
-                isHighlighted: true, // <-- make this field easily accessible
-              },
-            },
-            {
-              title: "Alt text",
-              name: "altText",
-              type: "string",
-              description:
-                "Include a description of the image to improve SEO and accessibility.",
-              options: {
-                isHighlighted: true, // <-- make this field easily accessible
-              },
-            },
-          ],
-        },
-      ],
-      options: { layout: "list", editModal: "fullscreen" },
-    },
-    {
-      title: "Lifestyle images",
-      name: "lifestyleImages",
-      type: "array",
-      of: [
-        {
-          title: "Lifestyle image",
-          name: "lifestyleImage",
-          type: "image",
-          fields: [
-            {
-              title: "Title",
-              name: "title",
-              type: "string",
-              options: {
-                isHighlighted: true, // <-- make this field easily accessible
-              },
-            },
-            {
-              title: "Caption",
-              name: "caption",
-              type: "string",
-              options: {
-                isHighlighted: true, // <-- make this field easily accessible
-              },
-            },
-            {
-              title: "Alt text",
-              name: "altText",
-              type: "string",
-              description:
-                "Include a description of the image to improve SEO and accessibility.",
-              options: {
-                isHighlighted: true, // <-- make this field easily accessible
-              },
-            },
-          ],
-        },
-      ],
-      options: { layout: "list", editModal: "fullscreen" },
-    },
-    {
-      title: "Features",
-      name: "features",
-      description:
-        "Add feature images, then click each to add a title and caption.",
-      type: "array",
-      of: [
-        {
-          title: "Feature",
-          name: "feature",
-          type: "image",
-          fields: [
-            {
-              title: "Title",
-              name: "title",
-              type: "string",
-              options: {
-                isHighlighted: true, // <-- make this field easily accessible
-              },
-            },
-            {
-              title: "Caption",
-              name: "caption",
-              type: "string",
-              options: {
-                isHighlighted: true, // <-- make this field easily accessible
-              },
-            },
-            {
-              title: "Alt text",
-              name: "altText",
-              type: "string",
-              description:
-                "Include a description of the image to improve SEO and accessibility.",
-              options: {
-                isHighlighted: true, // <-- make this field easily accessible
-              },
-            },
-          ],
-        },
-      ],
-      options: { layout: "list" },
-    },
   ],
   preview: {
     select: {
