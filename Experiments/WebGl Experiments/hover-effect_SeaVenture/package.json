@@ -4,10 +4,10 @@
   "description": "Experimenting with WebGL",
   "main": "index.js",
   "dependencies": {
-    "hover-effect": "^1.0.4"
+    "hover-effect": "^1.1.0"
   },
   "devDependencies": {
-    "sass": "^1.20.3"
+    "sass": "^1.23.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
