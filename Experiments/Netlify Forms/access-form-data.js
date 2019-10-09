@@ -10,7 +10,7 @@ fetch(`${url}?access_token=${netlifyPersonalAccessToken}`)
     return data.map(submission => {
       let li = document.createElement('li');
       let h3 = document.createElement('h3');
-      let message = document.createElement('message');
+      let message = document.createElement('span');
 
       h3.innerHTML = `${submission.name} says:`;
       message.innerHTML = submission.body;
