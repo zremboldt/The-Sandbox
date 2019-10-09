@@ -1,0 +1,80 @@
+html {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  background-color: black;
+}
+
+h1,
+a {
+  font-family: bebas-neue, sans-serif;
+  font-weight: normal;
+}
+
+h1 {
+  margin: 0;
+  font-size: 72px;
+}
+
+a {
+  margin-top: 100px;
+  padding: 18px 46px;
+  border: none;
+  background-color: #eee;
+  cursor: pointer;
+  font-size: 30px;
+  text-decoration: none;
+  transition: transform 0.1s ease-in-out;
+}
+a:active {
+  transform: scale(0.98);
+}
+
+.wrap {
+  display: flex;
+  height: 100vh;
+}
+
+.ctr {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-position: center;
+  background-size: cover;
+  text-align: center;
+}
+
+.ctrLeft {
+  background-image: url('images/bigdog-bg.jpg');
+}
+.ctrLeft h1 {
+  color: #ec1d27;
+}
+.ctrLeft a {
+  background-color: #ec1d27;
+  color: white;
+}
+
+.ctrRight {
+  background-image: url('images/hustler-bg.jpg');
+}
+.ctrRight h1 {
+  color: #ffc324;
+}
+.ctrRight a {
+  background-image: linear-gradient(to left, #ffc324 0%, #fee86b 100%);
+  color: #20242b;
+}
