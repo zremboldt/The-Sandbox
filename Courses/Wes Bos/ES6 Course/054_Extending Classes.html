@@ -19,11 +19,15 @@
         }
         drink() {
           this.thirst -= 10;
-          return this.thirst;
+          return `${this.name} has a thirst level of: ${this.thirst}`;
         }
         eat(food) {
           this.belly.push(food);
-          return this.belly;
+          return `${this.name} has eaten: ${this.belly}`;
+        }
+        barf() {
+          this.belly.pop();
+          return `Yuck ${this.name}! Now your belly contains: ${this.belly}`;
         }
       }
 
@@ -38,7 +42,7 @@
         }
         run() {
           this.thirst += 10;
-          return this.thirst;
+          return `${this.name} has a thirst level of: ${this.thirst}`;
         }
       }
 
