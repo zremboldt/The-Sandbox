@@ -29,7 +29,16 @@
       // Map
       const participants = trivia.map(record => record.name);
 
-      document.body.innerHTML = JSON.stringify(participants);
+      // Find (returns the first item that is true)
+      const findName = name => trivia.find(record => record.name === name);
+
+      // forEach
+      topThree.forEach(record => console.log(record));
+
+      // Some (are any of the scores under 200?)
+      const someUnder200 = trivia.some(record => record.score < 200);
+
+      document.body.innerHTML = JSON.stringify(someUnder200);
     </script>
   </body>
 </html>
