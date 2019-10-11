@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const trivia = [
+        { name: 'Aaron', score: 200 },
+        { name: 'Isaiah', score: 430 },
+        { name: 'Zac', score: 190 },
+        { name: 'Mark', score: 500 },
+        { name: 'Ron', score: 180 },
+        { name: 'Tyler', score: 210 },
+        { name: 'Shelley', score: 320 }
+      ];
+
+      // Filter
+      const scoresUnder200 = trivia.filter(record => record.score < 200);
+
+      // Sort
+      const sortByScore = trivia.sort((a, b) => a.score - b.score);
+      const topThree = sortByScore.slice(0, 3);
+      const winner = sortByScore[0];
+
+      // Map
+      const participants = trivia.map(record => record.name);
+
+      document.body.innerHTML = JSON.stringify(participants);
+    </script>
+  </body>
+</html>
