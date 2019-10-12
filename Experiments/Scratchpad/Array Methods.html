@@ -1,44 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-  </head>
-  <body>
-    <script>
-      const trivia = [
-        { name: 'Aaron', score: 200 },
-        { name: 'Isaiah', score: 430 },
-        { name: 'Zac', score: 190 },
-        { name: 'Mark', score: 500 },
-        { name: 'Ron', score: 180 },
-        { name: 'Tyler', score: 210 },
-        { name: 'Shelley', score: 320 }
-      ];
+<!-- prettier-ignore -->
+<html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta http-equiv="X-UA-Compatible" content="ie=edge" /><title>Document</title></head><body><script>
 
-      // Filter
-      const scoresUnder200 = trivia.filter(record => record.score < 200);
+  const trivia = [
+    { name: 'Aaron', score: 200 },
+    { name: 'Isaiah', score: 430 },
+    { name: 'Zac', score: 190 },
+    { name: 'Mark', score: 500 },
+    { name: 'Ron', score: 180 },
+    { name: 'Tyler', score: 210 },
+    { name: 'Shelley', score: 320 }
+  ];
 
-      // Sort
-      const sortByScore = trivia.sort((a, b) => a.score - b.score);
-      const topThree = sortByScore.slice(0, 3);
-      const winner = sortByScore[0];
+  // Filter
+  const scoresUnder200 = trivia.filter(record => record.score < 200);
 
-      // Map
-      const participants = trivia.map(record => record.name);
+  // Sort
+  const sortByScore = trivia.sort((a, b) => a.score - b.score);
+  const topThree = sortByScore.slice(0, 3);
+  const winner = sortByScore[0];
 
-      // Find (returns the first item that is true)
-      const findName = name => trivia.find(record => record.name === name);
+  // Map
+  const participants = trivia.map(record => record.name);
 
-      // forEach
-      topThree.forEach(record => console.log(record));
+  // Find (returns the first item that is true)
+  const findName = name => trivia.find(record => record.name === name);
 
-      // Some (are any of the scores under 200?)
-      const someUnder200 = trivia.some(record => record.score < 200);
+  // forEach
+  topThree.forEach(record => console.log(record));
 
-      document.body.innerHTML = JSON.stringify(someUnder200);
-    </script>
-  </body>
-</html>
+  // Some (are any of the scores under 200? Returns a boolean.)
+  const areSomeUnder200 = trivia.some(record => record.score < 200);
+
+  // Every (are all of the scores under 400? Returns a boolean.)
+  const areAllUnder400 = trivia.every(record => record.score < 400);
+
+  // Reduce
+  // prettier-ignore
+  const combinedScores = trivia.reduce((accumulator, record) => accumulator + record.score, 0);
+
+  document.body.innerHTML = JSON.stringify(topThree);
+
+</script></body></html>
