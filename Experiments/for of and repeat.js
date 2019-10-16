@@ -1,11 +1,11 @@
 const dogs = [
   'Beasley',
+  'Chewie',
   'Moose',
   'Shnookums',
   'Gidget',
   'Bowser',
   'Oreo',
-  'Pete',
   'Bravo Pup',
   'Chance'
 ];
