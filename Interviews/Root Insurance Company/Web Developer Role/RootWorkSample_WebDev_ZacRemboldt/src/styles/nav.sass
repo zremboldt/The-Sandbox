@@ -1,0 +1,36 @@
+nav
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  display: flex
+  align-items: center
+  padding: 0 2rem
+  height: 6rem
+  background-color: white
+  box-shadow: $shadowNav
+
+  a:hover svg,
+  a:focus svg
+    fill: $rootOrange
+
+  svg
+    // REVIEW: The artwork calls for #231F20 as the logo color but we could increase
+    // consistency if we use nearBlack as spec'd in the Root design system. Thoughts?
+    // fill: #231F20
+    fill: $nearBlack
+    transition: fill 150ms ease-in-out
+
+
+
+// *************
+// Media Queries
+// *************
+
+@media screen and (max-width: 900px)
+  nav
+    justify-content: center
+
+@media screen and (max-width: 414px) // 414px accounts for the widest majority of large phones.
+  nav
+    display: none

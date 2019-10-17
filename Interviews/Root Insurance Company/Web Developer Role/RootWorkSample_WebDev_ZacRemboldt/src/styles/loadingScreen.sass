@@ -1,0 +1,71 @@
+.loadingScreen
+  position: fixed
+  top: 0
+  right: 0
+  left: 0
+  bottom: 0
+  display: flex
+  align-items: center
+  justify-content: center
+  background-color: $offWhite
+  transition: opacity 300ms ease-out
+  opacity: 0
+
+  .card
+    position: relative
+    display: flex
+    align-items: center
+    margin: 1rem
+    max-width: 400px
+    width: 100%
+    background-color: white
+    border-radius: 5rem
+    box-shadow: $shadowSoft
+    text-align: center
+
+  .emitter
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 64px
+    height: 64px
+    margin: 2rem 0 2rem 2rem
+    border-radius: 100%
+    box-shadow: $shadowSoft
+
+  .redDot
+    position: relative
+    width: 50px
+    height: 50px
+    background-color: $rootOrange
+    border-radius: 100%
+
+    &:before,
+    &:after
+      position: absolute
+      top: 0
+      left: 0
+      content: ''
+      width: 100%
+      height: 100%
+      border: 1px solid $rootOrange
+      background-color: transparentize($rootOrange, 0.4)
+      border-radius: 100%
+      animation-name: pulse
+      animation-duration: 2000ms
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1)
+      animation-iteration-count: infinite
+      animation-fill-mode: forwards
+
+    &:before
+      animation-delay: 500ms
+
+  h5
+    flex: 1
+
+@keyframes pulse
+  from
+    transform: scale(1)
+  to
+    transform: scale(2)
+    opacity: 0

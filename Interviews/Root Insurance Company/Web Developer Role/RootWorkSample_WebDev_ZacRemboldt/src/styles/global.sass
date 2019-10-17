@@ -1,0 +1,181 @@
+// *********
+// Variables
+// *********
+
+// Primary Colors
+$rootOrange: #FF5715
+$offWhite:   #FAFAFA
+$nearBlack:  #1D1D21
+
+// Secondary Colors
+$green:      #00A778
+$greenDark:  #007A52
+$blue:       #009DE0
+$blueDark:   #006BC6
+$purple:     #DB5ED1
+$purpleDark: #9D38D7
+$yellow:     #FFCD00
+
+// Neutral Colors
+$grayLight:  #F4F4F6
+$grayMedium: #E4E4E4
+$grayDark:   #767678
+$grayDarker: #5F5F62
+
+// Gradients
+$gradientSubtle: linear-gradient(to bottom, white 0%, $offWhite 100%)
+
+// Shadows
+$shadowSoft: 0px 16px 16px rgba(0, 0, 0, 0.05), 0px 8px 8px rgba(0, 0, 0, 0.03)
+// REVIEW: The design calls for #DEDEDE but I suggest using transparency to create the nav shadow.
+// #DEDEDE looked great over white but created almost a glow when it runs over color. Thoughts?
+// $shadowNav: 0px 1px 4px #DEDEDE
+$shadowNav:  0px 1px 4px rgba(0, 0, 0, 0.15)
+
+// Easing
+$zease:       cubic-bezier(0.165, 0.84, 0.44, 1)
+$easeOutBack: cubic-bezier(0.175, 0.885, 0.32, 1.275)
+
+
+
+// *************
+// Initial Setup
+// *************
+
+html
+  box-sizing: border-box
+  font-size: 10px // Globally sets rems to increments of 10px. 1rem = 10px.
+  margin: 0
+
+*, *:before, *:after
+  box-sizing: inherit
+
+body
+  margin: 0
+  padding: 0
+
+figure
+  margin: 0
+
+
+
+// **********
+// Typography
+// **********
+
+h1, h2, h3, h4, h5, h6, p, button
+  margin: 0
+  color: $nearBlack
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+h1, h2, h3, h4
+  font-family: 'RootSansBlack', Helvetica Neue, arial, sans-serif
+
+h5, h6, button
+  font-family: 'RootSansSemiBold', Helvetica Neue, arial, sans-serif
+
+p
+  font-family: 'RootSansRegular', Helvetica Neue, arial, sans-serif
+
+// Modular type scale (below) taken from the Root design system specs.
+h1
+  font-size: 9.4rem
+  line-height: 8.4rem
+h2
+  font-size: 7rem
+  line-height: 6rem
+h3
+  font-size: 4.8rem
+  line-height: 4.2rem
+h4
+  font-size: 3.6rem
+  line-height: 3.6rem
+h5
+  font-size: 2.4rem
+  line-height: 2.4rem
+h6
+  font-size: 2rem
+  line-height: 2.4rem
+.p1
+  font-size: 2rem
+  line-height: 2.4rem
+.p2
+  font-size: 1.8rem
+  line-height: 2.4rem
+.p3
+  font-size: 1.6rem
+  line-height: 2.1rem
+button
+  font-size: 1.8rem
+  line-height: 1.8rem
+
+@media screen and (max-width: 350px)
+  h1
+    font-size: 7rem
+    line-height: 6rem
+  h2
+    font-size: 4.8rem
+    line-height: 4.2rem
+  h3
+    font-size: 3.6rem
+    line-height: 3rem
+  h4
+    font-size: 2.8rem
+    line-height: 3rem
+  h5
+    font-size: 2rem
+    line-height: 2.4rem
+  h6
+    font-size: 1.8rem
+    line-height: 2.4rem
+  .p1
+    font-size: 1.8rem
+    line-height: 2.4rem
+  .p2
+    font-size: 1.6rem
+    line-height: 2.1rem
+  .p3
+    font-size: 1.6rem
+    line-height: 2.1rem
+  button
+    font-size: 1.8rem
+    line-height: 1.8rem
+
+
+
+// ********
+// Elements
+// ********
+
+button
+  display: inline-block
+  margin: 0
+  padding: 21px 3rem // 21px top/bottom padding + 18px text line-height = 60px total height.
+  border: none
+  cursor: pointer
+  text-align: center
+  text-decoration: none
+  transition: background 150ms ease-in-out
+  -webkit-appearance: none
+  -moz-appearance: none
+
+.btn-primary
+  background-color: $rootOrange
+  border-radius: 4px
+  color: white
+
+  &:hover,
+  &:active
+    background-color: adjust-hue($rootOrange, -5deg)
+
+
+
+// *************
+// Pairs with JS
+// *************
+
+body:not(.user-is-tabbing) button:focus
+  outline: none
+
+

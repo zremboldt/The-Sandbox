@@ -1,0 +1,69 @@
+.main // using a class rather than selecting the "main" tag because IE 11 has trouble with it.
+  display: flex
+  padding-top: 6rem // accounts for nav height.
+  background-color: white
+
+
+
+  .ctr-left
+    flex: 1.05
+    min-width: 320px // iPhone 5 and SE are the smallest mobile devices I'm accounting for at a width of 320px.
+    min-height: 100vh // Fallback in case calc isn't supported.
+    min-height: calc(100vh - 60px) // fullscreen minus nav height.
+    display: flex
+    align-items: center
+    justify-content: center
+
+  .cta-getYourQuote
+    max-width: 362px
+    padding: 2rem
+    text-align: center
+    
+    h4
+      margin: 12px 0 16px
+
+    p
+      margin-bottom: 22px
+      color: $grayDark
+
+    .btn-primary
+      width: 100%
+      margin-bottom: 24px
+      // REVIEW: The artwork did not call for a box shadow on this button but I see
+      // them commonly used on joinroot.com and feel it adds a nice touch of depth here.
+      // I'm open to either way, just let me know and we'll go with the original spec.
+      box-shadow: $shadowSoft
+
+      &:hover ~ .icon-caret,
+      &:focus ~ .icon-caret,
+        transform: translateY(-8px)
+
+    .icon-caret
+      transition: transform 300ms $easeOutBack
+
+
+
+  .ctr-right
+    flex: 2
+    min-width: 64% // Fallback because IE struggles with flex.
+    background-color: $grayLight // This is nice as a placeholder until the image loads. (for very slow connections)
+    background-image: url(../images/goodDriversSave_1200x950.svg)
+    background-position: center
+    background-size: cover
+
+
+
+// *************
+// Media Queries
+// *************
+
+@media screen and (max-width: 900px)
+  .main .ctr-right
+    display: none
+
+@media screen and (max-width: 414px) // 414px accounts for the widest majority of large phones.
+  .main
+    padding-top: 0
+
+    .ctr-left
+      min-height: 100vh
