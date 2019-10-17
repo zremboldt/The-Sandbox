@@ -12,21 +12,38 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        font-family: 'Courier New', Courier, monospace;
       }
     </style>
   </head>
   <body>
     <script>
       setInterval(function() {
-        console.log(Date.now());
-
         let date = new Date();
+
+        // using toLocaleString allows you to ask for the long form of the month rather than its index.
         let month = date.toLocaleString('default', { month: 'long' });
+
         let day = date.getDay();
-        let hours = date.getHours();
-        let minutes = date.getMinutes();
-        let seconds = date.getSeconds();
-        document.body.innerHTML = `The date is ${month} ${day} at ${hours}:${minutes}:${seconds}`;
+
+        let year = date.getFullYear();
+
+        // prettier-ignore
+        let hours = date.getHours() > 12
+          ? date.getHours() - 12
+          : date.getHours();
+
+        let minutes = date
+          .getMinutes()
+          .toString()
+          .padStart(2, '0');
+
+        let seconds = date
+          .getSeconds()
+          .toString()
+          .padStart(2, '0');
+
+        document.body.innerHTML = `Today's date is ${month} ${day}, ${year} at ${hours}:${minutes}:${seconds}`;
       }, 1000);
     </script>
   </body>
