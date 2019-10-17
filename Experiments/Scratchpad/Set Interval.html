@@ -5,11 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
   </head>
   <body>
     <script>
       setInterval(function() {
         console.log(Date.now());
+
+        let date = new Date();
+        let month = date.toLocaleString('default', { month: 'long' });
+        let day = date.getDay();
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        let seconds = date.getSeconds();
+        document.body.innerHTML = `The date is ${month} ${day} at ${hours}:${minutes}:${seconds}`;
       }, 1000);
     </script>
   </body>
