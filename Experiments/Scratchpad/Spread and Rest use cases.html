@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // ------------------
+      // Spread Operator
+      // ------------------
+      // The spread operator allows an iterable to spread or expand individually
+      // inside a receiver. The iterable and the receiver can be anything that
+      // can be looped over like arrays, objects, sets, maps. You can put parts
+      // of a container individually into another container.
+
+      // const newArray = ['first', ...anotherArray];
+
+      // ------------------
+      // Rest parameters
+      // ------------------
+      // The rest parameter syntax allows us to represent an indefinite number of
+      // arguments as an array. Named parameters can be in front of rest parameters.
+
+      // const func = (first, second, ...rest) => {};
+
+      // ------------------
+      // Use-cases ↓
+      // ------------------
+
+      // Copying an array
+      // ------------------
+      const creatures = [
+        'Sasquatch',
+        'Tardigrade',
+        'Mastadon',
+        'Nessie',
+        'Yeti',
+        'Parasaurolophus'
+      ];
+      const copiedCreatures = [...creatures];
+
+      // Unique array
+      // ------------------
+      // Easiest way to remove duplicate elements from an array
+      // First I'll add 2 more duplicate creatures to the array
+      copiedCreatures.push(...['Parasaurolophus', 'Parasaurolophus']);
+      // Then Set will remove all duplicate entries in the array
+      const uniqueCreatures = [...new Set(copiedCreatures)];
+    </script>
+  </body>
+</html>
