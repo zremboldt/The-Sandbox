@@ -2,4 +2,15 @@ GET http://localhost:3000/subscribers
 
 ###
 
-GET http://localhost:3000/subscribers/23
+GET http://localhost:3000/subscribers/5dadb664c85a2f01058298ae
+
+###
+
+POST http://localhost:3000/subscribers
+Content-Type: application/json
+
+{
+  "name": "Ron",
+  "subscribedToChannel": "The Ron Way"
+}
+
