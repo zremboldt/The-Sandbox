@@ -14,10 +14,13 @@ router.get('/', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
 // Getting one
 router.get('/:id', getSubscriber, (req, res) => {
-  res.send(res.subscriber.name);
+  // res.send(res.subscriber.name);
+  res.json(res.subscriber);
 });
+
 // Creating one
 router.post('/', async (req, res) => {
   const subscriber = new Subscriber({
@@ -31,10 +34,19 @@ router.post('/', async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
+
 // Updating one
-router.patch('/:id', (req, res) => {});
+router.patch('/:id', getSubscriber, (req, res) => {});
+
 // Deleting one
-router.delete('/:id', (req, res) => {});
+router.delete('/:id', getSubscriber, async (req, res) => {
+  try {
+    await res.subscriber.remove();
+    res.json({ message: 'Deleted subscriber' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
 // Middleware we'll use in a few of the fns above. (fns that use :id)
 // https://youtu.be/fgTGADljAeg?list=WL&t=1221

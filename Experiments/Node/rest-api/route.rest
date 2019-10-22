@@ -14,3 +14,6 @@ Content-Type: application/json
   "subscribedToChannel": "The Ron Way"
 }
 
+###
+
+DELETE http://localhost:3000/subscribers/5dadb664c85a2f01058298ae
