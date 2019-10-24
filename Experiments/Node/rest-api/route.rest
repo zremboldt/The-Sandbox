@@ -20,7 +20,7 @@ PATCH http://localhost:3000/subscribers/5db0f890eeea010820c465d0
 Content-Type: application/json
 
 {
-  "name": "New Name",
+  "name": "Ronald",
   "subscribedToChannel": "The Ron Way"
 }
 
