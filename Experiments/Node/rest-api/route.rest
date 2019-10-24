@@ -2,7 +2,7 @@ GET http://localhost:3000/subscribers
 
 ###
 
-GET http://localhost:3000/subscribers/5dadb664c85a2f01058298ae
+GET http://localhost:3000/subscribers/5db0f890eeea010820c465d0
 
 ###
 
@@ -16,4 +16,14 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/subscribers/5dadb664c85a2f01058298ae
+PATCH http://localhost:3000/subscribers/5db0f890eeea010820c465d0
+Content-Type: application/json
+
+{
+  "name": "New Name",
+  "subscribedToChannel": "The Ron Way"
+}
+
+###
+
+DELETE http://localhost:3000/subscribers/5db0f890eeea010820c465d0
