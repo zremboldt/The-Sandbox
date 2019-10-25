@@ -6,10 +6,10 @@ const Subscriber = require('../models/subscriber');
 
 // Getting all
 router.get('/', async (req, res) => {
-  // res.send('Hello, world!');
   try {
-    const subscribers = await Subscriber.find();
-    res.json(subscribers);
+    res.send('Hello, world!');
+    // const subscribers = await Subscriber.find();
+    // res.json(subscribers);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
