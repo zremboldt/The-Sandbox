@@ -5,12 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
+    <style>
+      html {
+        box-sizing: border-box;
+      }
+      *,
+      *:before,
+      *:after {
+        box-sizing: inherit;
+      }
+      body {
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      form {
+        margin: 30px;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 12px 30px -2px hsla(320, 100%, 50%, 0.3);
+        border-radius: 10px;
+      }
+      input,
+      button {
+        height: 50px;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+      input {
+        padding: 0 16px;
+        margin-right: 10px;
+        border: 1px solid #999;
+      }
+      button {
+        padding: 0 30px;
+        border: 1px solid hsla(320, 100%, 50%, 0.5);
+        background-color: hsla(320, 100%, 50%, 1);
+        color: white;
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body>
     <form method="post" action="https://backend.zacaree.now.sh">
       <input type="text" name="name" />
       <input type="text" name="subscribedToChannel" />
-      <button type="submit">Add</button>
+      <button type="submit">Add subscriber</button>
+    </form>
+
+    <form method="get" action="https://backend.zacaree.now.sh">
+      <button type="submit">Get all subscribers</button>
     </form>
   </body>
 </html>

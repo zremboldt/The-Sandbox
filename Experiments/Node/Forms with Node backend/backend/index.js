@@ -8,7 +8,10 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.DATABASE, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 const db = mongoose.connection;
 db.on('err', err => console.error(err));
 db.once('open', () => console.log('Connected to database'));
@@ -22,13 +25,15 @@ app.use(bodyParser.json()); // Send JSON responses
 
 app.listen(5000, () => console.log('Server started'));
 
-//
+////////////////
+// Routes
+////////////////
 
 app.get('/', async (req, res) => {
   try {
-    res.send('Hello, world!');
-    // const subscribers = await Subscriber.find();
-    // res.json(subscribers);
+    // res.send('Hello, world!');
+    const subscribers = await Subscriber.find();
+    res.json(subscribers);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -37,7 +42,10 @@ app.get('/', async (req, res) => {
 //
 
 app.get('/users', (req, res) => {
-  res.json([{ name: 'William', location: 'Abu Dhabi' }, { name: 'Chris', location: 'Vegas' }]);
+  res.json([
+    { name: 'William', location: 'Abu Dhabi' },
+    { name: 'Chris', location: 'Vegas' }
+  ]);
 });
 
 //
