@@ -3,7 +3,7 @@
 // require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const Subscriber = require('./models/subscriber');
+const User = require('./models/user');
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -20,8 +20,8 @@ app.use(bodyParser.urlencoded({ extended: false })); // Parses urlencoded bodies
 app.use(bodyParser.json()); // Send JSON responses
 
 // app.use(express.json());
-// const subscribersRouter = require('./routes/subscribers');
-// app.use('/subscribers', subscribersRouter);
+// const usersRouter = require('./routes/users');
+// app.use('/users', usersRouter);
 
 app.listen(5000, () => console.log('Server started'));
 
@@ -32,8 +32,8 @@ app.listen(5000, () => console.log('Server started'));
 app.get('/', async (req, res) => {
   try {
     // res.send('Hello, world!');
-    const subscribers = await Subscriber.find();
-    res.json(subscribers);
+    const users = await User.find();
+    res.json(users);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -42,23 +42,21 @@ app.get('/', async (req, res) => {
 //
 
 app.get('/users', (req, res) => {
-  res.json([
-    { name: 'William', location: 'Abu Dhabi' },
-    { name: 'Chris', location: 'Vegas' }
-  ]);
+  res.json([{ name: 'William', location: 'Abu Dhabi' }, { name: 'Chris', location: 'Vegas' }]);
 });
 
 //
 
 // Creating one
 app.post('/', async (req, res) => {
-  const subscriber = new Subscriber({
-    name: req.body.name,
-    subscribedToChannel: req.body.subscribedToChannel
+  const user = new User({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email
   });
   try {
-    const newSubscriber = await subscriber.save();
-    res.status(201).json(newSubscriber);
+    const newUser = await user.save();
+    res.status(201).json(newUser);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -68,17 +66,17 @@ app.post('/', async (req, res) => {
 
 // Middleware we'll use in a few of the fns above. (fns that use :id)
 // https://youtu.be/fgTGADljAeg?list=WL&t=1221
-async function getSubscriber(req, res, next) {
-  let subscriber;
+async function getUser(req, res, next) {
+  let user;
   try {
-    subscriber = await Subscriber.findById(req.params.id);
-    if (subscriber == null) {
-      return res.status(404).json({ message: 'Cannot find subscriber' });
+    user = await User.findById(req.params.id);
+    if (user == null) {
+      return res.status(404).json({ message: 'Cannot find user' });
     }
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
 
-  res.subscriber = subscriber;
+  res.user = user;
   next();
 }
