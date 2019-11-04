@@ -1,3 +1,5 @@
+import React from 'react';
+
 const ChildOne = React.memo(props => {
   console.log('Rerendering Child One');
   return (
@@ -18,7 +20,7 @@ const ChildTwo = props => {
   );
 };
 
-class App extends React.Component {
+class ReactMemo extends React.Component {
   state = {
     value: 1,
     name: 'Zac'
@@ -32,16 +34,16 @@ class App extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div className="sectionReactMemo">
         <div className="box">
-          <div>{this.state.value}</div>
+          <h2>{this.state.value}</h2>
           <button onClick={this.handleClick}>+</button>
         </div>
         <ChildOne name={this.state.name} />
         <ChildTwo name={this.state.name} />
-      </React.Fragment>
+      </div>
     );
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+export default ReactMemo;
