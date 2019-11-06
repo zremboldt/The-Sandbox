@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const ChildOne = React.memo(props => {
   console.log('Rerendering Child One');
@@ -20,30 +20,20 @@ const ChildTwo = props => {
   );
 };
 
-class ReactMemo extends React.Component {
-  state = {
-    value: 1,
-    name: 'Zac'
-  };
+const ReactMemo = () => {
+  const [value, setValue] = useState(0);
+  const [name] = useState(0);
 
-  handleClick = () => {
-    this.setState({
-      value: this.state.value + 1
-    });
-  };
-
-  render() {
-    return (
-      <div className="sectionReactMemo">
-        <div className="box">
-          <h2>{this.state.value}</h2>
-          <button onClick={this.handleClick}>+</button>
-        </div>
-        <ChildOne name={this.state.name} />
-        <ChildTwo name={this.state.name} />
+  return (
+    <div className="sectionReactMemo">
+      <div className="box">
+        <h2>{value}</h2>
+        <button onClick={() => setValue(value + 1)}>+</button>
       </div>
-    );
-  }
-}
+      <ChildOne name={name} />
+      <ChildTwo name={name} />
+    </div>
+  );
+};
 
 export default ReactMemo;
