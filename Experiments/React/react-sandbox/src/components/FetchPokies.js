@@ -4,14 +4,9 @@ const FetchPokies = () => {
   const [data, setData] = useState();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch('https://pokeapi.co/api/v2/pokemon/');
-      const json = await res.json();
-      console.log(json);
-      setData(json.results);
-    };
-
-    fetchData();
+    fetch('https://pokeapi.co/api/v2/pokemon/')
+      .then(res => res.json())
+      .then(json => setData(json.results));
   }, []);
 
   if (data !== undefined) {
