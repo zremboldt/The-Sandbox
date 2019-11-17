@@ -3,41 +3,65 @@
 import React from 'react';
 
 function CompositionAvoidsPropDrilling() {
-  // Often devs would put this in Context or Redux.
+  // Often we would put this in Context or Redux.
   // Let's use Composition to avoid "prop drilling" and Redux.
-  const [currentUser, setCurrentUser] = React.useState('Zac');
+  const [currentUser, setCurrentUser] = React.useState();
 
   return (
-    <div>
+    <div className="sectionComposition">
       <Header />
-      {currentUser ? <Dashboard /> : <LoginScreen />}
+      <main>
+        {currentUser ? (
+          <Dashboard>
+            <DashboardNav />
+            <DashboardContent>
+              <WelcomeMessage user={currentUser} />
+            </DashboardContent>
+          </Dashboard>
+        ) : (
+          <LoginScreen onLogin={() => setCurrentUser({ name: 'Zac' })} />
+        )}
+      </main>
       <Footer />
     </div>
   );
 }
 
 const Header = () => (
-  <div>
+  <header>
     <h1>Header</h1>
-  </div>
+  </header>
 );
 
-const Dashboard = () => (
-  <div>
-    <h1>Dashboard</h1>
-  </div>
+const Dashboard = ({ children }) => (
+  <React.Fragment>
+    <h2>The Dashboard</h2>
+    {children}
+  </React.Fragment>
 );
 
-const LoginScreen = () => (
-  <div>
-    <h1>LoginScreen</h1>
-  </div>
+const DashboardNav = () => <h3>Dashboard nav</h3>;
+
+const DashboardContent = ({ children }) => (
+  <React.Fragment>
+    <h3>Dashboard content</h3>
+    {children}
+  </React.Fragment>
+);
+
+const WelcomeMessage = ({ user }) => <h4>Welcome, {user.name}</h4>;
+
+const LoginScreen = ({ onLogin }) => (
+  <React.Fragment>
+    <h2>Please login</h2>
+    <button onClick={onLogin}>Login</button>
+  </React.Fragment>
 );
 
 const Footer = () => (
-  <div>
+  <footer>
     <h1>Footer</h1>
-  </div>
+  </footer>
 );
 
 export default CompositionAvoidsPropDrilling;
