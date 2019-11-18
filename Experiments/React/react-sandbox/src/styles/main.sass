@@ -1,8 +1,20 @@
+html
+  box-sizing: border-box
+
+*, *:before, *:after
+  box-sizing: inherit
+
 body
   height: 100vh
   margin: 0
   background-color: #21232b
   color: #ccc
+
+h1,h2,h3,h4,h5,h6,p
+  margin-bottom: 14px
+  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Helvetica Neue", sans-serif
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
 
 
 ////////////////////////
@@ -28,15 +40,10 @@ body
   display: flex
   flex-direction: column
   height: 100vh
-  
-  h1
-    font-size: 3.8rem
-  h2
-    font-size: 2.8rem
-  h3
-    font-size: 1.8rem
-  h4
-    font-size: 1rem
+
+  header, footer
+    h1,h2,h3,h4
+      margin: 0
 
   header
     padding: 10px 30px
@@ -44,8 +51,21 @@ body
   
   main
     flex: 1
-    padding: 10px 30px
+    display: flex
+    flex-direction: column
+    padding: 60px 30px
   
   footer
     padding: 10px 30px
     background-color: black
+
+  input, button
+    margin-bottom: 20px
+    max-width: 350px
+    padding: 14px
+    border: none
+    border-radius: 2px
+    font-size: 16px
+
+  button
+    background-color: #2aedd2

@@ -3,9 +3,10 @@
 import React from 'react';
 
 function CompositionAvoidsPropDrilling() {
-  // Often we would put this in Context or Redux.
+  // Often we would put user state in Context or Redux.
   // Let's use Composition to avoid "prop drilling" and Redux.
   const [currentUser, setCurrentUser] = React.useState();
+  const [inputVal, setInputVal] = React.useState();
 
   return (
     <div className="sectionComposition">
@@ -19,7 +20,14 @@ function CompositionAvoidsPropDrilling() {
             </DashboardContent>
           </Dashboard>
         ) : (
-          <LoginScreen onLogin={() => setCurrentUser({ name: 'Zac' })} />
+          <LoginScreen
+            onInput={e => setInputVal(e.target.value)}
+            onLogin={() => {
+              if (inputVal) {
+                setCurrentUser({ name: inputVal });
+              }
+            }}
+          />
         )}
       </main>
       <Footer />
@@ -40,20 +48,21 @@ const Dashboard = ({ children }) => (
   </React.Fragment>
 );
 
-const DashboardNav = () => <h3>Dashboard nav</h3>;
+const DashboardNav = () => <h3>Dashboard Nav</h3>;
 
 const DashboardContent = ({ children }) => (
   <React.Fragment>
-    <h3>Dashboard content</h3>
+    <h3>Dashboard Content</h3>
     {children}
   </React.Fragment>
 );
 
-const WelcomeMessage = ({ user }) => <h4>Welcome, {user.name}</h4>;
+const WelcomeMessage = ({ user }) => <p>Welcome, {user.name}!</p>;
 
-const LoginScreen = ({ onLogin }) => (
+const LoginScreen = ({ onInput, onLogin }) => (
   <React.Fragment>
     <h2>Please login</h2>
+    <input onKeyUp={onInput} type="text" placeholder="Username" autoFocus />
     <button onClick={onLogin}>Login</button>
   </React.Fragment>
 );
