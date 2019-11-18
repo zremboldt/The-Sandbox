@@ -6,8 +6,8 @@ const zac = {
   links: {
     social: {
       twitter: 'https://twitter.com/zremboldt',
-      github: 'https://github.com/zacaree',
-      codepen: 'https://codepen.io/Zacaree/',
+      github: 'https://github.com/zremboldt',
+      codepen: 'https://codepen.io/zremboldt/',
       instagram: 'https://www.instagram.com/zremboldt/'
     },
     web: {
