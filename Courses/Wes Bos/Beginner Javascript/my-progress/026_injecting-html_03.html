@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="base-styles.css">
+  <style>
+    :root {
+      --img-size: 500px;
+    }
+
+    img {
+      background-color: lightgreen;
+      border-radius: 100%;
+    }
+  </style>
+</head>
+
+<body class='center'>
+
+  <script>
+    // Let's pretend the user has the ability to add a name (or html) via an input field.
+    // They could do something like hide all elements on any page where their first name appears ↓
+    // const first = `<style>* { display: none; }</style>`;
+    const first = `Zac`;
+    // Or they could do something more worrysome by injecting JS into the page.
+    const last = `<img onload="alert('HACKED!!! This Javascript was injected into your page through the last-name input. Better sanitize your data. Have a nice day :)')" src="https://picsum.photos/200">`;
+
+    const myHtml = `
+      <div class="ctr">
+        <h1>My name is: ${first} ${last}</h1>
+        <p>All of this html has been injected via innerHTML and has not been sanitized...</p>
+      </div>
+    `;
+
+    document.body.innerHTML = myHtml;
+  </script>
+</body>
+
+</html>

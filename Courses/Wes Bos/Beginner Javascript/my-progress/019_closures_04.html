@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // A closure is the ability to access a parent level scope from a child scope, even after the parent function has been terminated.
+
+    // You can use closures to create private variables:
+
+    function createGame(gameName) {
+      let score = 0;
+      return function win() {
+        score++;
+        return `Your ${gameName} game score is ${score}.`;
+      }
+    }
+
+    // You can maintain independent scores on multiple games using this technique.
+    // Each ot these have their own private version of the variable, score.
+    const hockeyGame = createGame('Hockey')
+    const soccerGame = createGame('Soccer')
+
+    console.log(hockeyGame())
+    console.log(hockeyGame())
+    console.log(hockeyGame())
+
+    console.log(soccerGame())
+    console.log(soccerGame())
+    console.log(soccerGame())
+    console.log(soccerGame())
+
+    console.log(hockeyGame())
+
+  </script>
+</body>
+
+</html>

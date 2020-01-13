@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../base-styles.css">
+  <style>
+    body {
+      background-blend-mode: overlay;
+      background-image: linear-gradient(170deg, white, black);
+      background-color: rgb(119, 109, 255);
+      transition: all 2000ms ease-in-out;
+    }
+  </style>
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min) + min);
+    const hslaPicker = (hue, saturation = 100, lightness = 50) => `hsla(${hue}, ${saturation}%, ${lightness}%, 1)`;
+
+    const generateColor = () => {
+      let randomHue = getRandomInt(170, 260);
+      document.body.style.backgroundColor = hslaPicker(randomHue);
+    };
+
+    setTimeout(generateColor, 100); // This kicks it off.
+    document.body.ontransitionend = () => generateColor();
+
+  </script>
+</body>
+
+</html>

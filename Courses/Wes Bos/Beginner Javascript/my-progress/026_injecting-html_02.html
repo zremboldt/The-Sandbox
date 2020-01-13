@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="base-styles.css">
+  <style>
+    :root {
+      --img-size: 500px;
+    }
+
+    img {
+      background-color: lightgoldenrodyellow;
+      width: var(--img-size);
+      height: var(--img-size);
+    }
+
+    p {
+      max-width: var(--img-size);
+      line-height: 170%;
+    }
+  </style>
+</head>
+
+<body class='center'>
+
+  <script>
+    const imgUrl = 'https://picsum.photos/500';
+
+    const myHtml = `
+      <div class="ctr">
+        <h1>Headline</h1>
+        <img src="${imgUrl}" alt="Nice photo!">
+        <p>All of this html was written with JS string templating, was broken into DOM elements using createRange() and createContextualFragment(), and was then added to the DOM using appendChild().</p>
+      </div>
+    `;
+
+    // If we want to modify any of the elements in `myHtml` we have to break it into fragments because it's currently just a string.
+    const fragment = document.createRange().createContextualFragment(myHtml);
+    console.log(fragment)
+    console.log(fragment.querySelector('img'))
+
+    // document.body.innerHTML = myHtml;
+    // Don't need to use innerHTML here because the string of html has been broken into DOM elements.
+    document.body.appendChild(fragment);
+  </script>
+</body>
+
+</html>

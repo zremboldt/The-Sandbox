@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // A closure is the ability to access a parent level scope from a child scope, even after the parent function has been terminated.
+
+    function multiplier(factor) {
+      return function (number) {
+        return number * factor;
+      }
+    }
+
+    const twice = multiplier(2);
+
+    console.log(twice(5)); // -> 10
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // A closure is the ability to access a parent level scope from a child scope, even after the parent function has been terminated.
+
+    function createGreeting(greeting = '') {
+      const allCapsGreeting = greeting.toUpperCase();
+      return function (name) {
+        return `${allCapsGreeting} ${name}!`;
+      }
+    }
+
+    const sayHello = createGreeting('Hello');
+    const sayHey = createGreeting('Hey');
+
+    console.log(sayHello('Benny'))
+    console.log(sayHello('ConCon'))
+    console.log(sayHey('Leah'))
+
+  </script>
+</body>
+
+</html>

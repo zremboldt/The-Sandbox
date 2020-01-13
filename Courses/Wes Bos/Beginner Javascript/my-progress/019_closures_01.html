@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // A closure is the ability to access a parent level scope from a child scope, even after the parent function has been terminated.
+
+    function outer() {
+      const outerVar = "I'm the outer var.";
+
+      function inner() {
+        const innerVar = "I'm the inner var.";
+        console.log(outerVar);
+        console.log(innerVar);
+      }
+
+      return inner;
+    }
+
+    const innerFn = outer();
+
+    innerFn()
+
+  </script>
+</body>
+
+</html>

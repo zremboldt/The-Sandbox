@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="../base-styles.css">
+  <style>
+    :root {
+      --mouse-x: 0px;
+      --mouse-y: 0px;
+      cursor: none;
+    }
+
+    .cheese {
+      position: absolute;
+      left: var(--mouse-x);
+      top: var(--mouse-y);
+      font-size: 100px;
+    }
+
+    .mouse {
+      position: absolute;
+      left: var(--mouse-x);
+      bottom: -60px;
+      font-size: 100px;
+      transition: 100ms ease-in-out;
+    }
+
+    .excited {
+      animation-name: jumping;
+      animation-fill-mode: forwards;
+      animation-duration: 300ms;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+    }
+
+    @keyframes jumping {
+      0% {
+        transform: translateY(0px) rotate(-1turn);
+      }
+
+      50% {
+        transform: translateY(-60px);
+      }
+
+      100% {
+        transform: translateY(0px);
+      }
+    }
+  </style>
+</head>
+
+<body class="center">
+  <div class="cheese">🧀</div>
+  <div class="mouse">🐁</div>
+
+  <script>
+    const mouse = document.querySelector('.mouse');
+    let root = document.documentElement;
+
+    root.addEventListener('mousemove', e => {
+      root.style.setProperty('--mouse-x', e.clientX + 'px');
+      root.style.setProperty('--mouse-y', e.clientY + 'px');
+
+      let distanceFromBottom = window.innerHeight - e.clientY;
+      if (distanceFromBottom < 360) {
+        mouse.classList.add('excited');
+      } else {
+        mouse.classList.remove('excited');
+      }
+    })
+  </script>
+</body>
+
+</html>

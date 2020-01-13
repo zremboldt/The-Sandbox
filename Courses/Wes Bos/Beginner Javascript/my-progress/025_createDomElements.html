@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="base-styles.css">
+  <style>
+    :root {
+      --img-size: 500px;
+    }
+
+    img {
+      border-radius: 10px;
+      background-color: paleturquoise;
+      width: var(--img-size);
+      height: var(--img-size);
+    }
+  </style>
+</head>
+
+<body class='center'>
+
+  <script>
+    const imageSize = 400; // Change the image size everywhere, from this line.
+
+    const root = document.documentElement;
+    root.style.setProperty('--img-size', imageSize + 'px'); // This is setting the CSS custom property to `imageSize`.
+
+    const paragraph = document.createElement('p');
+    paragraph.textContent = `Photo caption!`;
+    paragraph.classList.add('classyParagraph')
+
+    const image = document.createElement('img');
+    image.src = `https://picsum.photos/${imageSize}`;
+    image.alt = 'Nice photo!';
+
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('wrapper');
+
+    wrapper.appendChild(image);
+    // wrapper.appendChild(paragraph);
+    document.body.appendChild(wrapper);
+  </script>
+</body>
+
+</html>

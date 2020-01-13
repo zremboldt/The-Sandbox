@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="base-styles.css">
+  <style>
+    :root {
+      --img-size: 500px;
+    }
+
+    img {
+      border-radius: 10px;
+      background-color: paleturquoise;
+      width: var(--img-size);
+      height: var(--img-size);
+    }
+
+    h2 {
+      max-width: var(--img-size);
+    }
+  </style>
+</head>
+
+<body class='center'>
+
+  <img src="https://picsum.photos/500" alt="Nice photo!">
+
+  <script>
+    const headline = document.createElement('h2');
+    headline.textContent = `This headline was inserted into the body using: insertAdjacentElement()`;
+
+    document.body.insertAdjacentElement('afterbegin', headline);
+  </script>
+</body>
+
+</html>

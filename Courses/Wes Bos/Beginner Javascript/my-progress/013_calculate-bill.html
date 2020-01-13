@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="base-styles.css">
+  <style>
+    .card {
+      width: 340px;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      border: 1px solid hsl(24, 100%, 51%);
+      box-shadow: -3px -3px 0px hsl(24, 100%, 51%);
+      border-radius: 10px;
+      transform: rotate(-15deg) skewX(-15deg);
+    }
+
+    input,
+    button {
+      width: 100%;
+      height: 50px;
+      border: 1px solid hsl(24, 100%, 51%);
+      border-radius: 4px;
+      font-size: 1.6rem;
+      box-shadow: -3px -3px 0px hsl(24, 100%, 51%);
+      transition: 100ms ease-in-out;
+    }
+
+    input:focus,
+    button:focus {
+      outline: none;
+    }
+
+    input {
+      padding: 10px;
+      margin-bottom: 2rem;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:active {
+      box-shadow: 0px 0px 0px hsl(24, 100%, 51%);
+      transform: translate(-3px, -3px);
+    }
+
+    #result {
+      width: 340px;
+      height: 2rem;
+      margin-top: 3rem;
+      text-align: right;
+    }
+  </style>
+  <title>Document</title>
+</head>
+
+<body class="center">
+
+  <div class="card">
+    <input id="input__subtotal" type="number" placeholder='Enter subtotal'>
+    <button>Calculate Bill</button>
+  </div>
+
+  <p id="result"></p>
+
+  <script>
+    const btnCalcBill = document.querySelector('button');
+    const inputSubtotal = document.querySelector('#input__subtotal');
+    const result = document.querySelector('#result');
+
+    function calcBill(subtotal, taxRate = 0.08, tipRate = 0.15) {
+      const tax = subtotal * taxRate;
+      const tip = subtotal * tipRate;
+      const total = subtotal + tip + tax;
+      return { subtotal, tax, tip, total };
+    }
+
+    btnCalcBill.addEventListener('click', function () {
+      const subtotal = parseInt(inputSubtotal.value || 0);
+      const bill = calcBill(subtotal, undefined, undefined)
+
+      result.innerText = `
+        Subtotal: $${bill.subtotal.toFixed(2)}
+        Tax: $${bill.tax.toFixed(2)}
+        Tip: $${bill.tip.toFixed(2)}
+        ---
+        Your total is: $${bill.total.toFixed(2)}
+      `;
+    })
+  </script>
+</body>
+
+</html>

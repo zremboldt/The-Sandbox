@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="base-styles.css">
+</head>
+
+<body class="center">
+
+  <h1>B's a pizza eater.</h1>
+  <p>How many slices should we order? </p>
+  <button>Feed Benny</button>
+
+  <script>
+    const tally = document.querySelector('p');
+    const btn = document.querySelector('button');
+
+    const addPizza = (el) => el.insertAdjacentText('beforeend', '🍕');
+
+    btn.addEventListener('click', () => { addPizza(tally) })
+  </script>
+</body>
+
+</html>
