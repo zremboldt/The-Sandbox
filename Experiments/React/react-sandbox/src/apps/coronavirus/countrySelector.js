@@ -4,16 +4,15 @@ import Stats from './stats.js';
 
 export default function CountrySelector() {
   const [selectedCountry, setSelectedCountry] = useState('usa');
+  const { error, stats } = useStats(`https://covid19.mathdro.id/api/countries`)
 
-  const data = useStats(`https://covid19.mathdro.id/api/countries`)
-  console.log(data)
-
-  if (!data) return 'Loading...';
+  if (!stats) return <p>Loading...</p>
+  if (error) return <p>Error...</p>
   return (
     <>
       <select onChange={(e) => setSelectedCountry(e.target.value)}>
-        {Object.entries(data.countries).map(([country, code], i) => (
-          <option key={i} value={data.iso3[code]}>{country}</option>
+        {Object.entries(stats.countries).map(([country, code], i) => (
+          <option key={i} value={stats.iso3[code]}>{country}</option>
         ))}
       </select>
       <Stats url={`https://covid19.mathdro.id/api/countries/${selectedCountry}`} />
