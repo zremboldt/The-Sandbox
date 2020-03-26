@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.sass';
-import ReactMemo from './components/ReactMemo';
-import FetchPokies from './components/FetchPokies';
-import CompositionAvoidsPropDrilling from './components/CompositionAvoidsPropDrilling';
+// import ReactMemo from './components/ReactMemo';
+// import FetchPokies from './components/FetchPokies';
+// import CompositionAvoidsPropDrilling from './components/CompositionAvoidsPropDrilling';
 import CoronaApp from './apps/coronavirus/index';
 
 const App = () => (

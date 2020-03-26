@@ -11,8 +11,8 @@ export default function CountrySelector() {
   return (
     <>
       <select onChange={(e) => setSelectedCountry(e.target.value)}>
-        {Object.entries(stats.countries).map(([country, code], i) => (
-          <option key={i} value={stats.iso3[code]}>{country}</option>
+        {Object.entries(stats.countries).map(([i, country]) => (
+          <option key={i} value={country.iso3}>{country.name}</option>
         ))}
       </select>
       <Stats url={`https://covid19.mathdro.id/api/countries/${selectedCountry}`} />
