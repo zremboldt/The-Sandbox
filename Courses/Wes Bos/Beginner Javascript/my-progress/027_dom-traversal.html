@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="base-styles.css">
+</head>
+
+<body class='center'>
+  <p class="mySentence">My name is Zac and I <em>love</em> to eat pizza and enjoy hacking on
+    <strong>JavaScript</strong>!</p>
+
+  <script>
+    const el = document.querySelector('.mySentence');
+
+    console.log('element: ', el)
+    console.log('childElementCount: ', el.childElementCount)
+    console.log('childNodes: ', el.childNodes)
+    console.log('children: ', el.children)
+    console.log('parent: ', el.parentElement)
+    console.log('firstChild: ', el.firstChild)
+    console.log('firstElementChild: ', el.firstElementChild)
+    console.log('lastElementChild: ', el.lastElementChild)
+    console.log('previousElementSibling: ', el.lastElementChild.previousElementSibling)
+    console.log('nextElementSibling: ', el.firstElementChild.nextElementSibling)
+
+    el.firstElementChild.innerText = 'like just a little bit';
+    el.lastChild.remove();
+  </script>
+</body>
+
+</html>
