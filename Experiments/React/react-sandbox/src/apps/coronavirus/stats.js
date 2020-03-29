@@ -1,5 +1,5 @@
 import React from 'react';
-import useStats from './useStats.js';
+import useStats from './use-stats';
 
 export default function Stats({ url }) {
   const { error, stats } = useStats(url)

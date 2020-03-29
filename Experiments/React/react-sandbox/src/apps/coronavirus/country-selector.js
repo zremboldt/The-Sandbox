@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import useStats from './useStats.js';
-import Stats from './stats.js';
+import useStats from './use-stats';
+import Stats from './stats';
 
 export default function CountrySelector() {
   const [selectedCountry, setSelectedCountry] = useState('usa');

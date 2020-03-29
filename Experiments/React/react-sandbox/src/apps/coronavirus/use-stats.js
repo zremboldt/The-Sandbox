@@ -1,8 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
+import { api, countries } from './mock-data'
 
 export default function useStats(url) {
   const [stats, setStats] = useState();
   const [error, setError] = useState();
+  const useMockData = false;
 
   const fetchData = useCallback(async () => {
     setError();
@@ -14,8 +16,12 @@ export default function useStats(url) {
   }, [url])
 
   useEffect(() => {
-    fetchData();
-  }, [url, fetchData])
+    if (useMockData) {
+      setStats(api)
+    } else {
+      fetchData();
+    }
+  }, [url, fetchData, useMockData])
 
   console.log('Stats: ', stats);
   console.log('Error: ', error);

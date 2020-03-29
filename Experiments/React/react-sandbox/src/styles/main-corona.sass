@@ -1,0 +1,54 @@
+$dark1: hsl(207, 24%, 7%)
+$dark2: hsl(207, 28%, 8%)
+$text1: hsl(210, 15%, 61%)
+
+html
+  box-sizing: border-box
+
+*, *:before, *:after
+  box-sizing: inherit
+
+body
+  height: 100vh
+  margin: 0
+  background-color: $dark2
+  color: #120544
+
+h1,h2,h3,h4,h5,h6,p,span
+  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Helvetica Neue", sans-serif
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+////////////////////////
+
+.sectionCoronavirus
+  display: flex
+  align-items: center
+  justify-content: center
+  height: 100vh
+  padding: 30px
+
+  h1
+    font-size: 42px
+
+  h2
+    font-size: 28px
+    margin-top: 60px
+
+  select
+    margin-bottom: 20px
+
+.card
+  padding: 30px
+  background-color: $dark1
+  margin: 0
+
+  &__deathsOverTime
+    height: 600px
+    width: 100%
+    max-width: 1000px
+
+  &__global-stats
+    display: flex
+    align-items: center
+    justify-content: space-around
