@@ -17,7 +17,7 @@ const LineChart = ({ data }) => (
     data={data}
     margin={{ top: 12, right: 90, bottom: 52, left: 60 }}
     xScale={{ type: 'point' }}
-    yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
+    yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: false, reverse: false }}
     curve="basis"
     axisTop={null}
     axisRight={null}
