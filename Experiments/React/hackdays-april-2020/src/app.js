@@ -1,8 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
-import Colors from './colors'
+import Colors from './utils/colors'
+import { useDeathsOverTime, useStats } from './hooks/use-stats';
+import LineChart from './components/line-chart';
+
+
+const countries = ['Italy', 'US', 'Mainland China', 'Spain', 'Germany'];
+const dates = [
+  '2-9-2020',
+  '2-24-2020',
+  '3-9-2020',
+  '3-24-2020',
+  '4-9-2020',
+];
 
 function App() {
+  const deathsOverTime = useDeathsOverTime(countries, dates);
+  // const [error, countryList] = useStats(`https://covid19.mathdro.id/api/countries`)
+
   return (
     <AppWrap>
       <TopBar>
@@ -14,7 +29,9 @@ function App() {
           <SearchBar placeholder="Select up to 5 countries..."></SearchBar>
         </BarWrap>
       </TopBar>
-      <ChartWrap></ChartWrap>
+      <ChartWrap>
+        <LineChart data={deathsOverTime} />
+      </ChartWrap>
     </AppWrap>
   );
 }
@@ -50,6 +67,7 @@ const SearchBar = styled.input`
   background-color: ${Colors.d20};
   border: 1px solid ${Colors.d10};
   border-radius: 5px;
+  caret-color: ${Colors.p10()};
   color: ${Colors.t10};
   font-size: 15px;
   transition: 150ms ease-in-out;
@@ -59,7 +77,7 @@ const SearchBar = styled.input`
   }
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 7px ${Colors.p10(0.2)};
+    box-shadow: 0 0 15px 5px ${Colors.p10(0.25)};
   }
   &::placeholder {
     color: ${Colors.t20};
@@ -68,7 +86,11 @@ const SearchBar = styled.input`
 `;
 
 const ChartWrap = styled.div`
+  margin: 60px auto;
+  padding: 0 20px;
+  width: 100%;
   max-width: ${wrapWidth};
+  height: 600px;
 `;
 
 const H2 = styled.h2`
