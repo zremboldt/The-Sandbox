@@ -89,11 +89,13 @@ function
 
 export function useDeathsOverTime(countries, dates) {
   const { isLoading, stats } = useDateStats(dates)
-  console.log(stats)
 
   if (!stats[1]) return;
 
   let countryData = countries.map(country => {
+    if (country === 'South Korea') {
+      country = 'Korea, South'
+    }
     if (country === 'Mainland China') {
       country = 'China'
     }

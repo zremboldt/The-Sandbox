@@ -1,22 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Colors from './utils/colors'
-import { useDeathsOverTime, useStats } from './hooks/use-stats';
+import { useDeathsOverTime } from './hooks/use-stats';
 import LineChart from './components/line-chart';
+import SearchBar from './components/searchbar';
 
+export default function App({ allCountries, dates }) {
+  const [selectedCountries, setSelectedCountries] = useState(['Italy', 'US']);
+  const deathsOverTime = useDeathsOverTime(selectedCountries, dates);
+  const [filteredCountries, setFilteredCountries] = useState(allCountries);
 
-const countries = ['Italy', 'US', 'Mainland China', 'Spain', 'Germany'];
-const dates = [
-  '2-9-2020',
-  '2-24-2020',
-  '3-9-2020',
-  '3-24-2020',
-  '4-9-2020',
-];
+  function handleSearch(searchQuery) {
+    const filteredList = allCountries.filter(country => {
+      const countryToLowerCase = country.name.toLowerCase();
+      return countryToLowerCase.includes(searchQuery.toLowerCase())
+    });
 
-function App() {
-  const deathsOverTime = useDeathsOverTime(countries, dates);
-  // const [error, countryList] = useStats(`https://covid19.mathdro.id/api/countries`)
+    if (!searchQuery) {
+      setFilteredCountries(allCountries)
+    } else {
+      setFilteredCountries(filteredList)
+    }
+  }
+
+  function addCountry(selectedCountry) {
+    if (!selectedCountries.includes(selectedCountry)) {
+      setSelectedCountries([...selectedCountries, selectedCountry]);
+    }
+  }
 
   return (
     <AppWrap>
@@ -26,7 +37,11 @@ function App() {
             <span style={{ color: Colors.p10() }}>COVID-19: </span>
             <span>Reported deaths</span>
           </H2>
-          <SearchBar placeholder="Select up to 5 countries..."></SearchBar>
+          <SearchBar
+            filteredCountries={filteredCountries}
+            handleSearch={handleSearch}
+            addCountry={addCountry}
+          />
         </BarWrap>
       </TopBar>
       <ChartWrap>
@@ -36,9 +51,7 @@ function App() {
   );
 }
 
-export default App;
-
-const wrapWidth = `${1000}px`;
+const wrapWidth = 1000;
 
 const AppWrap = styled.div`
   width: 100%;
@@ -56,40 +69,15 @@ const TopBar = styled.div`
 
 const BarWrap = styled.div`
   width: 100%;
-  max-width: ${wrapWidth};
-`;
-
-const SearchBar = styled.input`
-  width: 100%;  
-  height: 50px;
-  margin: 20px 0;
-  padding: 12px 14px 14px;
-  background-color: ${Colors.d20};
-  border: 1px solid ${Colors.d10};
-  border-radius: 5px;
-  caret-color: ${Colors.p10()};
-  color: ${Colors.t10};
-  font-size: 15px;
-  transition: 150ms ease-in-out;
-
-  &:hover, &:focus {
-    border-color: ${Colors.p10()};
-  }
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 15px 5px ${Colors.p10(0.25)};
-  }
-  &::placeholder {
-    color: ${Colors.t20};
-    font-weight: 500;
-  }
+  max-width: ${wrapWidth}px;
 `;
 
 const ChartWrap = styled.div`
-  margin: 60px auto;
+  margin: 80px auto 0;
   padding: 0 20px;
   width: 100%;
-  max-width: ${wrapWidth};
+  max-width: ${wrapWidth + 134}px;
+  transform: translateX(35px);
   height: 600px;
 `;
 

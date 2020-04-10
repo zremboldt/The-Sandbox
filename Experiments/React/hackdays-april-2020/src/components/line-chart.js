@@ -41,6 +41,7 @@ const LineChart = ({ data }) => {
       enableGridX={false}
       colors={{ scheme: 'nivo' }}
       enablePoints={false}
+      enableCrosshair={false}
       enableArea={true}
       areaBlendMode="overlay"
       areaOpacity={0.25}
