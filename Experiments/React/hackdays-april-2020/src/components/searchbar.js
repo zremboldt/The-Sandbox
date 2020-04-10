@@ -19,6 +19,7 @@ export default function SearchBar({ filteredCountries, handleSearch, addCountry 
             ? <ListItem>No matches...</ListItem>
             : Object.entries(filteredCountries).map(([i, country]) => (
               <ListItem
+                tabIndex="0"
                 key={i}
                 onClick={e => addCountry(e.target.innerText)}
               >
@@ -46,7 +47,7 @@ const Input = styled.input`
   height: 50px;
   padding: 12px ${inputPadding}px 14px;
   background-color: ${Colors.d20};
-  border: 1px solid ${Colors.d10};
+  border: 2px solid ${Colors.d10};
   border-radius: 5px;
   caret-color: ${Colors.p10()};
   color: ${Colors.t10};

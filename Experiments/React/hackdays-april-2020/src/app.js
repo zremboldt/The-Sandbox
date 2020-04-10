@@ -3,10 +3,15 @@ import styled from 'styled-components';
 import Colors from './utils/colors'
 import { useDeathsOverTime } from './hooks/use-stats';
 import LineChart from './components/line-chart';
+import Pill from './components/pill';
 import SearchBar from './components/searchbar';
 
+// 
+// TODO: Need to work on dropdown accessibility
+// 
+
 export default function App({ allCountries, dates }) {
-  const [selectedCountries, setSelectedCountries] = useState(['Italy', 'US']);
+  const [selectedCountries, setSelectedCountries] = useState(['Thailand']);
   const deathsOverTime = useDeathsOverTime(selectedCountries, dates);
   const [filteredCountries, setFilteredCountries] = useState(allCountries);
 
@@ -43,6 +48,9 @@ export default function App({ allCountries, dates }) {
             addCountry={addCountry}
           />
         </BarWrap>
+        <PillsContainer>
+          {selectedCountries.map(country => <Pill country={country} />)}
+        </PillsContainer>
       </TopBar>
       <ChartWrap>
         <LineChart data={deathsOverTime} />
@@ -60,6 +68,7 @@ const AppWrap = styled.div`
 `;
 
 const TopBar = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -70,6 +79,20 @@ const TopBar = styled.div`
 const BarWrap = styled.div`
   width: 100%;
   max-width: ${wrapWidth}px;
+`;
+
+const PillsContainer = styled.div`
+  position: absolute;
+  bottom: -15px;
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: ${wrapWidth}px;
+  height: 30px;
+
+  & > button + button {
+    margin-left: 10px;
+  }
 `;
 
 const ChartWrap = styled.div`

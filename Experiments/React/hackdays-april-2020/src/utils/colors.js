@@ -19,6 +19,7 @@ const Colors = {
   p10: (opacity = 1) => `hsla(236, 100%, 65%, ${opacity})`,
   p20: '#8C56FF',
   p30: '#00FFC2',
+  p40: '#FF5689',
 }
 
 export default Colors;
