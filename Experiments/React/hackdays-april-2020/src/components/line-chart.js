@@ -10,11 +10,11 @@ import Colors from '../utils/colors';
 
 const LineChart = ({ data }) => {
 
-  if (!data) return <p>Loading...</p>
+  if (!data) return null;
   return (
     <ResponsiveLine
       data={data}
-      margin={{ top: 12, right: 90, bottom: 52, left: 60 }}
+      margin={{ top: 10, right: 130, bottom: 40, left: 142 }}
       xScale={{ type: 'point' }}
       yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: false, reverse: false }}
       curve="basis"
@@ -23,20 +23,16 @@ const LineChart = ({ data }) => {
       axisBottom={{
         orient: 'bottom',
         tickSize: 5,
-        tickPadding: 5,
+        tickPadding: 8,
         tickRotation: 0,
-        legend: '',
-        legendOffset: 45,
-        legendPosition: 'middle'
+        legend: null,
       }}
       axisLeft={{
         orient: 'left',
         tickSize: 0,
         tickPadding: 10,
         tickRotation: 0,
-        legend: '',
-        legendOffset: -53,
-        legendPosition: 'middle'
+        legend: null,
       }}
       enableGridX={false}
       colors={{ scheme: 'nivo' }}
