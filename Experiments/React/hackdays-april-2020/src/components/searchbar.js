@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import Colors from '../utils/colors'
-import React, { useState } from 'react';
+import React from 'react';
 
-export default function SearchBar({ filteredCountries, isSearching, setIsSearching, handleSearch, addCountry }) {
+const SearchBar = React.forwardRef(({ filteredCountries, isSearching, setIsSearching, handleSearch, addCountry }, ref) => {
 
   function handleKeyDown(event) {
     // downArrow
@@ -19,6 +19,8 @@ export default function SearchBar({ filteredCountries, isSearching, setIsSearchi
     if (event.keyCode === 13) {
       addCountry(event.target.innerText);
       setIsSearching(false);
+      ref.current.value = '';
+      ref.current.focus();
     }
   }
 
@@ -26,6 +28,7 @@ export default function SearchBar({ filteredCountries, isSearching, setIsSearchi
     <SearchBarContainer onBlur={() => setIsSearching(false)}>
       <Input
         onChange={e => handleSearch(e.target.value)}
+        ref={ref}
         placeholder="Select countries..."
       />
       <SelectList
@@ -48,7 +51,8 @@ export default function SearchBar({ filteredCountries, isSearching, setIsSearchi
       </SelectList>
     </SearchBarContainer>
   )
-}
+})
+export default SearchBar;
 
 const inputPadding = 14;
 

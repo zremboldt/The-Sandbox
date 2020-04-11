@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import Colors from './utils/colors'
 import { useDeathsOverTime } from './hooks/use-stats';
@@ -11,6 +11,7 @@ export default function App({ allCountries, dates }) {
   const deathsOverTime = useDeathsOverTime(selectedCountries, dates);
   const [filteredCountries, setFilteredCountries] = useState(allCountries);
   const [isSearching, setIsSearching] = useState(false);
+  const searchInput = useRef(null);
 
   function handleSearch(searchQuery) {
     const filteredList = allCountries.filter(country => {
@@ -30,6 +31,7 @@ export default function App({ allCountries, dates }) {
   function addCountry(selectedCountry) {
     if (!selectedCountries.includes(selectedCountry)) {
       setSelectedCountries([...selectedCountries, selectedCountry]);
+
     }
   }
 
@@ -52,6 +54,7 @@ export default function App({ allCountries, dates }) {
             setIsSearching={setIsSearching}
             handleSearch={handleSearch}
             addCountry={addCountry}
+            ref={searchInput}
           />
         </BarWrap>
         <PillsContainer>
