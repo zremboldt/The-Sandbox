@@ -19,8 +19,6 @@ const SearchBar = React.forwardRef(({ filteredCountries, isSearching, setIsSearc
     if (event.keyCode === 13) {
       addCountry(event.target.innerText);
       setIsSearching(false);
-      ref.current.value = '';
-      ref.current.focus();
     }
   }
 

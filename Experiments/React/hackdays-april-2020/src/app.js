@@ -31,7 +31,8 @@ export default function App({ allCountries, dates }) {
   function addCountry(selectedCountry) {
     if (!selectedCountries.includes(selectedCountry)) {
       setSelectedCountries([...selectedCountries, selectedCountry]);
-
+      searchInput.current.value = '';
+      searchInput.current.focus();
     }
   }
 
