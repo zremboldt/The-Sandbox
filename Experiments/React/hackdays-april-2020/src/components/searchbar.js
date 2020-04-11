@@ -2,33 +2,50 @@ import styled from 'styled-components';
 import Colors from '../utils/colors'
 import React, { useState } from 'react';
 
-export default function SearchBar({ filteredCountries, handleSearch, addCountry }) {
-  const [selectListIsActive, setSelectListIsActive] = useState(false);
-  console.log('fil', filteredCountries)
+export default function SearchBar({ filteredCountries, isSearching, setIsSearching, handleSearch, addCountry }) {
+
+  function handleKeyDown(event) {
+    // downArrow
+    if (event.keyCode === 38 && event.target.previousSibling) {
+      event.preventDefault();
+      event.target.previousSibling.focus();
+    }
+    // upArrow
+    if (event.keyCode === 40 && event.target.nextSibling) {
+      event.preventDefault();
+      event.target.nextSibling.focus();
+    }
+    // returnKey
+    if (event.keyCode === 13) {
+      addCountry(event.target.innerText);
+      setIsSearching(false);
+    }
+  }
+
   return (
-    <SearchBarContainer>
+    <SearchBarContainer onBlur={() => setIsSearching(false)}>
       <Input
         onChange={e => handleSearch(e.target.value)}
-        onFocus={() => setSelectListIsActive(true)}
-        onBlur={() => setTimeout(() => setSelectListIsActive(false), 200)}
-        placeholder="Select up to 5 countries..."
+        placeholder="Select countries..."
       />
-      {selectListIsActive && (
-        <SelectList>
-          {filteredCountries.length < 1
-            ? <ListItem>No matches...</ListItem>
-            : Object.entries(filteredCountries).map(([i, country]) => (
-              <ListItem
-                tabIndex="0"
-                key={i}
-                onClick={e => addCountry(e.target.innerText)}
-              >
-                {country.name}
-              </ListItem>
-            ))
-          }
-        </SelectList>
-      )}
+      <SelectList
+        onFocus={() => setIsSearching(true)}
+        style={isSearching ? { opacity: 1, pointerEvents: 'auto', transform: 'translate3d(0, 0, 0)' } : null}
+      >
+        {filteredCountries.length < 1
+          ? <ListItem>No matches...</ListItem>
+          : Object.entries(filteredCountries).map(([i, country]) => (
+            <ListItem
+              tabIndex={isSearching ? '0' : '-1'}
+              key={i}
+              onClick={e => addCountry(e.target.innerText)}
+              onKeyDown={e => handleKeyDown(e)}
+            >
+              {country.name}
+            </ListItem>
+          ))
+        }
+      </SelectList>
     </SearchBarContainer>
   )
 }
@@ -83,10 +100,10 @@ const SelectList = styled.ul`
   color: ${Colors.t10};
   font-size: 15px;
   overflow-y: auto;
-  transition: 150ms ease-in-out;
-  transform: translate3d(0, 0, 0);
-  /* opacity: 0; */
-  /* pointer-events: none; */
+  transition: transform 700ms cubic-bezier(0.165, 0.84, 0.44, 1), opacity 150ms ease-in-out;
+  transform: translate3d(0, 10px, 0);
+  opacity: 0;
+  pointer-events: none;
 `;
 
 const ListItem = styled.li`
@@ -95,7 +112,8 @@ const ListItem = styled.li`
   cursor: pointer;
   list-style: none;
 
-  &:hover {
+  &:hover, &:focus {
+    outline: none;
     background-color: ${Colors.d40};
   }
   &:first-of-type {

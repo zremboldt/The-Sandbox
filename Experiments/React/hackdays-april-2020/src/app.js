@@ -6,14 +6,11 @@ import LineChart from './components/line-chart';
 import Pill from './components/pill';
 import SearchBar from './components/searchbar';
 
-// 
-// TODO: Need to work on dropdown accessibility
-// 
-
 export default function App({ allCountries, dates }) {
   const [selectedCountries, setSelectedCountries] = useState(['Thailand']);
   const deathsOverTime = useDeathsOverTime(selectedCountries, dates);
   const [filteredCountries, setFilteredCountries] = useState(allCountries);
+  const [isSearching, setIsSearching] = useState(false);
 
   function handleSearch(searchQuery) {
     const filteredList = allCountries.filter(country => {
@@ -22,8 +19,10 @@ export default function App({ allCountries, dates }) {
     });
 
     if (!searchQuery) {
+      setIsSearching(false);
       setFilteredCountries(allCountries)
     } else {
+      setIsSearching(true);
       setFilteredCountries(filteredList)
     }
   }
@@ -32,6 +31,11 @@ export default function App({ allCountries, dates }) {
     if (!selectedCountries.includes(selectedCountry)) {
       setSelectedCountries([...selectedCountries, selectedCountry]);
     }
+  }
+
+  function removeCountry(selectedCountry) {
+    const newCountriesArray = selectedCountries.filter(country => country !== selectedCountry);
+    setSelectedCountries(newCountriesArray);
   }
 
   return (
@@ -44,12 +48,20 @@ export default function App({ allCountries, dates }) {
           </H2>
           <SearchBar
             filteredCountries={filteredCountries}
+            isSearching={isSearching}
+            setIsSearching={setIsSearching}
             handleSearch={handleSearch}
             addCountry={addCountry}
           />
         </BarWrap>
         <PillsContainer>
-          {selectedCountries.map(country => <Pill country={country} />)}
+          {selectedCountries.map(country => (
+            <Pill
+              country={country}
+              removeCountry={removeCountry}
+              key={country}
+            />
+          ))}
         </PillsContainer>
       </TopBar>
       <ChartWrap>
@@ -99,8 +111,8 @@ const ChartWrap = styled.div`
   margin: 80px auto 0;
   padding: 0 20px;
   width: 100%;
-  max-width: ${wrapWidth + 134}px;
-  transform: translateX(35px);
+  max-width: ${wrapWidth + 266}px;
+  transform: translateX(6px);
   height: 600px;
 `;
 
