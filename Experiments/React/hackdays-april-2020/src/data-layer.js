@@ -7,7 +7,7 @@ const dates = [
   '2-24-2020',
   '3-9-2020',
   '3-24-2020',
-  '4-9-2020',
+  '4-10-2020',
 ];
 
 export default function DataLayer() {

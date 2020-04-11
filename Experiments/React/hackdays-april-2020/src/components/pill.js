@@ -30,6 +30,7 @@ const CountryPill = styled.button`
   
   span {
     margin-bottom: 2px;
+    white-space: nowrap;
   }
 
   svg {
