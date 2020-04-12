@@ -20,6 +20,7 @@ const Colors = {
   p20: '#8C56FF',
   p30: '#00FFC2',
   p40: '#FF5689',
+  p50: '#FFD74A',
 }
 
 export default Colors;

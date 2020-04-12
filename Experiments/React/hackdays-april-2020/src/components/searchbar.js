@@ -27,7 +27,7 @@ const SearchBar = React.forwardRef(({ filteredCountries, isSearching, setIsSearc
       <Input
         onChange={e => handleSearch(e.target.value)}
         ref={ref}
-        placeholder="Select countries..."
+        placeholder="Select up to 5 countries..."
       />
       <SelectList
         onFocus={() => setIsSearching(true)}

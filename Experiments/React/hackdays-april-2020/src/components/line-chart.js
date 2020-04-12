@@ -35,7 +35,7 @@ const LineChart = ({ data }) => {
         legend: null,
       }}
       enableGridX={false}
-      colors={{ scheme: 'nivo' }}
+      colors={[Colors.p10(), Colors.p30, Colors.p40, Colors.p50, Colors.p20]}
       enablePoints={false}
       enableCrosshair={false}
       enableArea={true}

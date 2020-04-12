@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import App from './app';
-import { useDeathsOverTime, useStats } from './hooks/use-stats';
+import { useStats } from './hooks/use-stats';
+import getPastDate from './utils/get-past-date'
 
 const dates = [
-  '2-9-2020',
-  '2-24-2020',
-  '3-9-2020',
-  '3-24-2020',
-  '4-10-2020',
+  getPastDate(60),
+  getPastDate(45),
+  getPastDate(30),
+  getPastDate(15),
+  getPastDate(1),
 ];
 
 export default function DataLayer() {
