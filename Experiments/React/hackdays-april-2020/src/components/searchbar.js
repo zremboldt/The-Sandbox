@@ -52,7 +52,7 @@ const SearchBar = React.forwardRef(({ filteredCountries, isSearching, setIsSearc
 })
 export default SearchBar;
 
-const inputPadding = 14;
+const inputPadding = 18;
 
 const SearchBarContainer = styled.div`
   position: relative;

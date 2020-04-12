@@ -115,8 +115,7 @@ const ChartWrap = styled.div`
   margin: 80px auto 0;
   padding: 0 20px;
   width: 100%;
-  max-width: ${wrapWidth + 266}px;
-  transform: translateX(6px);
+  max-width: ${wrapWidth + 280}px;
   height: 600px;
 `;
 
