@@ -1,24 +1,43 @@
 import styled from 'styled-components';
 import Colors from '../utils/colors'
-import React from 'react';
+import React, { useRef } from 'react';
 
 const SearchBar = React.forwardRef(({ filteredCountries, isSearching, setIsSearching, handleSearch, addCountry }, ref) => {
+  const selectList = useRef(null);
 
   function handleKeyDown(event) {
-    // downArrow
-    if (event.keyCode === 38 && event.target.previousSibling) {
-      event.preventDefault();
-      event.target.previousSibling.focus();
+    if (event.target.name === 'searchInput') {
+      // downArrow
+      if (event.keyCode === 40) {
+        event.preventDefault();
+        selectList.current.firstElementChild.focus();
+      }
     }
-    // upArrow
-    if (event.keyCode === 40 && event.target.nextSibling) {
-      event.preventDefault();
-      event.target.nextSibling.focus();
-    }
-    // returnKey
-    if (event.keyCode === 13) {
-      addCountry(event.target.innerText);
-      setIsSearching(false);
+
+    if (event.target.name !== 'searchInput') {
+      // upArrow
+      if (event.keyCode === 38) {
+        // If previousSibling exists, focus it. Otherwise move focus to searchbar.
+        if (event.target.previousSibling) {
+          event.preventDefault();
+          event.target.previousSibling.focus();
+        } else {
+          ref.current.focus();
+          // Put cursor at end of searchbar text
+          const numOfChars = ref.current.value.length;
+          setTimeout(() => ref.current.setSelectionRange(numOfChars, numOfChars), 1);
+        }
+      }
+      // downArrow
+      if (event.keyCode === 40 && event.target.nextSibling) {
+        event.preventDefault();
+        event.target.nextSibling.focus();
+      }
+      // returnKey
+      if (event.keyCode === 13) {
+        addCountry(event.target.innerText);
+        setIsSearching(false);
+      }
     }
   }
 
@@ -26,11 +45,16 @@ const SearchBar = React.forwardRef(({ filteredCountries, isSearching, setIsSearc
     <SearchBarContainer onBlur={() => setIsSearching(false)}>
       <Input
         onChange={e => handleSearch(e.target.value)}
+        onKeyDown={e => handleKeyDown(e)}
+        // onKeyDown={e => console.log(e.target.nextSibling)}
+        name="searchInput"
+        type="search"
         ref={ref}
         placeholder="Select up to 5 countries..."
       />
       <SelectList
         onFocus={() => setIsSearching(true)}
+        ref={selectList}
         style={isSearching ? { opacity: 1, pointerEvents: 'auto', transform: 'translate3d(0, 0, 0)' } : null}
       >
         {filteredCountries.length < 1
