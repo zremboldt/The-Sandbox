@@ -7,7 +7,7 @@ import Pill from './components/pill';
 import SearchBar from './components/searchbar';
 
 export default function App({ allCountries, dates }) {
-  const [selectedCountries, setSelectedCountries] = useState(['Italy', 'United Kingdom']);
+  const [selectedCountries, setSelectedCountries] = useState(['Canada', 'Mexico']);
   const deathsOverTime = useDeathsOverTime(selectedCountries, dates);
   const [filteredCountries, setFilteredCountries] = useState(allCountries);
   const [isSearching, setIsSearching] = useState(false);
