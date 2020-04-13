@@ -1,6 +1,6 @@
 import React from 'react';
 import { ResponsiveLine } from '@nivo/line'
-import Colors from '../utils/colors';
+import Colors, { chartScheme } from '../utils/colors';
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
 // no chart will be rendered.
@@ -14,7 +14,7 @@ const LineChart = ({ data }) => {
   return (
     <ResponsiveLine
       data={data}
-      margin={{ top: 10, right: 130, bottom: 40, left: 142 }}
+      margin={{ top: 10, right: 40, bottom: 40, left: 50 }}
       xScale={{ type: 'point' }}
       yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: false, reverse: false }}
       curve="basis"
@@ -35,7 +35,7 @@ const LineChart = ({ data }) => {
         legend: null,
       }}
       enableGridX={false}
-      colors={[Colors.p10(), Colors.p30, Colors.p40, Colors.p50, Colors.p20]}
+      colors={chartScheme}
       enablePoints={false}
       enableCrosshair={false}
       enableArea={true}
@@ -66,33 +66,7 @@ const LineChart = ({ data }) => {
           container: { background: "black", fontSize: "14px", color: 'white', paddingBottom: 6 },
         }
       }}
-      legends={[
-        {
-          anchor: 'bottom-right',
-          direction: 'column',
-          justify: false,
-          translateX: 100,
-          translateY: 0,
-          itemsSpacing: 0,
-          itemDirection: 'left-to-right',
-          itemWidth: 80,
-          itemHeight: 20,
-          itemOpacity: 0.75,
-          itemTextColor: Colors.t20,
-          symbolSize: 12,
-          symbolShape: 'circle',
-          symbolBorderColor: 'rgba(0, 0, 0, .5)',
-          effects: [
-            {
-              on: 'hover',
-              style: {
-                itemBackground: 'rgba(0, 0, 0, .03)',
-                itemOpacity: 1
-              }
-            }
-          ]
-        }
-      ]}
+      legends={[]}
     />
   )
 }

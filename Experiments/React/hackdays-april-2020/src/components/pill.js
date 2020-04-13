@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import Colors from '../utils/colors'
 import IconClose from '../assets/icon-close';
 
-export default function Pill({ country, removeCountry }) {
+export default function Pill({ country, removeCountry, color }) {
   return (
     <CountryPill onClick={() => removeCountry(country)}>
+      <ColorCode style={{ backgroundColor: color }} />
       <span>{country}</span>
       <IconClose />
     </CountryPill>
@@ -17,7 +18,7 @@ const CountryPill = styled.button`
   align-items: center;
   justify-content: space-between;
   height: 100%;
-  padding: 0 0 0 20px;
+  padding: 0;
   appearance: none;
   background-color: ${Colors.d30};
   border: 2px solid ${Colors.d10};
@@ -54,4 +55,11 @@ const CountryPill = styled.button`
     outline: none;
     box-shadow: 0 0 15px 5px ${Colors.p10(0.25)};
   }
+`;
+
+const ColorCode = styled.div`
+  width: 14px;
+  height: 14px;
+  margin: 0 14px 0 7px;
+  border-radius: 50px;
 `;

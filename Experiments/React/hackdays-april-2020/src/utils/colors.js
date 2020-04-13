@@ -24,3 +24,11 @@ const Colors = {
 }
 
 export default Colors;
+
+export const chartScheme = [
+  Colors.p10(),
+  Colors.p30,
+  Colors.p40,
+  Colors.p50,
+  Colors.p20,
+]
