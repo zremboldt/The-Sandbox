@@ -1,7 +1,7 @@
 // Data fetching based partially on this article:
 // https://dev.to/silvestricodes/asynchronous-flows-with-react-hooks-1g0m
 
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 // The fn returned from useEffect will run when the component unmounts.
 // This will set didCancel to true, and ensure that all state is only set if didCancel is false.
@@ -30,7 +30,7 @@ export const useDateStats = (dates) => {
     }
     fetchData()
     return () => { didCancel = true }
-  }, [])
+  }, [dates])
 
   return { isLoading, stats };
 }
@@ -88,7 +88,7 @@ function
 */
 
 export function useDeathsOverTime(countries, dates) {
-  const { isLoading, stats } = useDateStats(dates)
+  const { stats } = useDateStats(dates)
 
   if (!stats[1]) return;
 
