@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Colors from '../utils/colors'
 import React, { useRef } from 'react';
 
-const SearchBar = React.forwardRef(({ filteredCountries, isSearching, setIsSearching, handleSearch, addCountry }, ref) => {
+const SearchBar = React.forwardRef(({ selectedCountries, filteredCountries, isSearching, setIsSearching, handleSearch, addCountry }, ref) => {
   const selectList = useRef(null);
 
   function handleKeyDown(event) {
@@ -50,25 +50,27 @@ const SearchBar = React.forwardRef(({ filteredCountries, isSearching, setIsSearc
         name="searchInput"
         type="search"
         ref={ref}
-        placeholder="Select up to 5 countries..."
+        placeholder="Select up to five countries..."
       />
       <SelectList
         onFocus={() => setIsSearching(true)}
         ref={selectList}
         style={isSearching ? { opacity: 1, pointerEvents: 'auto', transform: 'translate3d(0, 0, 0)' } : null}
       >
-        {filteredCountries.length < 1
-          ? <ListItem>No matches...</ListItem>
-          : Object.entries(filteredCountries).map(([i, country]) => (
-            <ListItem
-              tabIndex={isSearching ? '0' : '-1'}
-              key={i}
-              onClick={e => addCountry(e.target.innerText)}
-              onKeyDown={e => handleKeyDown(e)}
-            >
-              {country.name}
-            </ListItem>
-          ))
+        {selectedCountries.length >= 5
+          ? <ListItem>Five countries is the limit.</ListItem>
+          : filteredCountries.length < 1
+            ? <ListItem>No matches.</ListItem>
+            : Object.entries(filteredCountries).map(([i, country]) => (
+              <ListItem
+                tabIndex={isSearching ? '0' : '-1'}
+                key={i}
+                onClick={e => addCountry(e.target.innerText)}
+                onKeyDown={e => handleKeyDown(e)}
+              >
+                {country.name}
+              </ListItem>
+            ))
         }
       </SelectList>
     </SearchBarContainer>

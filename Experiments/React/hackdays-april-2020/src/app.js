@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
-import Colors from './utils/colors'
+import Colors, { chartScheme } from './utils/colors'
 import { useDeathsOverTime } from './hooks/use-stats';
 import LineChart from './components/line-chart';
 import Pill from './components/pill';
@@ -29,7 +29,7 @@ export default function App({ allCountries, dates }) {
   }
 
   function addCountry(selectedCountry) {
-    if (!selectedCountries.includes(selectedCountry)) {
+    if (!selectedCountries.includes(selectedCountry) && selectedCountries.length < 5) {
       setSelectedCountries([...selectedCountries, selectedCountry]);
       searchInput.current.value = '';
       searchInput.current.focus();
@@ -50,6 +50,7 @@ export default function App({ allCountries, dates }) {
             <span>Reported deaths</span>
           </H2>
           <SearchBar
+            selectedCountries={selectedCountries}
             filteredCountries={filteredCountries}
             isSearching={isSearching}
             setIsSearching={setIsSearching}
@@ -59,13 +60,15 @@ export default function App({ allCountries, dates }) {
           />
         </BarWrap>
         <PillsContainer>
-          {selectedCountries.map(country => (
+          {selectedCountries.map((country, i) => (
             <Pill
+              color={chartScheme[i]}
               country={country}
               removeCountry={removeCountry}
-              key={country}
+              key={i}
             />
           ))}
+          <OverflowSpacer />
         </PillsContainer>
       </TopBar>
       <ChartWrap>
@@ -103,19 +106,37 @@ const PillsContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   width: 100%;
-  max-width: ${wrapWidth}px;
+  max-width: ${wrapWidth + 40}px;
   height: 30px;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 
-  & > button + button {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  & > button {
     margin-left: 10px;
   }
+
+  & > button:first-of-type {
+    margin-left: 20px;
+  }
+`;
+
+const OverflowSpacer = styled.div`
+  width: 20px;
+  height: 100%;
+  flex-shrink: 0;
 `;
 
 const ChartWrap = styled.div`
   margin: 80px auto 0;
   padding: 0 20px;
   width: 100%;
-  max-width: ${wrapWidth + 280}px;
+  max-width: ${wrapWidth + 80}px;
   height: 600px;
 `;
 
