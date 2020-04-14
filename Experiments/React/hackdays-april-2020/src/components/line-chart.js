@@ -42,6 +42,32 @@ const LineChart = ({ data }) => {
       areaBlendMode="overlay"
       areaOpacity={0.25}
       useMesh={true}
+      enableSlices="x"
+      sliceTooltip={({ slice }) => {
+        return (
+          <div
+            style={{
+              background: 'black',
+              padding: '9px 12px',
+              border: '1px solid black',
+              borderRadius: 6,
+            }}
+          >
+            {/* <div>x: {slice.id}</div> */}
+            {slice.points.map(point => (
+              <div
+                key={point.id}
+                style={{
+                  color: point.serieColor,
+                  padding: '3px 0',
+                }}
+              >
+                <strong>{point.serieId}</strong> [{point.data.yFormatted}]
+              </div>
+            ))}
+          </div>
+        )
+      }}
       theme={{
         axis: {
           legend: {
@@ -62,9 +88,9 @@ const LineChart = ({ data }) => {
             stroke: Colors.b10,
           }
         },
-        tooltip: {
-          container: { background: "black", fontSize: "14px", color: 'white', paddingBottom: 6 },
-        }
+        // tooltip: {
+        //   container: { background: "black", fontSize: "14px", color: 'white', paddingBottom: 6 },
+        // }
       }}
       legends={[]}
     />
