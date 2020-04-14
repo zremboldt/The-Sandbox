@@ -127,6 +127,7 @@ const SelectList = styled.ul`
   box-shadow: 0 30px 60px 30px ${Colors.d10};
   color: ${Colors.t10};
   font-size: 15px;
+  outline: none;
   overflow-y: auto;
   transition: transform 700ms cubic-bezier(0.165, 0.84, 0.44, 1), opacity 150ms ease-in-out;
   transform: translate3d(0, 10px, 0);

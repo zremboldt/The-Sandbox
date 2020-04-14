@@ -38,14 +38,12 @@ export const useDateStats = (dates) => {
 
 export function useStats(url) {
   const [stats, setStats] = useState();
-  const [error, setError] = useState();
 
   const fetchData = useCallback(async () => {
-    setError();
     console.log('Fetching data');
     const data = await fetch(url)
       .then(res => res.json())
-      .catch(err => setError(err));
+      .catch(err => console.log('Error coming from `useStats.js`: ', err));
     setStats(data);
   }, [url])
 
@@ -53,10 +51,7 @@ export function useStats(url) {
     fetchData();
   }, [url, fetchData])
 
-  return [
-    error,
-    stats
-  ];
+  return stats;
 }
 
 /*

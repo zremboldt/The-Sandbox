@@ -47,7 +47,7 @@ export default function App({ allCountries, dates }) {
         <BarWrap>
           <H2>
             <span style={{ color: Colors.p10() }}>COVID-19: </span>
-            <span>Reported deaths</span>
+            <span>Reported&nbsp;deaths</span>
           </H2>
           <SearchBar
             selectedCountries={selectedCountries}
@@ -108,7 +108,6 @@ const PillsContainer = styled.div`
   width: 100%;
   max-width: ${wrapWidth + 40}px;
   height: 30px;
-  overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -123,6 +122,10 @@ const PillsContainer = styled.div`
 
   & > button:first-of-type {
     margin-left: 20px;
+  }
+
+  @media(max-width: 1000px) {
+    overflow-x: scroll;
   }
 `;
 

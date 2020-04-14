@@ -12,7 +12,7 @@ const dates = [
 ];
 
 export default function DataLayer() {
-  const [countryList] = useStats(`https://covid19.mathdro.id/api/countries`);
+  const countryList = useStats(`https://covid19.mathdro.id/api/countries`);
   const allCountries = countryList?.countries;
 
   if (!allCountries) return null;
