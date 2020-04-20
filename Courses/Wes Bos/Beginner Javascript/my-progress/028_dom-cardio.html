@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<head></head>
+<html lang="en">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+<link rel="stylesheet" href="base-styles.css">
+<style>
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 40px;
+  }
+
+  .playerCard {
+    max-width: 300px;
+    margin: 10px;
+    padding: 20px 30px;
+    box-shadow: 0 6px 30px -4px hsla(0, 0%, 0%, 0.2);
+    border-radius: 10px;
+  }
+</style>
+</head>
+
+<body class='center'>
+  <script>
+    // Data
+    const cardData = [
+      {
+        name: 'Benny',
+        age: 3,
+        gender: 'male',
+      },
+      {
+        name: 'ConCon',
+        age: 2,
+        gender: 'male',
+      },
+      {
+        name: 'Gma Rem',
+        age: 66,
+        gender: 'female',
+      },
+      {
+        name: 'Gpa Rem',
+        age: 64,
+        gender: 'male',
+      },
+      {
+        name: 'Mommy',
+        age: 32,
+        gender: 'female',
+      },
+      {
+        name: 'Daddy',
+        age: 33,
+        gender: 'male',
+      },
+      {
+        name: 'Gma Kop',
+        age: 60,
+        gender: 'female',
+      },
+    ];
+
+    // Store elements
+    const body = document.body;
+    const wrapper = createMyElement('div', 'wrapper');
+    const cards = createMyElement('div', 'cards');
+
+    // Create a list
+    const ul = createMyElement('ul');
+    const listItems = ['one', 'two', 'three'].map(word => `<li>${word}</li>`);
+    ul.innerHTML = listItems.join('');
+
+    // Create an image
+    const img = createMyElement('img', 'cute');
+    img.setAttribute('src', 'https://media.giphy.com/media/gxxlowyvtfS0M/giphy.gif');
+    img.setAttribute('alt', 'cute puppies');
+    img.style.width = '500px';
+    img.style.height = '400px';
+
+    // Create some markup
+    const paragraphs = `
+      <div>
+        <p>ConCon is sitting with me.</p>
+        <p>He likes the puppies.</p>
+      </div>
+    `;
+
+    // Insert elements into the DOM
+    body.appendChild(wrapper);
+    wrapper.appendChild(ul);
+    wrapper.appendChild(img);
+    ul.insertAdjacentHTML('beforebegin', paragraphs);
+    wrapper.insertAdjacentElement('beforebegin', cards);
+
+    // Modify elements
+    const paragraphContainer = wrapper.firstElementChild;
+    paragraphContainer.lastElementChild.classList.add('warning');
+    paragraphContainer.firstElementChild.remove();
+
+    function makeCards(data) {
+      data.forEach(item => cards.insertAdjacentHTML('beforeend', generateCard(item.name, item.age, item.gender)))
+    };
+    makeCards(cardData);
+
+    const buttons = Array.from(document.querySelectorAll('.removeCard'));
+
+    cards.addEventListener('click', (e) => {
+      const isCloseButton = e.target.textContent === 'x';
+
+      if (isCloseButton) {
+        e.target.parentElement.remove();
+      }
+    })
+
+    // Utils
+    function createMyElement(type = 'div', className) {
+      const el = document.createElement(type);
+      className && el.classList.add(className);
+      return el;
+    }
+
+    function generateCard(name, age, gender) {
+      console.log(gender)
+      const ageInDogYears = age * 7;
+      const isOld = age > 50;
+      const isFemale = gender === 'female';
+      const isOldDog = ageInDogYears > 50;
+
+      function getEmoji() {
+        if (isOld) {
+          if (isFemale) return '👵🏻';
+          return '👴🏻';
+        }
+        if (isFemale) return '👧🏻';
+        return '👦🏻';
+      }
+
+      return `
+        <div class='playerCard'>
+          <button class='removeCard'>x</button>
+          <h1>${getEmoji()}</h1>
+          <h2>Name: ${name}</h2>  
+          <h3>Age: ${age}</h3>
+          <p>${name} is ${age} years old. In dog years ${name} would be ${ageInDogYears} years old. That's ${isOldDog ? 'an' : 'a'} ${isOldDog ? 'old' : 'young'} dog! 🐶</p>
+        </div>
+      `;
+    }
+
+  </script>
+</body>
+
+</html>
