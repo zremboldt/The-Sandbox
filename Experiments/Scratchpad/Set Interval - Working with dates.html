@@ -1,50 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <style>
-      body {
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: 'Courier New', Courier, monospace;
-      }
-    </style>
-  </head>
-  <body>
-    <script>
-      setInterval(function() {
-        let date = new Date();
 
-        // using toLocaleString allows you to ask for the long form of the month rather than its index.
-        let month = date.toLocaleString('default', { month: 'long' });
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Courier New', Courier, monospace;
+    }
+  </style>
+</head>
 
-        let day = date.getDay();
+<body>
+  <script>
+    setInterval(function () {
+      let date = new Date();
 
-        let year = date.getFullYear();
+      // using toLocaleString allows you to ask for the long form of the month rather than its index.
+      let month = date.toLocaleString('default', { month: 'long' });
 
-        // prettier-ignore
-        let hours = date.getHours() > 12
-          ? date.getHours() - 12
-          : date.getHours();
+      let day = date.getDate();
 
-        let minutes = date
-          .getMinutes()
-          .toString()
-          .padStart(2, '0');
+      let year = date.getFullYear();
 
-        let seconds = date
-          .getSeconds()
-          .toString()
-          .padStart(2, '0');
+      // prettier-ignore
+      let hours = date.getHours() > 12
+        ? date.getHours() - 12
+        : date.getHours();
 
-        document.body.innerHTML = `Today's date is ${month} ${day}, ${year} at ${hours}:${minutes}:${seconds}`;
-      }, 1000);
-    </script>
-  </body>
+      let minutes = date
+        .getMinutes()
+        .toString()
+        .padStart(2, '0');
+
+      let seconds = date
+        .getSeconds()
+        .toString()
+        .padStart(2, '0');
+
+      document.body.innerHTML = `Today's date is ${month} ${day}, ${year} at ${hours}:${minutes}:${seconds}`;
+    }, 1000);
+  </script>
+</body>
+
 </html>
