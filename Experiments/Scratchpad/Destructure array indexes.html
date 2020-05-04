@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const bikes = ['bianchi', 'miele', 'miyata', 'benotto', 'panasonic'];
+
+    // Grab the first and last item of an array with Object destructuring.
+    // Arrays have a length property which can be destructioed along with indexes.
+    const { length, 0: first, [length - 1]: last } = bikes;
+    console.log(first, last); // bianchi panasonic
+
+    const { length, [Math.floor(length / 2)]: middle } = bikes;
+    console.log(middle); // miyata
+  </script>
+</body>
+
+</html>
