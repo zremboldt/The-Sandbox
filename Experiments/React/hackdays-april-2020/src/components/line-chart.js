@@ -1,6 +1,7 @@
 import React from 'react';
 import { ResponsiveLine } from '@nivo/line'
 import Colors, { chartScheme } from '../utils/colors';
+import Tooltip from './tooltip';
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
 // no chart will be rendered.
@@ -35,40 +36,22 @@ const LineChart = ({ data }) => {
         legend: null,
       }}
       enableGridX={false}
-      colors={chartScheme}
+      colors={(d) => d.color}
       enablePoints={false}
-      enableCrosshair={false}
+      enableCrosshair={true}
       enableArea={true}
       areaBlendMode="overlay"
       areaOpacity={0.25}
       useMesh={true}
       enableSlices="x"
-      sliceTooltip={({ slice }) => {
-        return (
-          <div
-            style={{
-              background: 'black',
-              padding: '9px 12px',
-              border: '1px solid black',
-              borderRadius: 6,
-            }}
-          >
-            {/* <div>x: {slice.id}</div> */}
-            {slice.points.map(point => (
-              <div
-                key={point.id}
-                style={{
-                  color: point.serieColor,
-                  padding: '3px 0',
-                }}
-              >
-                <strong>{point.serieId}</strong> [{point.data.yFormatted}]
-              </div>
-            ))}
-          </div>
-        )
-      }}
+      sliceTooltip={({ slice }) => <Tooltip slice={slice} />}
       theme={{
+        crosshair: {
+          line: {
+            stroke: Colors.b10,
+            strokeDasharray: '8 4',
+          },
+        },
         axis: {
           legend: {
             text: {

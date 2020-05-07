@@ -1,6 +1,6 @@
 // Data fetching based partially on this article:
 // https://dev.to/silvestricodes/asynchronous-flows-with-react-hooks-1g0m
-
+import { chartScheme } from '../utils/colors'
 import { useState, useEffect, useCallback } from 'react';
 
 // The fn returned from useEffect will run when the component unmounts.
@@ -87,16 +87,17 @@ export function useDeathsOverTime(countries, dates) {
 
   if (!stats[1]) return;
 
-  let countryData = countries.map(country => {
+  let countryData = countries.map((country, i) => {
     if (country === 'South Korea') {
       country = 'Korea, South'
     }
     if (country === 'Mainland China') {
       country = 'China'
     }
+
     return ({
       "id": country,
-      "color": "hsl(10, 70%, 50%)",
+      "color": chartScheme[i],
       "data": []
     })
   });
