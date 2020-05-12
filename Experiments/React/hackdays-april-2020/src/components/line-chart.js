@@ -1,13 +1,7 @@
 import React from 'react';
 import { ResponsiveLine } from '@nivo/line'
-import Colors, { chartScheme } from '../utils/colors';
+import Colors from '../utils/colors';
 import Tooltip from './tooltip';
-// make sure parent container have a defined height when using
-// responsive component, otherwise height will be 0 and
-// no chart will be rendered.
-// website examples showcase many properties,
-// you'll often use just a few of them.
-
 
 const LineChart = ({ data }) => {
 
@@ -15,7 +9,7 @@ const LineChart = ({ data }) => {
   return (
     <ResponsiveLine
       data={data}
-      margin={{ top: 30, right: 40, bottom: 60, left: 50 }}
+      margin={{ top: 20, right: 34, bottom: 40, left: 50 }}
       xScale={{ type: 'point' }}
       yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: false, reverse: false }}
       curve="basis"
@@ -71,9 +65,6 @@ const LineChart = ({ data }) => {
             stroke: Colors.b10,
           }
         },
-        // tooltip: {
-        //   container: { background: "black", fontSize: "14px", color: 'white', paddingBottom: 6 },
-        // }
       }}
       legends={[]}
     />

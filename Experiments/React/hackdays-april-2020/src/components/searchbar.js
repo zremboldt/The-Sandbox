@@ -2,7 +2,14 @@ import styled from 'styled-components';
 import Colors from '../utils/colors'
 import React, { useRef } from 'react';
 
-const SearchBar = React.forwardRef(({ selectedCountries, filteredCountries, isSearching, setIsSearching, handleSearch, addCountry }, ref) => {
+const SearchBar = React.forwardRef(({
+  selectedCountries,
+  filteredCountries,
+  isSearching,
+  setIsSearching,
+  handleSearch,
+  addCountry
+}, ref) => {
   const selectList = useRef(null);
 
   function handleKeyDown(event) {

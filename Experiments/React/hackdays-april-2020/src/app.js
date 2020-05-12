@@ -136,10 +136,9 @@ const OverflowSpacer = styled.div`
 `;
 
 const ChartWrap = styled.div`
-  margin: 80px auto 0;
-  padding: 0 20px;
+  margin: 80px auto 60px;
   width: 100%;
-  max-width: ${wrapWidth + 80}px;
+  max-width: ${wrapWidth + 45}px;
   height: 600px;
 `;
 

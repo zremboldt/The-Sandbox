@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Colors from '../utils/colors'
 import { pluralize } from '../utils/pluralize'
+import { months } from '../utils/months'
 
 export default function Tooltip({ slice }) {
-  const hoveredDate = slice.points[0].data.x;
-  // console.log(slice)
+  const [currentSliceId, setCurrentSliceId] = useState('');
+  const [hoveredDate, setHoveredDate] = useState('');
+
+  if (currentSliceId !== slice.id) {
+    setCurrentSliceId(slice.id);
+
+    const [month, day, year] = slice.points[0].data.x.split('-');
+    setHoveredDate(`${months[month]} ${day}, ${year}`);
+  }
 
   return (
     <TooltipContainer>
