@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    const theOcean = {
+      ingredients: ['water', 'salt'],
+      creatures: ['Octopus', 'Jellyfish', 'Sharks'],
+      bottle: {
+        message: 'Help me! I\'m stranded on an island at sea!',
+      },
+      boat: {
+        crew: {
+          names: ['Ralph', 'Marv', 'Bubba']
+        },
+        tools: ['fishing rods', 'nets']
+      }
+    };
+
+    const { bottle: { message }, boat: { crew: { names: [first, second] }, tools } } = theOcean;
+
+    console.log(message);
+    console.log(first);
+    console.log(tools);
+
+  </script>
+</body>
+
+</html>
