@@ -1,0 +1,5 @@
+Use this command to open this text file, copy its contents, print it to the console and close the file.
+deno run -A https://deno.land/std/examples/cat.ts my-text-file.txt
+
+This is my cat 🐱
+This is my dog 🐶
