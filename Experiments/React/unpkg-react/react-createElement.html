@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script>
+    <script type="text/javascript">
+      const rootElement = document.getElementById("root");
+      // With React.createElement you first define the element type (div in this case).
+      // You then specify properties of that element within an object.
+      const element1 = React.createElement("div", {
+        children: "Hello World",
+        className: "container",
+      });
+
+      // Children could alternatively be written as a third property instead of being defined within the object.
+      const element2 = React.createElement(
+        "div",
+        {
+          className: "container",
+        },
+        "Hello World"
+      );
+
+      // You could even add multiple children and when you log the element out you'll see they've been put into an array.
+      // Here we're saying we don't want any props for this element.
+      const element3 = React.createElement(
+        "div",
+        null,
+        "Hello World",
+        ", Goodbye World"
+      );
+
+      // Or we could do the same thing again by doing this:
+      const element4 = React.createElement("div", {
+        children: ["Hello World", ", Goodbye World"],
+        className: "container",
+      });
+
+      // You could also add a react element as a child
+      const element5 = React.createElement("div", {
+        children: React.createElement("div", {
+          children: "I'm a child!",
+          className: "kiddo",
+        }),
+        className: "container",
+      });
+
+      // Let's try this!
+      const childElement = React.createElement("div", {
+        children: "I'm a child",
+        className: "kiddo",
+      });
+
+      const element6 = React.createElement("div", {
+        children: ["Hello.", childElement, "Check it out!"],
+        className: "container",
+      });
+
+      console.log(element1);
+      console.log(element2);
+      console.log(element3);
+      console.log(element4);
+      console.log(element5);
+      console.log(element6);
+
+      ReactDOM.render(element6, rootElement);
+    </script>
+  </body>
+</html>
