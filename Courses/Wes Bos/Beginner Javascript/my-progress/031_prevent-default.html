@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<head></head>
+<html lang="en">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+<link rel="stylesheet" href="base-styles.css">
+</head>
+
+<body class='center'>
+  <a class="myLink" href="https://www.codepen.io/zremboldt">Codepen</a>
+
+  <script>
+    const myLink = document.querySelector('.myLink');
+
+    function handleClick(e) {
+      e.preventDefault();
+      const shouldChangePage = confirm('This site may be malicious. Do you want to proceed?');
+      if (shouldChangePage) {
+        window.location = e.currentTarget.href
+      }
+    }
+
+    myLink.addEventListener('click', handleClick);
+  </script>
+</body>
+
+</html>
