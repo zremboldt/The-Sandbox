@@ -6,7 +6,7 @@ import linkSpriteDown from "../../assets/link-sprite-down.png";
 import linkSpriteUp from "../../assets/link-sprite-up.png";
 import useKeyPress from "../../hooks/useKeyPress";
 
-export default function Hero({ boardWidthInPx, gridCellSize }) {
+export default function Hero({ boardWidthInPx, gridCellSize, mapLayout }) {
   const [yPos, setYPos] = useState(0);
   const [xPos, setXPos] = useState(0);
   const [isFacing, setIsFacing] = useState("down");
@@ -18,7 +18,12 @@ export default function Hero({ boardWidthInPx, gridCellSize }) {
 
   useEffect(() => {
     if (pressArrowRight && xPos < boardWidthInPx) {
-      setXPos(xPos + gridCellSize);
+      const nextTile = mapLayout.filter(
+        (tile) => tile.yPos === yPos && tile.xPos === xPos + gridCellSize
+      );
+      if (!Object.values(...nextTile)[3]) {
+        setXPos(xPos + gridCellSize);
+      }
       setIsFacing("right");
     }
     if (pressArrowLeft && xPos > 0) {

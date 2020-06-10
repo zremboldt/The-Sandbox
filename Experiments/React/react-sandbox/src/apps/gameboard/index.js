@@ -4,31 +4,38 @@ import Hero from "./hero";
 import dungeonBlock from "../../assets/dungeon-block.png";
 import dungeonFloorTile from "../../assets/dungeon-floor-tile.png";
 
-const squared = (num) => num * num;
+// const squared = (num) => num * num;
 
 export default function Gameboard({ boardWidth = 10, gridCellSize = 70 }) {
   const [mapLayout, setMapLayout] = useState();
-  const totalCellCount = squared(boardWidth);
+  // const totalCellCount = squared(boardWidth);
   const boardWidthInPx = gridCellSize * (boardWidth - 1);
 
   useEffect(() => {
-    const tileDistribution = [...Array(totalCellCount)].map(() => {
-      const tile = {
-        xPos: 0,
-        yPos: 0,
-      };
+    const boardHeight = boardWidth;
+    let tileDistribution = [];
 
-      if (Math.random() > 0.1) {
-        tile.image = dungeonFloorTile;
-      } else {
-        tile.image = dungeonBlock;
+    for (let i = 0; i < boardHeight; i++) {
+      for (let j = 0; j < boardWidth; j++) {
+        const tile = {
+          xPos: j * gridCellSize,
+          yPos: i * gridCellSize,
+        };
+
+        if (Math.random() > 0.1) {
+          tile.image = dungeonFloorTile;
+          tile.isSolid = false;
+        } else {
+          tile.image = dungeonBlock;
+          tile.isSolid = true;
+        }
+
+        tileDistribution.push(tile);
       }
-
-      return tile;
-    });
+    }
 
     setMapLayout(tileDistribution);
-  }, [totalCellCount]);
+  }, [boardWidth, gridCellSize]);
 
   return (
     <Screen>
@@ -38,7 +45,11 @@ export default function Gameboard({ boardWidth = 10, gridCellSize = 70 }) {
             console.log(tile);
             return <GridCell key={i} image={tile.image} />;
           })}
-        <Hero gridCellSize={gridCellSize} boardWidthInPx={boardWidthInPx} />
+        <Hero
+          gridCellSize={gridCellSize}
+          boardWidthInPx={boardWidthInPx}
+          mapLayout={mapLayout}
+        />
       </Board>
     </Screen>
   );
