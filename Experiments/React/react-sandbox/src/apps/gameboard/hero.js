@@ -5,6 +5,7 @@ import linkSpriteRight from "../../assets/link-sprite-right.png";
 import linkSpriteDown from "../../assets/link-sprite-down.png";
 import linkSpriteUp from "../../assets/link-sprite-up.png";
 import useKeyPress from "../../hooks/useKeyPress";
+import getNextTile from "../../hooks/getNextTile";
 
 export default function Hero({ boardWidthInPx, gridCellSize, mapLayout }) {
   const [yPos, setYPos] = useState(0);
@@ -16,26 +17,32 @@ export default function Hero({ boardWidthInPx, gridCellSize, mapLayout }) {
   const pressArrowUp = useKeyPress("ArrowUp");
   const pressArrowDown = useKeyPress("ArrowDown");
 
+  const commonProperties = {
+    mapLayout,
+    xPos,
+    yPos,
+    gridCellSize,
+  };
+
   useEffect(() => {
     if (pressArrowRight && xPos < boardWidthInPx) {
-      const nextTile = mapLayout.filter(
-        (tile) => tile.yPos === yPos && tile.xPos === xPos + gridCellSize
-      );
-      if (!Object.values(...nextTile)[3]) {
-        setXPos(xPos + gridCellSize);
-      }
+      const nextTile = getNextTile("right", { ...commonProperties });
+      if (!nextTile.isSolid) setXPos(xPos + gridCellSize);
       setIsFacing("right");
     }
     if (pressArrowLeft && xPos > 0) {
-      setXPos(xPos - gridCellSize);
+      const nextTile = getNextTile("left", { ...commonProperties });
+      if (!nextTile.isSolid) setXPos(xPos - gridCellSize);
       setIsFacing("left");
     }
     if (pressArrowUp && yPos > 0) {
-      setYPos(yPos - gridCellSize);
+      const nextTile = getNextTile("up", { ...commonProperties });
+      if (!nextTile.isSolid) setYPos(yPos - gridCellSize);
       setIsFacing("up");
     }
     if (pressArrowDown && yPos < boardWidthInPx) {
-      setYPos(yPos + gridCellSize);
+      const nextTile = getNextTile("down", { ...commonProperties });
+      if (!nextTile.isSolid) setYPos(yPos + gridCellSize);
       setIsFacing("down");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

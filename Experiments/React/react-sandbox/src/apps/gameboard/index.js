@@ -22,7 +22,7 @@ export default function Gameboard({ boardWidth = 10, gridCellSize = 70 }) {
           yPos: i * gridCellSize,
         };
 
-        if (Math.random() > 0.1) {
+        if (Math.random() > 0.3) {
           tile.image = dungeonFloorTile;
           tile.isSolid = false;
         } else {
@@ -42,7 +42,6 @@ export default function Gameboard({ boardWidth = 10, gridCellSize = 70 }) {
       <Board cellCountPerDirection={boardWidth} gridCellSize={gridCellSize}>
         {mapLayout &&
           mapLayout.map((tile, i) => {
-            console.log(tile);
             return <GridCell key={i} image={tile.image} />;
           })}
         <Hero
