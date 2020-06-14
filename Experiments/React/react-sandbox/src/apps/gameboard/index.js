@@ -4,13 +4,11 @@ import Hero from "./hero";
 import HeartContainers from "./heart-containers";
 import Goon from "./goon";
 import dungeonBlock from "../../assets/dungeon-block.png";
+import dungeonHole from "../../assets/dungeon-hole.png";
 import dungeonFloorTile from "../../assets/dungeon-floor-tile.png";
-
-// const squared = (num) => num * num;
 
 export default function Gameboard({ boardWidth = 10, gridCellSize = 70 }) {
   const [mapLayout, setMapLayout] = useState();
-  // const totalCellCount = squared(boardWidth);
   const boardWidthInPx = gridCellSize * (boardWidth - 1);
 
   useEffect(() => {
@@ -23,7 +21,6 @@ export default function Gameboard({ boardWidth = 10, gridCellSize = 70 }) {
           xPos: j * gridCellSize,
           yPos: i * gridCellSize,
         };
-
         if (Math.random() > 0.2) {
           tile.image = dungeonFloorTile;
           tile.isSolid = false;
@@ -35,6 +32,8 @@ export default function Gameboard({ boardWidth = 10, gridCellSize = 70 }) {
         tileDistribution.push(tile);
       }
     }
+
+    tileDistribution[tileDistribution.length - 1].image = dungeonHole;
 
     setMapLayout(tileDistribution);
   }, [boardWidth, gridCellSize]);
