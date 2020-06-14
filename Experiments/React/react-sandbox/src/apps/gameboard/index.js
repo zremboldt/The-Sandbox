@@ -50,11 +50,14 @@ export default function Gameboard({ boardWidth = 10, gridCellSize = 70 }) {
           boardWidthInPx={boardWidthInPx}
           mapLayout={mapLayout}
         />
-        <Goon
-          gridCellSize={gridCellSize}
-          boardWidthInPx={boardWidthInPx}
-          mapLayout={mapLayout}
-        />
+        {[...Array(6)].map((_, i) => (
+          <Goon
+            gridCellSize={gridCellSize}
+            boardWidthInPx={boardWidthInPx}
+            mapLayout={mapLayout}
+            key={i}
+          />
+        ))}
       </Board>
     </Screen>
   );
