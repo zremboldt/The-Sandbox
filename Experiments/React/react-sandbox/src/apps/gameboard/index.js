@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Hero from "./hero";
+import Goon from "./goon";
 import dungeonBlock from "../../assets/dungeon-block.png";
 import dungeonFloorTile from "../../assets/dungeon-floor-tile.png";
 
@@ -22,7 +23,7 @@ export default function Gameboard({ boardWidth = 10, gridCellSize = 70 }) {
           yPos: i * gridCellSize,
         };
 
-        if (Math.random() > 0.3) {
+        if (Math.random() > 0.2) {
           tile.image = dungeonFloorTile;
           tile.isSolid = false;
         } else {
@@ -45,6 +46,11 @@ export default function Gameboard({ boardWidth = 10, gridCellSize = 70 }) {
             return <GridCell key={i} image={tile.image} />;
           })}
         <Hero
+          gridCellSize={gridCellSize}
+          boardWidthInPx={boardWidthInPx}
+          mapLayout={mapLayout}
+        />
+        <Goon
           gridCellSize={gridCellSize}
           boardWidthInPx={boardWidthInPx}
           mapLayout={mapLayout}
