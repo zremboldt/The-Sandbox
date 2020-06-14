@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Hero from "./hero";
+import HeartContainers from "./heart-containers";
 import Goon from "./goon";
 import dungeonBlock from "../../assets/dungeon-block.png";
 import dungeonFloorTile from "../../assets/dungeon-floor-tile.png";
@@ -40,6 +41,7 @@ export default function Gameboard({ boardWidth = 10, gridCellSize = 70 }) {
 
   return (
     <Screen>
+      <HeartContainers />
       <Board cellCountPerDirection={boardWidth} gridCellSize={gridCellSize}>
         {mapLayout &&
           mapLayout.map((tile, i) => {
