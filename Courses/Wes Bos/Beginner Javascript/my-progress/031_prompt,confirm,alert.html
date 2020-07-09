@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<head></head>
+<html lang="en">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+<link rel="stylesheet" href="base-styles.css">
+<style>
+  button {
+    margin: 10px;
+  }
+</style>
+</head>
+
+<body class='center'>
+  <button id="startButton">Start!</button>
+
+  <script>
+    const startButton = document.querySelector('#startButton');
+
+    const stores = `
+      <button id="generalStore">Cloyd's General Store</button>
+      <button id="medicalSupplies">Medical Supply Shop</button>
+      <button id="blacksmith">The Town Blacksmith</button>
+    `
+
+    const items = `
+      <button id="hardtack">Hardack $10</button>
+      <button id="rice">Rice $8</button>
+      <button id="bandages">Bandages $15</button>
+      <button id="rifle">Rifle $85</button>
+      <button id="ammo">Ammo $12</button>
+      <button id="rope">Rope $28</button>
+    `
+
+    function handleClick() {
+      const beginJourney = confirm('This journey may be dangerous! Do you wish to proceed?');
+      if (beginJourney) {
+        alert("Ok, let's get started.");
+        alert("My name is Danny and I'll be your guide.");
+        const name = prompt("What's your name?.");
+        alert(`Hey, ${name}. Welcome aboard!`);
+        alert("Before we set sail we'll need to grab some supplies. Here are a few of the best places to find what you need...");
+        document.body.innerHTML = stores;
+        const generalStore = document.querySelector('#generalStore');
+        generalStore.addEventListener('click', handleClickStore);
+      }
+    }
+    
+    function handleClickStore() {
+      alert("Welcome to Cloyd's General Store. We've got all the good stuff. Take a look around.");
+      document.body.innerHTML = items;
+    }
+
+    startButton.addEventListener('click', handleClick);
+  </script>
+</body>
+
+</html>
