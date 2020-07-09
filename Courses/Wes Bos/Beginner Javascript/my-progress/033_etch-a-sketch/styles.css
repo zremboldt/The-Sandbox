@@ -1,0 +1,66 @@
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background-color: rgb(187, 221, 218);
+}
+
+#etch-a-sketch {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  background-color: #e80000;
+  border: 10px solid #ce0000;
+  border-top: 10px solid #ff4242;
+  border-left: 10px solid #ff4242;
+  border-radius: 50px;
+}
+
+#canvas {
+  border-radius: 12px;
+  /* Set the width and height to half the actual size so it doesn't look pixelated */
+  width: 600px;
+  height: 400px;
+  background: white;
+}
+
+#etch-a-sketch.shake {
+  animation: shake 0.5s linear 1;
+}
+
+@keyframes shake {
+
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 30px;
+  background-color: white;
+  border-radius: 10px;
+  color: gray;
+}
