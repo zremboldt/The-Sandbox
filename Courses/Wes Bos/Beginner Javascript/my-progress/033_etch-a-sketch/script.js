@@ -1,7 +1,8 @@
 // Options
-const MOVE_DISTANCE = 50;
-const STROKE_BRIGHTNESS = 50;
-const STROKE_WIDTH = 40; // Also works well to set this to MOVE_DISTANCE
+const MOVE_DISTANCE = 20;
+const CAP_SHAPE = 'square'; // "butt" || "round" || "square"
+const STROKE_BRIGHTNESS = 0;
+const STROKE_WIDTH = 15; // Also works well to set this to MOVE_DISTANCE
 
 // Select elements
 const etchASketch = document.querySelector('#etch-a-sketch');
@@ -13,7 +14,7 @@ const shakeButton = document.querySelector('.btn-shake');
 const { width, height } = canvas;
 let x = 0 + MOVE_DISTANCE / 2;
 let y = 0 + MOVE_DISTANCE / 2;
-ctx.lineCap = 'round'; // "butt" || "round" || "square"
+ctx.lineCap = CAP_SHAPE;
 ctx.lineWidth = STROKE_WIDTH;
 
 // Begin drawing
