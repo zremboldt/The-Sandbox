@@ -1,7 +1,7 @@
 // Options
 const MOVE_DISTANCE = 20;
 const CAP_SHAPE = 'square'; // "butt" || "round" || "square"
-const STROKE_BRIGHTNESS = 0;
+let strokeBrightness = 0;
 const STROKE_WIDTH = 15; // Also works well to set this to MOVE_DISTANCE
 
 // Select elements
@@ -10,6 +10,7 @@ const etchASketch = document.querySelector('#etch-a-sketch');
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
 const shakeButton = document.querySelector('.btn-shake');
+const partyButton = document.querySelector('.btn-party');
 
 // Setup canvas for drawing
 const { width, height } = canvas;
@@ -20,7 +21,7 @@ ctx.lineWidth = STROKE_WIDTH;
 
 // Set initial cursor color and position
 let hue = 100;
-ctx.strokeStyle = `hsl(${hue}, 100%, ${STROKE_BRIGHTNESS}%)`;
+ctx.strokeStyle = `hsl(${hue}, 100%, ${strokeBrightness}%)`;
 ctx.beginPath();
 ctx.moveTo(x, y);
 
@@ -28,7 +29,7 @@ ctx.moveTo(x, y);
 function draw({ key }) {
   // Update the stroke color with each keypress
   hue += 1;
-  ctx.strokeStyle = `hsl(${hue}, 100%, ${STROKE_BRIGHTNESS}%)`;
+  ctx.strokeStyle = `hsl(${hue}, 100%, ${strokeBrightness}%)`;
   // Define the current line starting position
   ctx.beginPath();
   ctx.moveTo(x, y);
@@ -81,3 +82,14 @@ function clearCanvas() {
 }
 
 shakeButton.addEventListener('click', clearCanvas);
+
+// Toggle Party Mode!
+function togglePartyMode() {
+  if (strokeBrightness === 0) {
+    strokeBrightness = 50;
+  } else {
+    strokeBrightness = 0
+  }
+}
+
+partyButton.addEventListener('click', togglePartyMode);
