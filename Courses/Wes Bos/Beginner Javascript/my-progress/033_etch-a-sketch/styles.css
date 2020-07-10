@@ -11,19 +11,48 @@ html {
 }
 
 body {
+  position: relative;
   min-height: 100vh;
   display: grid;
   place-items: center;
   background-color: rgb(187, 221, 218);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.get-started {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translate3d(-50%, -80px, 0);
+  color: rgb(73, 112, 85);
+  font-size: 1.6rem;
+  transition: 600ms cubic-bezier(0.5,-0.2,.45,.95);
+  margin: 0;
+  opacity: 0;
+  background-color: hsla(0, 0%, 100%, 0.7);
+  padding: 14px 24px;
+  border-radius: 100px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.get-started.active {
+  transform: translate3d(-50%, 0, 0);
+  opacity: 1;
 }
 
 h1 {
   margin: 20px 0;
-  color: rgb(255, 236, 125);
-  font-family: 'Limelight', cursive;
+  font-family: cursive;
   font-size: 3.5rem;
-  text-shadow: 2px 2px 0 rgba(0,0,0,0.25);
   text-align: center;
+  /* Gradient on text */
+  color: rgb(255, 236, 125);
+  background-image: linear-gradient(-3deg, rgb(255, 209, 2) 48%, rgb(255, 246, 197) 54%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 #etch-a-sketch {
@@ -35,11 +64,16 @@ h1 {
   border-top: 10px solid #ff4242;
   border-left: 10px solid #ff4242;
   border-radius: 50px;
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 21.184c.13.357.264.72.402 1.088l.661 1.768C4.653 33.64 6 39.647 6 50c0 10.271-1.222 15.362-4.928 24.629-.383.955-.74 1.869-1.072 2.75v6.225c.73-2.51 1.691-5.139 2.928-8.233C6.722 65.888 8 60.562 8 50c0-10.626-1.397-16.855-5.063-26.66l-.662-1.767C1.352 19.098.601 16.913 0 14.85v6.335zm20 0C17.108 13.258 16 8.077 16 0h2c0 5.744.574 9.951 2 14.85v6.334zm0 56.195c-2.966 7.86-4 13.123-4 22.621h2c0-6.842.542-11.386 2-16.396v-6.225zM6 0c0 8.44 1.21 13.718 4.402 22.272l.661 1.768C14.653 33.64 16 39.647 16 50c0 10.271-1.222 15.362-4.928 24.629C7.278 84.112 6 89.438 6 100h2c0-10.271 1.222-15.362 4.928-24.629C16.722 65.888 18 60.562 18 50c0-10.626-1.397-16.855-5.063-26.66l-.662-1.767C9.16 13.223 8 8.163 8 0H6z' fill='%23fff' fill-rule='nonzero' fill-opacity='.3' opacity='.3'/%3E%3C/svg%3E%0A");
+  background-size: 15px;
+}
+
+#etch-a-sketch.shake {
+  animation: shake 0.5s linear 1;
 }
 
 #canvas {
   border-radius: 15px;
-  /* Set the width and height to half the actual size so it doesn't look pixelated */
   width: 600px;
   height: 400px;
   background: white;
@@ -48,8 +82,29 @@ h1 {
   border-right: 4px solid #ff4242;
 }
 
-#etch-a-sketch.shake {
-  animation: shake 0.5s linear 1;
+button {
+  align-self: center;
+  margin: 24px 0;
+  padding: 10px 20px 8px;
+  background-color: rgb(255, 236, 125);
+  background-image: linear-gradient(-8deg, rgb(255, 209, 2) 40%, rgb(255, 246, 197) 80%);
+  border: 0;
+  border-radius: 4px;
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.25);
+  color: rgb(212, 127, 0);
+  cursor: pointer;
+  font-size: 1.8rem;
+  font-family: cursive;
+  font-weight: bold;
+  transition: 50ms ease-in-out;
+}
+
+button:focus {
+  outline: none;
+}
+button:active {
+  box-shadow: 0px 0px 0px rgba(0,0,0,0.25);
+  transform: translate3d(1px, 1px, 0);
 }
 
 @keyframes shake {
@@ -74,30 +129,4 @@ h1 {
   60% {
     transform: translate3d(4px, 0, 0);
   }
-}
-
-.buttons {
-  margin: 24px 0;
-  display: flex;
-  justify-content: space-evenly;
-}
-
-button {
-  padding: 8px 20px;
-  background-color: white;
-  border: 0;
-  border-radius: 4px;
-  box-shadow: 2px 2px 0px rgba(0,0,0,0.25);
-  color: rgb(107, 107, 107);
-  cursor: pointer;
-  font-size: 1.8rem;
-  transition: 50ms ease-in-out;
-}
-
-button:focus {
-  outline: none;
-}
-button:active {
-  box-shadow: 0px 0px 0px rgba(0,0,0,0.25);
-  transform: translate3d(1px, 1px, 0);
 }

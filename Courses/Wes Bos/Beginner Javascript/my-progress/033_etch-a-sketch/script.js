@@ -5,6 +5,7 @@ const STROKE_BRIGHTNESS = 0;
 const STROKE_WIDTH = 15; // Also works well to set this to MOVE_DISTANCE
 
 // Select elements
+const getStartedText = document.querySelector('.get-started');
 const etchASketch = document.querySelector('#etch-a-sketch');
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
@@ -17,23 +18,21 @@ let y = 0 + MOVE_DISTANCE / 2;
 ctx.lineCap = CAP_SHAPE;
 ctx.lineWidth = STROKE_WIDTH;
 
-// Begin drawing
+// Set initial cursor color and position
 let hue = 100;
 ctx.strokeStyle = `hsl(${hue}, 100%, ${STROKE_BRIGHTNESS}%)`;
 ctx.beginPath();
 ctx.moveTo(x, y);
-ctx.lineTo(x, y);
-ctx.stroke();
 
 // Draw
 function draw({ key }) {
   // Update the stroke color with each keypress
   hue += 1;
   ctx.strokeStyle = `hsl(${hue}, 100%, ${STROKE_BRIGHTNESS}%)`;
-  // Define the pen starting position
+  // Define the current line starting position
   ctx.beginPath();
   ctx.moveTo(x, y);
-  // Move pen to new position based on user input
+  // Move cursor to new position based on user input
   if (key === 'ArrowRight') {
     if (x + MOVE_DISTANCE < width) x += MOVE_DISTANCE;
   }
@@ -48,14 +47,27 @@ function draw({ key }) {
   }
   ctx.lineTo(x, y);
   ctx.stroke();
-  console.log(hue)
+
+  // Draw a dot at the cursor resting position 
+  // so user can see where they're at.
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  ctx.lineTo(x, y);
+  ctx.strokeStyle = `hsla(0, 0%, 100%, 0.3)`;
+  ctx.stroke();
 }
+
+let isDrawing = false;
 
 // Keypress events
 function handleKey(e) {
   if (e.key.includes('Arrow')) {
     e.preventDefault();
     draw({ key: e.key });
+    if (!isDrawing) {
+      getStartedText.classList.remove('active');
+      isDrawing = true;
+    }
   }
 }
 
