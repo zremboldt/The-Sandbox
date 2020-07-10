@@ -36,6 +36,7 @@ body {
   border-radius: 100px;
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
+  white-space: nowrap;
 }
 
 .get-started.active {
@@ -59,6 +60,7 @@ h1 {
 #etch-a-sketch {
   display: flex;
   flex-direction: column;
+  margin: 50px;
   padding: 0 40px;
   background-color: #e80000;
   border: 10px solid #ce0000;
