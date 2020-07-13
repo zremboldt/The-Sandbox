@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const meatInventory = {
+      pepperoni: 100,
+      sausage: 30,
+      hamburger: 60,
+    }
+
+    const veggieInventory = {
+      onion: 20,
+      greenPepper: 30,
+      mushroom: 10,
+    }
+
+    const inventory = {
+      ...meatInventory,
+      ...veggieInventory,
+      tomato: 90, // Here I'm adding in an extra value.
+    }
+
+    // Here I'll spit the values out in the console.
+    Object.entries(inventory).forEach(([key, value]) => console.log(`${key}: ${value} lbs`))
+
+  </script>
+</body>
+
+</html>

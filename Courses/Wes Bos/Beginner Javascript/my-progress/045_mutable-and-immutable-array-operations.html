@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const mutantCats = ['Kitty', 'Meowser', 'Sassy', 'Grumpy Cat']
+    const nonMutantCats = ['Kitty', 'Meowser', 'Sassy', 'Grumpy Cat']
+
+    // ===================================================================
+    // add an item to the end of an array
+    // ===================================================================
+
+    // mutable way
+    mutantCats.push('Garfield');
+
+    // immutable way
+    const nonMutantCats1 = [...nonMutantCats, 'Garfield'];
+
+    // ===================================================================
+    // add an item to the beginning of an array
+    // ===================================================================
+
+    // mutable way
+    mutantCats.unshift('Garfield');
+
+    // immutable way
+    const nonMutantCats2 = ['Garfield', ...nonMutantCats];
+
+    // ===================================================================
+    // add an item somewhere in the middle of an array
+    // ===================================================================
+
+    const nonMutantCats3 = [
+      ...nonMutantCats.slice(0, 2),
+      'Garfield',
+      ...nonMutantCats.slice(2)
+    ];
+
+    // ===================================================================
+    // remove an item somewhere in the middle of an array
+    // ===================================================================
+
+    const nonMutantCats4 = [
+      ...nonMutantCats.slice(0, 2),
+      ...nonMutantCats.slice(3)
+    ];
+  </script>
+</body>
+
+</html>

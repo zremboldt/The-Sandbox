@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <ul class="prizes"></ul>
+  <script>
+    // Docs on insertAdjacentHTML
+    // https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
+    document.body.insertAdjacentHTML('afterbegin', `<h4>Prizes</h4>`);
+
+    const ul = document.querySelector('.prizes');
+    const score = 200;
+
+    // The order of the items in a Map is guaranteed. This is not the case with an object.
+    const prizes = new Map();
+    prizes.set(100, 'Laffy Taffy');
+    prizes.set(200, 'Stuffed Bear');
+    prizes.set(300, 'Super Soaker');
+
+    // forOf loop. You can use destructuring here.
+    for (const [points, prize] of prizes) {
+      const li = `<li>${points}: ${prize}</li>`;
+      ul.insertAdjacentHTML('beforeend', li);
+    }
+
+    ul.insertAdjacentHTML('afterend', `<p>Prize for your current score: <strong>${prizes.get(score)}</strong></p>`)
+  </script>
+</body>
+
+</html>

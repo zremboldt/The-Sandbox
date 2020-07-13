@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <ul class="prizes"></ul>
+  <script>
+    // The order of the items in a Map is guaranteed. This is not the case with an object.
+    const ul = document.querySelector('.prizes');
+    const score = 200;
+
+    const prizes = new Map();
+    prizes.set(100, 'Laffy Taffy');
+    prizes.set(200, 'Stuffed Bear');
+    prizes.set(300, 'Super Soaker');
+
+    console.log(`You win a ${prizes.get(score)}`);
+
+    // forOf loop here
+    for (const prize of prizes) {
+      console.log(prize)
+    }
+
+    // Can use destructuring here
+    for (const [points, prize] of prizes) {
+      const li = `<li>${points}: ${prize}</li>`;
+      ul.insertAdjacentHTML('beforeend', li);
+    }
+
+  </script>
+</body>
+
+</html>

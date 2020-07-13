@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // Removing an item from the middle of an array is somehting that we need to do commonly in React land.
+    const comments = [
+      { text: 'Yo', id: 123 },
+      { text: 'I like pizza!', id: 223 },
+      { text: "Let's plan a backpacking trip.", id: 323 },
+      { text: 'Banff would be an awesome location!', id: 423 },
+      { text: 'Be right back...', id: 523 },
+    ];
+
+    function removeComment(id, comments) {
+      // Find the index of the item
+      const indexToRemove = comments.findIndex(comment => comment.id === id);
+      // Make a new array without that item and return it
+      return [
+        ...comments.slice(0, indexToRemove),
+        ...comments.slice(indexToRemove + 1)
+      ];
+    }
+
+    const modifiedComments = removeComment(323, comments);
+    console.log(modifiedComments)
+
+  </script>
+</body>
+
+</html>

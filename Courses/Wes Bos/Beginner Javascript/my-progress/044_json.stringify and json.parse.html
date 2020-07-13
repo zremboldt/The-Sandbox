@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const person = {
+      name: 'Matt',
+      age: 33,
+      state: 'Kansas',
+    }
+
+    // Turn your object into plain text that is readable by anyone. You could even send this in an email and parse it on the other side. Any programming language can take this and use it.
+    const objectToText = JSON.stringify(person);
+    console.log(objectToText);
+
+    // Now take that text and turn it back into a JS object.
+    const textToObject = JSON.parse(objectToText);
+    console.log(textToObject);
+
+
+  </script>
+</body>
+
+</html>

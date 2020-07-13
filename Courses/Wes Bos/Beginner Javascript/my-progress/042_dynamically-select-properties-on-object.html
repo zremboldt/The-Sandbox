@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const kevin = {
+      firstName: 'Kevin',
+      lastName: 'McCallister',
+      age: 8,
+      mom: 'Mary',
+      dad: 'Peter',
+      uncle: 'Frank',
+      sayGoodnightKevin() {
+        console.log(`Goodnight ${this.firstName}`);
+      }
+    }
+
+    const keyToLookup = prompt('Which key would you like to access?');
+    document.body.innerHTML = kevin[keyToLookup];
+  </script>
+</body>
+
+</html>

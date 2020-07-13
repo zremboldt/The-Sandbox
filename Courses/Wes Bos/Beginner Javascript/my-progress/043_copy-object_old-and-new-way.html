@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const kevin1 = {
+      firstName: 'Kevin',
+      lastName: 'McCallister',
+      age: 8,
+      mom: 'Mary',
+      dad: 'Peter',
+      uncle: 'Frank',
+      sayGoodnightKevin() {
+        console.log(`Goodnight ${this.firstName}`);
+      }
+    }
+
+    // if I were to say:
+
+    // const kevin2 = kevin1;
+    // kevin2.age = 10
+
+    // now kevin1.age is equal to 10.
+    // That's not waht we want. We wanted to make a copy of the object.
+
+    // ---
+
+    // To make a copy of kevin1 before ES6 we had to do this:
+    const kevin3 = Object.assign({}, kevin1);
+
+    // Now we can do this using the spread operator:
+    const kevin4 = { ...kevin1 };
+
+    // BUT!!!
+    // These are only shallow copies. Only one level deep!
+    // One solution to this problem would be to reach for lodash. This would do it:
+    // _.cloneDeep(kevin1);
+  </script>
+</body>
+
+</html>
