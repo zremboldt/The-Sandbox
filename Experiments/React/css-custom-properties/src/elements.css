@@ -1,0 +1,239 @@
+[data-avatar] {
+  --avatar--size: 2rem;
+  --avatar--border: 0 solid white;
+  --avatar--opacity: 1;
+
+  box-sizing: border-box;
+  display: inline-block;
+  border-radius: 50%;
+  border: var(--avatar--border);
+  opacity: var(--avatar--opacity);
+  width: var(--avatar--size);
+  height: var(--avatar--size);
+  object-fit: cover;
+}
+/* even tho the properties are low fidelity, it's great declaring these on a shared ancestor */
+[data-box] {
+  box-sizing: var(--box--box-sizing, border-box);
+  border: var(--box--border, 0);
+  border-radius: var(--box--border-radius, 0);
+  margin: var(--box--margin, 0);
+  padding: var(--box--padding, 0);
+}
+[data-button] {
+  -moz-appearance: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-appearance: none;
+  -webkit-user-select: none;
+  appearance: none;
+  box-sizing: border-box;
+  border-width: var(--button--border-width, 1px);
+  border-style: solid;
+  border-color: var(--button--border-color, fuchsia);
+  background-image: var(--button--background-image);
+  background-color: var(--button--background-color, fuchsia);
+  border-radius: var(--button--border-radius, 4px);
+  color: var(--button--color, blue);
+  cursor: pointer;
+  display: inline-block;
+  font-weight: var(--button--font-weight, 600);
+  position: relative;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  transition: 100ms all ease-in-out;
+  font-size: var(--button--font-size, 14px);
+  padding: var(--button--padding, 0 16px);
+  line-height: calc(
+    var(--button--height, 32px) - calc(var(--button--border-width, 1px) * 2)
+  );
+  box-shadow: var(--button--box-shadow);
+  background-image: var(--button--background-image);
+}
+input[type="submit"][data-button] {
+  text-align: center;
+}
+button[data-button] {
+}
+a[data-button] {
+  text-align: center;
+  text-decoration: none;
+}
+[data-heading] {
+  color: var(--heading--color, inherit);
+  font-size: var(--heading--font-size);
+  font-weight: var(--heading--font-weight);
+  font-style: var(--heading--font-style);
+  text-transform: var(--heading--text-transform);
+  margin: var(--heading--margin);
+  line-height: var(--heading--line-height, inherit);
+}
+/*! select.css (modified) */
+[data-select] {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-position: right center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+[data-select] {
+  --select--height: 2.25rem;
+
+  font-size: var(--select--font-size, 1rem);
+
+  background-color: var(--select--background-color, #fff);
+  background-image: var(
+    --select--background-image,
+    url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='-7 -7  30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7.55504 10.5092C7.75343 10.7608 8.13399 10.7635 8.33592 10.5147L11.3385 6.81508C11.6037 6.48828 11.3711 6 10.9503 6H5.03091C4.61331 6 4.37972 6.48163 4.63826 6.80956L7.55504 10.5092Z' fill='%23444'/%3E%3C/svg%3E%0A")
+  );
+  height: var(--select--height);
+  background-size: var(--select--background-size, var(--select--height));
+  width: var(--select--width, auto);
+  padding: var(--select--padding, 0 1.75em 0 0.5em);
+
+  color: var(--select--color, inherit);
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--select--border-color, hsl(0, 0%, 58%));
+  border-radius: var(--select--border-radius, 0.25em);
+}
+[data-select]:disabled {
+  --select--background-color: hsl(0, 0%, 95%);
+  --select--color: hsl(0, 0%, 40%);
+  --select--border-color: hsl(0, 0%, 70%);
+  --select--background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='-7 -7  30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7.55504 10.5092C7.75343 10.7608 8.13399 10.7635 8.33592 10.5147L11.3385 6.81508C11.6037 6.48828 11.3711 6 10.9503 6H5.03091C4.61331 6 4.37972 6.48163 4.63826 6.80956L7.55504 10.5092Z' fill='%23aaa'/%3E%3C/svg%3E%0A");
+  cursor: not-allowed;
+}
+/* FF(all): remove dotted inner focus ring */
+/* [data-select]:focus:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #000;
+} */
+[data-surface] {
+  box-sizing: border-box;
+  background-color: var(--surface-1of1--background-color, #fff);
+  transition: all 200ms ease;
+}
+[data-surface~="depth:2"] {
+  background-color: var(--surface-2of2--background-color, #eee);
+}
+[data-surface~="depth:2"] [data-surface] {
+  background-color: var(--surface-1of2--background-color, #fff);
+}
+[data-surface~="depth:3"] {
+  background-color: var(--surface-3of3--background-color, #ddd);
+}
+[data-surface~="depth:3"] [data-surface] {
+  background-color: var(--surface-2of3--background-color, #eee);
+}
+[data-surface~="depth:3"] [data-surface] [data-surface] {
+  background-color: var(--surface-1of3--background-color, #fff);
+}
+[data-table] {
+  --table--border-color: hsl(0, 0%, 90%);
+  --table--border-radius: 0;
+  --table--font-size: 0.875rem;
+
+  --table-row--height: 4rem;
+
+  --table-head--background-color: hsl(0, 0%, 97.5%);
+  --table-head--color: hsl(0, 0%, 40%);
+  --table-head--font-size: 0.75rem;
+
+  --table-data--border-color: var(--table--border-color);
+  --table-data--padding: 0 0.5rem;
+}
+[data-table] {
+  box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--table--border-color);
+  border-spacing: 0;
+  font-size: var(--table--font-size);
+  border-radius: var(--table--border-radius);
+  overflow: hidden;
+}
+[data-table-head] {
+  --table-row--height: 3rem;
+  background-color: var(--table-head--background-color);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: var(--table-head--font-size);
+  font-weight: 700;
+  color: var(--table-head--color);
+}
+[data-table-row] {
+  box-sizing: border-box;
+  height: var(--table-row--height);
+}
+/* yes, there's a more clever way to right this with :last-child *if* there is only ever one header row but that isn't guaranteed */
+[data-table-head] [data-table-row]:first-child,
+[data-table-body] [data-table-row]:last-child {
+  box-sizing: border-box;
+  height: calc(var(--table-row--height) - 1px);
+}
+[data-table-data] {
+  box-sizing: border-box;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: var(--table--border-color);
+  padding: var(--table-data--padding);
+}
+[data-table-data]:first-child {
+  padding-left: 1rem;
+}
+[data-table--data]:last-child {
+  padding-right: 1rem;
+}
+[data-table-head] [data-table-data] {
+  border-top-width: 0;
+}
+[data-text] {
+  color: var(--text--color, inherit);
+  font-size: var(--text--font-size, inherit);
+  font-weight: var(--text--font-weight, inherit);
+  font-style: var(--text--font-style, inherit);
+}
+[data-text-input] {
+  box-sizing: var(--text-input--box-sizing, border-box);
+  font-size: var(--text-input--font-size, 1rem);
+  border-color: var(--text-input--border-color, #767676);
+  border-width: var(--text-input--border-width, 1px);
+  border-style: var(--text-input--border-style, solid);
+  background-color: var(--text-input--background-color, white);
+  border-radius: var(--text-input--border-radius, 0.25em);
+  padding: var(--text-input--padding, 0.5em 0.625em);
+  margin: var(--text-input--margin, 0);
+  color: var(--text-input--color, inherit);
+  box-shadow: var(--text-input--box-shadow, none);
+  width: var(--text-input--width, auto);
+  line-height: var(--text-input--line-height, 1.125em);
+}
+[data-text-input]::placeholder {
+  color: var(--text-input--color__placeholder, #767676);
+  color: #767676;
+}
+[data-text-input]:focus {
+  outline: var(--text-input--outline_focus, none);
+  --text-input--box-shadow: var(
+    --text-input--box-shadow_focus,
+    0 0 1.5px 3px hsla(0, 0%, 50%, 0.5)
+  );
+}
+[data-text-input]:invalid {
+  --text-input--border-color: var(
+    --text-input--border-color_invalid,
+    hsl(0, 79%, 63%)
+  );
+  --text-input--color: var(--text-input--color_invalid, hsl(0, 79%, 63%));
+  --text-input--box-shadow: var(
+    --text-input--box-shadow_invalid,
+    0 0 1.5px 3px hsla(0, 79%, 63%, 0.5)
+  );
+}

@@ -1,0 +1,31 @@
+@import-normalize;
+
+:root {
+  --avatar--size: 8rem;
+  --grid--column-count: 1;
+  --grid--row-count: 1;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.App {
+  background-color: #171c25;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(var(--grid--column-count), 1fr);
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.avatar {
+  width: var(--avatar--size, 6rem);
+  height: var(--avatar--size, 6rem);
+  object-fit: cover;
+  border-radius: 50%;
+}
