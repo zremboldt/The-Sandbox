@@ -1,0 +1,1 @@
+[...Array(7)].forEach((_, i) => console.log('#'.repeat(i + 1)));
