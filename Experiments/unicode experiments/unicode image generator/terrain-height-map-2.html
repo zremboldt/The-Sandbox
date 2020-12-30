@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Unicode Image Generator</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100&display=swap" rel="stylesheet">
+    <style>
+      body { 
+        min-width: 100vw;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        margin: 0; 
+        background-color: black;
+      }
+      #imageCanvas { display: none; }
+      #artboard {
+        margin: 60px;
+        font-size: 12px;
+        line-height: 1.2em;
+        letter-spacing: 0.2em;
+        font-family: 'Noto Sans JP';
+        font-weight: 100;
+        color: white;
+      }
+    </style>
+</head>
+<body>
+    <canvas id="imageCanvas"></canvas>
+    <pre id="artboard"></pre>
+
+    <script>
+      // Controls ====================================
+      const MAXIMUM_WIDTH = 60;
+      const MAXIMUM_HEIGHT = 60;
+      const grayRamp = "　　・╲╲╲╳╳╳";
+      const imageSource = './image-options/terrain-height-map-2.jpg';
+
+      // Setup =======================================
+      const canvas = document.querySelector("#imageCanvas");
+      const ctx = canvas.getContext("2d");
+      const artboard = document.querySelector("#artboard");
+
+      const image = new Image();
+      image.src = imageSource;
+      
+      // =====================================
+      // Main
+      // =====================================
+
+      image.onload = () => {
+        const [width, height] = clampDimensions(image.width, image.height);
+        canvas.width = width;
+        canvas.height = height;
+
+        ctx.drawImage(image, 0, 0, width, height);
+
+        const grayscale = convertToGrayscale(ctx, width, height);
+        drawAscii(grayscale, width);
+      };
+
+      // =====================================
+      // Resize image if larger than desired
+      // =====================================
+
+      const clampDimensions = (width, height) => {
+        if (height > MAXIMUM_HEIGHT) {
+          const reducedWidth = Math.floor((width * MAXIMUM_HEIGHT) / height);
+          return [reducedWidth, MAXIMUM_HEIGHT];
+        }
+
+        if (width > MAXIMUM_WIDTH) {
+          const reducedHeight = Math.floor((height * MAXIMUM_WIDTH) / width);
+          return [MAXIMUM_WIDTH, reducedHeight];
+        }
+
+        return [width, height];
+      };
+
+      // =====================================
+      // Convert image to grayscale
+      // =====================================
+
+      const toGrayscale = (r, g, b) => 0.21 * r + 0.72 * g + 0.07 * b;
+
+      const convertToGrayscale = (ctx, width, height) => {
+        const imageData = ctx.getImageData(0, 0, width, height);
+        const grayscales = [];
+
+        for (let i = 0; i < imageData.data.length; i += 4) {
+          const r = imageData.data[i];
+          const g = imageData.data[i + 1];
+          const b = imageData.data[i + 2];
+
+          const grayscale = toGrayscale(r, g, b);
+          imageData.data[i] = imageData.data[i + 1] = imageData.data[
+            i + 2
+          ] = grayscale;
+
+          grayscales.push(grayscale);
+        }
+
+        ctx.putImageData(imageData, 0, 0);
+
+        return grayscales;
+      };
+
+      // =====================================
+      // Assign characters to grayscale values
+      // =====================================
+
+      const rampLength = grayRamp.length;
+
+      // the grayscale value is an integer ranging from 0 (black) to 255 (white)
+      const getCharacterForGrayscale = grayscale => grayRamp[Math.ceil(((rampLength - 1) * grayscale) / 255)];
+
+      const drawAscii = (grayscales, width) => {
+        const allCharacters = grayscales.reduce((artboard, grayscale, index) => {
+          let nextChars = getCharacterForGrayscale(grayscale);
+
+          if ((index + 1) % width === 0) {
+            nextChars += "\n";
+          }
+
+          return artboard + nextChars;
+        }, "");
+
+        artboard.textContent = allCharacters;
+      };
+
+    </script>
+</body>
+</html>
