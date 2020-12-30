@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ascii/Unicode Fun</title>
+    <title>Unicode Image Generator</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100&display=swap" rel="stylesheet">
     <style>
@@ -33,7 +33,7 @@
     <pre id="artboard"></pre>
 
     <script>
-      // Controls
+      // Controls ====================================
       const MAXIMUM_WIDTH = 400;
       const MAXIMUM_HEIGHT = 400;
       // const grayRamp = "WMXZOCxz|+-:. ";
@@ -42,7 +42,7 @@
       const grayRamp = "╳╳╲╲╲・・・　　　　";
       const imageSource = './ascii-image-options/galaxyInverse4.jpg';
 
-      // Setup
+      // Setup =======================================
       const canvas = document.querySelector("#imageCanvas");
       const ctx = canvas.getContext("2d");
       const artboard = document.querySelector("#artboard");
