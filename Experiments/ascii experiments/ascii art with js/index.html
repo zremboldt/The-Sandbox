@@ -16,8 +16,8 @@
         margin: 0; 
         background-color: black;
       }
-      canvas { display: none; }
-      #ascii {
+      #imageCanvas { display: none; }
+      #artboard {
         margin: 30px;
         font-size: 12px;
         line-height: 1.2em;
@@ -29,31 +29,45 @@
     </style>
 </head>
 <body>
-    <canvas id="preview"></canvas>
-    <pre id="ascii"></pre>
+    <canvas id="imageCanvas"></canvas>
+    <pre id="artboard"></pre>
 
     <script>
-      const canvas = document.getElementById("preview");
-      const context = canvas.getContext("2d");
+      // Controls
+      const MAXIMUM_WIDTH = 400;
+      const MAXIMUM_HEIGHT = 400;
+      // const grayRamp = "WMXZOCxz|+-:. ";
+      // const grayRamp = "ⅢⅡⅠ⁝⁚ ";
+      // const grayRamp = "╳╳╳╲╲╲・・・　";
+      const grayRamp = "╳╳╲╲╲・・・　　　　";
+      const imageSource = './ascii-image-options/galaxyInverse4.jpg';
 
+      // Setup
+      const canvas = document.querySelector("#imageCanvas");
+      const ctx = canvas.getContext("2d");
+      const artboard = document.querySelector("#artboard");
 
       const image = new Image();
-      image.src = './ascii-image-options/galaxyInverse4.jpg';
+      image.src = imageSource;
       
+      // =====================================
+      // Main
+      // =====================================
+
       image.onload = () => {
         const [width, height] = clampDimensions(image.width, image.height);
         canvas.width = width;
         canvas.height = height;
 
-        context.drawImage(image, 0, 0, width, height);
+        ctx.drawImage(image, 0, 0, width, height);
 
-        const grayscale = convertToGrayScales(context, width, height);
+        const grayscale = convertToGrayscale(ctx, width, height);
         drawAscii(grayscale, width);
       };
 
-
-      const MAXIMUM_WIDTH = 400;
-      const MAXIMUM_HEIGHT = 400;
+      // =====================================
+      // Resize image if larger than desired
+      // =====================================
 
       const clampDimensions = (width, height) => {
         if (height > MAXIMUM_HEIGHT) {
@@ -68,65 +82,56 @@
 
         return [width, height];
       };
-      
 
       // =====================================
-      // Change image to grayscale
+      // Convert image to grayscale
       // =====================================
 
-      const toGrayScale = (r, g, b) => 0.21 * r + 0.72 * g + 0.07 * b;
+      const toGrayscale = (r, g, b) => 0.21 * r + 0.72 * g + 0.07 * b;
 
-      const convertToGrayScales = (context, width, height) => {
-        const imageData = context.getImageData(0, 0, width, height);
-
-        const grayScales = [];
+      const convertToGrayscale = (ctx, width, height) => {
+        const imageData = ctx.getImageData(0, 0, width, height);
+        const grayscales = [];
 
         for (let i = 0; i < imageData.data.length; i += 4) {
           const r = imageData.data[i];
           const g = imageData.data[i + 1];
           const b = imageData.data[i + 2];
 
-          const grayScale = toGrayScale(r, g, b);
+          const grayscale = toGrayscale(r, g, b);
           imageData.data[i] = imageData.data[i + 1] = imageData.data[
             i + 2
-          ] = grayScale;
+          ] = grayscale;
 
-          grayScales.push(grayScale);
+          grayscales.push(grayscale);
         }
 
-        context.putImageData(imageData, 0, 0);
+        ctx.putImageData(imageData, 0, 0);
 
-        return grayScales;
+        return grayscales;
       };
 
       // =====================================
-      // Assign chars to grayscale values
+      // Assign characters to grayscale values
       // =====================================
 
-      // const grayRamp = "WMXZOCxz|+-:. ";
-      // const grayRamp = "ⅢⅡⅠ⁝⁚ ";
-      // const grayRamp = "╳╳╳╲╲╲・・・　";
-      const grayRamp = "╳╳╲╲╲・・・　　　　";
       const rampLength = grayRamp.length;
 
-      // the grayScale value is an integer ranging from 0 (black) to 255 (white)
-      const getCharacterForGrayScale = grayScale => grayRamp[Math.ceil(((rampLength - 1) * grayScale) / 255)];
+      // the grayscale value is an integer ranging from 0 (black) to 255 (white)
+      const getCharacterForGrayscale = grayscale => grayRamp[Math.ceil(((rampLength - 1) * grayscale) / 255)];
 
-
-      const asciiImage = document.querySelector("pre#ascii");
-
-      const drawAscii = (grayScales, width) => {
-        const ascii = grayScales.reduce((asciiImage, grayScale, index) => {
-          let nextChars = getCharacterForGrayScale(grayScale);
+      const drawAscii = (grayscales, width) => {
+        const allCharacters = grayscales.reduce((artboard, grayscale, index) => {
+          let nextChars = getCharacterForGrayscale(grayscale);
 
           if ((index + 1) % width === 0) {
             nextChars += "\n";
           }
 
-          return asciiImage + nextChars;
+          return artboard + nextChars;
         }, "");
 
-        asciiImage.textContent = ascii;
+        artboard.textContent = allCharacters;
       };
 
     </script>
