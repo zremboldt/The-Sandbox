@@ -58,6 +58,9 @@ typings/
 .cache/
 public
 
+# parcel files
+.parcel-cache
+
 # Mac files
 .DS_Store
 
