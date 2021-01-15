@@ -2,6 +2,7 @@ import * as THREE from "three";
 import fragment from './shaders/fragment.glsl';
 import vertex from './shaders/vertex.glsl';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { GUI } from 'three/examples/jsm/libs/dat.gui.module';
 import imgAbove from '../assets/above.jpg';
 import displacement from '../assets/displacement.png';
 
@@ -15,9 +16,18 @@ export default class Sketch{
     this.camera.position.z = 1;
     this.scene = new THREE.Scene();
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.settings();
     this.time = 0;
     this.addObjects();
     this.render();
+  }
+
+  settings() {
+    this.settings = {
+      progress: 0,
+    };
+    this.gui = new GUI();
+    this.gui.add(this.settings, 'progress', 0, 1, 0.01);
   }
 
   addObjects() {
@@ -27,6 +37,7 @@ export default class Sketch{
       extensions: { derivatives: '#extension GL_OES_standard_derivatives : enable' },
       side: THREE.DoubleSide,
       uniforms: {
+        progress: { type: 'f', value: 0 },
         time: { type: 'f', value: 0 },
         image: { type: 't', value: new THREE.TextureLoader().load(imgAbove) },
         displacement: { type: 't', value: new THREE.TextureLoader().load(displacement) },
@@ -46,6 +57,7 @@ export default class Sketch{
     this.time++;
     console.log(this.time);
 
+    this.material.uniforms.progress.value = this.settings.progress;
     this.material.uniforms.time.value = this.time;
     
     this.renderer.render( this.scene, this.camera );
