@@ -36942,7 +36942,7 @@ if (typeof __THREE_DEVTOOLS__ !== 'undefined') {
 
 }
 },{}],"js/shaders/fragment.glsl":[function(require,module,exports) {
-module.exports = "#define GLSLIFY 1\nuniform float time;\nuniform float progress;\nuniform sampler2D image;\n\nvarying vec2 vUv;\n\nvoid main() {\n  vec4 color = texture2D( image, vUv );\n  gl_FragColor = color;\n}";
+module.exports = "#define GLSLIFY 1\nuniform float time;\nuniform float progress;\nuniform sampler2D image;\nuniform sampler2D displacement;\n\nvarying vec2 vUv;\n\nvoid main() {\n  vec4 displace = texture2D( displacement, vUv );\n  vec2 displacedUV = vec2( vUv.x + 0.1 * sin(vUv.y * 20. + time / 10.), vUv.y);\n\n  vec4 color = texture2D( image, displacedUV );\n  gl_FragColor = color;\n}";
 },{}],"js/shaders/vertex.glsl":[function(require,module,exports) {
 module.exports = "#define GLSLIFY 1\nuniform float time;\nvarying vec2 vUv;\nvarying vec2 vUv1;\n\nuniform sampler2D image;\nuniform vec2 pixels;\nuniform vec2 uvRate1;\n\nvoid main() {\n  vUv = uv;\n  vec2 _uv = uv - 0.5;\n  vUv1 = _uv;\n  vUv1 *= uvRate1.xy;\n\n  vUv1 += 0.5;\n\n  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\n}";
 },{}],"../node_modules/three/examples/jsm/controls/OrbitControls.js":[function(require,module,exports) {
@@ -37776,6 +37776,8 @@ MapControls.prototype = Object.create(_threeModule.EventDispatcher.prototype);
 MapControls.prototype.constructor = MapControls;
 },{"../../../build/three.module.js":"../node_modules/three/build/three.module.js"}],"assets/above.jpg":[function(require,module,exports) {
 module.exports = "/above.69978f5f.jpg";
+},{}],"assets/displacement.png":[function(require,module,exports) {
+module.exports = "/displacement.609b547a.png";
 },{}],"js/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -37793,6 +37795,8 @@ var _vertex = _interopRequireDefault(require("./shaders/vertex.glsl"));
 var _OrbitControls = require("three/examples/jsm/controls/OrbitControls");
 
 var _above = _interopRequireDefault(require("../assets/above.jpg"));
+
+var _displacement = _interopRequireDefault(require("../assets/displacement.png"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37819,23 +37823,33 @@ var Sketch = /*#__PURE__*/function () {
     this.camera.position.z = 1;
     this.scene = new THREE.Scene();
     this.controls = new _OrbitControls.OrbitControls(this.camera, this.renderer.domElement);
-    this.addObjects();
     this.time = 0;
+    this.addObjects();
     this.render();
   }
 
   _createClass(Sketch, [{
     key: "addObjects",
     value: function addObjects() {
+      // console.log(this.time)
+      // console.log(time)
       this.material = new THREE.ShaderMaterial({
         extensions: {
           derivatives: '#extension GL_OES_standard_derivatives : enable'
         },
         side: THREE.DoubleSide,
         uniforms: {
+          time: {
+            type: 'f',
+            value: 0
+          },
           image: {
             type: 't',
             value: new THREE.TextureLoader().load(_above.default)
+          },
+          displacement: {
+            type: 't',
+            value: new THREE.TextureLoader().load(_displacement.default)
           },
           uvRate1: {
             value: new THREE.Vector2(1, 1)
@@ -37853,6 +37867,7 @@ var Sketch = /*#__PURE__*/function () {
     value: function render() {
       this.time++;
       console.log(this.time);
+      this.material.uniforms.time.value = this.time;
       this.renderer.render(this.scene, this.camera);
       window.requestAnimationFrame(this.render.bind(this));
     }
@@ -37863,7 +37878,7 @@ var Sketch = /*#__PURE__*/function () {
 
 exports.default = Sketch;
 new Sketch();
-},{"three":"../node_modules/three/build/three.module.js","./shaders/fragment.glsl":"js/shaders/fragment.glsl","./shaders/vertex.glsl":"js/shaders/vertex.glsl","three/examples/jsm/controls/OrbitControls":"../node_modules/three/examples/jsm/controls/OrbitControls.js","../assets/above.jpg":"assets/above.jpg"}],"../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"three":"../node_modules/three/build/three.module.js","./shaders/fragment.glsl":"js/shaders/fragment.glsl","./shaders/vertex.glsl":"js/shaders/vertex.glsl","three/examples/jsm/controls/OrbitControls":"../node_modules/three/examples/jsm/controls/OrbitControls.js","../assets/above.jpg":"assets/above.jpg","../assets/displacement.png":"assets/displacement.png"}],"../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;

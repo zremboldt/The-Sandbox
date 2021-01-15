@@ -3,6 +3,7 @@ import fragment from './shaders/fragment.glsl';
 import vertex from './shaders/vertex.glsl';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import imgAbove from '../assets/above.jpg';
+import displacement from '../assets/displacement.png';
 
 export default class Sketch{
   constructor() {
@@ -14,18 +15,22 @@ export default class Sketch{
     this.camera.position.z = 1;
     this.scene = new THREE.Scene();
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-    this.addObjects();
     this.time = 0;
+    this.addObjects();
     this.render();
   }
 
   addObjects() {
+    // console.log(this.time)
+    // console.log(time)
     this.material = new THREE.ShaderMaterial({
       extensions: { derivatives: '#extension GL_OES_standard_derivatives : enable' },
       side: THREE.DoubleSide,
       uniforms: {
+        time: { type: 'f', value: 0 },
         image: { type: 't', value: new THREE.TextureLoader().load(imgAbove) },
-        uvRate1: { value: new THREE.Vector2(1,1) }
+        displacement: { type: 't', value: new THREE.TextureLoader().load(displacement) },
+        uvRate1: { value: new THREE.Vector2(1,1) },
       },
       vertexShader: vertex,
       fragmentShader: fragment
@@ -40,6 +45,8 @@ export default class Sketch{
   render() {
     this.time++;
     console.log(this.time);
+
+    this.material.uniforms.time.value = this.time;
     
     this.renderer.render( this.scene, this.camera );
     window.requestAnimationFrame(this.render.bind(this))
