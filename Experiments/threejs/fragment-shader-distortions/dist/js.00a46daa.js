@@ -36942,7 +36942,7 @@ if (typeof __THREE_DEVTOOLS__ !== 'undefined') {
 
 }
 },{}],"js/shaders/fragment.glsl":[function(require,module,exports) {
-module.exports = "#define GLSLIFY 1\nuniform float time;\nuniform float progress;\nuniform sampler2D image;\nuniform sampler2D displacement;\n\nvarying vec2 vUv;\n\nvoid main() {\n  vec4 displace = texture2D( displacement, vUv );\n  vec2 displacedUV = vec2( vUv.x + 0.1 * sin(vUv.y * 20. + time / (progress * 10. + 1.)), vUv.y);\n\n  vec4 color = texture2D( image, displacedUV );\n  gl_FragColor = color;\n}";
+module.exports = "#define GLSLIFY 1\nuniform float time;\nuniform float progress;\nuniform sampler2D image;\nuniform sampler2D displacement;\n\nvarying vec2 vUv;\n\nvoid main() {\n  vec4 displace = texture2D( displacement, vUv.yx );\n\n  vec2 displacedUV = vec2(\n    vUv.x, \n    vUv.y\n  );\n\n  displacedUV.y = mix(vUv.y, displace.r - 0.1, progress / 2.);\n\n  vec4 color = texture2D( image, displacedUV );\n\n  color.r = texture2D( image, displacedUV + vec2(0., 3.*0.005) * progress ).r;\n  color.g = texture2D( image, displacedUV + vec2(0., 3.*0.01) * progress ).g;\n  color.b = texture2D( image, displacedUV + vec2(0., 3.*0.02) * progress ).b;\n\n  gl_FragColor = color;\n}";
 },{}],"js/shaders/vertex.glsl":[function(require,module,exports) {
 module.exports = "#define GLSLIFY 1\nuniform float time;\nvarying vec2 vUv;\nvarying vec2 vUv1;\n\nuniform sampler2D image;\nuniform vec2 pixels;\nuniform vec2 uvRate1;\n\nvoid main() {\n  vUv = uv;\n  vec2 _uv = uv - 0.5;\n  vUv1 = _uv;\n  vUv1 *= uvRate1.xy;\n\n  vUv1 += 0.5;\n\n  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\n}";
 },{}],"../node_modules/three/examples/jsm/controls/OrbitControls.js":[function(require,module,exports) {
@@ -40751,8 +40751,6 @@ var Sketch = /*#__PURE__*/function () {
   }, {
     key: "addObjects",
     value: function addObjects() {
-      // console.log(this.time)
-      // console.log(time)
       this.material = new THREE.ShaderMaterial({
         extensions: {
           derivatives: '#extension GL_OES_standard_derivatives : enable'
@@ -40831,7 +40829,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56436" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64317" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

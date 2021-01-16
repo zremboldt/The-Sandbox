@@ -31,8 +31,6 @@ export default class Sketch{
   }
 
   addObjects() {
-    // console.log(this.time)
-    // console.log(time)
     this.material = new THREE.ShaderMaterial({
       extensions: { derivatives: '#extension GL_OES_standard_derivatives : enable' },
       side: THREE.DoubleSide,
