@@ -60,6 +60,7 @@ public
 
 # parcel files
 .parcel-cache
+dist
 
 # Mac files
 .DS_Store
