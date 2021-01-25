@@ -1,17 +1,8 @@
 varying vec2 vUv;
-varying vec2 vUv1;
-
-uniform float time;
-uniform vec2 pixels;
-uniform vec2 uvRate1;
+varying vec3 vPosition;
 
 void main() {
   vUv = uv;
-  vec2 _uv = uv - 0.5;
-  vUv1 = _uv;
-  vUv1 *= uvRate1.xy;
-
-  vUv1 += 0.5;
-
+  vPosition = position;
   gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
 }
