@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Document</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
+</style>
+</head>
+<body>
+  <div id="container"></div>
+
+  <script src="https://unpkg.com/three@0.125.2/build/three.js"></script>
+  <script id="vertexShader" type="x-shader/x-vertex">
+    void main() {
+      gl_Position = vec4( position, 1.0 );
+    }
+  </script>
+  <script id="fragmentShader" type="x-shader/x-fragment">
+    uniform vec2 u_resolution;
+    uniform float u_time;
+
+    void main() {
+      vec2 st = gl_FragCoord.xy/u_resolution.xy;
+  
+      vec4 color = vec4(0.0, 0.0, 0.0, 1.0);
+
+      color.r = st.x;
+      color.g = st.y;
+      color.b = 0.0;
+
+      gl_FragColor = color;
+    }
+  </script>
+  <script src="index.js"></script>
+</body>
+</html>
+
+// COORDINATE LAYOUT
+  // vec2 uv = vUv * 2.0 - 1.0;
+  vec2 uv = vUv;
+  
+  // COLORS
+  vec4 color = vec4(0.0, 0.0, 0.0, 1.0);
+
+  color.r = uv.x;
+  color.g = uv.y;
+  color.b = 0.0;
+
+  // OUTPUT
+  gl_FragColor = color;
