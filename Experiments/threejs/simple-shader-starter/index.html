@@ -34,17 +34,3 @@
   <script src="index.js"></script>
 </body>
 </html>
-
-// COORDINATE LAYOUT
-  // vec2 uv = vUv * 2.0 - 1.0;
-  vec2 uv = vUv;
-  
-  // COLORS
-  vec4 color = vec4(0.0, 0.0, 0.0, 1.0);
-
-  color.r = uv.x;
-  color.g = uv.y;
-  color.b = 0.0;
-
-  // OUTPUT
-  gl_FragColor = color;
