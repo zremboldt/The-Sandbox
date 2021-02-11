@@ -1,0 +1,62 @@
+// $dark1: hsl(210, 20%, 0%)
+// $dark2: hsl(210, 20%, 7%)
+// $dark3: hsl(210, 20%, 9%)
+// $dark4: hsl(210, 20%, 11%)
+// $dark4: hsl(210, 20%, 17%)
+// $text1: hsl(210, 15%, 60%)
+// $text2: hsl(210, 15%, 85%)
+// $primary1: hsl(30, 65%, 65%)
+  
+// Custom properties
+////////////////////////
+\:root
+  --off-white: hsl(210, 15%, 85%)
+  --text-primary: hsl(210, 20%, 11%)
+
+// Setup
+////////////////////////
+html
+  box-sizing: border-box
+
+*, *:before, *:after
+  box-sizing: inherit
+
+body
+  margin: 0
+  padding: 0
+  background-color: var(--off-white)
+
+h1,h2,h3,h4,h5,h6,p
+  color: var(--text-primary)
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+h3
+  font-size: calc(10px + 2vmin)
+
+// Main styles begin
+////////////////////////
+
+.app
+  padding: 50px
+  min-height: 100vh
+  display: grid
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr))
+  grid-template-rows: repeat(auto-fit, 30vh)
+  grid-gap: 1.4vw
+
+.card
+  display: grid
+  place-items: center
+  background-color: white
+  border-radius: 15px
+  box-shadow: 0 3px 6px hsla(220, 30%, 20%, 0.2)
+  cursor: pointer
+  transition: all 150ms ease-in-out
+
+  &:hover
+    transform: scale(1.04)
+
+  img
+    width: 60%
