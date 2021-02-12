@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import shuffle from './utils/shuffle';
 
+const NUM_OF_MATCHES = 5;
+
+
+// Favs
+// 6, 59, 121, 1, 146, 112, 130, 25, 133, 78, 31, 77, 145, 149
 const randomNum = (max) => Math.ceil(Math.random() * max);
-const shuffle = (arr) => arr.sort(() => Math.random() - 0.5);
 
 export default function App() {
-  const [pokemonData, setpokemonData] = useState();
+  const [cards, setCards] = useState();
 
   useEffect(() => {
     async function fetchPokies(count) {
@@ -27,35 +32,66 @@ export default function App() {
           .then(json => json)
         )
       );
+
+      
+      const pokePairs = [
+        ...response,
+        ...response
+      ]
+
+      const pokeObjects = pokePairs.map((pokemon, i) => ({
+        pokemonImg: pokemon.sprites.front_default,
+        pokemonId: pokemon.id,
+        pokemonName: pokemon.name,
+        cardId: i,
+        isFlipped: false,
+      }))
     
-      setpokemonData(response);
+      const shuffledCards = shuffle(pokeObjects);
+    
+      setCards(shuffledCards);
     }
 
-    fetchPokies(6);
+    fetchPokies(NUM_OF_MATCHES);
   }, []);
 
-  const handleClick = (id) => {
-    console.log(id)
+  if (!cards) return <div className='app'>loading...</div>
+
+  const flippedCards = cards.filter(card => card.isFlipped);
+
+  if (flippedCards.length >= 2) {
+    setTimeout(() => {
+      const newCards = cards.map((newCard) => {
+        return {...newCard, isFlipped: false};
+      })
+      setCards(newCards)
+    }, 1500)
   }
 
-  if (!pokemonData) return <div className='app'>loading...</div>
+  const handleClick = ({cardId, isFlipped}) => {
+    if (flippedCards.length >= 2) return;
+    if (!isFlipped) {
+      const newCards = cards.map((newCard) => {
+        if (newCard.cardId === cardId) return {...newCard, isFlipped: true};
+        return newCard;
+      })
+      setCards(newCards)
+    }
+  }
 
-  const doublePokemon = [
-    ...pokemonData,
-    ...pokemonData
-  ]
-
-  const shuffledPokemon = shuffle(doublePokemon);
 
   return (
     <main className='app'>
-      {shuffledPokemon.map((pokemon, i) => (
+      {cards.map(card => (
         <div 
-          className="card" 
-          onClick={() => handleClick(pokemon.id)}
-          key={i} 
+          className={`card ${card.isFlipped ? 'card__flipped' : ''}`}
+          onClick={() => handleClick(card)}
+          key={card.cardId} 
         >
-          <img src={pokemon.sprites.front_default} />
+          <div className="side side__front">
+            <img src={card.pokemonImg} alt={card.pokemonName} />
+          </div>
+          <div className="side side__back"></div>
         </div>
       ))}
     </main>
