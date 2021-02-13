@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import Card from './components/card';
 import fetchPokies from './utils/fetch-pokies';
 import resetRevealedCards from './utils/reset-revealed-cards';
 
 const NUM_OF_MATCHES = 4;
+const PLAYER_COUNT = 2;
+const PLAYER_NAMES = {
+  0: 'Benaiah',
+  1: 'Daddy',
+}
 // Favs 6, 59, 121, 1, 146, 112, 130, 25, 133, 78, 31, 77, 145, 149
 
 // Keep track of who's turn it is.
@@ -11,6 +17,7 @@ const NUM_OF_MATCHES = 4;
 
 export default function App() {
   const [cards, setCards] = useState();
+  const [currentPlayer, setCurrentPlayer] = useState(0);
   
   useEffect(() => fetchPokies(NUM_OF_MATCHES, setCards), []);
   
@@ -34,9 +41,18 @@ export default function App() {
         setCards(newCards);
       }, 1000);
     } else {
-      resetRevealedCards(cards, setCards);
+      setTimeout(() => {
+        resetRevealedCards(cards, setCards);
+        if (currentPlayer === PLAYER_COUNT - 1) {
+          setCurrentPlayer(0);
+        } else {
+          setCurrentPlayer(currentPlayer + 1);
+        }
+      }, 1000)
     }
   }
+
+  console.log(currentPlayer)
 
   const revealCard = (clickedCardId) => {
     const newCards = cards.map(newCard => (
@@ -48,24 +64,20 @@ export default function App() {
     setCards(newCards)
   }
 
-  const handleClick = ({id, isRevealed}) => {
+  const handleClick = (id, isRevealed) => {
     if (flippedCards.length === 2) return;
     if (!isRevealed) { revealCard(id) };
   }
 
   return (
     <main className='app'>
+      <h3>{PLAYER_NAMES[currentPlayer]}</h3>
       {cards.map(card => (
-        <div 
-          className={`card ${card.isRevealed ? 'card__revealed' : ''} ${card.isMatched ? 'card__matched' : ''}`}
-          onClick={() => handleClick(card)}
+        <Card
+          card={card} 
+          handleClick={handleClick} 
           key={card.id} 
-        >
-          <div className="side side__front">
-            <img src={card.pokemonImg} alt={card.pokemonName} />
-          </div>
-          <div className="side side__back"></div>
-        </div>
+        />
       ))}
     </main>
   )
