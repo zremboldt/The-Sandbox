@@ -1,90 +1,41 @@
 import React, { useState, useEffect } from 'react';
-import shuffle from './utils/shuffle';
+import fetchPokies from './utils/fetch-pokies';
+import resetRevealedCards from './utils/reset-revealed-cards';
 
-const NUM_OF_MATCHES = 5;
-
-
-// Favs
-// 6, 59, 121, 1, 146, 112, 130, 25, 133, 78, 31, 77, 145, 149
-const randomNum = (max) => Math.ceil(Math.random() * max);
+const NUM_OF_MATCHES = 3;
+// Favs 6, 59, 121, 1, 146, 112, 130, 25, 133, 78, 31, 77, 145, 149
 
 export default function App() {
   const [cards, setCards] = useState();
-
-  useEffect(() => {
-    async function fetchPokies(count) {
-      const uniqueNumbers = [];
-      while(uniqueNumbers.length < count) {
-        const num = randomNum(150);
-        if (!uniqueNumbers.includes(num)) {
-          uniqueNumbers.push(num);
-        }
-      }
-      
-      const urls = [];
-      for (let i = 0; i < uniqueNumbers.length; i++) {
-        urls.push(`https://pokeapi.co/api/v2/pokemon/${uniqueNumbers[i]}`);
-      }
-    
-      const response = await Promise.all(
-        urls.map(url => fetch(url)
-          .then(res => res.json())
-          .then(json => json)
-        )
-      );
-
-      
-      const pokePairs = [
-        ...response,
-        ...response
-      ]
-
-      const pokeObjects = pokePairs.map((pokemon, i) => ({
-        pokemonImg: pokemon.sprites.front_default,
-        pokemonId: pokemon.id,
-        pokemonName: pokemon.name,
-        cardId: i,
-        isFlipped: false,
-      }))
-    
-      const shuffledCards = shuffle(pokeObjects);
-    
-      setCards(shuffledCards);
-    }
-
-    fetchPokies(NUM_OF_MATCHES);
-  }, []);
-
+  
+  useEffect(() => fetchPokies(NUM_OF_MATCHES, setCards), []);
+  
   if (!cards) return <div className='app'>loading...</div>
 
-  const flippedCards = cards.filter(card => card.isFlipped);
+  const flippedCardCount = cards.filter(card => card.isRevealed).length;
 
-  if (flippedCards.length >= 2) {
-    setTimeout(() => {
-      const newCards = cards.map((newCard) => {
-        return {...newCard, isFlipped: false};
-      })
-      setCards(newCards)
-    }, 1500)
+  if (flippedCardCount >= 2) { resetRevealedCards(cards, setCards) }
+
+  const revealCard = (clickedCardId) => {
+    const newCards = cards.map(newCard => (
+      newCard.cardId === clickedCardId 
+        ? {...newCard, isRevealed: true} 
+        : newCard
+      )
+    );
+    setCards(newCards)
   }
 
-  const handleClick = ({cardId, isFlipped}) => {
-    if (flippedCards.length >= 2) return;
-    if (!isFlipped) {
-      const newCards = cards.map((newCard) => {
-        if (newCard.cardId === cardId) return {...newCard, isFlipped: true};
-        return newCard;
-      })
-      setCards(newCards)
-    }
+  const handleClick = ({cardId, isRevealed}) => {
+    if (flippedCardCount >= 2) return;
+    if (!isRevealed) { revealCard(cardId) };
   }
-
 
   return (
     <main className='app'>
       {cards.map(card => (
         <div 
-          className={`card ${card.isFlipped ? 'card__flipped' : ''}`}
+          className={`card ${card.isRevealed ? 'card__flipped' : ''}`}
           onClick={() => handleClick(card)}
           key={card.cardId} 
         >
