@@ -33,8 +33,10 @@ export default async function fetchPokies(count, setCards) {
     pokemonImg: pokemon.sprites.front_default,
     pokemonId: pokemon.id,
     pokemonName: pokemon.name,
-    cardId: i,
+    id: i,
     isRevealed: false,
+    isMatched: false,
+    matchedBy: null,
   }))
 
   const shuffledCards = shuffle(pokeObjects);

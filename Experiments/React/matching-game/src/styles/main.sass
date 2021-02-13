@@ -59,8 +59,13 @@ h3
   transition: all 500ms cubic-bezier(0.165, 0.84, 0.44, 1)
   transform-style: preserve-3d
 
-  &__flipped
-    transform: rotate3d(0.05,1,0,180deg)
+  &__revealed
+    transform: rotate3d(0.05, 1, 0, 180deg)
+
+  &__matched
+    opacity: 0
+    transform: rotate3d(2, 1, 0, 180deg) translate3d(0, 0, -500px)
+    pointer-events: none
 
   .side
     position: absolute
