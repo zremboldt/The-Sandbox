@@ -5,6 +5,8 @@ import fetchPokies from './utils/fetch-pokies';
 import resetRevealedCards from './utils/reset-revealed-cards';
 import launchConfetti from './utils/launch-confetti'
 
+// Favs 6, 59, 121, 1, 146, 25, 133,  31, 77, 78, 145, 149
+
 // 1: bulbasaur
 // 4: squirtle
 // 7: charmander
@@ -12,14 +14,12 @@ import launchConfetti from './utils/launch-confetti'
 
 const NUM_OF_MATCHES = 6;
 const SELECTED_POKEMON = [1, 4, 7, 25, 78, 59]
+// const SELECTED_POKEMON = []
 const PLAYER_NAMES = [
   'Benaiah',
-  'Connor',
+  // 'Connor',
   'Daddy',
 ];
-
-// Favs 6, 59, 121, 1, 146, 25, 133,  31, 77, 78, 145, 149
-// charmander squirtle bulbasaur
 
 export default function App() {
   const [cards, setCards] = useState();
@@ -59,7 +59,7 @@ export default function App() {
         } else {
           setCurrentPlayer(currentPlayer + 1);
         }
-      }, 1000)
+      }, 1500)
     }
   }
 
