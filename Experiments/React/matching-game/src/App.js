@@ -1,25 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import Card from './components/card';
+import emeraldGameIcon from './assets/emerald-game-icon.png';
 import fetchPokies from './utils/fetch-pokies';
 import resetRevealedCards from './utils/reset-revealed-cards';
+import launchConfetti from './utils/launch-confetti'
 
-const NUM_OF_MATCHES = 4;
-const PLAYER_COUNT = 2;
-const PLAYER_NAMES = {
-  0: 'Benaiah',
-  1: 'Daddy',
-}
-// Favs 6, 59, 121, 1, 146, 112, 130, 25, 133, 78, 31, 77, 145, 149
+// 1: bulbasaur
+// 4: squirtle
+// 7: charmander
+// 25: pikachu
 
-// Keep track of who's turn it is.
-// If !isMatch turn changes.
-// Label which player matched within the card object.
+const NUM_OF_MATCHES = 6;
+const SELECTED_POKEMON = [1, 4, 7, 25, 78, 59]
+const PLAYER_NAMES = [
+  'Benaiah',
+  'Connor',
+  'Daddy',
+];
+
+// Favs 6, 59, 121, 1, 146, 25, 133,  31, 77, 78, 145, 149
+// charmander squirtle bulbasaur
 
 export default function App() {
   const [cards, setCards] = useState();
   const [currentPlayer, setCurrentPlayer] = useState(0);
   
-  useEffect(() => fetchPokies(NUM_OF_MATCHES, setCards), []);
+  useEffect(() => fetchPokies(NUM_OF_MATCHES, setCards, SELECTED_POKEMON), []);
   
   if (!cards) return <div className='app'><p>loading...</p></div>
 
@@ -32,7 +38,12 @@ export default function App() {
     if (isMatch) {
       const newCards = cards.map(newCard => {
         if (newCard.id === firstCard.id || newCard.id === secondCard.id) {
-          return { ...newCard, isRevealed: false, isMatched: true }
+          return { 
+            ...newCard, 
+            isRevealed: false, 
+            isMatched: true,
+            matchedBy: currentPlayer,
+          }
         }
         return newCard;
       });
@@ -43,7 +54,7 @@ export default function App() {
     } else {
       setTimeout(() => {
         resetRevealedCards(cards, setCards);
-        if (currentPlayer === PLAYER_COUNT - 1) {
+        if (currentPlayer === PLAYER_NAMES.length - 1) {
           setCurrentPlayer(0);
         } else {
           setCurrentPlayer(currentPlayer + 1);
@@ -51,8 +62,6 @@ export default function App() {
       }, 1000)
     }
   }
-
-  console.log(currentPlayer)
 
   const revealCard = (clickedCardId) => {
     const newCards = cards.map(newCard => (
@@ -69,16 +78,35 @@ export default function App() {
     if (!isRevealed) { revealCard(id) };
   }
 
+  const cardsRemaining = cards.filter(({isMatched}) => !isMatched).length;
+  if (!cardsRemaining) { launchConfetti() }
+
   return (
-    <main className='app'>
-      <h3>{PLAYER_NAMES[currentPlayer]}</h3>
-      {cards.map(card => (
-        <Card
-          card={card} 
-          handleClick={handleClick} 
-          key={card.id} 
-        />
-      ))}
-    </main>
+    <>
+      <header>
+        <img className='game-icon' src={emeraldGameIcon} alt="Emerald Game icon"/>
+        <div className="player-container">
+          {PLAYER_NAMES.map((name, playerIndex) => {
+            const playerScore = cards.filter(({matchedBy}) => matchedBy === playerIndex).length / 2;
+            const isActive = playerIndex === currentPlayer ? true : false;
+            
+            return (
+              <h3 className={`player ${isActive && 'player__active'}`} key={playerIndex}>
+                <span>{name}: </span>{playerScore}
+              </h3>
+            )
+          })}
+        </div>
+      </header>
+      <main>
+        {cards.map(card => (
+          <Card
+            card={card} 
+            handleClick={handleClick} 
+            key={card.id} 
+          />
+        ))}
+      </main>
+    </>
   )
 };

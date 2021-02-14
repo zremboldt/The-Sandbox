@@ -2,8 +2,8 @@ import shuffle from './shuffle';
 
 const randomNum = (max) => Math.ceil(Math.random() * max);
 
-export default async function fetchPokies(count, setCards) {
-  const uniqueNumbers = [];
+export default async function fetchPokies(count, setCards, selectedPokies) {
+  const uniqueNumbers = [...selectedPokies];
   while(uniqueNumbers.length < count) {
     const num = randomNum(150);
     if (!uniqueNumbers.includes(num)) {

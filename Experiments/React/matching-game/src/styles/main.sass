@@ -1,17 +1,9 @@
-// $dark1: hsl(210, 20%, 0%)
-// $dark2: hsl(210, 20%, 7%)
-// $dark3: hsl(210, 20%, 9%)
-// $dark4: hsl(210, 20%, 11%)
-// $dark4: hsl(210, 20%, 17%)
-// $text1: hsl(210, 15%, 60%)
-// $text2: hsl(210, 15%, 85%)
-// $primary1: hsl(30, 65%, 65%)
-  
 // Custom properties
 ////////////////////////
 \:root
   --off-white: hsl(210, 15%, 85%)
   --text-primary: hsl(210, 20%, 11%)
+  --text-inactive: hsl(210, 20%, 60%)
 
 // Setup
 ////////////////////////
@@ -27,26 +19,65 @@ body
   background-color: var(--off-white)
 
 h1,h2,h3,h4,h5,h6,p
-  color: var(--text-primary)
+  margin: 0
   font-family: -apple-system, BlinkMacSystemFont, sans-serif
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
 
 h3
-  font-size: calc(10px + 2vmin)
+  font-size: calc(10px + 1.8vmin)
 
 // Main styles begin
 ////////////////////////
 
-.app
-  padding: 50px
+header
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  z-index: 10
+  backdrop-filter: blur(15px)
+  box-shadow: 0 4px 30px hsla(210, 15%, 0%, 0.1)
+  display: flex
+  align-items: center
+  justify-content: space-between
+  margin: 20px
+  background-color: hsla(210, 15%, 100%, 0.5)
+  border-radius: 100px
+
+  .game-icon
+    margin: 12px
+    max-width: 50px
+
+  .player-container
+    display: flex
+    margin: 0 calc(10px + 3vmin) 4px 0
+
+    & .player + .player
+      margin-left: 20px
+  
+  .player
+    color: var(--text-inactive)
+    transition: transform 500ms cubic-bezier(0.165, 0.84, 0.44, 1)
+    transform: scale(0.8)
+
+    &__active
+      color: var(--text-primary)
+      transform: scale(1)
+  
+  span
+    font-weight: 400
+    letter-spacing: 0.03em
+  
+main
+  padding: 126px 30px
   min-height: 100vh
   display: grid
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr))
   grid-template-rows: repeat(auto-fill, 220px)
   align-items: center
   justify-items: center
-  grid-gap: 1.4vw
+  grid-gap: 1.5vw
   perspective: 1000px
 
 .card
@@ -87,9 +118,3 @@ h3
 
   img
     width: 80%
-
-h3
-  margin: 0
-  position: absolute
-  top: 10px
-  left: 10px
