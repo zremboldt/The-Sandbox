@@ -11,7 +11,7 @@ export default function Card({
   handleClick
 }) {
   let styles = [];
-  if (isRevealed) { styles.push('card__revealed') }
+  if (isRevealed) { styles.push('card__revealed') };
   if (isMatched) { styles.push('card__matched') };
   
   return (

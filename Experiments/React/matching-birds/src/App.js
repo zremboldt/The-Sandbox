@@ -1,24 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import Card from './components/card';
 import emeraldGameIcon from './assets/emerald-game-icon.png';
-import fetchBirdies from './utils/fetch-birdies';
+import createCards from './utils/create-cards';
 import resetRevealedCards from './utils/reset-revealed-cards';
 import launchConfetti from './utils/launch-confetti'
 
-const NUM_OF_MATCHES = 6;
 const PLAYER_NAMES = [
   'Benaiah',
   // 'Connor',
   'Daddy',
 ];
 
+// cardCount: [columnCount, rowCount]
+const layoutMap = {
+  '12': [4, 3],
+  '18': [6, 3],
+}
+
 export default function App() {
+  const [cardCount, setCardCount] = useState();
   const [cards, setCards] = useState();
   const [currentPlayer, setCurrentPlayer] = useState(0);
   
-  useEffect(() => fetchBirdies(NUM_OF_MATCHES, setCards), []);
+  useEffect(() => {
+    if (!cardCount) return;
+    createCards(cardCount, setCards)
+  }, [cardCount]);
   
-  if (!cards) return <div className='app'><p>loading...</p></div>
+  if (!cardCount) return (
+    <div>
+      <select
+        value={cardCount} 
+        onChange={(e) => setCardCount(e.target.value)} 
+      >
+        <option hidden>Select number of cards</option>
+        {Object.keys(layoutMap).map((num, i) => <option value={num} key={i}>{num}</option>)}
+      </select>
+    </div>
+  );
+
+  if (!cards) return null;
 
   const flippedCards = cards.filter(card => card.isRevealed);
 
