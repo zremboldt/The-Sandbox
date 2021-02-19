@@ -13,8 +13,8 @@ const PLAYER_NAMES = [
 
 // cardCount: [columnCount, rowCount]
 const layoutMap = {
-  '12': [4, 3],
-  '18': [6, 3],
+  '12': [{columns: 4, rows: 3}],
+  '18': [{columns: 6, rows: 3}],
 }
 
 export default function App() {
