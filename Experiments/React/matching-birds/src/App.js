@@ -4,6 +4,7 @@ import emeraldGameIcon from './assets/emerald-game-icon.png';
 import createCards from './utils/create-cards';
 import resetRevealedCards from './utils/reset-revealed-cards';
 import launchConfetti from './utils/launch-confetti'
+import SetupModal from './components/setup-modal'
 
 const PLAYER_NAMES = [
   'Benaiah',
@@ -28,15 +29,11 @@ export default function App() {
   }, [cardCount]);
   
   if (!cardCount) return (
-    <div>
-      <select
-        value={cardCount} 
-        onChange={(e) => setCardCount(e.target.value)} 
-      >
-        <option hidden>Select number of cards</option>
-        {Object.keys(layoutMap).map((num, i) => <option value={num} key={i}>{num}</option>)}
-      </select>
-    </div>
+    <SetupModal 
+      cardCount={cardCount} 
+      setCardCount={setCardCount} 
+      layoutMap={layoutMap} 
+    />
   );
 
   if (!cards) return null;
