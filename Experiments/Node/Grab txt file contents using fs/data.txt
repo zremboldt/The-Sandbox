@@ -1,0 +1,6 @@
+Ron Swanson,waffle iron,80,2
+Ron Swanson,blender,200,1
+Ron Swanson,knife,10,4
+Dwight Schrute,waffle,iron,80,1
+Dwight Schrute,knife,10,2
+Dwight Schrute,pot,20,3
