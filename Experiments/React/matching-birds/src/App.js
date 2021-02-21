@@ -14,14 +14,22 @@ const PLAYER_NAMES = [
 
 // cardCount: [columnCount, rowCount]
 const layoutMap = {
-  '12': [{columns: 4, rows: 3}],
-  '18': [{columns: 6, rows: 3}],
+  '12': {columns: 4, rows: 3},
+  '20': {columns: 5, rows: 4},
 }
 
 export default function App() {
   const [cardCount, setCardCount] = useState();
   const [cards, setCards] = useState();
   const [currentPlayer, setCurrentPlayer] = useState(0);
+  
+  useEffect(() => {
+    if (cardCount) {
+      const rootElement = document.documentElement
+      rootElement.style.setProperty('--column-cell-count', layoutMap[cardCount].columns);
+      rootElement.style.setProperty('--row-cell-count', layoutMap[cardCount].rows);
+    }
+  }, [cardCount]);
   
   useEffect(() => {
     if (!cardCount) return;
@@ -91,23 +99,23 @@ export default function App() {
   if (!cardsRemaining) { launchConfetti() }
 
   return (
-    <>
-      <header>
-        <img className='game-icon' src={emeraldGameIcon} alt="Emerald Game icon"/>
-        <div className="player-container">
-          {PLAYER_NAMES.map((name, playerIndex) => {
-            const playerScore = cards.filter(({matchedBy}) => matchedBy === playerIndex).length / 2;
-            const isActive = playerIndex === currentPlayer ? true : false;
-            
-            return (
-              <h3 className={`player ${isActive && 'player__active'}`} key={playerIndex}>
-                <span>{name}: </span>{playerScore}
-              </h3>
-            )
-          })}
-        </div>
-      </header>
-      <main>
+      <div className="wrap">
+        <header>
+          <img className='game-icon' src={emeraldGameIcon} alt="Emerald Game icon"/>
+          <div className="player-container">
+            {PLAYER_NAMES.map((name, playerIndex) => {
+              const playerScore = cards.filter(({matchedBy}) => matchedBy === playerIndex).length / 2;
+              const isActive = playerIndex === currentPlayer ? true : false;
+              
+              return (
+                <h3 className={`player ${isActive && 'player__active'}`} key={playerIndex}>
+                  <span>{name}: </span>{playerScore}
+                </h3>
+              )
+            })}
+          </div>
+        </header>
+        <main>
         {cards.map(card => (
           <Card
             card={card} 
@@ -116,6 +124,6 @@ export default function App() {
           />
         ))}
       </main>
-    </>
+    </div>
   )
 };

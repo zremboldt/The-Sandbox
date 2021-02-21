@@ -5,6 +5,14 @@
   --text-primary: hsl(210, 20%, 11%)
   --text-inactive: hsl(210, 20%, 60%)
 
+  --ease-out-quart: cubic-bezier(0.165, 0.85, 0.45, 1)
+  --ease-out-back: cubic-bezier(0.175, 0.885, 0.32, 1.275)
+  --ease-out-back-Lg: cubic-bezier(0.17, 0.9, 0.46, 1.70)
+
+  --column-cell-count: 0
+  --row-cell-count: 0
+  --grid-cell-size: 180
+
 // Setup
 ////////////////////////
 html
@@ -16,7 +24,6 @@ html
 body
   margin: 0
   padding: 0
-  background-color: var(--off-white)
 
 h1,h2,h3,h4,h5,h6,p
   margin: 0
@@ -30,6 +37,16 @@ h3
 // Main styles begin
 ////////////////////////
 
+#app-wrap
+  display: flex
+  justify-content: center
+  background-color: var(--off-white)
+
+.wrap
+  position: relative
+  width: 100%
+  max-width: 1200px
+
 header
   position: fixed
   top: 0
@@ -41,7 +58,7 @@ header
   display: flex
   align-items: center
   justify-content: space-between
-  margin: 20px
+  margin: 25px
   background-color: hsla(210, 15%, 100%, 0.5)
   border-radius: 100px
 
@@ -68,16 +85,19 @@ header
   span
     font-weight: 400
     letter-spacing: 0.03em
+
   
 main
-  padding: 126px 30px 0
-  min-height: 80vh
+  padding: 126px 30px
+  min-height: 100vh
   display: grid
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr))
-  grid-template-rows: repeat(auto-fill, 220px)
+  // grid-template-columns: repeat(var(--column-cell-count), 180px);
+  // grid-template-rows: repeat(var(--row-cell-count), 180px);
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr))
+  grid-template-rows: repeat(auto-fit, minmax(180px, 1fr))
   align-items: center
   justify-items: center
-  grid-gap: 1.5vw
+  grid-gap: 2vw
   perspective: 1000px
 
 .card
