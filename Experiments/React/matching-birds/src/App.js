@@ -6,11 +6,11 @@ import resetRevealedCards from './utils/reset-revealed-cards';
 import launchConfetti from './utils/launch-confetti'
 import SetupModal from './components/setup-modal'
 
-const PLAYER_NAMES = [
-  'Benaiah',
-  // 'Connor',
-  'Daddy',
-];
+// const PLAYER_NAMES = [
+//   'Benaiah',
+//   'Connor',
+//   'Daddy',
+// ];
 
 // cardCount: [columnCount, rowCount]
 const layoutMap = {
@@ -20,6 +20,7 @@ const layoutMap = {
 
 export default function App() {
   const [cardCount, setCardCount] = useState();
+  const [playerNames, setPlayerNames] = useState(['Benaiah', 'Daddy']);
   const [cards, setCards] = useState();
   const [currentPlayer, setCurrentPlayer] = useState(0);
   
@@ -40,6 +41,8 @@ export default function App() {
     <SetupModal 
       cardCount={cardCount} 
       setCardCount={setCardCount} 
+      playerNames={playerNames}
+      setPlayerNames={setPlayerNames}
       layoutMap={layoutMap} 
     />
   );
@@ -71,7 +74,7 @@ export default function App() {
     } else {
       setTimeout(() => {
         resetRevealedCards(cards, setCards);
-        if (currentPlayer === PLAYER_NAMES.length - 1) {
+        if (currentPlayer === playerNames.length - 1) {
           setCurrentPlayer(0);
         } else {
           setCurrentPlayer(currentPlayer + 1);
@@ -103,7 +106,7 @@ export default function App() {
         <header>
           <img className='game-icon' src={emeraldGameIcon} alt="Emerald Game icon"/>
           <div className="player-container">
-            {PLAYER_NAMES.map((name, playerIndex) => {
+            {playerNames.map((name, playerIndex) => {
               const playerScore = cards.filter(({matchedBy}) => matchedBy === playerIndex).length / 2;
               const isActive = playerIndex === currentPlayer ? true : false;
               
