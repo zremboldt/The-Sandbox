@@ -7,10 +7,10 @@ export default function SetupModal({
   setCardCount,
   playerNames,
   setPlayerNames,
-  setSetupModalIsVisible
+  setSetupModalIsVisible,
+  gridWidthMap
 }) {
   const [playerCount, setPlayerCount] = useState(1);
-  const cardQtyOptions = [12, 20,];
 
   const handleNameChange = (event, index) => {
     const currentPlayers = [...playerNames];
@@ -32,7 +32,7 @@ export default function SetupModal({
             onChange={(e) => setCardCount(e.target.value)} 
           >
             <option hidden>How many cards?</option>
-            {cardQtyOptions.map((num, i) => (
+            {Object.keys(gridWidthMap).map((num, i) => (
               <option 
                 value={num} 
                 key={i}

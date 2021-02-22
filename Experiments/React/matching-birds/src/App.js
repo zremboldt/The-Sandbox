@@ -6,11 +6,10 @@ import resetRevealedCards from './utils/reset-revealed-cards';
 import launchConfetti from './utils/launch-confetti'
 import SetupModal from './components/setup-modal'
 
-// const PLAYER_NAMES = [
-//   'Benaiah',
-//   'Connor',
-//   'Daddy',
-// ];
+const gridWidthMap = {
+  '12': 1000,
+  '20': 1200,
+}
 
 export default function App() {
   const [setupModalIsVisible, setSetupModalIsVisible] = useState(true);
@@ -23,6 +22,11 @@ export default function App() {
     if (!cardCount) return;
     createCards(cardCount, setCards)
   }, [cardCount]);
+
+  useEffect(() => {
+    const rootElement = document.documentElement;
+    rootElement.style.setProperty('--wrap__max-width', `${gridWidthMap[cardCount]}px`);
+  }, [cardCount])
   
   if (setupModalIsVisible) return (
     <SetupModal 
@@ -31,10 +35,9 @@ export default function App() {
       playerNames={playerNames}
       setPlayerNames={setPlayerNames}
       setSetupModalIsVisible={setSetupModalIsVisible}
+      gridWidthMap={gridWidthMap}
     />
   );
-
-  if (!cards) return null;
 
   const flippedCards = cards.filter(card => card.isRevealed);
 
