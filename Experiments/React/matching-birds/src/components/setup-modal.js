@@ -5,12 +5,10 @@ import ArrowDown from '../assets/icon-arrow-down';
 export default function SetupModal({cardCount, setCardCount, layoutMap, playerNames, setPlayerNames}) {
   const [playerCount, setPlayerCount] = useState(1);
 
-  const handleNameChange = (index) => {
-    // const currentPlayers = [...playerNames];
-
-    // if (currentPlayers[index])
-
-    // setPlayerNames(newPlayers)
+  const handleNameChange = (event, index) => {
+    const currentPlayers = [...playerNames];
+    currentPlayers[index] = event.target.value;
+    setPlayerNames(currentPlayers);
   }
 
   return (
@@ -26,13 +24,15 @@ export default function SetupModal({cardCount, setCardCount, layoutMap, playerNa
           </select>
           <ArrowDown />
         </div>
-        {[...Array(playerCount)].map((player, i) => {
-          return (
-            <input type="text" value={playerNames[i]} onChange={handleNameChange(i)} placeholder="Player name"/>
-          )
-        })}
+        {[...Array(playerCount)].map((_, i) => (
+          <input
+            type="text"
+            value={playerNames[i]}
+            onChange={(event) => handleNameChange(event, i)}
+            placeholder="Player name"
+          />
+        ))}
         <button className="plus-button" onClick={() => setPlayerCount(playerCount + 1)}><Plus /></button>
-        {/* <input type="text" placeholder="Player two name"/> */}
         <button className="play-button">Play!</button>
       </div>
     </div>

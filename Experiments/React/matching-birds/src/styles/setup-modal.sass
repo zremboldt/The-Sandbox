@@ -50,7 +50,7 @@
     top: 50%
     right: 5px
     transform: translateY(-50%)
-    fill: var(--text-inactive)
+    fill: var(--highlight-color-primary)
     pointer-events: none
 
   .plus-button
@@ -67,7 +67,7 @@
 
     &:focus
       box-shadow: var(--input-shadows)
-    &:hover
+    &:focus, &:hover
       transform: rotate(180deg)
 
     .icon-plus

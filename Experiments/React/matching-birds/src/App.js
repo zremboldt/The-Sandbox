@@ -20,17 +20,9 @@ const layoutMap = {
 
 export default function App() {
   const [cardCount, setCardCount] = useState();
-  const [playerNames, setPlayerNames] = useState(['Benaiah', 'Daddy']);
+  const [playerNames, setPlayerNames] = useState([]);
   const [cards, setCards] = useState();
   const [currentPlayer, setCurrentPlayer] = useState(0);
-  
-  useEffect(() => {
-    if (cardCount) {
-      const rootElement = document.documentElement
-      rootElement.style.setProperty('--column-cell-count', layoutMap[cardCount].columns);
-      rootElement.style.setProperty('--row-cell-count', layoutMap[cardCount].rows);
-    }
-  }, [cardCount]);
   
   useEffect(() => {
     if (!cardCount) return;
