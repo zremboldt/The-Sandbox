@@ -12,14 +12,9 @@ import SetupModal from './components/setup-modal'
 //   'Daddy',
 // ];
 
-// cardCount: [columnCount, rowCount]
-const layoutMap = {
-  '12': {columns: 4, rows: 3},
-  '20': {columns: 5, rows: 4},
-}
-
 export default function App() {
-  const [cardCount, setCardCount] = useState();
+  const [setupModalIsVisible, setSetupModalIsVisible] = useState(true);
+  const [cardCount, setCardCount] = useState(null);
   const [playerNames, setPlayerNames] = useState([]);
   const [cards, setCards] = useState();
   const [currentPlayer, setCurrentPlayer] = useState(0);
@@ -29,13 +24,13 @@ export default function App() {
     createCards(cardCount, setCards)
   }, [cardCount]);
   
-  if (!cardCount) return (
+  if (setupModalIsVisible) return (
     <SetupModal 
       cardCount={cardCount} 
       setCardCount={setCardCount} 
       playerNames={playerNames}
       setPlayerNames={setPlayerNames}
-      layoutMap={layoutMap} 
+      setSetupModalIsVisible={setSetupModalIsVisible}
     />
   );
 
