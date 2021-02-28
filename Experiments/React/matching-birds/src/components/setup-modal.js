@@ -8,7 +8,8 @@ export default function SetupModal({
   playerNames,
   setPlayerNames,
   setSetupModalIsVisible,
-  gridWidthMap
+  gridWidthMap,
+  emeraldGameIcon
 }) {
   const [playerCount, setPlayerCount] = useState(1);
 
@@ -24,40 +25,46 @@ export default function SetupModal({
   }
 
   return (
-    <div className='setup-modal-container'>
-      <div className='setup-modal'>
-        <div className="select-container">
-          <select
-            value={cardCount} 
-            onChange={(e) => setCardCount(e.target.value)} 
-          >
-            <option hidden>How many cards?</option>
-            {Object.keys(gridWidthMap).map((num, i) => (
-              <option 
-                value={num} 
-                key={i}
-              >
-                {num}
-              </option>
-            ))}
-          </select>
-          <ArrowDown />
+    <div className='setup-modal-bg'>
+      <div className='setup-modal-container'>
+        <div className="title-container">
+          <img className='game-icon' src={emeraldGameIcon} alt="Emerald Game icon"/>
+          <h1 className='title'>THE EMERALD GAME</h1>
         </div>
-        {[...Array(playerCount)].map((_, i) => (
-          <input
-            type="text"
-            value={playerNames[i]}
-            onChange={(event) => handleNameChange(event, i)}
-            placeholder="Player name"
-          />
-        ))}
-        <button 
-          className="plus-button" 
-          onClick={() => setPlayerCount(playerCount + 1)}
-        >
-          <Plus />
-        </button>
-        <button className="play-button" onClick={() => handlePlayButtonClick()}>Play!</button>
+        <div className='setup-modal'>
+          <div className="select-container">
+            <select
+              value={cardCount} 
+              onChange={(e) => setCardCount(e.target.value)} 
+            >
+              <option hidden>How many cards?</option>
+              {Object.keys(gridWidthMap).map((num, i) => (
+                <option 
+                  value={num} 
+                  key={i}
+                >
+                  {num}
+                </option>
+              ))}
+            </select>
+            <ArrowDown />
+          </div>
+          {[...Array(playerCount)].map((_, i) => (
+            <input
+              type="text"
+              value={playerNames[i]}
+              onChange={(event) => handleNameChange(event, i)}
+              placeholder="Player name"
+            />
+          ))}
+          <button 
+            className="plus-button" 
+            onClick={() => setPlayerCount(playerCount + 1)}
+          >
+            <Plus />
+          </button>
+          <button className="play-button" onClick={() => handlePlayButtonClick()}>Play!</button>
+        </div>
       </div>
     </div>
   )

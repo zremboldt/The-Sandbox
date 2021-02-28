@@ -36,6 +36,7 @@ export default function App() {
       setPlayerNames={setPlayerNames}
       setSetupModalIsVisible={setSetupModalIsVisible}
       gridWidthMap={gridWidthMap}
+      emeraldGameIcon={emeraldGameIcon}
     />
   );
 

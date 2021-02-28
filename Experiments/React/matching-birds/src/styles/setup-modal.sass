@@ -1,4 +1,4 @@
-.setup-modal-container
+.setup-modal-bg
   position: fixed
   top: 0
   left: 0
@@ -6,14 +6,16 @@
   height: 100%
   display: grid
   place-items: center
+  perspective: 1000px
 
-.setup-modal
+.setup-modal-container
   display: flex
   flex-direction: column
-  width: 100%
-  max-width: 340px
+  width: Min(400px, 100%)
   padding: 25px
-  border-radius: 10px
+  border-radius: 20px
+  border-top-left-radius: 100%70%
+  border-top-right-radius: 100%70%
   background-color: white
   box-shadow: 0 8px 30px -4px hsla(250, 100%, 10%, 0.25)
   opacity: 0
@@ -22,7 +24,40 @@
   animation-fill-mode: forwards
   animation-iteration-count: 1
   animation-timing-function: var(--ease-out-quart)
-  animation-name: modal-animate-in
+  animation-name: setup-modal-container-animate-in
+
+.title-container
+  display: flex
+  flex-direction: column
+  align-items: center
+  
+  .game-icon
+    max-width: 50px
+    margin-top: 5px
+  
+  .title
+    margin: 20px 0 -20px
+    font-family: 'Press Start 2P', sans-serif
+    text-align: center
+    line-height: 1.5em
+    color: #86ffae
+    text-shadow: -2px -2px 0 #243f2f, 2px -2px 0 #243f2f, -2px 2px 0 #243f2f, 2px 2px 0 #243f2f, 3px 3px 0 #243f2f, 4px 4px 0 #243f2f
+
+.setup-modal
+  display: flex
+  flex-direction: column
+  width: 100%
+  padding: 25px
+  border-radius: 10px
+  background-color: white
+  box-shadow: 0 6px 40px -6px hsla(250, 100%, 10%, 0.2)
+  transition: transform 300ms var(--ease-out-quart)
+  animation-delay: 300ms
+  animation-duration: 1500ms
+  animation-fill-mode: forwards
+  animation-iteration-count: 1
+  animation-timing-function: var(--ease-out-quart)
+  animation-name: setup-modal-animate-in
   
   & > * + *
     margin-top: 16px
@@ -101,10 +136,16 @@
       background-position: right center
 
 
-@keyframes modal-animate-in
+@keyframes setup-modal-container-animate-in
   0%
     opacity: 0
-    transform: translateY(-10px)
+    transform: translateY(15px) rotate3d(0, 1, 0, 50deg)
   100%
     opacity: 1
+    transform: translateY(-25px)
+
+@keyframes setup-modal-animate-in
+  0%
     transform: translateY(0px)
+  100%
+    transform: translateY(60px)
