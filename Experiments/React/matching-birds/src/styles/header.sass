@@ -1,0 +1,38 @@
+header
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  z-index: 10
+  backdrop-filter: blur(10px)
+  box-shadow: 0 4px 30px hsla(210, 15%, 0%, 0.1)
+  display: flex
+  align-items: center
+  justify-content: space-between
+  margin: 25px
+  background-color: hsla(210, 15%, 100%, 0.5)
+  border-radius: 100px
+
+  .game-icon
+    margin: 12px
+    max-width: 50px
+
+  .player-container
+    display: flex
+    margin: 0 calc(10px + 3vmin) 4px 0
+
+    & .player + .player
+      margin-left: 20px
+  
+  .player
+    color: var(--text-inactive)
+    transition: transform 500ms cubic-bezier(0.165, 0.84, 0.44, 1)
+    transform: scale(0.8)
+
+    &__active
+      color: var(--text-primary)
+      transform: scale(1)
+  
+  span
+    font-weight: 400
+    letter-spacing: 0.03em

@@ -5,6 +5,7 @@ import createCards from './utils/create-cards';
 import resetRevealedCards from './utils/reset-revealed-cards';
 import launchConfetti from './utils/launch-confetti'
 import SetupModal from './components/setup-modal'
+import Header from './components/header';
 
 const gridWidthMap = {
   '12': 1000,
@@ -93,23 +94,14 @@ export default function App() {
   if (!cardsRemaining) { launchConfetti() }
 
   return (
-      <div className="wrap">
-        <header>
-          <img className='game-icon' src={emeraldGameIcon} alt="Emerald Game icon"/>
-          <div className="player-container">
-            {playerNames.map((name, playerIndex) => {
-              const playerScore = cards.filter(({matchedBy}) => matchedBy === playerIndex).length / 2;
-              const isActive = playerIndex === currentPlayer ? true : false;
-              
-              return (
-                <h3 className={`player ${isActive && 'player__active'}`} key={playerIndex}>
-                  <span>{name}: </span>{playerScore}
-                </h3>
-              )
-            })}
-          </div>
-        </header>
-        <main>
+    <div className="wrap">
+      <Header
+        emeraldGameIcon={emeraldGameIcon}
+        playerNames={playerNames}
+        cards={cards}
+        currentPlayer={currentPlayer}
+      />
+      <main>
         {cards.map(card => (
           <Card
             card={card} 
