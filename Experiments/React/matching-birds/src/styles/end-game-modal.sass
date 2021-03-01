@@ -1,0 +1,33 @@
+.end-game-modal
+  display: flex
+  flex-direction: column
+  width: Min(340px, 100%)
+  padding: 25px
+  border-radius: 10px
+  background-color: white
+  box-shadow: 0 8px 30px -4px hsla(250, 100%, 10%, 0.25)
+  opacity: 0
+  animation-delay: 300ms
+  animation-duration: 1500ms
+  animation-fill-mode: forwards
+  animation-iteration-count: 1
+  animation-timing-function: var(--ease-out-quart)
+  animation-name: end-game-modal-animate-in
+
+  & > * + *
+    margin-top: 30px
+
+.end-game-message
+  font-family: 'Press Start 2P', sans-serif
+  text-align: center
+  line-height: 1.5em
+  color: #86ffae
+  text-shadow: -2px -2px 0 #243f2f, 2px -2px 0 #243f2f, -2px 2px 0 #243f2f, 2px 2px 0 #243f2f, 3px 3px 0 #243f2f, 4px 4px 0 #243f2f
+
+@keyframes end-game-modal-animate-in
+  0%
+    opacity: 0
+    transform: translateY(0) rotate3d(0, 1, 0, 50deg)
+  100%
+    opacity: 1
+    transform: translateY(-25px)

@@ -5,8 +5,8 @@ import ArrowDown from '../assets/icon-arrow-down';
 export default function SetupModal({
   cardCount,
   setCardCount,
-  playerNames,
-  setPlayerNames,
+  allPlayerData,
+  setAllPlayerData,
   setSetupModalIsVisible,
   gridWidthMap,
   emeraldGameIcon
@@ -14,18 +14,21 @@ export default function SetupModal({
   const [playerCount, setPlayerCount] = useState(1);
 
   const handleNameChange = (event, index) => {
-    const currentPlayers = [...playerNames];
-    currentPlayers[index] = event.target.value;
-    setPlayerNames(currentPlayers);
-  }
+    const currentPlayers = [...allPlayerData]
 
+    if (!allPlayerData[index]) { currentPlayers.push({ name: '', score: 0}) }
+
+    currentPlayers[index].name = event.target.value;
+    setAllPlayerData(currentPlayers);
+  }
+  
   const handlePlayButtonClick = () => {
-    if (!cardCount || !playerNames.length) return;
+    if (!cardCount || !allPlayerData.length) return;
     setSetupModalIsVisible(false);
   }
 
   return (
-    <div className='setup-modal-bg'>
+    <div className='modal-bg'>
       <div className='setup-modal-container'>
         <div className="title-container">
           <img className='game-icon' src={emeraldGameIcon} alt="Emerald Game icon"/>
@@ -51,8 +54,9 @@ export default function SetupModal({
           </div>
           {[...Array(playerCount)].map((_, i) => (
             <input
+              key={i}
               type="text"
-              value={playerNames[i]}
+              value={allPlayerData[i]?.name}
               onChange={(event) => handleNameChange(event, i)}
               placeholder="Player name"
             />
@@ -63,7 +67,7 @@ export default function SetupModal({
           >
             <Plus />
           </button>
-          <button className="play-button" onClick={() => handlePlayButtonClick()}>Play!</button>
+          <button className="button button__primary" onClick={() => handlePlayButtonClick()}>Play!</button>
         </div>
       </div>
     </div>

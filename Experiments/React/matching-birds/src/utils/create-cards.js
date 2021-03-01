@@ -16,7 +16,6 @@ export default function createCards(cardCount, setCards) {
 
   const selectBirds = uniqueNumbers.reduce((selectedBirds, num) => [...selectedBirds, birdData[num]], []);
 
-  console.log(selectBirds)
   const birdPairs = [
     ...selectBirds,
     ...selectBirds
