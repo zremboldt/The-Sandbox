@@ -3,7 +3,6 @@ import Card from './components/card';
 import emeraldGameIcon from './assets/emerald-game-icon.png';
 import createCards from './utils/create-cards';
 import resetRevealedCards from './utils/reset-revealed-cards';
-import launchConfetti from './utils/launch-confetti'
 import SetupModal from './components/setup-modal'
 import Header from './components/header';
 import EndOfGameModal from './components/end-of-game-modal';
@@ -12,7 +11,6 @@ const gridWidthMap = {
   '12': 1000,
   '20': 1200,
 }
-
 
 const calculateScore = (allPlayerData, cards, setAllPlayerData) => {
   const buildPlayerData = allPlayerData.map(({ name }, playerIndex) => {
@@ -55,11 +53,8 @@ export default function App() {
       emeraldGameIcon={emeraldGameIcon}
     />
   );
-
-  if (isEndOfGame) {
-    launchConfetti()
-    return <EndOfGameModal allPlayerData={allPlayerData} />
-  }
+  
+  if (isEndOfGame) return <EndOfGameModal allPlayerData={allPlayerData} />
 
   const flippedCards = cards.filter(card => card.isRevealed);
 
@@ -108,8 +103,6 @@ export default function App() {
     if (flippedCards.length === 2) return;
     if (!isRevealed) { revealCard(id) };
   }
-
-  console.log(allPlayerData)
 
   const cardsRemaining = cards.filter(({ isMatched }) => !isMatched).length;
   if (!cardsRemaining) { setIsEndOfGame(true) }
