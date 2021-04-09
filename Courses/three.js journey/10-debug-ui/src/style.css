@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    overflow: hidden;
+    font-family: 'Fira Code', Arial, Helvetica, sans-serif;
+    background-color: rgb(14, 13, 26);
+    color: hsl(246, 55%, 35%);
+}
+
+.webgl {
+    position: fixed;
+    top: 0;
+    right: 0;
+    outline: none;
+}
+
+.wrap {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  padding: 0 30px 160px;
+}
+
+h1 {
+  font-size: 120px;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+h3 {
+  padding-left: 10px;
+  font-size: 40px;
+}
