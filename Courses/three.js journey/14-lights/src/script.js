@@ -2,6 +2,7 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'dat.gui'
+import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper';
 
 /**
  * Base
@@ -12,10 +13,10 @@ gui.hide();
 
 const parameters = {
   ambientLightColor: 0x9f78ff,
-  directionalLightColor: 0x28ff73,
+  directionalLightColor: 0x647fff,
   hemisphereLightColor1: 0xff0000,
   hemisphereLightColor2: 0x0000ff,
-  pointLightColor: 0xffff00,
+  pointLightColor: 0xff00e0,
 }
 
 // Canvas
@@ -39,14 +40,15 @@ gui.addColor(parameters, 'ambientLightColor').onChange(() => {
   ambientLight.color.set(parameters.ambientLightColor)
 })
 
-const directionalLight = new THREE.DirectionalLight(parameters.directionalLightColor, 0.9);
-directionalLight.position.set(1, 0.25, 0);
-// scene.add(directionalLight);
+const directionalLight = new THREE.DirectionalLight(parameters.directionalLightColor, 0.6);
+directionalLight.position.set(2, 0.45, -0.5);
+scene.add(directionalLight);
 
-gui.add(directionalLight, 'intensity').min(0).max(1);
+gui.add(directionalLight, 'intensity').min(0).max(3);
 gui.addColor(parameters, 'directionalLightColor').onChange(() => {
   directionalLight.color.set(parameters.directionalLightColor)
 })
+
 
 const hemisphereLight = new THREE.HemisphereLight(
   parameters.hemisphereLightColor1,
@@ -63,9 +65,10 @@ gui.addColor(parameters, 'hemisphereLightColor2').onChange(() => {
   hemisphereLight.groundColor.set(parameters.hemisphereLightColor2);
 });
 
-const pointLight = new THREE.PointLight(parameters.pointLightColor, 0.5);
+
+const pointLight = new THREE.PointLight(parameters.pointLightColor, 0.6);
 pointLight.position.set(0, -0.5, 1);
-// scene.add(pointLight);
+scene.add(pointLight);
 
 gui.add(pointLight, 'intensity').name('Point light intensity').min(0).max(1);
 gui.add(pointLight, 'distance').name('Point light distance').min(0).max(10);
@@ -74,20 +77,52 @@ gui.addColor(parameters, 'pointLightColor').onChange(() => {
   pointLight.color.set(parameters.pointLightColor);
 })
 
-const rectAreaLight = new THREE.RectAreaLight(0x4e00ff, 5.5, 1.4, 3.3);
+
+const rectAreaLight = new THREE.RectAreaLight(0x4e00ff, 5.5, 1.4, 1.3);
 rectAreaLight.position.set(-0.5, 0.2, 0.7);
 rectAreaLight.lookAt(new THREE.Vector3());
-// scene.add(rectAreaLight);
+scene.add(rectAreaLight);
 
 gui.add(rectAreaLight, 'intensity').name('Rect area light intensity').min(0).max(10);
 gui.add(rectAreaLight, 'width').name('Rect area light width').min(0).max(10);
 gui.add(rectAreaLight, 'height').name('Rect area light height').min(0).max(10);
 
+
 const spotlight = new THREE.SpotLight(0x78ff00, 1.5, 6, Math.PI * 0.1, 1, 1);
 spotlight.position.set(0, 2, 3);
-scene.add(spotlight);
 spotlight.target.position.x = 1.5;
 scene.add(spotlight.target);
+// scene.add(spotlight);
+
+
+// ================================
+// Helpers
+// ================================
+
+const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight, 0.5);
+scene.add(directionalLightHelper);
+
+// ================================
+
+const pointLightHelper = new THREE.PointLightHelper(pointLight, 0.2);
+scene.add(pointLightHelper);
+
+// ================================
+
+const rectAreaLightHelper = new RectAreaLightHelper(rectAreaLight)
+scene.add(rectAreaLightHelper);
+
+// ================================
+
+const spotlightHelper = new THREE.SpotLightHelper(spotlight);
+// scene.add(spotlightHelper);
+
+// This may be a bug.
+// The spotlight helper needs to be updated on the next frame in order 
+// to track the spotlight.target.position.
+// So we'll use rAF to  do this.
+window.requestAnimationFrame(() => { spotlightHelper.update() })
+
 
 /**
  * Objects
