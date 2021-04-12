@@ -13,7 +13,8 @@ const gui = new dat.GUI()
  * Textures
  */
 const textureLoader = new THREE.TextureLoader();
-const matcapMaterial = textureLoader.load('./textures/matcaps/4.png');
+const matcapTexture = textureLoader.load('./textures/matcaps/4.png');
+const torusTexture = textureLoader.load('./textures/matcaps/2.png');
 
 
 // Canvas
@@ -50,27 +51,31 @@ fontLoader.load(
     textGeometry.center();
 
     const textMaterial = new THREE.MeshMatcapMaterial();
-    textMaterial.matcap = matcapMaterial;
+    textMaterial.matcap = matcapTexture;
     const text = new THREE.Mesh(textGeometry, textMaterial);
     scene.add(text);
   }
 )
 
 const torusGeometry = new THREE.TorusGeometry(0.4, 0.2, 30, 50);
-const torusMaterial = new THREE.MeshMatcapMaterial({ matcap: matcapMaterial });
+const torusMaterial = new THREE.MeshMatcapMaterial({ matcap: torusTexture });
 // const torusMesh = new THREE.Mesh(torusGeometry, torusMaterial);
 
+console.time('donuts');
+
 for(let i = 0; i < 10000; i++) {
-  if (i > 50) {
-    const torusMesh = new THREE.Mesh(torusGeometry, torusMaterial);
-    torusMesh.position.x = (Math.random() - 0.5) * i * 0.2;
-    torusMesh.position.y = (Math.random() - 0.5) * i * 0.2;
-    torusMesh.position.z = (Math.random() - 0.5) * i * 0.2;
-    torusMesh.rotation.x = Math.PI * Math.random();
-    torusMesh.rotation.y = Math.PI * Math.random();
-    scene.add(torusMesh);
-  }
+  const torusMesh = new THREE.Mesh(torusGeometry, torusMaterial);
+  torusMesh.position.x = (Math.random() - 0.5) * 70;
+  torusMesh.position.y = (Math.random() - 0.5) * 70;
+  torusMesh.position.z = (Math.random() - 0.5) * 70;
+  torusMesh.rotation.x = Math.PI * Math.random();
+  torusMesh.rotation.y = Math.PI * Math.random();
+  const scaleValue = Math.random();
+  torusMesh.scale.set(scaleValue, scaleValue, scaleValue);
+  scene.add(torusMesh);
 }
+
+console.timeEnd('donuts');
 
 /**
  * Sizes
