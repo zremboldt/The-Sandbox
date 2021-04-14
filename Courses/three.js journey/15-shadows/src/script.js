@@ -44,10 +44,22 @@ directionalLight.shadow.camera.right = -1.5;
 directionalLight.shadow.radius = 4;
 scene.add(directionalLight)
 
-const directionalLightCameraHelper = new THREE.CameraHelper(directionalLight.shadow.camera);
-scene.add(directionalLightCameraHelper);
+// const directionalLightCameraHelper = new THREE.CameraHelper(directionalLight.shadow.camera);
+// scene.add(directionalLightCameraHelper);
 
-// console.log(directionalLight.shadow.camera);
+// Spotlight
+const spotlight = new THREE.SpotLight(0xffffff, 0.4, 10, Math.PI * 0.3);
+spotlight.castShadow = true;
+spotlight.shadow.mapSize.set(1024, 1024);
+spotlight.shadow.camera.near = 1;
+spotlight.shadow.camera.far = 5;
+spotlight.shadow.camera.fov = 30;
+spotlight.shadow.radius = 4;
+spotlight.position.set(0, 2, 2);
+scene.add(spotlight);
+
+// const spotlightCameraHelper = new THREE.CameraHelper(spotlight.shadow.camera);
+// scene.add(spotlightCameraHelper);
 
 /**
  * Materials
