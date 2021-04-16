@@ -3,6 +3,11 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'dat.gui'
 
+// Textures
+const textureLoader = new THREE.TextureLoader();
+const bakedShadowTexture = textureLoader.load('./textures/bakedShadow.jpg');
+const simpleShadowTexture = textureLoader.load('./textures/simpleShadow.jpg');
+
 /**
  * Base
  */
@@ -20,11 +25,13 @@ const scene = new THREE.Scene()
  */
 // Ambient light
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
+ambientLight.intensity = 0;
 gui.add(ambientLight, 'intensity').min(0).max(1).step(0.001)
 scene.add(ambientLight)
 
 // Directional light
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5)
+directionalLight.intensity = 0.5;
 directionalLight.position.set(2, 2, - 1)
 gui.add(directionalLight, 'intensity').min(0).max(1).step(0.001)
 gui.add(directionalLight.position, 'x').min(- 5).max(5).step(0.001)
@@ -48,7 +55,7 @@ scene.add(directionalLight)
 // scene.add(directionalLightCameraHelper);
 
 // Spotlight
-const spotlight = new THREE.SpotLight(0xffffff, 0.4, 10, Math.PI * 0.3);
+const spotlight = new THREE.SpotLight(0x5555ff, 0.4, 10, Math.PI * 0.3);
 spotlight.castShadow = true;
 spotlight.shadow.mapSize.set(1024, 1024);
 spotlight.shadow.camera.near = 1;
@@ -61,6 +68,20 @@ scene.add(spotlight);
 // const spotlightCameraHelper = new THREE.CameraHelper(spotlight.shadow.camera);
 // scene.add(spotlightCameraHelper);
 
+// Pointlight
+const pointlight = new THREE.PointLight(0x0000ff, 0.3);
+pointlight.position.set(1, 1, 0);
+pointlight.castShadow = true;
+pointlight.shadow.mapSize.set(1024, 1024);
+pointlight.shadow.radius = 10;
+pointlight.shadow.camera.near = 0.4;
+pointlight.shadow.camera.far = 5;
+console.log(pointlight.shadow)
+scene.add(pointlight);
+
+// const pointlightCameraHelper = new THREE.CameraHelper(pointlight.shadow.camera);
+// scene.add(pointlightCameraHelper);
+
 /**
  * Materials
  */
@@ -68,6 +89,9 @@ const material = new THREE.MeshStandardMaterial()
 material.roughness = 0.7
 gui.add(material, 'metalness').min(0).max(1).step(0.001)
 gui.add(material, 'roughness').min(0).max(1).step(0.001)
+
+const planeMaterial = new THREE.MeshStandardMaterial({ map: bakedShadowTexture });
+
 
 /**
  * Objects
@@ -81,12 +105,25 @@ sphere.castShadow = true;
 const plane = new THREE.Mesh(
     new THREE.PlaneGeometry(5, 5),
     material
+    // planeMaterial
 )
 plane.receiveShadow = true;
 plane.rotation.x = - Math.PI * 0.5
 plane.position.y = - 0.5
 
 scene.add(sphere, plane)
+
+const sphereShadow = new THREE.Mesh(
+  new THREE.PlaneGeometry(1.2, 1.2),
+  new THREE.MeshBasicMaterial({ 
+    color: 'black', 
+    transparent: true,
+    alphaMap: simpleShadowTexture 
+  })
+)
+sphereShadow.rotation.x = -Math.PI * 0.5;
+sphereShadow.position.y = plane.position.y + 0.01
+scene.add(sphereShadow);
 
 /**
  * Sizes
@@ -116,8 +153,8 @@ window.addEventListener('resize', () => {
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
 camera.position.x = 1
-camera.position.y = 1
-camera.position.z = 1
+camera.position.y = 2
+camera.position.z = 2
 scene.add(camera)
 
 // Controls
@@ -132,7 +169,7 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-renderer.shadowMap.enabled = true;
+// renderer.shadowMap.enabled = true;
 // renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 /**
@@ -143,6 +180,20 @@ const clock = new THREE.Clock()
 const tick = () =>
 {
     const elapsedTime = clock.getElapsedTime()
+
+    // Update sphere
+    sphere.position.x = Math.sin(elapsedTime) * 1.5;
+    sphere.position.y = Math.abs(Math.sin(elapsedTime * 3));
+    sphere.position.z = Math.cos(elapsedTime) * 1.5;
+
+    // Update sphereShadow
+    sphereShadow.position.x = sphere.position.x;
+    sphereShadow.position.z = sphere.position.z;
+    sphereShadow.material.opacity = (1 - sphere.position.y) * 0.7;
+    sphereShadow.scale.x = sphere.position.y + 0.5;
+    sphereShadow.scale.y = sphere.position.y + 0.5;
+
+    
 
     // Update controls
     controls.update()
