@@ -247,12 +247,18 @@ scene.add(floor)
 // =============================
 
 // Ambient light
-const ambientLight = new THREE.AmbientLight('#ffffff', 0.5)
+const ambientLight = new THREE.AmbientLight('#ffffff', 0)
 gui.add(ambientLight, 'intensity').min(0).max(1).step(0.001).name('Ambient light intensity');
 scene.add(ambientLight)
 
+// Point light
+const pointLight = new THREE.PointLight('hsl(20, 20%, 60%)', 0.75, 6)
+gui.add(pointLight, 'intensity').min(0).max(1).step(0.001).name('Pointlight intensity');
+pointLight.position.set(0, 2, 2.5);
+scene.add(pointLight)
+
 // Directional light
-const moonLight = new THREE.DirectionalLight('#ffffff', 0.5)
+const moonLight = new THREE.DirectionalLight('#ffffff', 0)
 moonLight.position.set(4, 5, - 2)
 gui.add(moonLight, 'intensity').min(0).max(1).step(0.001).name('Moonlight intensity');
 gui.add(moonLight.position, 'x').min(- 5).max(5).step(0.001)
@@ -317,8 +323,8 @@ const clock = new THREE.Clock()
 const tick = () => {
   const elapsedTime = clock.getElapsedTime()
 
-  camera.position.x = Math.PI * Math.sin(elapsedTime * 0.5) * 2.5;
-  camera.position.z = Math.PI * Math.cos(elapsedTime * 0.5) * 2.5;
+  // camera.position.x = Math.PI * Math.sin(elapsedTime * 0.5) * 2.5;
+  // camera.position.z = Math.PI * Math.cos(elapsedTime * 0.5) * 2.5;
   // camera.position.y = Math.cos(elapsedTime * 0.25) + 4
 
   // Update controls
