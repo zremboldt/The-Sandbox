@@ -11,9 +11,10 @@ import * as dat from 'dat.gui'
 // Debug
 const gui = new dat.GUI({ width: 400 })
 const guiParams = {
-  ambientLightColor: 0x4ddc,
+  ambientLightColor: 0x334566,
   pointLightColor: 0x8c7b76,
   moonlightColor: 0x4b526e,
+  fogColor: 0x90911,
 }
 
 // Canvas
@@ -21,6 +22,14 @@ const canvas = document.querySelector('canvas.webgl')
 
 // Scene
 const scene = new THREE.Scene()
+
+// Fog
+const fog = new THREE.Fog(guiParams.fogColor, 0, 20);
+scene.fog = fog;
+
+gui.addColor(guiParams, 'fogColor').onChange(() => {
+  fog.color.set(guiParams.fogColor);
+});
 
 // =============================
 // Textures
@@ -35,6 +44,8 @@ const porchPlanksColorTexture = textureLoader.load('./textures/wood-planks/wood-
 const chimneyTopTexture = textureLoader.load('./textures/stone/stone-color.jpg');
 const chimneyMiddleTexture = textureLoader.load('./textures/stone/stone-color.jpg');
 const chimneyBaseTexture = textureLoader.load('./textures/stone/stone-color.jpg');
+const grassColorTexture = textureLoader.load('./textures/grass/color.jpg');
+const grassNormalTexture = textureLoader.load('./textures/grass/normal.jpg');
 
 
 woodPlanksColorTexture.repeat.x = 2;
@@ -58,6 +69,16 @@ chimneyMiddleTexture.wrapS = THREE.RepeatWrapping;
 
 chimneyBaseTexture.repeat.x = 0.5;
 chimneyBaseTexture.repeat.y = 0.5;
+
+grassColorTexture.repeat.x = 16
+grassColorTexture.repeat.y = 16
+grassColorTexture.wrapS = THREE.RepeatWrapping;
+grassColorTexture.wrapT = THREE.RepeatWrapping;
+
+grassNormalTexture.repeat.x = 16
+grassNormalTexture.repeat.y = 16
+grassNormalTexture.wrapS = THREE.RepeatWrapping;
+grassNormalTexture.wrapT = THREE.RepeatWrapping;
 
 // porchPlanksColorTexture.wrapS = THREE.RepeatWrapping;
 // porchPlanksColorTexture.wrapT = THREE.RepeatWrapping;
@@ -264,7 +285,11 @@ for (let i = 0; i < 125; i++) {
 // Floor
 const floor = new THREE.Mesh(
   new THREE.PlaneGeometry(40, 40),
-  new THREE.MeshStandardMaterial({ color: '#a9c388' })
+  new THREE.MeshStandardMaterial({ 
+    color: 'hsl(0, 10%, 50%)',
+    map: grassColorTexture,
+    normalMap: grassNormalTexture,
+  })
 )
 floor.rotation.x = - Math.PI * 0.5
 floor.position.y = 0
@@ -275,7 +300,7 @@ scene.add(floor)
 // =============================
 
 // Ambient light
-const ambientLight = new THREE.AmbientLight(guiParams.ambientLightColor, 0.025)
+const ambientLight = new THREE.AmbientLight(guiParams.ambientLightColor, 0.2)
 scene.add(ambientLight)
 
 gui.addColor(guiParams, 'ambientLightColor').onChange(() => {
@@ -295,8 +320,8 @@ gui.addColor(guiParams, 'pointLightColor').onChange(() => {
 gui.add(pointLight, 'intensity').min(0).max(1).step(0.001).name('Pointlight intensity');
 
 // Directional light
-const moonLight = new THREE.DirectionalLight(guiParams.moonlightColor, 0.13)
-moonLight.position.set(4, 5, - 2)
+const moonLight = new THREE.DirectionalLight(guiParams.moonlightColor, 0.35)
+moonLight.position.set(5, 0.8, 2.5)
 scene.add(moonLight)
 
 gui.addColor(guiParams, 'moonlightColor').onChange(() => {
