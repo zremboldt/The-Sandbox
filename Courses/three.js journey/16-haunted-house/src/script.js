@@ -13,7 +13,7 @@ const gui = new dat.GUI({ width: 400 })
 const guiParams = {
   ambientLightColor: 0x4ddc,
   pointLightColor: 0x8c7b76,
-  moonlightColor: 0x89aaff,
+  moonlightColor: 0x4b526e,
 }
 
 // Canvas
@@ -232,32 +232,38 @@ chimney.add(chimneyTop);
 
 // house.add(bush1, bush2, bush3, bush4);
 
-// Graves
-const graves = new THREE.Group();
-scene.add(graves);
+// Trees
+const trees = new THREE.Group();
+scene.add(trees);
 
-const graveGeometry = new THREE.BoxGeometry(0.5, 0.8, 0.15);
-const graveMaterial = new THREE.MeshStandardMaterial({ color: '#b2b6b1' });
+const treeGeometry = new THREE.BoxGeometry(0.5, 10, 0.5);
+// const treeGeometry = new THREE.BoxGeometry(0.5, 0.8, 0.15);
+const treeMaterial = new THREE.MeshStandardMaterial({ color: '#453729' });
 
-for (let i = 0; i < 50; i++) {
+for (let i = 0; i < 125; i++) {
   const angle = (Math.PI * 2) * Math.random();
-  const circleRaduis = 5 + Math.random() * 4;
+  const circleRaduis = 6 + Math.random() * 14;
   const xPos = Math.cos(angle) * circleRaduis;
   const zPos = Math.sin(angle) * circleRaduis;
-  const yPos = 0.1 + Math.random() * 0.3;
 
-  const grave = new THREE.Mesh(graveGeometry, graveMaterial);
-  grave.position.set(xPos, yPos, zPos);
-  grave.rotation.x = (Math.random() - 0.5) * 0.2;
-  grave.rotation.y = (Math.random() - 0.5) * 0.5;
-  grave.rotation.z = (Math.random() - 0.5) * 0.2;
-  graves.add(grave);
+  // Thin out trees in front of house
+  const isInFrontOfHouseX = xPos > -4 && xPos < -1;
+  const isInFrontOfHouseZ = zPos > 0;
+  if (isInFrontOfHouseX && isInFrontOfHouseZ) { continue };
+
+  // Place trees
+  const tree = new THREE.Mesh(treeGeometry, treeMaterial);
+  tree.position.set(xPos, 4.9, zPos);
+  tree.rotation.x = (Math.random() - 0.5) * 0.2;
+  tree.rotation.y = (Math.random() - 0.5) * 0.5;
+  tree.rotation.z = (Math.random() - 0.5) * 0.2;
+  trees.add(tree);
 }
 
 
 // Floor
 const floor = new THREE.Mesh(
-  new THREE.PlaneGeometry(20, 20),
+  new THREE.PlaneGeometry(40, 40),
   new THREE.MeshStandardMaterial({ color: '#a9c388' })
 )
 floor.rotation.x = - Math.PI * 0.5
@@ -281,7 +287,7 @@ gui.add(ambientLight, 'intensity').min(0).max(1).step(0.001).name('Ambient light
 // Point light
 const pointLight = new THREE.PointLight(guiParams.pointLightColor, 0.75, 6)
 pointLight.position.set(0, 2, 2.5);
-scene.add(pointLight)
+house.add(pointLight)
 
 gui.addColor(guiParams, 'pointLightColor').onChange(() => {
   pointLight.color.set(guiParams.pointLightColor);
@@ -329,10 +335,12 @@ window.addEventListener('resize', () => {
 // =============================
 
 // Base camera
+const cameraSubject = new THREE.Vector3(0, 2, 0);
+
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.x = -6
+camera.position.x = -4
 camera.position.y = 2
-camera.position.z = 8
+camera.position.z = 10
 scene.add(camera)
 
 // Controls
@@ -364,6 +372,7 @@ const tick = () => {
 
   // Update controls
   controls.update()
+  camera.lookAt(cameraSubject);
 
   // Render
   renderer.render(scene, camera)
