@@ -10,6 +10,11 @@ import * as dat from 'dat.gui'
 
 // Debug
 const gui = new dat.GUI({ width: 400 })
+const guiParams = {
+  ambientLightColor: 0x4ddc,
+  pointLightColor: 0x8c7b76,
+  moonlightColor: 0x89aaff,
+}
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -66,6 +71,7 @@ chimneyBaseTexture.repeat.y = 0.5;
 
 // Group
 const house = new THREE.Group();
+house.position.z = -1;
 scene.add(house);
 
 // Walls
@@ -230,7 +236,23 @@ chimney.add(chimneyTop);
 const graves = new THREE.Group();
 scene.add(graves);
 
-const graveGeometry = new THREE.BoxGeometry()
+const graveGeometry = new THREE.BoxGeometry(0.5, 0.8, 0.15);
+const graveMaterial = new THREE.MeshStandardMaterial({ color: '#b2b6b1' });
+
+for (let i = 0; i < 50; i++) {
+  const angle = (Math.PI * 2) * Math.random();
+  const circleRaduis = 5 + Math.random() * 4;
+  const xPos = Math.cos(angle) * circleRaduis;
+  const zPos = Math.sin(angle) * circleRaduis;
+  const yPos = 0.1 + Math.random() * 0.3;
+
+  const grave = new THREE.Mesh(graveGeometry, graveMaterial);
+  grave.position.set(xPos, yPos, zPos);
+  grave.rotation.x = (Math.random() - 0.5) * 0.2;
+  grave.rotation.y = (Math.random() - 0.5) * 0.5;
+  grave.rotation.z = (Math.random() - 0.5) * 0.2;
+  graves.add(grave);
+}
 
 
 // Floor
@@ -247,24 +269,37 @@ scene.add(floor)
 // =============================
 
 // Ambient light
-const ambientLight = new THREE.AmbientLight('#ffffff', 0)
-gui.add(ambientLight, 'intensity').min(0).max(1).step(0.001).name('Ambient light intensity');
+const ambientLight = new THREE.AmbientLight(guiParams.ambientLightColor, 0.025)
 scene.add(ambientLight)
 
+gui.addColor(guiParams, 'ambientLightColor').onChange(() => {
+  ambientLight.color.set(guiParams.ambientLightColor);
+});
+gui.add(ambientLight, 'intensity').min(0).max(1).step(0.001).name('Ambient light intensity');
+
+
 // Point light
-const pointLight = new THREE.PointLight('hsl(20, 20%, 60%)', 0.75, 6)
-gui.add(pointLight, 'intensity').min(0).max(1).step(0.001).name('Pointlight intensity');
+const pointLight = new THREE.PointLight(guiParams.pointLightColor, 0.75, 6)
 pointLight.position.set(0, 2, 2.5);
 scene.add(pointLight)
 
+gui.addColor(guiParams, 'pointLightColor').onChange(() => {
+  pointLight.color.set(guiParams.pointLightColor);
+})
+gui.add(pointLight, 'intensity').min(0).max(1).step(0.001).name('Pointlight intensity');
+
 // Directional light
-const moonLight = new THREE.DirectionalLight('#ffffff', 0)
+const moonLight = new THREE.DirectionalLight(guiParams.moonlightColor, 0.13)
 moonLight.position.set(4, 5, - 2)
+scene.add(moonLight)
+
+gui.addColor(guiParams, 'moonlightColor').onChange(() => {
+  moonLight.color.set(guiParams.moonlightColor);
+})
 gui.add(moonLight, 'intensity').min(0).max(1).step(0.001).name('Moonlight intensity');
 gui.add(moonLight.position, 'x').min(- 5).max(5).step(0.001)
 gui.add(moonLight.position, 'y').min(- 5).max(5).step(0.001)
 gui.add(moonLight.position, 'z').min(- 5).max(5).step(0.001)
-scene.add(moonLight)
 
 // =============================
 // Sizes
