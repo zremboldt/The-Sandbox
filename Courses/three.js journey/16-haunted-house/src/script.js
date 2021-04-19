@@ -22,9 +22,10 @@ const canvas = document.querySelector('canvas.webgl')
 
 // Scene
 const scene = new THREE.Scene()
+scene.background = new THREE.Color(0x90911)
 
 // Fog
-const fog = new THREE.Fog(guiParams.fogColor, 0, 20);
+const fog = new THREE.Fog(guiParams.fogColor, 0, 25);
 scene.fog = fog;
 
 gui.addColor(guiParams, 'fogColor').onChange(() => {
@@ -36,16 +37,28 @@ gui.addColor(guiParams, 'fogColor').onChange(() => {
 // =============================
 
 const textureLoader = new THREE.TextureLoader();
+
 const doorColorTexture = textureLoader.load('./textures/door/color.jpg');
 const doorAlphaTexture = textureLoader.load('./textures/door/alpha.jpg');
+const doorAOTexture = textureLoader.load('./textures/door/ambientOcclusion.jpg');
+const doorDisplacementTexture = textureLoader.load('./textures/door/height.jpg');
+const doorNormalTexture = textureLoader.load('./textures/door/normal.jpg');
+const doorMetalnessTexture = textureLoader.load('./textures/door/metalness.jpg');
+const doorRoughnessTexture = textureLoader.load('./textures/door/roughness.jpg');
+
 const woodPlanksColorTexture = textureLoader.load('./textures/wood-planks/wood-planks-color.jpg');
 const woodPlanksNormalTexture = textureLoader.load('./textures/wood-planks/wood-planks-normal.jpg');
 const porchPlanksColorTexture = textureLoader.load('./textures/wood-planks/wood-planks-color.jpg');
+const porchPlanksNormalTexture = textureLoader.load('./textures/wood-planks/wood-planks-normal.jpg');
+
 const chimneyTopTexture = textureLoader.load('./textures/stone/stone-color.jpg');
 const chimneyMiddleTexture = textureLoader.load('./textures/stone/stone-color.jpg');
 const chimneyBaseTexture = textureLoader.load('./textures/stone/stone-color.jpg');
+
 const grassColorTexture = textureLoader.load('./textures/grass/color.jpg');
 const grassNormalTexture = textureLoader.load('./textures/grass/normal.jpg');
+const grassAOTexture = textureLoader.load('./textures/grass/ambientOcclusion.jpg');
+const grassRoughnessTexture = textureLoader.load('./textures/grass/roughness.jpg');
 
 
 woodPlanksColorTexture.repeat.x = 2;
@@ -60,6 +73,8 @@ woodPlanksNormalTexture.rotation = Math.PI * 0.5;
 
 porchPlanksColorTexture.repeat.x = 4;
 porchPlanksColorTexture.wrapS = THREE.RepeatWrapping;
+porchPlanksNormalTexture.repeat.x = 4;
+porchPlanksNormalTexture.wrapS = THREE.RepeatWrapping;
 
 chimneyTopTexture.repeat.x = 0.5;
 
@@ -80,11 +95,6 @@ grassNormalTexture.repeat.y = 16
 grassNormalTexture.wrapS = THREE.RepeatWrapping;
 grassNormalTexture.wrapT = THREE.RepeatWrapping;
 
-// porchPlanksColorTexture.wrapS = THREE.RepeatWrapping;
-// porchPlanksColorTexture.wrapT = THREE.RepeatWrapping;
-// porchPlanksColorTexture.repeat.y = 2;
-// porchPlanksColorTexture.offset.x = 0.5
-// porchPlanksColorTexture.offset.y = 1
 
 // =============================
 // House
@@ -111,6 +121,8 @@ const porchFloor = new THREE.Mesh(
   new THREE.BoxGeometry(6, 0.2, 1.5),
   new THREE.MeshStandardMaterial({
     map: porchPlanksColorTexture,
+    normalMap: porchPlanksNormalTexture,
+    normalScale: { x: 3, y: 3 },
   })
 )
 porchFloor.position.y = 0.2 * 0.5;
@@ -168,14 +180,24 @@ house.add(roofPorch);
 
 // Door
 const door = new THREE.Mesh(
-  new THREE.PlaneGeometry(2.2, 2.2),
-  new THREE.MeshStandardMaterial({ 
-    map: doorColorTexture, 
+  new THREE.PlaneGeometry(2.2, 2.2, 60, 60),
+  new THREE.MeshStandardMaterial({
+    color: 'hsl(25, 0%, 50%)',
+    map: doorColorTexture,
+    transparent: true,
     alphaMap: doorAlphaTexture,
-    transparent: true
+    aoMap: doorAOTexture,
+    displacementMap: doorDisplacementTexture,
+    displacementScale: 0.2,
+    normalMap: doorNormalTexture,
+    metalnessMap: doorMetalnessTexture,
+    roughnessMap: doorRoughnessTexture,
+    roughness: 2
   })
 )
-door.position.z = 2 + 0.01;
+// NOTE: This next line is necessary for ambient Occlusion to work.
+door.geometry.setAttribute('uv2', new THREE.Float32BufferAttribute(door.geometry.attributes.uv.array, 2)); 
+door.position.z = 2 - 0.04;
 door.position.y = 2.4 * 0.5;
 house.add(door);
 
@@ -230,42 +252,19 @@ chimneyTop.position.x = 0.15;
 chimneyTop.position.y = (3 * 0.5) + 2.1;
 chimney.add(chimneyTop);
 
-
-// Bushes
-// const bushGeometry = new THREE.SphereGeometry(1, 16, 16);
-// const bushMaterial = new THREE.MeshStandardMaterial({ color: 'hsl(70, 12%, 35%)' });
-
-// const bush1 = new THREE.Mesh(bushGeometry, bushMaterial);
-// bush1.scale.set(0.7, 0.6, 0.7);
-// bush1.position.set(-1.2, 0.4, 2.8);
-
-// const bush2 = new THREE.Mesh(bushGeometry, bushMaterial);
-// bush2.scale.set(0.5, 0.4, 0.4);
-// bush2.position.set(-1.9, 0.2, 2.95);
-
-// const bush3 = new THREE.Mesh(bushGeometry, bushMaterial);
-// bush3.scale.set(0.6, 0.8, 0.6);
-// bush3.position.set(1.3, 0.5, 2.8);
-
-// const bush4 = new THREE.Mesh(bushGeometry, bushMaterial);
-// bush4.scale.set(0.3, 0.3, 0.3);
-// bush4.position.set(2, 0.2, 2.8);
-
-// house.add(bush1, bush2, bush3, bush4);
-
 // Trees
 const trees = new THREE.Group();
 scene.add(trees);
 
-const treeGeometry = new THREE.BoxGeometry(0.5, 10, 0.5);
-// const treeGeometry = new THREE.BoxGeometry(0.5, 0.8, 0.15);
+const treeGeometry = new THREE.BoxGeometry(1, 20, 1);
 const treeMaterial = new THREE.MeshStandardMaterial({ color: '#453729' });
 
-for (let i = 0; i < 125; i++) {
+for (let i = 0; i < 100; i++) {
   const angle = (Math.PI * 2) * Math.random();
   const circleRaduis = 6 + Math.random() * 14;
   const xPos = Math.cos(angle) * circleRaduis;
   const zPos = Math.sin(angle) * circleRaduis;
+  const treeThickness = 0.4 + (Math.random() * 0.6)
 
   // Thin out trees in front of house
   const isInFrontOfHouseX = xPos > -4 && xPos < -1;
@@ -274,33 +273,48 @@ for (let i = 0; i < 125; i++) {
 
   // Place trees
   const tree = new THREE.Mesh(treeGeometry, treeMaterial);
-  tree.position.set(xPos, 4.9, zPos);
-  tree.rotation.x = (Math.random() - 0.5) * 0.2;
+  tree.position.set(xPos, 9.5, zPos);
+  tree.scale.set(treeThickness, 1, treeThickness);
+  console.log(tree)
+  tree.rotation.x = (Math.random() - 0.5) * 0.1;
   tree.rotation.y = (Math.random() - 0.5) * 0.5;
-  tree.rotation.z = (Math.random() - 0.5) * 0.2;
+  tree.rotation.z = (Math.random() - 0.5) * 0.1;
   trees.add(tree);
 }
 
 
-// Floor
-const floor = new THREE.Mesh(
+// Ground
+const ground = new THREE.Mesh(
   new THREE.PlaneGeometry(40, 40),
   new THREE.MeshStandardMaterial({ 
     color: 'hsl(0, 10%, 50%)',
     map: grassColorTexture,
     normalMap: grassNormalTexture,
+    aoMap: grassAOTexture,
+    roughnessMap: grassRoughnessTexture,
+    roughness: 1.3,
   })
 )
-floor.rotation.x = - Math.PI * 0.5
-floor.position.y = 0
-scene.add(floor)
+ground.geometry.setAttribute('uv2', new THREE.Float32BufferAttribute(ground.geometry.attributes.uv.array, 2)); 
+ground.rotation.x = - Math.PI * 0.5
+ground.position.y = 0
+scene.add(ground)
 
 // =============================
 // Lights
 // =============================
 
+const ghost1 = new THREE.PointLight(0x550055, 1, 4)
+scene.add(ghost1);
+
+const ghost2 = new THREE.PointLight(0x0055, 2, 3)
+scene.add(ghost2);
+
+const ghost3 = new THREE.PointLight(0x5500, 2, 3)
+scene.add(ghost3);
+
 // Ambient light
-const ambientLight = new THREE.AmbientLight(guiParams.ambientLightColor, 0.2)
+const ambientLight = new THREE.AmbientLight(guiParams.ambientLightColor, 0.1)
 scene.add(ambientLight)
 
 gui.addColor(guiParams, 'ambientLightColor').onChange(() => {
@@ -311,7 +325,7 @@ gui.add(ambientLight, 'intensity').min(0).max(1).step(0.001).name('Ambient light
 
 // Point light
 const pointLight = new THREE.PointLight(guiParams.pointLightColor, 0.75, 6)
-pointLight.position.set(0, 2, 2.5);
+pointLight.position.set(0, 1.8, 2.5);
 house.add(pointLight)
 
 gui.addColor(guiParams, 'pointLightColor').onChange(() => {
@@ -320,8 +334,8 @@ gui.addColor(guiParams, 'pointLightColor').onChange(() => {
 gui.add(pointLight, 'intensity').min(0).max(1).step(0.001).name('Pointlight intensity');
 
 // Directional light
-const moonLight = new THREE.DirectionalLight(guiParams.moonlightColor, 0.35)
-moonLight.position.set(5, 0.8, 2.5)
+const moonLight = new THREE.DirectionalLight(guiParams.moonlightColor, 0.2)
+moonLight.position.set(5, -0.5, -1.5)
 scene.add(moonLight)
 
 gui.addColor(guiParams, 'moonlightColor').onChange(() => {
@@ -394,6 +408,18 @@ const tick = () => {
   // camera.position.x = Math.PI * Math.sin(elapsedTime * 0.5) * 2.5;
   // camera.position.z = Math.PI * Math.cos(elapsedTime * 0.5) * 2.5;
   // camera.position.y = Math.cos(elapsedTime * 0.25) + 4
+
+  ghost1.position.x = Math.PI * Math.sin(elapsedTime * 0.25) * 2;
+  ghost1.position.z = Math.PI * Math.cos(elapsedTime * 0.5) * 2;
+  ghost1.position.y = 3 + Math.cos(elapsedTime * 0.5) * 5;
+
+  ghost2.position.x = Math.PI * Math.cos(elapsedTime * 0.25) * 2;
+  ghost2.position.z = Math.PI * Math.sin(elapsedTime * 0.5) * 2;
+  ghost2.position.y = 3 + Math.cos(elapsedTime * 0.5) * 5;
+
+  ghost3.position.x = Math.PI * Math.cos(elapsedTime * 0.5) * 2;
+  ghost3.position.z = Math.PI * Math.sin(elapsedTime * 0.25) * 2;
+  ghost3.position.y = 3 + Math.cos(elapsedTime * 0.25) * 5;
 
   // Update controls
   controls.update()
