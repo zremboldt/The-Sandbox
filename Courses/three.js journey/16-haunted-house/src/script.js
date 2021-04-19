@@ -9,7 +9,9 @@ import * as dat from 'dat.gui'
 // =============================
 
 // Debug
-const gui = new dat.GUI({ width: 400 })
+const gui = new dat.GUI({ width: 400 });
+gui.hide();
+
 const guiParams = {
   ambientLightColor: 0x334566,
   pointLightColor: 0x8c7b76,
@@ -304,13 +306,13 @@ scene.add(ground)
 // Lights
 // =============================
 
-const ghost1 = new THREE.PointLight(0x550055, 1, 4)
+const ghost1 = new THREE.PointLight(0x338888, 1, 4)
 scene.add(ghost1);
 
-const ghost2 = new THREE.PointLight(0x0055, 2, 3)
+const ghost2 = new THREE.PointLight(0x338888, 1, 4)
 scene.add(ghost2);
 
-const ghost3 = new THREE.PointLight(0x5500, 2, 3)
+const ghost3 = new THREE.PointLight(0x338888, 1, 4)
 scene.add(ghost3);
 
 // Ambient light
