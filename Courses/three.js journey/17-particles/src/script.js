@@ -24,14 +24,34 @@ const textureLoader = new THREE.TextureLoader()
 // Particles
 // =========================================
 
-const particleGeometry = new THREE.SphereGeometry(1, 32, 32);
-const particleMaterial = new THREE.PointsMaterial({
-  size: 0.02,
-  sizeAttenuation: true,
-});
+// const particleGeometry = new THREE.SphereGeometry(1, 32, 32);
+// const particleMaterial = new THREE.PointsMaterial({
+//   size: 0.02,
+//   sizeAttenuation: true,
+// });
 
-const particles = new THREE.Points(particleGeometry, particleMaterial);
+// const particles = new THREE.Points(particleGeometry, particleMaterial);
+// scene.add(particles);
+
+// - - - - - - - - - - - - - - - - - - - - -
+
+const geometry = new THREE.BufferGeometry();
+
+const count = 10000;
+const positionsArray = new Float32Array(count * 3 * 3);
+
+for (let i = 0; i < count * 3 * 3; i++) {
+  positionsArray[i] = Math.random() - 0.5;
+}
+
+const positionsAttribute = new THREE.BufferAttribute(positionsArray, 3);
+geometry.setAttribute('position', positionsAttribute);
+
+const material = new THREE.PointsMaterial({ size: 0.001, sizeAttenuation: true })
+const particles = new THREE.Points(geometry, material)
 scene.add(particles);
+
+// - - - - - - - - - - - - - - - - - - - - -
 
 /**
  * Sizes
