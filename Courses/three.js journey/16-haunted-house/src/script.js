@@ -281,6 +281,7 @@ for (let i = 0; i < 100; i++) {
   tree.rotation.x = (Math.random() - 0.5) * 0.1;
   tree.rotation.y = (Math.random() - 0.5) * 0.5;
   tree.rotation.z = (Math.random() - 0.5) * 0.1;
+  tree.castShadow = true;
   trees.add(tree);
 }
 
@@ -306,13 +307,13 @@ scene.add(ground)
 // Lights
 // =============================
 
-const ghost1 = new THREE.PointLight(0x338888, 1, 4)
+const ghost1 = new THREE.PointLight(0x00ffff, 2, 4)
 scene.add(ghost1);
 
-const ghost2 = new THREE.PointLight(0x338888, 1, 4)
+const ghost2 = new THREE.PointLight(0xff00ff, 2, 4)
 scene.add(ghost2);
 
-const ghost3 = new THREE.PointLight(0x338888, 1, 4)
+const ghost3 = new THREE.PointLight(0x0000ff, 2, 4)
 scene.add(ghost3);
 
 // Ambient light
@@ -395,8 +396,35 @@ controls.enableDamping = true
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas
 })
-renderer.setSize(sizes.width, sizes.height)
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+renderer.setSize(sizes.width, sizes.height);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+// =============================
+// Shadows
+// =============================
+
+renderer.shadowMap.enabled = true;
+
+ghost1.castShadow = true;
+ghost2.castShadow = true;
+ghost3.castShadow = true;
+
+pointLight.castShadow = true;
+
+cabinBlockMain.castShadow = true;
+roofMain.castShadow = true;
+roofPorch.castShadow = true;
+porchFloor.castShadow = true;
+
+post1.castShadow = true;
+post2.castShadow = true;
+post3.castShadow = true;
+post4.castShadow = true;
+
+ground.receiveShadow = true;
+cabinBlockMain.receiveShadow = true;
+roofMain.receiveShadow = true;
+roofPorch.receiveShadow = true;
 
 // =============================
 // Animate
@@ -407,21 +435,17 @@ const clock = new THREE.Clock()
 const tick = () => {
   const elapsedTime = clock.getElapsedTime()
 
-  // camera.position.x = Math.PI * Math.sin(elapsedTime * 0.5) * 2.5;
-  // camera.position.z = Math.PI * Math.cos(elapsedTime * 0.5) * 2.5;
-  // camera.position.y = Math.cos(elapsedTime * 0.25) + 4
+  ghost1.position.x = -Math.cos(elapsedTime * 0.1) * (10 + Math.sin(elapsedTime * 1) * 4);
+  ghost1.position.z = -Math.sin(elapsedTime * 0.1) * (10 + Math.sin(elapsedTime * 1) * 4);
+  ghost1.position.y = 3 + Math.cos(elapsedTime * 0.25) * 3;
 
-  ghost1.position.x = Math.PI * Math.sin(elapsedTime * 0.25) * 2;
-  ghost1.position.z = Math.PI * Math.cos(elapsedTime * 0.5) * 2;
-  ghost1.position.y = 3 + Math.cos(elapsedTime * 0.5) * 5;
+  ghost2.position.x = -Math.cos(elapsedTime * 0.2) * (10 + Math.sin(elapsedTime * 1) * 4);
+  ghost2.position.z = -Math.sin(elapsedTime * 0.2) * (10 + Math.sin(elapsedTime * 1) * 4);
+  ghost2.position.y = 3 + Math.cos(elapsedTime * 0.25) * 3;
 
-  ghost2.position.x = Math.PI * Math.cos(elapsedTime * 0.25) * 2;
-  ghost2.position.z = Math.PI * Math.sin(elapsedTime * 0.5) * 2;
-  ghost2.position.y = 3 + Math.cos(elapsedTime * 0.5) * 5;
-
-  ghost3.position.x = Math.PI * Math.cos(elapsedTime * 0.5) * 2;
-  ghost3.position.z = Math.PI * Math.sin(elapsedTime * 0.25) * 2;
-  ghost3.position.y = 3 + Math.cos(elapsedTime * 0.25) * 5;
+  ghost3.position.x = -Math.cos(elapsedTime * 0.3) * (10 + Math.sin(elapsedTime * 1) * 4);
+  ghost3.position.z = -Math.sin(elapsedTime * 0.3) * (10 + Math.sin(elapsedTime * 1) * 4);
+  ghost3.position.y = 3 + Math.cos(elapsedTime * 0.25) * 3;
 
   // Update controls
   controls.update()
