@@ -90,15 +90,29 @@ const particleTexture = textureLoader.load('./textures/particles/9.png');
 
 const geometry = new THREE.BufferGeometry();
 
-const vertexCount = 20000;
+const vertexCount = 1000;
 
 const positions = new Float32Array(vertexCount * 3); // 3 here refers to the three points in the triangular vertex.
 // Add a color attribute per particle
 const colors = new Float32Array(vertexCount * 3); // 3 here refers to "R", "G", "B".
 
-for (let i = 0; i < vertexCount * 3; i++) {
-  positions[i] = (Math.random() - 0.5) * 10;
-  colors[i] = Math.random();
+for (let i = 0; i < vertexCount; i++) {
+  const i3 = i * 3;
+  
+  const x = i3;
+  const y = i3 + 1;
+  const z = i3 + 2;
+
+  positions[x] = Math.sin(i) * (Math.random() + 1);
+  positions[y] = Math.cos(i) * (Math.random() + 1);
+  positions[z] = Math.random() - 0.5;
+
+  // positions[x] = (Math.random() - 0.5) * 3;
+  // positions[y] = (Math.random() - 0.5) * 3;
+  // positions[z] = (Math.random() - 0.5) * 3;
+  
+  colors[z] = Math.random() - 0.3;
+  colors[y] = Math.random();
 }
 
 geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3)) // Why 3 here? because we need to say that every 3 values in the array make up 1 vertex.
