@@ -44,6 +44,15 @@ scene.add(object1, object2, object3, object4)
 // Raycaster
 const raycaster = new THREE.Raycaster();
 
+// const rayOrigin = new THREE.Vector3(-3, 0, 0);
+// const rayDirection = new THREE.Vector3(10, 0, 0);
+// rayDirection.normalize();
+// raycaster.set(rayOrigin, rayDirection);
+
+// const intersection = raycaster.intersectObject(object2);
+// const intersections = raycaster.intersectObjects([object1, object2, object3]);
+// console.log(intersections)
+
 
 /**
  * Sizes
@@ -67,15 +76,6 @@ window.addEventListener('resize', () =>
     renderer.setSize(sizes.width, sizes.height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
-
-// Mouse
-const mouse = new THREE.Vector2();
-
-window.addEventListener('mousemove', (e) => {
-  mouse.x = (e.clientX / sizes.width) * 2 - 1;
-  mouse.y = -(e.clientY / sizes.height) * 2 + 1;
-})
-
 
 /**
  * Camera
@@ -107,8 +107,8 @@ const tick = () =>
 {
     const elapsedTime = clock.getElapsedTime()
 
-    // camera.position.x = Math.sin(elapsedTime * 6) * 4;
-    // camera.position.z = Math.cos(elapsedTime * 6) * 4;
+    camera.position.x = Math.sin(elapsedTime * 6) * 4;
+    camera.position.z = Math.cos(elapsedTime * 6) * 4;
 
     object2.position.x = Math.sin(elapsedTime * 2) * 0.75;
     object2.position.y = Math.cos(elapsedTime * 2) * 0.75;
@@ -120,13 +120,11 @@ const tick = () =>
     object4.position.y = Math.cos(elapsedTime * 1) * 2.25;
 
     // Cast a ray
-    raycaster.setFromCamera(mouse, camera);
+    const rayOrigin = new THREE.Vector3(-5, 0, 0);
+    const rayDirection = new THREE.Vector3(1, 0, 0);
+    rayDirection.normalize()
 
-    // const rayOrigin = new THREE.Vector3(-5, 0, 0);
-    // const rayDirection = new THREE.Vector3(1, 0, 0);
-    // rayDirection.normalize()
-
-    // raycaster.set(rayOrigin, rayDirection);
+    raycaster.set(rayOrigin, rayDirection);
 
     const objectsToTest = [object1, object2, object3, object4];
     const intersects = raycaster.intersectObjects(objectsToTest);
