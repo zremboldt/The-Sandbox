@@ -122,12 +122,6 @@ const tick = () =>
     // Cast a ray
     raycaster.setFromCamera(mouse, camera);
 
-    // const rayOrigin = new THREE.Vector3(-5, 0, 0);
-    // const rayDirection = new THREE.Vector3(1, 0, 0);
-    // rayDirection.normalize()
-
-    // raycaster.set(rayOrigin, rayDirection);
-
     const objectsToTest = [object1, object2, object3, object4];
     const intersects = raycaster.intersectObjects(objectsToTest);
 
