@@ -25,17 +25,17 @@ const object1 = new THREE.Mesh(
 
 const object2 = new THREE.Mesh(
     new THREE.SphereGeometry(0.25, 32, 32),
-    new THREE.MeshBasicMaterial({ color: 'hsl(180, 100%, 50%)' })
+    new THREE.MeshBasicMaterial({ color: 'hsl(330, 100%, 65%)' })
 )
 
 const object3 = new THREE.Mesh(
     new THREE.SphereGeometry(0.25, 32, 32),
-    new THREE.MeshBasicMaterial({ color: 'hsl(35, 100%, 55%)' })
+    new THREE.MeshBasicMaterial({ color: 'hsl(330, 100%, 65%)' })
 )
 
 const object4 = new THREE.Mesh(
     new THREE.SphereGeometry(0.25, 32, 32),
-    new THREE.MeshBasicMaterial({ color: 'hsl(100, 100%, 50%)' })
+    new THREE.MeshBasicMaterial({ color: 'hsl(330, 100%, 65%)' })
 )
 
 scene.add(object1, object2, object3, object4)
@@ -110,14 +110,27 @@ const tick = () =>
     camera.position.x = Math.sin(elapsedTime * 6) * 4;
     camera.position.z = Math.cos(elapsedTime * 6) * 4;
 
-    object2.position.x = Math.sin(elapsedTime * 6) * 0.75;
-    object2.position.y = Math.cos(elapsedTime * 6) * 0.75;
+    object2.position.x = Math.sin(elapsedTime * 2) * 0.75;
+    object2.position.y = Math.cos(elapsedTime * 2) * 0.75;
 
-    object3.position.x = Math.sin(elapsedTime * 3) * 1.5;
-    object3.position.y = Math.cos(elapsedTime * 3) * 1.5;
+    object3.position.x = Math.sin(elapsedTime * -1) * 1.5;
+    object3.position.y = Math.cos(elapsedTime * -1) * 1.5;
 
     object4.position.x = Math.sin(elapsedTime * 1) * 2.25;
     object4.position.y = Math.cos(elapsedTime * 1) * 2.25;
+
+    // Cast a ray
+    const rayOrigin = new THREE.Vector3(-5, 0, 0);
+    const rayDirection = new THREE.Vector3(1, 0, 0);
+    rayDirection.normalize()
+
+    raycaster.set(rayOrigin, rayDirection);
+
+    const objectsToTest = [object1, object2, object3, object4];
+    const intersects = raycaster.intersectObjects(objectsToTest);
+
+    objectsToTest.forEach(object => object.material.color.set('#ff00ff'));
+    intersects.forEach(intersect => intersect.object.material.color.set('#00ff00'));
 
     // Update controls
     controls.update()
