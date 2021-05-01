@@ -15,27 +15,22 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
-// Textures
-const textureLoader = new THREE.TextureLoader();
-const matcapTexture2 = textureLoader.load('./textures/2.png');
-const matcapTexture4 = textureLoader.load('./textures/4.png');
-
 /**
  * Objects
  */
 const object1 = new THREE.Mesh(
-    new THREE.SphereGeometry(0.5, 64, 64),
-    new THREE.MeshMatcapMaterial({ matcap: matcapTexture4 })
+    new THREE.SphereGeometry(0.5, 32, 32),
+    new THREE.MeshBasicMaterial({ color: 'hsl(330, 100%, 65%)' })
 )
 
 const object2 = new THREE.Mesh(
     new THREE.SphereGeometry(0.15, 32, 32),
-    new THREE.MeshMatcapMaterial({ matcap: matcapTexture2 })
+    new THREE.MeshBasicMaterial({ color: 'hsl(330, 100%, 65%)' })
 )
 
 const object3 = new THREE.Mesh(
     new THREE.SphereGeometry(0.05, 32, 32),
-    new THREE.MeshMatcapMaterial({ matcap: matcapTexture2 })
+    new THREE.MeshBasicMaterial({ color: 'hsl(330, 100%, 65%)' })
 )
 
 const object4 = new THREE.Mesh(
@@ -45,12 +40,9 @@ const object4 = new THREE.Mesh(
 
 scene.add(object1, object2, object3, object4)
 
-// ===========================
-// Lights
-// ===========================
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 1);
-scene.add(ambientLight);
+// Raycaster
+const raycaster = new THREE.Raycaster();
 
 
 /**
@@ -126,6 +118,15 @@ const tick = () =>
 
     // object4.position.x = Math.sin(elapsedTime * 1) * 2.25;
     // object4.position.y = Math.cos(elapsedTime * 1) * 2.25;
+
+    // Cast a ray
+    raycaster.setFromCamera(mouse, camera);
+
+    const objectsToTest = [object1, object2, object3, object4];
+    const intersects = raycaster.intersectObjects(objectsToTest);
+
+    objectsToTest.forEach(object => object.material.color.set('#ff00ff'));
+    intersects.forEach(intersect => intersect.object.material.color.set('#00ff00'));
 
     // Update controls
     controls.update()
