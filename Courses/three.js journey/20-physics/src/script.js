@@ -2,6 +2,9 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'dat.gui'
+import CANNON from 'cannon'
+
+const SPHERE_START_POS_Y = 3;
 
 /**
  * Debug
@@ -32,6 +35,44 @@ const environmentMapTexture = cubeTextureLoader.load([
     '/textures/environmentMaps/0/nz.png'
 ])
 
+// =======================
+// Physics
+// =======================
+
+// World
+const world = new CANNON.World();
+world.gravity.set(0, -9.82, 0);
+
+// Materials
+const defaultMaterial = new CANNON.Material('default');
+const defaultContactMaterial = new CANNON.ContactMaterial(
+  defaultMaterial,
+  defaultMaterial,
+  { friction: 0.1, restitution: 0.7 }
+  )
+  world.addContactMaterial(defaultContactMaterial);
+  world.defaultContactMaterial = defaultContactMaterial;
+
+// Sphere
+const sphereShape = new CANNON.Sphere(0.5);
+const sphereBody = new CANNON.Body({
+  mass: 1,
+  position: CANNON.Vec3(0, 3, 0),
+  shape: sphereShape,
+})
+sphereBody.position.y = SPHERE_START_POS_Y;
+sphereBody.applyLocalForce(new CANNON.Vec3(650, 0, 0), new CANNON.Vec3(0, 0, 0))
+world.addBody(sphereBody);
+
+// Floor
+const floorShape = new CANNON.Plane();
+const floorBody = new CANNON.Body({
+  mass: 0,
+  shape: floorShape,
+});
+floorBody.quaternion.setFromAxisAngle(new CANNON.Vec3(-1, 0, 0), Math.PI * 0.5)
+world.addBody(floorBody);
+
 /**
  * Test sphere
  */
@@ -44,7 +85,7 @@ const sphere = new THREE.Mesh(
     })
 )
 sphere.castShadow = true
-sphere.position.y = 0.5
+sphere.position.y = SPHERE_START_POS_Y;
 scene.add(sphere)
 
 /**
@@ -130,10 +171,18 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
  * Animate
  */
 const clock = new THREE.Clock()
+let oldElapsedTime = 0;
 
 const tick = () =>
 {
-    const elapsedTime = clock.getElapsedTime()
+    const elapsedTime = clock.getElapsedTime();
+    const deltaTime = elapsedTime - oldElapsedTime;
+    oldElapsedTime = elapsedTime;
+
+    // Update physics world
+    world.step(1/60, deltaTime, 3);
+
+    sphere.position.copy(sphereBody.position);
 
     // Update controls
     controls.update()
