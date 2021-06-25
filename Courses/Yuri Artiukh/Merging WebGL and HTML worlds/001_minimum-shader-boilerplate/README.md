@@ -1,0 +1,1 @@
+To run the project use: `npx parcel index.html`

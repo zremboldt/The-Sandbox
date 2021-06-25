@@ -42,6 +42,19 @@ export default class Sketch {
 
     this.geometry = new THREE.BoxGeometry( 0.3, 0.3, 0.3 );
     this.material = new THREE.MeshNormalMaterial();
+
+    this.material = new THREE.ShaderMaterial({
+      fragmentShader: `
+        void main() {
+          gl_FragColor = vec4(1., 0., 1., 1.);
+        }
+      `,
+      vertexShader: `
+        void main() {
+          gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+        }
+      `,
+    })
   
     this.mesh = new THREE.Mesh( this.geometry, this.material );
     this.scene.add( this.mesh );
