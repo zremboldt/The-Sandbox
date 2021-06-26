@@ -85,7 +85,7 @@ void main() {
 
   // Using the perlin noise
   float noise = cnoise(vec3(position.x*4.0, position.y*4.0 + time*0.2, 0.0));
-  newPos.z += 0.2 * noise;
+  newPos.z += 0.1 * noise;
 
   // Doing this so we can send the noise to the fragment shader through a varying
   vNoise = noise;
