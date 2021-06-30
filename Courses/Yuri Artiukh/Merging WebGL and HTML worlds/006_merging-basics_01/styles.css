@@ -1,14 +1,101 @@
-* {
+*, *::before, *::after {
   margin: 0;
   padding: 0;
-  overscroll-behavior: none;
 }
 
-#container {
+/* ========== */
+/* Typography */
+/* ========== */
+
+h1,
+h2,
+h3,
+p,
+span {
+  font-family: 'Exo 2', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-size: 107px;
+  font-weight: 200;
+}
+
+h2 {
+  font-size: 44px;
+  font-weight: 300;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.8rem;
+}
+
+.interstellar-colonies-title {
+  font-size: 22.5px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.font-mono {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+/* =========== */
+/* Main layout */
+/* =========== */
+
+body {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+}
+
+nav {
+  border-right: 1px solid #ddd;
+  writing-mode: vertical-rl;
+}
+
+.container__primary-content {
+  display: flex;
+  flex-direction: column;
+  padding: 110px 60px;
+}
+
+header {
+  margin-bottom: 240px;
+}
+
+main {
+  display: grid;
+  /* grid-template-columns: repeat(2, 1fr);
+  grid-auto-flow: dense; */
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-auto-rows: minmax(100px, 1fr);
+  grid-auto-flow: dense;
+  gap: 50px;
+  /* grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); */
+  /* grid-auto-flow: column; */
+  /* grid-auto-columns: minmax(300px, 600px); */
+  /* grid-auto-columns: repeat(auto-fill, minmax(100px, 600px)); */
+}
+
+/* article {
+  width: 100%;
+} */
+
+img {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+}
+
+
+/* #container {
   width: 100vw;
   height: 100vh;
 }
 
 canvas {
   display: block;
-}
+} */
