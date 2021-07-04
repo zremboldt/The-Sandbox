@@ -6,6 +6,7 @@ import vertex from './shaders/vertex.glsl';
 
 export default class Sketch {
   constructor(options) {
+    this.cameraPosZ = 600;
     this.time = 0;
 
     this.scene = new THREE.Scene();
@@ -15,10 +16,19 @@ export default class Sketch {
     this.width = this.container.offsetWidth;
     this.height = this.container.offsetHeight;
     
-    this.camera = new THREE.PerspectiveCamera( 70, this.width / this.height, 0.01, 10 );
-    this.camera.position.z = 1;
+    this.camera = new THREE.PerspectiveCamera( 70, this.width / this.height, 100, 2000 );
+    this.camera.position.z = this.cameraPosZ;
 
-    this.renderer = new THREE.WebGLRenderer( { antialias: true } );
+    // ==========================
+    // The next 2 lines are the most important part in connecting the HTML and JS worlds.
+    // ==========================
+    // Here we're finding the correct camera field-of-view in order to make a 100x100 square on our canvas
+    // appear to be the same size as a 100px x 100px div in our HTML.
+    this.calculatedFov = 2 * Math.atan((this.height / 2) / this.cameraPosZ); 
+    // Math.atan (above) returns an angle in radians so we'll convert it to degrees on the next line and assign it to the camera.fov.
+    this.camera.fov = this.calculatedFov * (180 / Math.PI); 
+
+    this.renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.container.appendChild( this.renderer.domElement );
 
@@ -43,7 +53,7 @@ export default class Sketch {
   }
 
   addObjects() {
-    this.geometry = new THREE.SphereGeometry( 0.4, 300, 300 );
+    this.geometry = new THREE.PlaneBufferGeometry( 100, 100, 10, 10 );
     this.material = new THREE.ShaderMaterial({
       side: THREE.DoubleSide,
       wireframe: true,
@@ -51,7 +61,7 @@ export default class Sketch {
       vertexShader: vertex,
       uniforms: {
         time: { value: 0 },
-        wavesTexture: { value: new THREE.TextureLoader().load(waves)}
+        // wavesTexture: { value: new THREE.TextureLoader().load(waves)}
       }
     })
   
@@ -74,4 +84,4 @@ export default class Sketch {
   }
 }
 
-new Sketch({ container: document.getElementById('container') });
+new Sketch({ container: document.getElementById('webgl-container') });

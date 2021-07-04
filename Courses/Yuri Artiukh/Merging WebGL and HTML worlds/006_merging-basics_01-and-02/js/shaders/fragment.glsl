@@ -1,14 +1,14 @@
 varying float vNoise;
 varying vec2 vUv;
-uniform sampler2D wavesTexture;
+// uniform sampler2D wavesTexture;
 uniform float time;
 
 void main() {
   vec4 color = vec4(0.0, 0.0, 0.0, 1.0);
 
   color.r = 0.0;
-  color.g = 1.0;
-  color.b = 0.0;
+  color.g = 0.0;
+  color.b = 1.0;
 
   // vec3 finalColor = mix(color1,color2,0.5 * (vNoise + 1.));
 

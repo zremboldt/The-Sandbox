@@ -88,7 +88,7 @@ void main() {
     3.*vec3(position.x, position.y, position.z + time*0.05)
   );
 
-  newPos += normal*activeNoise*0.1;
+  // newPos += normal*activeNoise*0.1;
 
   // float staticNoise = cnoise(10.*vec3(position.x, position.y, position.z));
   // vNoise = staticNoise;

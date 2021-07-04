@@ -17,10 +17,10 @@ const data = [
     body: 'If the oxygenator breaks down, I’ll suffocate. If the water reclaimer breaks down, I’ll die of thirst. If the Hab breaches, I’ll just kind of explode. If none of those things happen, I’ll eventually run out of food and starve to death. So yeah. I’m toast.'
   },
   {
-    img: img1,
-    date: '3121 / Sol 4',
-    headline: 'Nova Cataluna seismic activity',
-    body: 'Also, I have duct tape. Ordinary duct tape, like you buy at a hardware store. Turns out even NASA can’t improve on duct tape.'
+    img: img6,
+    date: '3120 / Sol 135',
+    headline: 'Expedition on Innis Prime',
+    body: `I didn’t want to distract the people who were saving my life, so I muted my mic and screamed like a little girl. It’s true, you know. In space, no one can hear you scream like a little girl.`
   },
   {
     img: img2,
@@ -47,10 +47,10 @@ const data = [
     body: `But in the end, if everything goes to plan, I’ll have 92 square meters of crop-able soil. Heck yeah I’m a botanist! Fear my botany powers!`
   },
   {
-    img: img6,
-    date: '3120 / Sol 135',
-    headline: 'Expedition on Innis Prime',
-    body: `I didn’t want to distract the people who were saving my life, so I muted my mic and screamed like a little girl. It’s true, you know. In space, no one can hear you scream like a little girl.`
+    img: img1,
+    date: '3121 / Sol 4',
+    headline: 'Unusual seismic activity recorded on Nova Cataluna',
+    body: 'Also, I have duct tape. Ordinary duct tape, like you buy at a hardware store. Turns out even NASA can’t improve on duct tape.'
   },
   {
     img: img7,
@@ -80,7 +80,7 @@ function generateArticle({
 }) {
   return `
     <article>
-      <div class="date-and-image-container">
+      <div class="container_article-start">
         <div class="image-container">
           <img src="${img}" alt="${headline}">
         </div>

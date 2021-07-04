@@ -14,7 +14,8 @@ h1,
 h2,
 h3,
 p,
-span {
+span,
+button {
   font-family: 'Exo 2', sans-serif;
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
@@ -35,7 +36,7 @@ p {
   line-height: 1.9rem;
 }
 
-.interstellar-colonies-title {
+.uic-title {
   font-size: 22.5px;
   font-weight: 400;
   text-transform: uppercase;
@@ -60,16 +61,65 @@ nav {
   left: 0;
   width: 80px;
   height: 100vh;
-  padding: 30px 0;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
   border-right: 1px solid #ddd;
-  writing-mode: vertical-rl;
 }
 
-.container__primary-content {
+.container_nav-start {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 0 0;
+  writing-mode: vertical-lr;
+}
+
+.signature {
+  line-height: 1.6;
+}
+
+.button_about {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.button_about:hover, .button_about:focus {
+  outline: none;
+  background-color: hsl(162, 100%, 84%);
+}
+
+.container_social {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #ddd;
+}
+
+.container_social a {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container_social a:hover, .container_social a:focus  {
+  outline: none;
+  background-color: hsl(162, 100%, 84%);
+}
+
+.container_social svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+/*  */
+
+.wrap {
   width: min(1320px, 100%);
   margin: 0 auto;
   padding: 110px max(4vw, 20px);
@@ -79,7 +129,7 @@ header {
   margin-bottom: 240px;
 }
 
-.uic-container {
+.container_uic {
   display: flex;
   align-items: center;
 }
@@ -90,13 +140,13 @@ header {
   height: auto;
 }
 
-main {
+.container_articles {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
   gap: 90px 50px;
 }
 
-.date-and-image-container {
+.container_article-start {
   display: flex;
   margin-bottom: 24px;
 }
@@ -105,11 +155,12 @@ main {
   flex: 1;
 }
 
-img {
+.article-image {
   display: block;
   width: 100%;
   height: auto;
   border-radius: 20px;
+  opacity: 0;
 }
 
 .date {
@@ -126,11 +177,19 @@ img {
   margin-top: 10px;
 }
 
-/* #container {
+/* =============== */
+/* WebGL Container */
+/* =============== */
+
+#container_webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
   width: 100vw;
   height: 100vh;
 }
 
-canvas {
+#container_webgl canvas {
   display: block;
-} */
+}
