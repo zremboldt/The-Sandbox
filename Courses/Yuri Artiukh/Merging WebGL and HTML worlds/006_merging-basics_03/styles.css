@@ -51,6 +51,10 @@ p {
 /* Main layout */
 /* =========== */
 
+body {
+  overscroll-behavior: none;
+}
+
 nav {
   position: fixed;
   top: 0;

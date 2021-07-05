@@ -10,7 +10,7 @@ export default class Scroll {
     this.docScroll = 0;
     this.scrollToRender = 0;
     this.current = 0;
-    this.ease = 0.1;
+    this.ease = 0.2;
     this.speed = 0;
     this.speedTarget = 0;
 
