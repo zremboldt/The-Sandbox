@@ -82,7 +82,7 @@ function generateArticle({
     <article>
       <div class="container_article-start">
         <div class="image-container">
-          <img src="${img}" alt="${headline}">
+          <img class="article-image" src="${img}" alt="${headline}">
         </div>
         <span class="date font-mono">${date}</span>
       </div>
@@ -96,6 +96,6 @@ function generateArticle({
 
 const articleMarkup = data.map(article => generateArticle(article)).join('');
 
-const mainEl = document.querySelector('main');
+const containerArticlesEl = document.querySelector('.container_articles');
 
-mainEl.insertAdjacentHTML('afterbegin', articleMarkup);
+containerArticlesEl.insertAdjacentHTML('afterbegin', articleMarkup);
