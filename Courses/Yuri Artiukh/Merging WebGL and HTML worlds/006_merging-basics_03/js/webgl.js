@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import fragment from './shaders/fragment.glsl';
 import vertex from './shaders/vertex.glsl';
+import Scroll from './scroll';
 import imagesLoaded from 'imagesloaded';
 import FontFaceObserver from 'fontfaceobserver';
 
@@ -55,6 +56,7 @@ export default class Sketch {
     })
 
     Promise.all([fontExo, fontMono, imagesHaveLoaded]).then(() => {
+      this.scroll = new Scroll();
       this.addImages();
       this.setPosition();
       this.resize();
@@ -62,10 +64,10 @@ export default class Sketch {
       // this.addObjects();
       this.render();
 
-      window.addEventListener('scroll', () => {
-        this.currentScroll = window.scrollY;
-        this.setPosition();
-      })
+      // window.addEventListener('scroll', () => {
+      //   this.currentScroll = window.scrollY;
+      //   this.setPosition();
+      // })
     })
   }
 
@@ -132,9 +134,10 @@ export default class Sketch {
   render() {
     this.time += 0.05;
 
-    // this.mesh.rotation.x = this.time / 20;
-    // this.mesh.rotation.y = this.time / 10;
-
+    this.scroll.render();
+    this.currentScroll = this.scroll.scrollToRender;
+    this.setPosition();
+    
     // this.material.uniforms.time.value = this.time;
 
     this.renderer.render( this.scene, this.camera );
