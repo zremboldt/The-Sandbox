@@ -31,7 +31,7 @@ export default class Sketch {
     this.camera.fov = this.calculatedFov * (180 / Math.PI); 
 
     this.renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.container.appendChild( this.renderer.domElement );
 
     this.controls = new OrbitControls( this.camera, this.renderer.domElement );
