@@ -4,6 +4,7 @@ import fragment from './shaders/fragment.glsl';
 import vertex from './shaders/vertex.glsl';
 import Scroll from './scroll';
 import imagesLoaded from 'imagesloaded';
+import gsap from 'gsap';
 import FontFaceObserver from 'fontfaceobserver';
 
 export default class Sketch {
@@ -65,7 +66,6 @@ export default class Sketch {
       this.mouseMovement();
       this.resize();
       this.setupResize();
-      // this.addObjects();
       this.render();
     })
   }
@@ -82,7 +82,8 @@ export default class Sketch {
       const intersects = this.raycaster.intersectObjects( this.scene.children );
 
       if (intersects.length > 0) {
-        console.log(intersects[0]);
+        let obj = intersects[0].object;
+        obj.material.uniforms.hover.value = intersects[0].uv;
       }
     }, false );
   }
@@ -100,13 +101,46 @@ export default class Sketch {
   }
 
   addImages() {
+    this.material = new THREE.ShaderMaterial({
+      uniforms: {
+        time: { value: 0 },
+        uImage: { value: 0 },
+        hover: { value: new THREE.Vector2(0.5, 0.5) },
+        hoverState: { value: 0 },
+      },
+      side: THREE.DoubleSide,
+      // wireframe: true,
+      fragmentShader: fragment,
+      vertexShader: vertex,
+    })
+
+    this.materials = [];
+
     this.imageStore = this.images.map(img => {
       let bounds = img.getBoundingClientRect();
 
-      let geometry = new THREE.PlaneBufferGeometry( bounds.width, bounds.height, 1, 1 );
+      let geometry = new THREE.PlaneBufferGeometry( bounds.width, bounds.height, 40, 40 );
       let texture = new THREE.Texture(img);
       texture.needsUpdate = true;
-      let material = new THREE.MeshBasicMaterial({ map: texture });
+
+      let material = this.material.clone();
+
+      img.addEventListener('mouseenter', () => {
+        gsap.to(material.uniforms.hoverState, {
+          duration: 1,
+          value: 1
+        })
+      })
+      img.addEventListener('mouseout', () => {
+        gsap.to(material.uniforms.hoverState, {
+          duration: 1,
+          value: 0
+        })
+      })
+
+      this.materials.push(material);
+      material.uniforms.uImage.value = texture;
+
       let mesh = new THREE.Mesh(geometry, material);
 
       this.scene.add(mesh);
@@ -129,23 +163,6 @@ export default class Sketch {
     })
   }
 
-  // addObjects() {
-  //   this.geometry = new THREE.PlaneBufferGeometry( 100, 100, 10, 10 );
-  //   this.material = new THREE.ShaderMaterial({
-  //     side: THREE.DoubleSide,
-  //     wireframe: true,
-  //     fragmentShader: fragment,
-  //     vertexShader: vertex,
-  //     uniforms: {
-  //       time: { value: 0 },
-  //       // wavesTexture: { value: new THREE.TextureLoader().load(waves)}
-  //     }
-  //   })
-  
-  //   this.mesh = new THREE.Mesh( this.geometry, this.material );
-  //   this.scene.add( this.mesh );
-  // }
-
   render() {
     this.time += 0.05;
 
@@ -154,6 +171,10 @@ export default class Sketch {
     this.setPosition();
     
     // this.material.uniforms.time.value = this.time;
+
+    this.materials.forEach(material => {
+      material.uniforms.time.value = this.time;
+    })
 
     this.renderer.render( this.scene, this.camera );
 
