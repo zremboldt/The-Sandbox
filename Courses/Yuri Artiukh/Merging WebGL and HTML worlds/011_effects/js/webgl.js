@@ -6,6 +6,11 @@ import Scroll from './scroll';
 import imagesLoaded from 'imagesloaded';
 import gsap from 'gsap';
 import FontFaceObserver from 'fontfaceobserver';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+// import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js';
 
 export default class Sketch {
   constructor(options) {
@@ -66,8 +71,50 @@ export default class Sketch {
       this.mouseMovement();
       this.resize();
       this.setupResize();
+      this.composerPass();
       this.render();
     })
+  }
+
+  composerPass() {
+    // Postprocessing setup
+    // Docs: https://threejs.org/docs/#manual/en/introduction/How-to-use-post-processing
+    this.composer = new EffectComposer(this.renderer);
+    this.renderPass = new RenderPass(this.scene, this.camera);
+    this.composer.addPass(this.renderPass);
+
+    // Custom postprocessing shader pass
+    let counter = 0.0;
+    this.myEffect = {
+      uniforms: {
+        "tDiffuse": { value: null },
+        "scrollSpeed": { value: null },
+      },
+      vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform sampler2D tDiffuse;
+        uniform float scrollSpeed;
+        varying vec2 vUv;
+        void main() {
+          vec2 newUv = vUv;
+          float area = smoothstep(0.4, -0.5, vUv.y);
+          newUv.x -= (vUv.x - 0.5)*0.4 * area * scrollSpeed;
+          gl_FragColor = texture2D(tDiffuse, newUv);
+          // gl_FragColor = vec4(newUv.x, 0.0, 0.0, 1.0);
+        }
+      `,
+    }
+
+    this.customPass = new ShaderPass(this.myEffect);
+    this.customPass.renderToScreen = true;
+
+    this.composer.addPass(this.customPass);
   }
 
   mouseMovement() {
@@ -169,6 +216,7 @@ export default class Sketch {
     this.scroll.render();
     this.currentScroll = this.scroll.scrollToRender;
     this.setPosition();
+    this.customPass.uniforms.scrollSpeed.value = this.scroll.speedTarget;
     
     // this.material.uniforms.time.value = this.time;
 
@@ -176,8 +224,8 @@ export default class Sketch {
       material.uniforms.time.value = this.time;
     })
 
-    this.renderer.render( this.scene, this.camera );
-
+    // this.renderer.render( this.scene, this.camera );
+    this.composer.render();
     window.requestAnimationFrame(this.render.bind(this));
   }
 }
