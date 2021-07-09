@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import fragment from './shaders/fragment.glsl';
 import vertex from './shaders/vertex.glsl';
+import noise from './shaders/noise.glsl';
 import Scroll from './scroll';
 import imagesLoaded from 'imagesloaded';
 import gsap from 'gsap';
@@ -36,8 +37,11 @@ export default class Sketch {
     // Math.atan (above) returns an angle in radians so we'll convert it to degrees on the next line and assign it to the camera.fov.
     this.camera.fov = this.calculatedFov * (180 / Math.PI); 
 
-    this.renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
-    // this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    this.renderer = new THREE.WebGLRenderer({ 
+      antialias: true,
+      alpha: true 
+    });
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.container.appendChild( this.renderer.domElement );
 
     this.controls = new OrbitControls( this.camera, this.renderer.domElement );
@@ -89,6 +93,7 @@ export default class Sketch {
       uniforms: {
         "tDiffuse": { value: null },
         "scrollSpeed": { value: null },
+        "time": { value: null },
       },
       vertexShader: `
         varying vec2 vUv;
@@ -100,13 +105,27 @@ export default class Sketch {
       fragmentShader: `
         uniform sampler2D tDiffuse;
         uniform float scrollSpeed;
+        uniform float time;
         varying vec2 vUv;
+        ${noise}
         void main() {
           vec2 newUv = vUv;
-          float area = smoothstep(0.4, -0.5, vUv.y);
-          newUv.x -= (vUv.x - 0.5)*0.4 * area * scrollSpeed;
-          gl_FragColor = texture2D(tDiffuse, newUv);
-          // gl_FragColor = vec4(newUv.x, 0.0, 0.0, 1.0);
+
+          float rippleArea = smoothstep(1.0, 0.8, vUv.y);
+          float normalizeRippleArea = rippleArea * 2.0 - 1.0;
+
+          float noise = cnoise(vec3(vUv * 10.0, time * 0.5));
+          float normalizeNoise = noise + 0.5;
+          float crispNoise = smoothstep(0.5, 0.51, normalizeNoise + normalizeRippleArea*1.2);
+
+          float imageFadeArea = smoothstep(0.4, -0.2, vUv.y);
+
+          // newUv.x -= (vUv.x - 0.5)*0.4 * imageFadeArea * scrollSpeed;
+
+          // gl_FragColor = texture2D(tDiffuse, newUv);
+          // gl_FragColor = vec4(crispNoise, 0.0, 0.0, 1.0);
+          // gl_FragColor = vec4(imageFadeArea, 0.0, 0.0, 1.0);
+          gl_FragColor = mix(vec4(1.0), texture2D(tDiffuse, newUv), crispNoise);
         }
       `,
     }
@@ -153,7 +172,7 @@ export default class Sketch {
         time: { value: 0 },
         uImage: { value: 0 },
         hover: { value: new THREE.Vector2(0.5, 0.5) },
-        hoverState: { value: 0 },
+        uHoverState: { value: 0 },
       },
       side: THREE.DoubleSide,
       // wireframe: true,
@@ -173,13 +192,13 @@ export default class Sketch {
       let material = this.material.clone();
 
       img.addEventListener('mouseenter', () => {
-        gsap.to(material.uniforms.hoverState, {
+        gsap.to(material.uniforms.uHoverState, {
           duration: 1,
           value: 1
         })
       })
       img.addEventListener('mouseout', () => {
-        gsap.to(material.uniforms.hoverState, {
+        gsap.to(material.uniforms.uHoverState, {
           duration: 1,
           value: 0
         })
@@ -217,6 +236,7 @@ export default class Sketch {
     this.currentScroll = this.scroll.scrollToRender;
     this.setPosition();
     this.customPass.uniforms.scrollSpeed.value = this.scroll.speedTarget;
+    this.customPass.uniforms.time.value = this.time;
     
     // this.material.uniforms.time.value = this.time;
 
