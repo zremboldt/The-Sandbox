@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@900&display=swap');
+
+html { box-sizing: border-box; }
+
+*, *::before, *::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+::selection { background-color: hsla(236, 100%, 69%, 0.8); }
+
+body { background-color: #010113; }
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#root > div {
+  position: fixed !important;
+  z-index: -1;
+  top: 0;
+  left: 0;
+}
+
+h1 {
+  margin: 0 20px;
+  text-shadow: 0 0 20px hsla(240, 90%, 4%, 0.6);
+  color: white;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 3.2rem;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+  text-align: center;
+  text-transform: uppercase;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
