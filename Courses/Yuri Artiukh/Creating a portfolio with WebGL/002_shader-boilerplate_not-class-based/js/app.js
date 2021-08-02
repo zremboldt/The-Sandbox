@@ -51,8 +51,9 @@ function animation(time) {
 //
 
 function addObjects() {
-  geometry = new THREE.PlaneBufferGeometry(0.8, 0.8);
+  geometry = new THREE.PlaneBufferGeometry(1, 1, 100, 100);
   material = new THREE.ShaderMaterial({
+    side: THREE.DoubleSide,
     uniforms: {
       uTime: { value: 1.0 },
     },

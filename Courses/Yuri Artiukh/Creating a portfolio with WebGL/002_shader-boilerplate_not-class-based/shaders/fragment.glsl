@@ -8,5 +8,5 @@ void main() {
   color.g = 0.5;
   color.b = 1.0;
 
-  gl_FragColor = vec4(vUv, sin(1.0 + uTime), 1.0);
+  gl_FragColor = vec4(vUv, 1.0, 1.0);
 }
