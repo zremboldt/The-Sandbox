@@ -42,8 +42,9 @@ function animation(time) {
   // mesh.rotation.x = time / 2000;
   // mesh.rotation.y = time / 1000;
 
-  material.uniforms.uTime.value += time * 0.0001;
-  console.log(material.uniforms.uTime.value)
+  const seconds = (time * 0.001);
+
+  material.uniforms.uTime.value = seconds;
 
   renderer.render(scene, camera);
 }
@@ -51,7 +52,7 @@ function animation(time) {
 //
 
 function addObjects() {
-  geometry = new THREE.PlaneBufferGeometry(1, 1, 100, 100);
+  geometry = new THREE.PlaneBufferGeometry(1, 1, 200, 200);
   material = new THREE.ShaderMaterial({
     side: THREE.DoubleSide,
     uniforms: {
