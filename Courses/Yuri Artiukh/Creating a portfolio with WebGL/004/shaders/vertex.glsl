@@ -9,5 +9,5 @@ void main() {
   pos.z = 0.2 + (0.15 * sin(length(pos) * 50.0 + uTime));
   vPulse = pos.z * 2.;
 
-  gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 }
