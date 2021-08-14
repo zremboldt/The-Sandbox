@@ -4,6 +4,9 @@ import debounce from 'lodash.debounce';
 import vertex from '../shaders/vertex.glsl';
 import fragment from '../shaders/fragment.glsl';
 import testTexture from '../images/water.jpg';
+import calculateCameraFov from './calculate-camera-fov'
+
+
 
 let camera, scene, renderer;
 let geometry, material, mesh;
@@ -16,8 +19,9 @@ function init() {
   const { offsetWidth, offsetHeight } = containerEl;
 
   // Camera & scene
-  camera = new THREE.PerspectiveCamera(70, offsetWidth / offsetHeight, 0.01, 10);
-  camera.position.z = 1;
+  const cameraZPosition = 600;
+  camera = new THREE.PerspectiveCamera(calculateCameraFov(cameraZPosition, offsetHeight), offsetWidth / offsetHeight, 10, 1000);
+  camera.position.z = cameraZPosition;
   scene = new THREE.Scene();
 
   // 3D objects
@@ -53,8 +57,7 @@ function animation(time) {
 //
 
 function addObjects() {
-  geometry = new THREE.PlaneBufferGeometry(1, 1, 200, 200);
-  geometry = new THREE.SphereBufferGeometry(0.5, 600, 600);
+  geometry = new THREE.PlaneBufferGeometry(350, 350, 1, 1);
   material = new THREE.ShaderMaterial({
     side: THREE.DoubleSide,
     uniforms: {
