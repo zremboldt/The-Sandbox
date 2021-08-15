@@ -60,12 +60,16 @@ function animation(time) {
 //
 
 function addObjects() {
+  const { offsetWidth, offsetHeight } = containerEl;
+
   geometry = new THREE.PlaneBufferGeometry(350, 350, 1, 1);
   material = new THREE.ShaderMaterial({
     side: THREE.DoubleSide,
     uniforms: {
       uTime: { value: 1.0 },
       uProgress: { value: 0.0 },
+      uResolution: { value: new THREE.Vector2(offsetWidth, offsetHeight) },
+      uQuadSize: { value: new THREE.Vector2(350, 350) },
       uTexture: { value: new THREE.TextureLoader().load(testTexture) }
     },
     vertexShader: vertex,
