@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "dat.gui": "^0.7.7",
+    "gsap": "^3.7.1",
+    "lodash.debounce": "^4.0.8",
+    "three": "^0.131.1"
+  },
+  "devDependencies": {
+    "@parcel/transformer-glsl": "^2.0.0-rc.0",
+    "@parcel/transformer-image": "^2.0.0-rc.0"
+  }
+}
