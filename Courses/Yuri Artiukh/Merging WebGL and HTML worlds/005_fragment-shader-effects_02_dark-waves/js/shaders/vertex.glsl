@@ -89,11 +89,7 @@ void main() {
   );
   newPos.z += 0.1 * noise;
 
-  // Doing this so we can send the noise to the fragment shader 
-  // through a varying
   vNoise = noise;
-  // Doing this so we can send the uv to the fragment shader 
-  // through a varying
   vUv = uv;
 
   gl_Position = projectionMatrix * modelViewMatrix * vec4( newPos, 1.0 );

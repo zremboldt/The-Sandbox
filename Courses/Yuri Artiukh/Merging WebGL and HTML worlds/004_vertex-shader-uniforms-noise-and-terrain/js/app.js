@@ -17,7 +17,7 @@ export default class Sketch {
     this.camera = new THREE.PerspectiveCamera( 70, this.width / this.height, 0.01, 10 );
     this.camera.position.z = 1;
 
-    this.renderer = new THREE.WebGLRenderer( { antialias: true } );
+    this.renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.container.appendChild( this.renderer.domElement );
 
