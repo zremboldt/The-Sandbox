@@ -37,6 +37,7 @@ export let loader: LoaderFunction = async ({ request }) => {
 // https://remix.run/guides/routing#index-routes
 export default function Index() {
   const [posX, setPosX] = useState(0);
+  const [posY, setPosY] = useState(0);
   let data = useLoaderData<IndexData>();
 
   useEffect(() => {
@@ -47,6 +48,12 @@ export default function Index() {
       if (e.key === 'ArrowLeft') {
         setPosX(posX => posX - 20);
       }
+      if (e.key === 'ArrowUp') {
+        setPosY(posY => posY - 20);
+      }
+      if (e.key === 'ArrowDown') {
+        setPosY(posY => posY + 20);
+      }
     })
   }, [])
 
@@ -55,7 +62,11 @@ export default function Index() {
       '--img-pos-x',
       `${posX}px`
     );
-  }, [posX])
+    document.documentElement.style.setProperty(
+      '--img-pos-y',
+      `${posY}px`
+    );
+  }, [posX, posY])
 
   return (
     <>

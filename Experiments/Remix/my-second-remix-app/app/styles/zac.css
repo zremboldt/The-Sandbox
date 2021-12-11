@@ -15,5 +15,5 @@ button {
 }
 
 img {
-  transform: translateX(var(--img-pos-x));
+  transform: translate3d(var(--img-pos-x), var(--img-pos-y), 0);
 }
