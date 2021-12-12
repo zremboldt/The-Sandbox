@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { MetaFunction, LoaderFunction, Form } from "remix";
 import { useLoaderData, json, Link } from "remix";
+import stars from './../stars.gif'
 
 type IndexData = {
   resources: Array<{ name: string; url: string }>;
@@ -20,14 +21,21 @@ export let meta: MetaFunction = () => {
 // to the component that renders it.
 // https://remix.run/api/conventions#loader
 export let loader: LoaderFunction = async ({ request }) => {
-
   const url = new URL(request.url);
   const searchParam = url.search ? url.searchParams.get('search') : '';
-  const result = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchParam}`);
+
+  const pokemon = `https://pokeapi.co/api/v2/pokemon/${searchParam}`;
+  const berry = `https://pokeapi.co/api/v2/item/129/`;
+  const urls = [pokemon, berry];
 
   try {
-    const data = await result?.json();
-    return data;
+    const response = await Promise.all(
+      urls.map(url => fetch(url)
+        .then(res => res.json())
+        .then(json => json)
+      )
+    );
+    return response;
   } catch (err) {
     console.log(`ERROR! 😢 HERE IT IS: ${err}`)
     return null;
@@ -41,17 +49,23 @@ export default function Index() {
   let data = useLoaderData<IndexData>();
 
   useEffect(() => {
+    document.querySelector('body').style.setProperty(
+      'background-image',
+      `url(${stars})`
+    )
+
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') {
+      console.log(e.key)
+      if (e.key === 'd') {
         setPosX(posX => posX + 20);
       }
-      if (e.key === 'ArrowLeft') {
+      if (e.key === 'a') {
         setPosX(posX => posX - 20);
       }
-      if (e.key === 'ArrowUp') {
+      if (e.key === 'w') {
         setPosY(posY => posY - 20);
       }
-      if (e.key === 'ArrowDown') {
+      if (e.key === 's') {
         setPosY(posY => posY + 20);
       }
     })
@@ -70,22 +84,31 @@ export default function Index() {
 
   return (
     <>
+      <Result data={data} />
       <Form method="get" action="/">
         <input name="search" type="number" autoComplete="off" min='1' max='898' />
-        <button type="submit">submit</button>
+        <button type="submit">Get pokie</button>
       </Form>
-      <Result data={data} />
     </>
   );
 }
 
 function Result({ data }) {
-  if (data.results) return null;
-
   return (
-    <div className="results">
-      <img src={data?.sprites?.front_default} />
-      <h5>{data?.name}</h5>
-    </div>
+    <>
+      {data.map((item, i) => {
+        if (item.sprites?.front_default) {
+          return (
+            <div key={i} className="results">
+              <img className="pokemon" src={item.sprites?.front_default} />
+              <h3>{`#${item.id}: ${item.name}`}</h3>
+            </div>
+          )
+        } else return (
+          null
+          // <img key={i} className="berry" src={item.sprites?.default} />
+        )
+      })}
+    </>
   )
 }

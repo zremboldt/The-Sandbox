@@ -1,19 +1,62 @@
-form {
+:root {
+  --img-pos-x: 0;
+  --img-pos-y: 0;
+  --primary-color: hsl(250, 100%, 55%);
+}
+
+body {
+  background-repeat: repeat;
+}
+
+.remix-app__main-content {
+  height: calc(100vh - 160px);
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
 }
+
+form {
+  position: relative;
+  display: flex;
+}
+
 form > * {
-  max-width: 300px;
-  margin-top: 15px;
-  padding: 12px;
   border: none;
   border-radius: 50px;
+  font-size: 18px;
+}
+
+input {
+  padding: 0 100px 0 25px;
+  height: 60px;
+  width: 320px;
 }
 
 button {
-  background-color:greenyellow;
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  height: 50px;
+  padding: 0 22px;
+  transform: translateY(-50%);
+  background-color: var(--primary-color);
+  color: white;
 }
 
-img {
+.results {
+  text-align: center;
+}
+
+.pokemon {
+  width: 130px;
+  height: auto;
   transform: translate3d(var(--img-pos-x), var(--img-pos-y), 0);
+  z-index: 10px;
+}
+
+.berry {
+  width: 40px;
+  height: auto;
+  transform: translate3d(100px, 200px, 0);
 }
