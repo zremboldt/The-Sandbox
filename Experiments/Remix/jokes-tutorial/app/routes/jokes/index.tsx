@@ -8,7 +8,6 @@ type LoaderData = { randomJoke: Joke };
 export const loader: LoaderFunction = async () => {
   const count = await db.joke.count();
   const randomRowNumber = Math.floor(Math.random() * count);
-  console.log('randomRowNumber', randomRowNumber)
   const [randomJoke] = await db.joke.findMany({
     skip: randomRowNumber,
     take: 1
@@ -19,8 +18,6 @@ export const loader: LoaderFunction = async () => {
 
 export default function JokesIndexRoute() {
   const data = useLoaderData<LoaderData>();
-
-  console.log(data)
 
   return (
     <div>
