@@ -122,3 +122,7 @@ export default function NewJokeRoute() {
     </div>
   );
 }
+
+export function ErrorBoundary() {
+  return <div className="error-container">There was an error loading the form. 😢 Sorry!</div>
+}
