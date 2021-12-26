@@ -1,55 +1,84 @@
-import type { ActionFunction } from "remix"
-import { useActionData } from "remix"
-import { redirect } from "remix"
+import type { ActionFunction, LoaderFunction } from "remix";
+import {
+  useActionData,
+  redirect,
+  json,
+  useCatch,
+  Link
+} from "remix";
 import { db } from "~/utils/db.server";
-import { getUserId, requireUserId } from "~/utils/session.server";
+import {
+  requireUserId,
+  getUserId
+} from "~/utils/session.server";
 
-function validateJokeName(name: string) {
-  if (name.length < 3) {
-    return 'Joke name must be at least 3 characters long.'
+export const loader: LoaderFunction = async ({
+  request
+}) => {
+  const userId = await getUserId(request);
+  if (!userId) {
+    throw new Response("Unauthorized", { status: 401 });
   }
-}
+  return {};
+};
 
 function validateJokeContent(content: string) {
   if (content.length < 10) {
-    return 'Joke content must be at least 10 characters long.'
+    return `That joke is too short`;
+  }
+}
+
+function validateJokeName(name: string) {
+  if (name.length < 2) {
+    return `That joke's name is too short`;
   }
 }
 
 type ActionData = {
-  formError?: string,
-  fields?: { name?: string, content?: string },
-  fieldErrors?: { name?: string, content?: string },
-}
+  formError?: string;
+  fieldErrors?: {
+    name: string | undefined;
+    content: string | undefined;
+  };
+  fields?: {
+    name: string;
+    content: string;
+  };
+};
 
-export const action: ActionFunction = async ({ request }): Promise<Response | ActionData> => {
+const badRequest = (data: ActionData) =>
+  json(data, { status: 400 });
+
+export const action: ActionFunction = async ({
+  request
+}) => {
   const userId = await requireUserId(request);
   const form = await request.formData();
-  const name = form.get('name');
-  const content = form.get('content');
-
-  if (typeof name !== 'string' || typeof content !== 'string') {
-    return { formError: 'Form not submitted correctly' }
+  const name = form.get("name");
+  const content = form.get("content");
+  if (
+    typeof name !== "string" ||
+    typeof content !== "string"
+  ) {
+    return badRequest({
+      formError: `Form not submitted correctly.`
+    });
   }
 
   const fieldErrors = {
     name: validateJokeName(name),
     content: validateJokeContent(content)
-  }
-
+  };
+  const fields = { name, content };
   if (Object.values(fieldErrors).some(Boolean)) {
-    return {
-      fieldErrors,
-      fields: { name, content }
-    }
+    return badRequest({ fieldErrors, fields });
   }
 
   const joke = await db.joke.create({
-    data: { name, content, jokesterId: userId }
+    data: { ...fields, jokesterId: userId }
   });
-
   return redirect(`/jokes/${joke.id}`);
-}
+};
 
 export default function NewJokeRoute() {
   const actionData = useActionData<ActionData>();
@@ -123,6 +152,23 @@ export default function NewJokeRoute() {
   );
 }
 
+export function CatchBoundary() {
+  const caught = useCatch();
+
+  if (caught.status === 401) {
+    return (
+      <div className="error-container">
+        <p>You must be logged in to create a joke.</p>
+        <Link to="/login">Login</Link>
+      </div>
+    );
+  }
+}
+
 export function ErrorBoundary() {
-  return <div className="error-container">There was an error loading the form. 😢 Sorry!</div>
+  return (
+    <div className="error-container">
+      Something unexpected went wrong. Sorry about that.
+    </div>
+  );
 }

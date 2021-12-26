@@ -108,8 +108,6 @@ export default function Login() {
   const actionData = useActionData<ActionData>();
   const [searchParams] = useSearchParams();
 
-  console.log(actionData);
-
   return (
     <div className="container">
       <div className="content" data-light="">
