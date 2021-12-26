@@ -1,4 +1,4 @@
-import type { LinksFunction } from "remix";
+import type { LinksFunction, MetaFunction } from "remix";
 import { Link } from "remix";
 import stylesUrl from "../styles/index.css";
 
@@ -9,6 +9,14 @@ export const links: LinksFunction = () => {
       href: stylesUrl
     }
   ];
+};
+
+export const meta: MetaFunction = () => {
+  return {
+    title: "Remix Jokes | Home",
+    description:
+      "Remix jokes app. Learn Remix and laugh at the same time!"
+  };
 };
 
 export default function Index() {
@@ -22,6 +30,7 @@ export default function Index() {
           <ul>
             <li>
               <Link to="jokes">Read Jokes</Link>
+              <Link to="jokes.rss" reloadDocument>RSS</Link>
             </li>
           </ul>
         </nav>

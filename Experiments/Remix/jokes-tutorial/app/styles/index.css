@@ -52,9 +52,13 @@ nav ul {
   line-height: 1;
 }
 
+nav ul a {
+  padding: 10px;
+}
+
 nav ul a:hover {
   text-decoration-style: wavy;
-  text-decoration-thickness: 1px;
+  text-decoration-thickness: 2px;
 }
 
 @media print, (min-width: 640px) {
