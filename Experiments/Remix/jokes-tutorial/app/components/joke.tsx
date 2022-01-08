@@ -1,0 +1,30 @@
+import { Joke } from '@prisma/client';
+import React from 'react';
+import { Form, Link } from 'remix';
+
+export function JokeDisplay(
+  { joke, isOwner }: {
+    joke: Pick<Joke, 'name' | 'content'>;
+    isOwner: boolean;
+  }
+) {
+  return (
+    <div>
+      <p>Here's your hilarious joke:</p>
+      <p>{joke.content}</p>
+      <Link to=".">{joke.name} Permalink</Link>
+      {isOwner ? (
+        <Form method="post">
+          <input
+            type="hidden"
+            name="_method"
+            value="delete"
+          />
+          <button type="submit" className="button">
+            Delete
+          </button>
+        </Form>
+      ) : null}
+    </div>
+  )
+}
