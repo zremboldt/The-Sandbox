@@ -1,17 +1,47 @@
-i = 0
+row_count = 20
+column_count = row_count * 2.5
 
+i = 0
 loop do
-  x = rand(1..2)
-  
-  if x == 1
-    puts "x"
-  else x == 2
-    puts "o"
+  arr = []
+  loop do
+    random_num = rand(1..4)
+    
+    case random_num
+    when 1
+      # arr.push('╳')
+      arr.push('╱')
+      # arr.push('╲')
+      # arr.push('╮')
+    when 2
+      # arr.push('┆')
+      arr.push('╲')
+      # arr.push('╭')
+    when 3
+      arr.push('╲')
+      # arr.push('┌')
+      # arr.push('╯')
+      # arr.push('⋅')
+      # arr.push('╌')
+      # arr.push('')
+      # arr.push('╳')
+    when 4
+      # arr.push('╰')
+      # arr.push('┼')
+      # arr.push('⋅')
+      # arr.push('')
+      # arr.push('⋅')
+    end
+
+    if arr.length == column_count
+      break
+    end
   end
   
-  i = i + 1
+  puts arr.join('')
   
-  if i == 10 
+  i = i + 1
+  if i == row_count
     break
   end
 end
