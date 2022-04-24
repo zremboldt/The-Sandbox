@@ -18,14 +18,14 @@ patterns = [
   ['╲', '╲', '╲'],
 ]
 
-randomPattern = patterns[rand(patterns.length())]
+random_pattern = patterns[rand(patterns.length())]
 
 row_count.times do
   arr = []
   
   while arr.length < column_count
     random_num = rand(0..2)
-    arr.push(randomPattern[random_num])
+    arr.push(random_pattern[random_num])
   end
   
   puts arr.join('')
