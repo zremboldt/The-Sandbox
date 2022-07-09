@@ -2,6 +2,12 @@
 
 <%= render @todo_list %>
 
+<ul>
+  <% @todo_list.todo_items.each do |todo_item| %>
+    <li><%= todo_item.description %></li>
+  <% end %>
+</ul>
+
 <div>
   <%= link_to "Edit this todo list", edit_todo_list_path(@todo_list) %> |
   <%= link_to "Back to todo lists", todo_lists_path %>

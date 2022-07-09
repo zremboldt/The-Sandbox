@@ -2,8 +2,4 @@
 
 <%= render "form", todo_list: @todo_list %>
 
-<br>
-
-<div>
-  <%= link_to "Back to todo lists", todo_lists_path %>
-</div>
+<%= link_to "Back to lists", todo_lists_path, class: "link-button" %>
