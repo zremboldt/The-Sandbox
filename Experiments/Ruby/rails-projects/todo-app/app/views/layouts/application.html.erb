@@ -13,8 +13,14 @@
   </head>
 
   <body>
-    <div class="app-container rad-shadow">
-      <%= yield %>
+    <div class="app-container">
+      <% unless current_page?(todo_lists_path) %>
+        <%= link_to "←", todo_lists_path, class: "back-button" %>
+      <% end %>
+
+      <div class="app-card rad-shadow">
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>

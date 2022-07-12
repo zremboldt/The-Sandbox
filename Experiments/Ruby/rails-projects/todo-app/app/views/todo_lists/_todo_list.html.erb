@@ -1,3 +1,5 @@
 <li class="todo-list-item" id="<%= dom_id todo_list %>">
-  <%= link_to todo_list.title, todo_list %>
+  <%= link_to(todo_list) do %>
+    <h4><%= todo_list.title %></h4>
+  <% end %>
 </li>

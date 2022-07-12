@@ -1,11 +1,17 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>☑ Todos</h1>
+<header>
+  <h1>☑ Todos</h1>
+</header>
 
-<div id="todo-lists-container">
+<ul class="list-container">
   <% @todo_lists.each do |todo_list| %>
-    <%= render todo_list %>
+    <li class="app-index_list-item" id="<%= dom_id todo_list %>">
+      <%= link_to(todo_list) do %>
+        <h4><%= todo_list.title %></h4>
+      <% end %>
+    </li>
   <% end %>
-</div>
+</ul>
 
-<%= link_to "New list", new_todo_list_path, class: "link-button" %>
+<%= link_to "New list", new_todo_list_path, class: "button" %>

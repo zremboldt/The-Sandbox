@@ -1,16 +1,38 @@
-<p style="color: green"><%= notice %></p>
 
-<%= render @todo_list %>
+<header>
+  <p style="color: green"><%= notice %></p>
 
-<ul>
+  <%= link_to edit_todo_list_path(@todo_list), class: "title-container" do %>
+    <h1><%= @todo_list.title %></h1>
+    <span class="badge <%= @todo_list.status.downcase.parameterize(separator: '-') %>"><%= @todo_list.status %></span>
+  <% end %>
+
+  <div class="progress-container">
+    <p class="progress-text"><%= @todo_list.percent_complete %>% Complete (<%= @todo_list.completed_items %>/<%= @todo_list.total_items %> Todo Items)</p>
+    <div class="progress-bar">
+      <div class="progress" style="width: <%= @todo_list.percent_complete %>%"></div>
+    </div>
+  </div>
+</header>
+
+
+<ul class="list-container">
   <% @todo_list.todo_items.each do |todo_item| %>
-    <li><%= todo_item.description %></li>
+    <li class="todo-list_list-item <%= todo_item.completed? ? "completed" : "" %>" >
+      <%= todo_item.description %>
+      <%= link_to "#", class: "complete-button" do %>
+        <i class="fas fa-check"></i>
+      <% end %>
+    </li>
   <% end %>
 </ul>
 
-<div>
-  <%= link_to "Edit this todo list", edit_todo_list_path(@todo_list) %> |
-  <%= link_to "Back to todo lists", todo_lists_path %>
+<%= form_for([@todo_list, @todo_item], :html => {:class => "add-todo-container"}) do |f| %>
+  <%= f.text_field :description, class: "text-input", placeholder: "Add a todo" %>
+  <%= f.submit "Add", class: "button" %>
+<% end %>
 
-  <%= button_to "Destroy this todo list", @todo_list, method: :delete %>
-</div>
+<%# <div class="buttons-container"> %>
+<%#   <%= button_to "Destroy", @todo_list, method: :delete %>
+<%# </div> %>
+

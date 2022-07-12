@@ -1,7 +1,7 @@
 
 html {
-  /* brand foundation */
-  --brand-hue: 200;
+  /* surface1 foundation */
+  --brand-hue: 265;
   --brand-saturation: 100%;
   --brand-lightness: 50%;
 
@@ -12,7 +12,8 @@ html {
     var(--brand-lightness)
   );
   --text1-light: hsl(var(--brand-hue) var(--brand-saturation) 10%);
-  --text2-light: hsl(var(--brand-hue) 30% 30%);
+  --text2-light: hsl(var(--brand-hue) 14% 50%);
+  --text-muted-light: hsl(var(--brand-hue) 14% 65%);
   --surface1-light: hsl(var(--brand-hue) 25% 90%);
   --surface2-light: hsl(var(--brand-hue) 20% 99%);
   --surface3-light: hsl(var(--brand-hue) 20% 92%);
@@ -58,6 +59,7 @@ html {
   --brand: var(--brand-light);
   --text1: var(--text1-light);
   --text2: var(--text2-light);
+  --text-muted: var(--text-muted-light);
   --surface1: var(--surface1-light);
   --surface2: var(--surface2-light);
   --surface3: var(--surface3-light);
@@ -150,8 +152,10 @@ html {
 
 body {
   min-block-size: 100%;
-  display: grid;
-  place-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
 }
 
 /* ========== */
@@ -188,7 +192,7 @@ h3 {
   font-size: 38px;
 }
 
-p, a {
+p, a, li, input {
   font-size: 18px;
   line-height: 1.4;
 }
@@ -225,24 +229,34 @@ a {
 /* Elements */
 /* ======== */
 
-#todo-lists-container {
+.list-container {
+  padding: 0;
   border-top: 1px solid var(--surface1);
 }
 
-.todo-list-item {
-  border-bottom: 1px solid var(--surface1);
-  list-style: none;
+.badge {
+  border-radius: .25rem;
+  padding: .15rem .3rem;
+  font-size: 13px;
+  font-weight: 700;
 }
-.todo-list-item > a {
-  display: block;
-  padding: 1rem 1.5rem;
+.badge.not-started {
+  background-color: var(--surface1);
+}
+.badge.in-progress {
+  background-color: var(--brand);
+  color: white;
+}
+.badge.complete {
+  background-color: mediumspringgreen;
 }
 
-.link-button {
+.button {
   display: block;
   padding: .75rem 1rem;
   border-radius: .25rem;
   background-color: var(--brand);
+  border: none;
   cursor: pointer;
   color: white;
   font-weight: 600;
@@ -251,22 +265,128 @@ a {
   transition: background-color .2s ease-in-out;
 }
 
+.back-button {
+  margin-bottom: 1rem;
+  display: inline-block;
+  padding: .1rem 1rem;
+  border-radius: 999px;
+  background-color: var(--surface4);
+  cursor: pointer;
+  color: var(--text2);
+  text-align: center;
+  transition: background-color .2s ease-in-out;
+}
+
+
+
+/* ========= */
+/* app index */
+/* ========= */
+
+.app-index_list-item {
+  border-bottom: 1px solid var(--surface1);
+  list-style: none;
+}
+.app-index_list-item > a {
+  display: block;
+  padding: 1rem 1.5rem;
+}
+
+
+
+/* ============== */
+/* todo list view */
+/* ============== */
+
+.title-container {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.progress-container {
+  margin-top: 1rem;
+}
+.progress-text {
+  font-size: 15px;
+  color: var(--text2);
+  margin-bottom: 0.5rem;
+}
+.progress-bar {
+  background-color: var(--surface1);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress {
+  height: 0.35rem;
+  background-color: var(--brand);
+}
+
+.todo-list_list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--surface1);
+  list-style: none;
+}
+.todo-list_list-item.completed {
+  color: var(--text-muted);
+}
+.todo-list_list-item.completed .complete-button {
+  color: var(--brand);
+  border-color: var(--brand);
+}
+
+.buttons-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.complete-button {
+  display: block;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  cursor: pointer;
+  color: transparent;
+  border: 1px solid var(--surface4);
+  transition: background-color .2s ease-in-out;
+}
+
+.add-todo-container {
+  display: flex;
+}
+.add-todo-container > .text-input {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: .25rem 0 0 .25rem;
+  border: 1px solid var(--surface4);
+  border-right: none;
+}
+.add-todo-container > .button {
+  border-radius: 0 .25rem .25rem 0;
+}
+
+
 
 /* ====== */
 /* Layout */
 /* ====== */
 
 .app-container {
-  margin: 10px;
-  width: min(94vw, 350px);
+  width: min(100%, 450px);
+}
+
+.app-card {
+  display: flex;
+  flex-direction: column;
   background-color: var(--surface2);
   border-radius: 1rem;
 }
-
-.app-container > h1 {
+.app-card > *:not(.list-container) {
   margin: 1.5rem;
 }
-.app-container > a {
-  margin: 1.5rem;
-}
-
