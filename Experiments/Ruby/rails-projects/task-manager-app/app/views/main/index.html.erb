@@ -1,4 +1,13 @@
-<h1>Main#index</h1>
-<p>Find me in app/views/main/index.html.erb</p>
+<h1>☑ Tasks</h1>
 
-<%= link_to("See todos", {controller: 'tasks', action: 'index'}) %>
+<div>
+  <h4>All Categories</h4>
+  <ul>
+    <% @categories.each do |category| %>
+      <li><%= link_to(category.name, category_path(category)) %></li>
+    <% end %>
+  </ul>
+</div>
+
+<%= link_to("Create new category", new_category_path) %>
+<%= link_to("View all tasks", tasks_path(page: 1)) %>

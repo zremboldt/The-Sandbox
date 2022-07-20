@@ -1,19 +1,30 @@
-<%= link_to("Back to homepage", {controller: 'main', action: 'index'}) %>
+<%= link_to("Back to homepage", {controller: 'main', action: 'index'}) %><br />
 
-<h1>Tasks#index</h1>
-<p>Find me in app/views/tasks/index.html.erb</p>
+<div class="tasks index">
+  <h2>Tasks</h2>
 
-<h3>Todos</h3>
+  <%= link_to("Add new task", new_task_path, class: "action new") %>
 
-<ul>
-  <% @todos.each do |task| %>
-    <li><%= task %></li>
-  <% end %>
-</ul>
-
-<%= link_to("About page", {
-  controller: 'main', 
-  action: 'about',
-  user_id: 2386,
-  coming_from: 'tasks'
-}) %>
+  <table class="listing" summary="Task list">
+    <tr class="header">
+      <th>#</th>
+      <th>Task</th>
+      <th>Completed</th>
+      <th>Category</th>
+      <th>Actions</th>
+    </tr>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.position %></td>
+        <td><%= task.name %></td>
+        <td><%= task.completed? ? "Yes" : "No" %></td>
+        <td><%= task.category&.name || "-" %></td>
+        <td class="actions">
+          <%= link_to("Show", task_path(task)) %>
+          <%= link_to("Edit", edit_task_path(task)) %>
+          <%= link_to("Delete", delete_task_path(task)) %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>

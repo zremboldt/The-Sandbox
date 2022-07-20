@@ -1,2 +1,10 @@
-<h1>Categories#new</h1>
-<p>Find me in app/views/categories/new.html.erb</p>
+<%= link_to("Back to list", "/", class: "back-link") %><br />
+
+<div class="categories new">
+  <h2>Create Category</h2>
+
+  <%= form_for(@category) do |f| %>
+    <%= f.text_field(:name, placeholder: "Name", required: true) %>
+    <%= f.submit("Create category") %>
+  <% end %>
+</div>

@@ -1,2 +1,10 @@
-<h1>Tasks#new</h1>
-<p>Find me in app/views/tasks/new.html.erb</p>
+<%= link_to("Back to list", tasks_path, class: "back-link") %><br />
+
+<div class="tasks new">
+  <h2>Create Task</h2>
+
+  <%= form_for(@task) do |f| %>
+    <%= render(partial: "form", locals: {f: f}) %>
+    <%= f.submit("Create task") %>
+  <% end %>
+</div>
