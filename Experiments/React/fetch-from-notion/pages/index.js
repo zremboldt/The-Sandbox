@@ -7,12 +7,36 @@ export async function getServerSideProps(context) {
   const notion = new Client({ auth: process.env.NOTION_TOKEN });
 
   const databaseId = 'b3179541dcf640f4ac36d181d4f43b32';
-  const response = await notion.databases.retrieve({ database_id: databaseId });
+  // const response = await notion.databases.retrieve({ database_id: databaseId });
+  const database = await notion.databases.query({ 
+    database_id: databaseId,
+  });
+
+  const pages = database.results;
+
+  const result = pages.map(async ({ id }) => {
+    // console.log('11111!!!!!!!!!!!!!!!!')
+    // console.log(id)
+    // const pageBlocks = await notion.blocks.children.list({
+    //   block_id: id,
+    //   page_size: 50,
+    // });
+    const pageBlocks = await notion.blocks.retrieve({
+      block_id: id,
+    });
+
+    return pageBlocks
+  });
+
+  const pageBlocks = await Promise.all(result);
+  console.log(pageBlocks)
   
   return {
-    props: { response }, // will be passed to the page component as props
+    props: { response: pageBlocks }, // will be passed to the page component as props
   }
 }
+
+// https://www.notion.so/9782ae7ce6954fa0acead5c9e7c82d7b?v=0268c17564e6430a814426fb1e55f3c9
 
 export default function Home({ response }) {
   console.log(response);
