@@ -55,6 +55,7 @@ const renderVerse = ({ type, paragraph, id }) => {
 };
 
 export default function Post({ page, blocks }) {
+  console.log("hi");
   if (!page || !blocks) {
     return <div />;
   }
