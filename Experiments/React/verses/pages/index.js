@@ -4,6 +4,7 @@ import { getDatabase } from "../lib/notion";
 import { Text } from "./[id].js";
 import styles from "./index.module.css";
 import Nav from "../components/nav";
+import { Fragment } from "react";
 
 export const databaseId = process.env.NOTION_DATABASE_ID;
 
@@ -18,7 +19,6 @@ export default function Home({ posts }) {
       <Nav />
 
       <main className={styles.container}>
-
         <h2 className={styles.heading}>All verses</h2>
         <ol className={styles.posts}>
           {posts.map((post) => {
@@ -30,18 +30,11 @@ export default function Home({ posts }) {
             //     year: "numeric",
             //   }
             // );
-            // console.log(post)
+            console.log(post);
             return (
-              <li key={post.id} className={styles.post}>
-                <h3 className={styles.postTitle}>
-                  <Link href={`/${post.id}`}>
-                    <Text text={post.properties.Name.title} />
-                  </Link>
-                </h3>
-
-                {/* <p className={styles.postDescription}>{date}</p> */}
-                {/* <Link href={`/${post.id}`}>Read verse →</Link> */}
-              </li>
+              <Fragment key={post.id}>
+                <ListItem title={post.properties.Name.title} id={post.id} />
+              </Fragment>
             );
           })}
         </ol>
@@ -59,4 +52,14 @@ export const getStaticProps = async () => {
     },
     revalidate: 1,
   };
+};
+
+const ListItem = ({ title, id }) => {
+  const [item] = title;
+
+  return (
+    <li className={styles.post}>
+      <Link href={`/${id}`}>{item.plain_text}</Link>
+    </li>
+  );
 };
