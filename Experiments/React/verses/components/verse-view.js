@@ -51,10 +51,6 @@ const renderVerse = ({ type, paragraph, id }) => {
 };
 
 export default function VerseView({ blocks }) {
-  if (!blocks) {
-    return <p>Select a verse.</p>;
-  }
-
   return (
     <section className="container">
       {blocks.map((block) => (

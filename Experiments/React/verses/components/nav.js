@@ -1,11 +1,11 @@
-import styles from "./nav.module.css";
 import Link from "next/link";
 
-export default function Nav() {
-  return null
-  // return (
-  //   <nav>
-  //     <Link href="/" className={styles.logo}>✨ Word</Link>
-  //   </nav>
-  // );
+export default function Nav({ isMenuVisible, setIsMenuVisible }) {
+  // return null
+  return (
+    <nav>
+      <h2 className={"logo"}>✨ Word</h2>
+      <button onClick={() => setIsMenuVisible(!isMenuVisible)}>MENU</button>
+    </nav>
+  );
 }

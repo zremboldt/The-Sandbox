@@ -8,8 +8,14 @@ import VerseView from "../components/verse-view";
 export const databaseId = process.env.NOTION_DATABASE_ID;
 
 export default function Home({ data }) {
+  const [isMenuVisible, setIsMenuVisible] = useState(true);
   const [selectedVerse, setSelectedVerse] = useState(null);
   console.log(data);
+
+  const handleSelect = (verse) => {
+    setSelectedVerse(verse);
+    setIsMenuVisible(false);
+  };
 
   return (
     <div>
@@ -18,36 +24,38 @@ export default function Home({ data }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Nav />
+      <Nav isMenuVisible={isMenuVisible} setIsMenuVisible={setIsMenuVisible} />
 
-      <main className={"container"}>
-        <h2 className={"listHeader"}>All verses</h2>
-        <ol className={"verses-ol"}>
-          {data.map(({ id, reference, verse }) => {
-            // const date = new Date(post.last_edited_time).toLocaleString(
-            //   "en-US",
-            //   {
-            //     month: "short",
-            //     day: "2-digit",
-            //     year: "numeric",
-            //   }
-            // );
+      {isMenuVisible && (
+        <main className={"list-container"}>
+          <h2 className={"listHeader"}>All verses</h2>
+          <ol className={"verses-ol"}>
+            {data.map(({ id, reference, verse }) => {
+              // const date = new Date(post.last_edited_time).toLocaleString(
+              //   "en-US",
+              //   {
+              //     month: "short",
+              //     day: "2-digit",
+              //     year: "numeric",
+              //   }
+              // );
 
-            return (
-              <Fragment key={id}>
-                <li
-                  onClick={() => setSelectedVerse(verse)}
-                  className={"verses-li"}
-                >
-                  {reference}
-                </li>
-              </Fragment>
-            );
-          })}
-        </ol>
-      </main>
+              return (
+                <Fragment key={id}>
+                  <li
+                    onClick={() => handleSelect(verse)}
+                    className={"verses-li"}
+                  >
+                    {reference}
+                  </li>
+                </Fragment>
+              );
+            })}
+          </ol>
+        </main>
+      )}
 
-      <VerseView blocks={selectedVerse} />
+      {selectedVerse && <VerseView blocks={selectedVerse} />}
     </div>
   );
 }
