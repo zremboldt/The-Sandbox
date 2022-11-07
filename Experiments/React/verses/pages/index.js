@@ -1,17 +1,20 @@
 import Head from "next/head";
 import Link from "next/link";
-import { getDatabase } from "../lib/notion";
-import { Text } from "./[id].js";
+import { getDatabase, getBlocks } from "../lib/notion";
 import Nav from "../components/nav";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
+import VerseView from "../components/verse-view";
 
 export const databaseId = process.env.NOTION_DATABASE_ID;
 
-export default function Home({ posts }) {
+export default function Home({ data }) {
+  const [selectedVerse, setSelectedVerse] = useState(null);
+  console.log(data);
+
   return (
     <div>
       <Head>
-        <title>Notion Next.js blog</title>
+        <title>Word App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -20,9 +23,7 @@ export default function Home({ posts }) {
       <main className={"container"}>
         <h2 className={"listHeader"}>All verses</h2>
         <ol className={"verses-ol"}>
-          {posts.map((post) => {
-            const [title] = post.properties.Name.title;
-
+          {data.map(({ id, reference, verse }) => {
             // const date = new Date(post.last_edited_time).toLocaleString(
             //   "en-US",
             //   {
@@ -33,15 +34,20 @@ export default function Home({ posts }) {
             // );
 
             return (
-              <Fragment key={post.id}>
-                <li className={"verses-li"}>
-                  <Link href={`/${post.id}`}>{title.plain_text}</Link>
+              <Fragment key={id}>
+                <li
+                  onClick={() => setSelectedVerse(verse)}
+                  className={"verses-li"}
+                >
+                  {reference}
                 </li>
               </Fragment>
             );
           })}
         </ol>
       </main>
+
+      <VerseView blocks={selectedVerse} />
     </div>
   );
 }
@@ -49,10 +55,22 @@ export default function Home({ posts }) {
 export const getStaticProps = async () => {
   const database = await getDatabase(databaseId);
 
+  const request = database.map(({ id }) => getBlocks(id));
+
+  const verse = await Promise.all(request).then((response) => response);
+
+  const transformedData = verse.map((verse, i) => {
+    const db = database[i];
+
+    return {
+      verse,
+      id: db.id,
+      reference: db.properties.Name.title[0].plain_text,
+    };
+  });
+
   return {
-    props: {
-      posts: database,
-    },
+    props: { data: transformedData },
     revalidate: 1,
   };
 };

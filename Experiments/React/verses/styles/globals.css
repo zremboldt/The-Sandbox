@@ -77,14 +77,11 @@ h1 {
 
 .verses-li {
   border-bottom: 1px solid var(--border-color);
-}
-
-.verses-li a {
-  display: block;
   padding: 20px 10px;
   color: white;
   font-size: 20px;
   font-weight: 600;
+  cursor: pointer;
 }
 
 /* =========== */
