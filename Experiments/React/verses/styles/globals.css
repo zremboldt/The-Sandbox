@@ -3,6 +3,7 @@
   --dark-color: hsl(var(--hue), 45%, 7%);
   --light-color: hsl(var(--hue), 95%, 98%);
   --link-color: hsl(var(--hue), 95%, 55%);
+  --border-color: hsl(var(--hue), 20%, 25%);
 
   --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
   --font-family: "IBM Plex Sans", system-ui, -apple-system, Helvetica Neue,
@@ -43,4 +44,29 @@ a {
 
 h1 {
   font-weight: 800;
+}
+
+.container {
+  padding: 100px 20px;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+.container .verse + .verse {
+  margin-top: 50px;
+}
+
+.verse {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 800;
+  cursor: default;
+}
+
+.space {
+  cursor: pointer;
+  color: transparent;
+  background-color: hsla(243, 51%, 48%, 0.2);
+  border-radius: 6px;
 }

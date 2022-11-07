@@ -18,10 +18,12 @@ export default function Home({ posts }) {
 
       <Nav />
 
-      <main className={styles.container}>
+      <main className={"container"}>
         <h2 className={styles.heading}>All verses</h2>
         <ol className={styles.posts}>
           {posts.map((post) => {
+            const [title] = post.properties.Name.title;
+
             // const date = new Date(post.last_edited_time).toLocaleString(
             //   "en-US",
             //   {
@@ -30,10 +32,12 @@ export default function Home({ posts }) {
             //     year: "numeric",
             //   }
             // );
-            console.log(post);
+
             return (
               <Fragment key={post.id}>
-                <ListItem title={post.properties.Name.title} id={post.id} />
+                <li className={styles.listItem}>
+                  <Link href={`/${post.id}`}>{title.plain_text}</Link>
+                </li>
               </Fragment>
             );
           })}
@@ -52,14 +56,4 @@ export const getStaticProps = async () => {
     },
     revalidate: 1,
   };
-};
-
-const ListItem = ({ title, id }) => {
-  const [item] = title;
-
-  return (
-    <li className={styles.post}>
-      <Link href={`/${id}`}>{item.plain_text}</Link>
-    </li>
-  );
 };

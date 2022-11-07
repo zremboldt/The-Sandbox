@@ -3,7 +3,6 @@ import Head from "next/head";
 import { getDatabase, getPage, getBlocks } from "../lib/notion";
 import Link from "next/link";
 import { databaseId } from "./index.js";
-import styles from "./post.module.css";
 import Nav from "../components/nav";
 
 const Word = ({ children, initiallyVisible }) => {
@@ -12,7 +11,7 @@ const Word = ({ children, initiallyVisible }) => {
   return (
     <Fragment>
       <span
-        className={!isVisible ? styles.space : ""}
+        className={!isVisible ? "space" : ""}
         onClick={() => setIsVisible(true)}
       >
         {children}
@@ -43,7 +42,7 @@ const Verse = ({ verse, density }) => {
 const renderVerse = ({ type, paragraph, id }) => {
   if (paragraph?.rich_text) {
     return paragraph.rich_text.map(({ plain_text }, i) => (
-      <div key={i} className={styles.verse}>
+      <div key={i} className={"verse"}>
         <Verse verse={plain_text} density={3} />
       </div>
     ));
@@ -55,12 +54,10 @@ const renderVerse = ({ type, paragraph, id }) => {
 };
 
 export default function Post({ page, blocks }) {
-  console.log("hi");
   if (!page || !blocks) {
     return <div />;
   }
 
-  console.log(blocks);
   return (
     <div>
       <Head>
@@ -70,7 +67,7 @@ export default function Post({ page, blocks }) {
 
       <Nav />
 
-      <section className={styles.container}>
+      <section className="container">
         {blocks.map((block) => (
           <Fragment key={block.id}>{renderVerse(block)}</Fragment>
         ))}
