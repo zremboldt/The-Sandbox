@@ -2,7 +2,6 @@ import Head from "next/head";
 import Link from "next/link";
 import { getDatabase } from "../lib/notion";
 import { Text } from "./[id].js";
-import styles from "./index.module.css";
 import Nav from "../components/nav";
 import { Fragment } from "react";
 
@@ -19,8 +18,8 @@ export default function Home({ posts }) {
       <Nav />
 
       <main className={"container"}>
-        <h2 className={styles.heading}>All verses</h2>
-        <ol className={styles.posts}>
+        <h2 className={"listHeader"}>All verses</h2>
+        <ol className={"verses-ol"}>
           {posts.map((post) => {
             const [title] = post.properties.Name.title;
 
@@ -35,7 +34,7 @@ export default function Home({ posts }) {
 
             return (
               <Fragment key={post.id}>
-                <li className={styles.listItem}>
+                <li className={"verses-li"}>
                   <Link href={`/${post.id}`}>{title.plain_text}</Link>
                 </li>
               </Fragment>
