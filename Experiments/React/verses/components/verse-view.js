@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
-import Head from "next/head";
-import Link from "next/link";
+import ShuffleIcon from "./shuffle-icon";
+import Button from "./squircle-button";
 
 const Word = ({ children, initiallyVisible }) => {
   const [isVisible, setIsVisible] = useState(initiallyVisible);
@@ -8,7 +8,7 @@ const Word = ({ children, initiallyVisible }) => {
   return (
     <Fragment>
       <span
-        className={!isVisible ? "space" : ""}
+        className={!isVisible ? "verse-blank" : ""}
         onClick={() => setIsVisible(true)}
       >
         {children}
@@ -28,6 +28,7 @@ const Verse = ({ verse, density }) => {
         </Word>
       );
     }
+
     return (
       <Word initiallyVisible={true} key={i}>
         {word}
@@ -36,32 +37,44 @@ const Verse = ({ verse, density }) => {
   });
 };
 
-const renderVerse = ({ type, paragraph, id }) => {
-  if (paragraph?.rich_text) {
-    return paragraph.rich_text.map(({ plain_text }, i) => (
-      <div key={i} className={"verse"}>
-        <Verse verse={plain_text} density={3} />
-      </div>
-    ));
+const renderVerse = (blocks) => {
+  if (!blocks) {
+    return <h3>Select a verse to begin.</h3>;
   }
 
-  return `❌ Unsupported block (${
-    type === "unsupported" ? "unsupported by Notion API" : type
-  })`;
+  return (
+    <>
+      {blocks.map(({ type, paragraph, id }) => {
+        if (paragraph?.rich_text) {
+          return paragraph.rich_text.map(({ plain_text }, i) => (
+            <div key={i} className={"verse"}>
+              <Verse verse={plain_text} density={3} />
+            </div>
+          ));
+        }
+
+        return `❌ Unsupported block (${
+          type === "unsupported" ? "unsupported by Notion API" : type
+        })`;
+      })}
+      <div className="verse-button-bar">
+        <Button className={"verse-button-shuffle"}>
+          <ShuffleIcon />
+        </Button>
+      </div>
+    </>
+  );
 };
 
 export default function VerseView({ blocks }) {
   return (
     <main className="verse-wrap">
-      <section className="verse-container">
-        {!blocks ? (
-          <h3>Select a verse to begin.</h3>
-        ) : (
-          blocks.map((block) => (
-            <Fragment key={block.id}>{renderVerse(block)}</Fragment>
-          ))
-        )}
-      </section>
+      <section className="verse-container">{renderVerse(blocks)}</section>
+      {/* <div className="verse-button-bar">
+        <Button className={"verse-button-shuffle"}>
+          <ShuffleIcon />
+        </Button>
+      </div> */}
     </main>
   );
 }

@@ -1,6 +1,8 @@
 :root {
-  --hue: 216;
+  --hue: 250;
+  --brand-color: hsl(var(--hue), 82%, 65%);
   --dark-color: hsl(var(--hue), 45%, 7%);
+  --dark-indigo-color: hsla(240, 50%, 50%, 0.2);
   --light-color: hsl(var(--hue), 95%, 98%);
   --link-color: hsl(var(--hue), 95%, 55%);
   --border-color: hsl(var(--hue), 20%, 25%);
@@ -10,6 +12,10 @@
   --font-family: "IBM Plex Sans", system-ui, -apple-system, Helvetica Neue,
     sans-serif;
 }
+
+/* ++++++ */
+/* Global */
+/* ++++++ */
 
 *,
 *:before,
@@ -24,6 +30,8 @@ body {
   font-family: var(--font-family), -apple-system, BlinkMacSystemFont, Segoe UI,
     Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
     sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -mox-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -37,11 +45,6 @@ body {
     background-color: var(--dark-color);
     color: rgb(238, 238, 238);
   }
-}
-
-a {
-  color: var(--link-color);
-  text-decoration: none;
 }
 
 h1 {
@@ -80,25 +83,20 @@ nav {
   border-bottom: 1px solid var(--border-color);
 }
 
-nav button {
-  padding: 4px 10px;
-}
-
-/* +++++++++++ */
-/* Index scene */
-/* +++++++++++ */
+/* ++++ */
+/* Menu */
+/* ++++ */
 
 .menu {
-  position: absolute;
+  position: fixed;
   z-index: 9;
-  top: var(--nav-height);
-  left: 0;
-  right: 0;
-  padding: 20px 14px;
+  width: 100%;
+  padding: var(--nav-height) 14px 20px;
   background-color: var(--dark-color);
 }
 
 .menu-header {
+  padding-top: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid var(--border-color);
   text-transform: uppercase;
@@ -133,9 +131,9 @@ nav button {
   -webkit-box-orient: vertical;
 }
 
-/* +++++++++++ */
-/* Verse scene */
-/* +++++++++++ */
+/* +++++ */
+/* Verse */
+/* +++++ */
 
 .verse-wrap {
   position: relative;
@@ -163,9 +161,41 @@ nav button {
   cursor: default;
 }
 
-.space {
+.verse-blank {
   cursor: pointer;
   color: transparent;
-  background-color: hsla(243, 51%, 48%, 0.2);
+  background-color: var(--dark-indigo-color);
   border-radius: 6px;
+}
+
+.verse-button-bar {
+  position: fixed;
+  bottom: 20px;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.verse-button-shuffle {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  color: var(--brand-color);
+  transition: transform 200ms var(--ease-out-quart);
+}
+
+.verse-button-shuffle:active {
+  transform: scale(0.94);
+}
+
+.verse-button-shuffle .squircle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  filter: drop-shadow(0 4px 8px hsl(256, 100%, 18%));
 }

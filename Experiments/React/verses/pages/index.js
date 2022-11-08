@@ -16,7 +16,7 @@ export default function Home({ data }) {
   return (
     <div>
       <Head>
-        <title>Word App</title>
+        <title>✨ Word App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
