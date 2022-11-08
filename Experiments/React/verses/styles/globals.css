@@ -11,6 +11,8 @@
   --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
   --font-family: "IBM Plex Sans", system-ui, -apple-system, Helvetica Neue,
     sans-serif;
+
+  ---transparent: #0f0c1b00;
 }
 
 /* ++++++ */
@@ -35,15 +37,36 @@ body {
 }
 
 body {
+  position: relative;
+  min-height: 100vh;
   background-color: white;
   color: black;
-  position: relative;
 }
 
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: var(--dark-color);
     color: rgb(238, 238, 238);
+    background-color: var(--dark-color);
+    background-image: radial-gradient(
+        circle 700px at 50% 0px,
+        hsla(230, 100%, 23%, 0.4),
+        var(---transparent)
+      ),
+      radial-gradient(
+        circle 600px at calc(50% + 600px) 500px,
+        hsla(270, 100%, 50%, 0.15),
+        var(---transparent)
+      ),
+      radial-gradient(
+        circle 800px at right center,
+        hsla(210, 100%, 23%, 0.22),
+        var(---transparent)
+      ),
+      radial-gradient(
+        circle 1300px at calc(50% - 400px) calc(100% - 100px),
+        hsla(270, 100%, 50%, 0.1),
+        var(---transparent)
+      );
   }
 }
 
@@ -79,7 +102,7 @@ nav {
   height: var(--nav-height);
   padding-right: 4px;
   background-color: var(--dark-color);
-  border-bottom: 1px solid var(--border-color);
+  /* border-bottom: 1px solid var(--border-color); */
 }
 
 /* ++++ */
@@ -90,14 +113,14 @@ nav {
   position: fixed;
   z-index: 9;
   width: 100%;
-  padding: var(--nav-height) 14px 20px;
+  padding: var(--nav-height) 14px 10px;
   background-color: var(--dark-color);
+  user-select: none;
 }
 
 .menu-header {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--border-color);
+  padding-top: 30px;
+  padding-bottom: 10px;
   text-transform: uppercase;
   font-size: 15px;
   letter-spacing: 0.5px;
@@ -110,7 +133,7 @@ nav {
 }
 
 .menu-li {
-  border-bottom: 1px solid var(--border-color);
+  border-top: 1px solid var(--border-color);
   padding: 20px 10px;
   color: white;
   font-size: 20px;
@@ -205,5 +228,5 @@ nav {
   width: 100%;
   height: 100%;
   z-index: -1;
-  filter: drop-shadow(0 4px 8px hsl(256, 100%, 18%));
+  filter: drop-shadow(0 5px 14px hsl(256, 100%, 35%));
 }
