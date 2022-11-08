@@ -1,35 +1,17 @@
 import Head from "next/head";
-import Link from "next/link";
 import { getDatabase, getBlocks } from "../lib/notion";
 import Nav from "../components/nav";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import VerseView from "../components/verse-view";
-import { motion, MotionConfig } from "framer-motion";
+import Menu from "../components/menu";
 
 export const databaseId = process.env.NOTION_DATABASE_ID;
-
-const transition = {
-  type: "spring",
-  damping: 28,
-  stiffness: 300,
-};
-
-const animationConfig = {
-  visible: { y: 0, transition },
-  notVisible: { y: "-100%", transition },
-};
 
 export default function Home({ data }) {
   const [isMenuVisible, setIsMenuVisible] = useState(true);
   const [selectedVerse, setSelectedVerse] = useState(null);
-  console.log(data);
 
   const day = dayOfTheWeek();
-
-  const handleSelect = (verse) => {
-    setSelectedVerse(verse);
-    setIsMenuVisible(false);
-  };
 
   return (
     <div>
@@ -40,30 +22,12 @@ export default function Home({ data }) {
 
       <Nav isMenuVisible={isMenuVisible} setIsMenuVisible={setIsMenuVisible} />
 
-      <motion.div
-        animate={isMenuVisible ? "visible" : "notVisible"}
-        variants={animationConfig}
-        className={"menu"}
-      >
-        {/* <h2 className={"menu-header"}>All verses</h2> */}
-        <h2 className={"menu-header"}>{day}</h2>
-        <ol className={"menu-ol"}>
-          {data.map(({ id, reference, verse }) => {
-            return (
-              <li
-                key={id}
-                onClick={() => handleSelect(verse)}
-                className={"menu-li"}
-              >
-                <h3 className="menu-verse-heading">{reference}</h3>
-                <p className="menu-verse-body">
-                  {verse[0].paragraph.rich_text[0].plain_text}
-                </p>
-              </li>
-            );
-          })}
-        </ol>
-      </motion.div>
+      <Menu
+        setSelectedVerse={setSelectedVerse}
+        data={data}
+        setIsMenuVisible={setIsMenuVisible}
+        isMenuVisible={isMenuVisible}
+      />
 
       <VerseView blocks={selectedVerse} />
     </div>
