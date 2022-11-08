@@ -6,6 +6,7 @@
   --link-color: hsl(var(--hue), 95%, 55%);
   --border-color: hsl(var(--hue), 20%, 25%);
 
+  --nav-height: 50px;
   --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
   --font-family: "IBM Plex Sans", system-ui, -apple-system, Helvetica Neue,
     sans-serif;
@@ -45,50 +46,60 @@ a {
 }
 
 h1 {
-  font-weight: 800;
+  font-size: 28px;
 }
 
-.container {
-  padding: 100px 20px;
-  max-width: 700px;
-  margin: 0 auto;
-  line-height: 1.5;
+h2 {
+  font-size: 24px;
 }
 
-.container .verse + .verse {
-  margin-top: 50px;
+h3 {
+  font-size: 20px;
 }
 
-/* =========== */
+p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6em;
+}
+
+/* +++ */
 /* Nav */
-/* =========== */
+/* +++ */
 
 nav {
+  position: fixed;
+  z-index: 10;
+  width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding-inline: 10px;
+  height: var(--nav-height);
+  background-color: var(--dark-color);
   border-bottom: 1px solid var(--border-color);
-  padding: 14px;
 }
 
 nav button {
   padding: 4px 10px;
 }
 
-/* =========== */
+/* +++++++++++ */
 /* Index scene */
-/* =========== */
+/* +++++++++++ */
 
-.list-container {
-  padding: 20px;
-  /* max-width: 700px; */
+.menu {
+  padding: 20px 14px;
   margin: 0 auto;
   position: absolute;
+  z-index: 9;
+  top: 50px;
   left: 0;
   right: 0;
   background-color: var(--dark-color);
 }
 
-.listHeader {
+.menu-header {
   padding-bottom: 20px;
   border-bottom: 1px solid var(--border-color);
   text-transform: uppercase;
@@ -96,13 +107,13 @@ nav button {
   letter-spacing: 0.5px;
 }
 
-.verses-ol {
+.menu-ol {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.verses-li {
+.menu-li {
   border-bottom: 1px solid var(--border-color);
   padding: 20px 10px;
   color: white;
@@ -111,9 +122,40 @@ nav button {
   cursor: pointer;
 }
 
-/* =========== */
+.menu-li * + * {
+  margin-top: 10px;
+}
+
+.menu-verse-body {
+  width: 100%;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+/* +++++++++++ */
 /* Verse scene */
-/* =========== */
+/* +++++++++++ */
+
+.verse-wrap {
+  position: relative;
+  top: 50px;
+  min-height: calc(100vh - var(--nav-height));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.verse-container {
+  max-width: 700px;
+  line-height: 1.5;
+}
+
+.verse-container .verse + .verse {
+  margin-top: 50px;
+}
 
 .verse {
   text-align: center;

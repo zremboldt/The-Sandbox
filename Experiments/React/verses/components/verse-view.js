@@ -52,10 +52,16 @@ const renderVerse = ({ type, paragraph, id }) => {
 
 export default function VerseView({ blocks }) {
   return (
-    <section className="container">
-      {blocks.map((block) => (
-        <Fragment key={block.id}>{renderVerse(block)}</Fragment>
-      ))}
-    </section>
+    <main className="verse-wrap">
+      <section className="verse-container">
+        {!blocks ? (
+          <h3>Select a verse to begin.</h3>
+        ) : (
+          blocks.map((block) => (
+            <Fragment key={block.id}>{renderVerse(block)}</Fragment>
+          ))
+        )}
+      </section>
+    </main>
   );
 }

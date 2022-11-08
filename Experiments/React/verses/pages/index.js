@@ -4,13 +4,27 @@ import { getDatabase, getBlocks } from "../lib/notion";
 import Nav from "../components/nav";
 import { Fragment, useState } from "react";
 import VerseView from "../components/verse-view";
+import { motion, MotionConfig } from "framer-motion";
 
 export const databaseId = process.env.NOTION_DATABASE_ID;
+
+const transition = {
+  type: "spring",
+  damping: 28,
+  stiffness: 300,
+};
+
+const animationConfig = {
+  visible: { y: 0, transition },
+  notVisible: { y: "-100%", transition },
+};
 
 export default function Home({ data }) {
   const [isMenuVisible, setIsMenuVisible] = useState(true);
   const [selectedVerse, setSelectedVerse] = useState(null);
   console.log(data);
+
+  const day = dayOfTheWeek();
 
   const handleSelect = (verse) => {
     setSelectedVerse(verse);
@@ -26,36 +40,32 @@ export default function Home({ data }) {
 
       <Nav isMenuVisible={isMenuVisible} setIsMenuVisible={setIsMenuVisible} />
 
-      {isMenuVisible && (
-        <main className={"list-container"}>
-          <h2 className={"listHeader"}>All verses</h2>
-          <ol className={"verses-ol"}>
-            {data.map(({ id, reference, verse }) => {
-              // const date = new Date(post.last_edited_time).toLocaleString(
-              //   "en-US",
-              //   {
-              //     month: "short",
-              //     day: "2-digit",
-              //     year: "numeric",
-              //   }
-              // );
+      <motion.div
+        animate={isMenuVisible ? "visible" : "notVisible"}
+        variants={animationConfig}
+        className={"menu"}
+      >
+        {/* <h2 className={"menu-header"}>All verses</h2> */}
+        <h2 className={"menu-header"}>{day}</h2>
+        <ol className={"menu-ol"}>
+          {data.map(({ id, reference, verse }) => {
+            return (
+              <li
+                key={id}
+                onClick={() => handleSelect(verse)}
+                className={"menu-li"}
+              >
+                <h3 className="menu-verse-heading">{reference}</h3>
+                <p className="menu-verse-body">
+                  {verse[0].paragraph.rich_text[0].plain_text}
+                </p>
+              </li>
+            );
+          })}
+        </ol>
+      </motion.div>
 
-              return (
-                <Fragment key={id}>
-                  <li
-                    onClick={() => handleSelect(verse)}
-                    className={"verses-li"}
-                  >
-                    {reference}
-                  </li>
-                </Fragment>
-              );
-            })}
-          </ol>
-        </main>
-      )}
-
-      {selectedVerse && <VerseView blocks={selectedVerse} />}
+      <VerseView blocks={selectedVerse} />
     </div>
   );
 }
@@ -81,4 +91,10 @@ export const getStaticProps = async () => {
     props: { data: transformedData },
     revalidate: 1,
   };
+};
+
+const dayOfTheWeek = () => {
+  const options = { weekday: "long" };
+  const now = new Date();
+  return new Intl.DateTimeFormat("en-US", options).format(now);
 };
