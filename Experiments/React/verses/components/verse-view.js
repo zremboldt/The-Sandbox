@@ -1,15 +1,17 @@
-import { Fragment, useState } from "react";
-import ShuffleIcon from "./shuffle-icon";
+import { Fragment, useEffect, useState } from "react";
+import ShuffleIcon from "../assets/shuffle-icon";
 import Button from "./squircle-button";
 
-const Word = ({ children, initiallyVisible }) => {
-  const [isVisible, setIsVisible] = useState(initiallyVisible);
+const Word = ({ children, blank }) => {
+  const [isBlank, setIsBlank] = useState();
+
+  useEffect(() => setIsBlank(blank), [blank]);
 
   return (
     <Fragment>
       <span
-        className={!isVisible ? "verse-blank" : ""}
-        onClick={() => setIsVisible(true)}
+        className={isBlank ? "verse-blank" : ""}
+        onClick={() => setIsBlank(false)}
       >
         {children}
       </span>{" "}
@@ -17,27 +19,29 @@ const Word = ({ children, initiallyVisible }) => {
   );
 };
 
-const Verse = ({ verse, density }) => {
+const Verse = ({ verse, density, shuffleNum }) => {
   const words = verse.split(" ");
 
   return words.map((word, i) => {
-    if (i > 0 && i % density === 0) {
-      return (
-        <Word initiallyVisible={false} key={i}>
-          {word}
-        </Word>
-      );
+    let blank;
+
+    if (i > 0 && randomAddSub(i, shuffleNum) % density === 0) {
+      blank = true;
+    } else {
+      blank = false;
     }
 
     return (
-      <Word initiallyVisible={true} key={i}>
+      <Word blank={blank} key={i}>
         {word}
       </Word>
     );
   });
 };
 
-const renderVerse = (blocks) => {
+const VerseRenderer = ({ blocks }) => {
+  const [shuffleNum, setShuffleNum] = useState(0);
+
   if (!blocks) {
     return <h3>Select a verse to begin.</h3>;
   }
@@ -48,7 +52,7 @@ const renderVerse = (blocks) => {
         if (paragraph?.rich_text) {
           return paragraph.rich_text.map(({ plain_text }, i) => (
             <div key={i} className={"verse"}>
-              <Verse verse={plain_text} density={3} />
+              <Verse verse={plain_text} density={3} shuffleNum={shuffleNum} />
             </div>
           ));
         }
@@ -57,8 +61,12 @@ const renderVerse = (blocks) => {
           type === "unsupported" ? "unsupported by Notion API" : type
         })`;
       })}
+
       <div className="verse-button-bar">
-        <Button className={"verse-button-shuffle"}>
+        <Button
+          onClick={() => setShuffleNum(shuffleNum + 1)}
+          className={"verse-button-shuffle"}
+        >
           <ShuffleIcon />
         </Button>
       </div>
@@ -69,7 +77,17 @@ const renderVerse = (blocks) => {
 export default function VerseView({ blocks }) {
   return (
     <main className="verse-wrap">
-      <section className="verse-container">{renderVerse(blocks)}</section>
+      <section className="verse-container">
+        <VerseRenderer blocks={blocks} />
+      </section>
     </main>
   );
+}
+
+function randomAddSub(a, b) {
+  if (Math.random() <= 0.5) {
+    return a - b;
+  } else {
+    return a + b;
+  }
 }

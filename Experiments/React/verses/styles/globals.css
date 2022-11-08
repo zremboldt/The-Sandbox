@@ -77,7 +77,6 @@ nav {
   justify-content: space-between;
   align-items: center;
   height: var(--nav-height);
-  padding-left: 10px;
   padding-right: 4px;
   background-color: var(--dark-color);
   border-bottom: 1px solid var(--border-color);
@@ -142,7 +141,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
+  padding: 40px 20px 100px;
 }
 
 .verse-container {
@@ -159,6 +158,7 @@ nav {
   font-size: 30px;
   font-weight: 800;
   cursor: default;
+  user-select: none;
 }
 
 .verse-blank {
@@ -170,11 +170,20 @@ nav {
 
 .verse-button-bar {
   position: fixed;
-  bottom: 20px;
+  bottom: 0;
   right: 0;
   left: 0;
+  height: 100px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(
+    0deg,
+    var(--dark-color) 0%,
+    hsla(var(--hue), 45%, 7%, 0.98) 10%,
+    hsla(var(--hue), 45%, 7%, 0.92) 20%,
+    hsla(var(--hue), 45%, 7%, 0) 100%
+  );
 }
 
 .verse-button-shuffle {

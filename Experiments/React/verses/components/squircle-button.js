@@ -1,6 +1,6 @@
-export default function Button({ children, className }) {
+export default function Button({ children, className, onClick }) {
   return (
-    <div className={className}>
+    <div className={className} onClick={onClick}>
       {children}
       <svg
         width="64"
