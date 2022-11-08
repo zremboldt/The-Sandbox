@@ -102,7 +102,7 @@ nav {
   height: var(--nav-height);
   padding-right: 4px;
   background-color: var(--dark-color);
-  /* border-bottom: 1px solid var(--border-color); */
+  user-select: none;
 }
 
 /* ++++ */

@@ -25,7 +25,7 @@ const Verse = ({ verse, density, shuffleNum }) => {
   return words.map((word, i) => {
     let blank;
 
-    if (i > 0 && randomAddSub(i, shuffleNum) % density === 0) {
+    if (randomAddSub(i, shuffleNum) % density === 0) {
       blank = true;
     } else {
       blank = false;
