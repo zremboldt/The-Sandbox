@@ -70,11 +70,6 @@ export default function VerseView({ blocks }) {
   return (
     <main className="verse-wrap">
       <section className="verse-container">{renderVerse(blocks)}</section>
-      {/* <div className="verse-button-bar">
-        <Button className={"verse-button-shuffle"}>
-          <ShuffleIcon />
-        </Button>
-      </div> */}
     </main>
   );
 }
