@@ -44,13 +44,14 @@ export default function Menu({
         </h3>
       </div>
       <ol className={"menu-ol"}>
-        {selectedData.map(({ id, reference, verse }) => {
+        {selectedData.map(({ id, reference, verse, tags }) => {
           return (
             <li
               key={id}
               onClick={() => handleSelect(verse)}
               className={"menu-li"}
             >
+              <span className="menu-verse-tag">{tags[0]}</span>
               <h3 className="menu-verse-heading">{reference}</h3>
               <p className="menu-verse-body">
                 {verse[0].paragraph.rich_text[0].plain_text}
