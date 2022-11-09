@@ -48,22 +48,22 @@ body {
     color: rgb(238, 238, 238);
     background-color: var(--dark-color);
     background-image: radial-gradient(
-        circle 700px at 50% 0px,
+        circle 500px at 50% 0px,
         hsla(230, 100%, 23%, 0.4),
         var(---transparent)
       ),
       radial-gradient(
-        circle 600px at calc(50% + 600px) 500px,
+        circle 400px at calc(50% + 600px) 500px,
         hsla(270, 100%, 50%, 0.15),
         var(---transparent)
       ),
       radial-gradient(
-        circle 800px at right center,
+        circle 600px at right center,
         hsla(210, 100%, 23%, 0.22),
         var(---transparent)
       ),
       radial-gradient(
-        circle 1300px at calc(50% - 400px) calc(100% - 100px),
+        circle 1100px at calc(50% - 400px) calc(100% - 100px),
         hsla(270, 100%, 50%, 0.1),
         var(---transparent)
       );
@@ -115,6 +115,7 @@ nav {
   width: 100%;
   padding: var(--nav-height) 14px 10px;
   background-color: var(--dark-color);
+  border-radius: 0 0 30px 30px;
   user-select: none;
 }
 
@@ -169,7 +170,7 @@ nav {
 
 .verse-container {
   max-width: 700px;
-  line-height: 1.5;
+  /* line-height: 1.5; */
 }
 
 .verse-container .verse + .verse {
@@ -181,13 +182,48 @@ nav {
   font-size: 30px;
   font-weight: 800;
   user-select: none;
+  perspective: 1000px;
 }
 
-.verse-blank {
+.verse-word {
+  position: relative;
+  display: inline-block;
+  margin: 4px 0;
+  transform-style: preserve-3d;
+}
+
+.verse-word-blank {
   cursor: pointer;
-  color: transparent;
+}
+
+.verse-word-front {
+  display: inline-block;
+  opacity: 1;
+  transform: rotateX(0deg);
+  transition: transform 400ms var(--ease-out-quart), opacity 250ms ease-in-out;
+}
+
+.verse-word-back {
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-color: var(--dark-indigo-color);
   border-radius: 6px;
+  opacity: 0;
+  transform: rotateX(-180deg);
+  transition: transform 400ms var(--ease-out-quart), opacity 250ms ease-in-out;
+}
+
+.verse-word-blank .verse-word-front {
+  opacity: 0;
+  transform: rotateX(-180deg);
+}
+
+.verse-word-blank .verse-word-back {
+  opacity: 1;
+  transform: rotateX(0deg);
 }
 
 .verse-button-bar {

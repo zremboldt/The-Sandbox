@@ -10,10 +10,11 @@ const Word = ({ children, blank }) => {
   return (
     <Fragment>
       <span
-        className={isBlank ? "verse-blank" : ""}
+        className={`verse-word ${isBlank ? "verse-word-blank" : ""}`}
         onClick={() => setIsBlank(false)}
       >
-        {children}
+        <span className="verse-word-front">{children}</span>
+        <span className="verse-word-back"></span>
       </span>{" "}
     </Fragment>
   );
