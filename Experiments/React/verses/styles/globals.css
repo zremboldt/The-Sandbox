@@ -204,7 +204,6 @@ nav {
 .menu-verse-tag {
   font-size: 11px;
   text-transform: uppercase;
-  background-color: var(--brand-color);
   border-radius: 3px;
   padding: 2px 4px;
 }

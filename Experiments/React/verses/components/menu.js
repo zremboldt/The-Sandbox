@@ -51,7 +51,9 @@ export default function Menu({
               onClick={() => handleSelect(verse)}
               className={"menu-li"}
             >
-              <span className="menu-verse-tag">{tags[0]}</span>
+              <span className="menu-verse-tag" style={getTagColor(tags[0])}>
+                {tags[0]}
+              </span>
               <h3 className="menu-verse-heading">{reference}</h3>
               <p className="menu-verse-body">
                 {verse[0].paragraph.rich_text[0].plain_text}
@@ -63,6 +65,36 @@ export default function Menu({
     </motion.div>
   );
 }
+
+const getTagColor = (tag) => {
+  const colors = {
+    indigo: "hsla(257, 100%, 70%, 1)",
+    pink: "hsla(322, 100%, 68%, 1)",
+    green: "hsla(160, 100%, 48%, 1)",
+    blue: "hsla(213, 100%, 60%, 1)",
+  };
+
+  const tagToColorMap = {
+    Inheritance: {
+      border: `1px solid ${colors.indigo}`,
+      color: colors.indigo,
+    },
+    "Joy of the Lord": {
+      border: `1px solid ${colors.green}`,
+      color: colors.green,
+    },
+    "Seeking Him": {
+      border: `1px solid ${colors.pink}`,
+      color: colors.pink,
+    },
+    "Love of God": {
+      border: `1px solid ${colors.blue}`,
+      color: colors.blue,
+    },
+  };
+
+  return tagToColorMap[tag];
+};
 
 const dayOfTheWeek = () => {
   const options = { weekday: "long" };
