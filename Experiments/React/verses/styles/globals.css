@@ -39,13 +39,13 @@ body {
 body {
   position: relative;
   min-height: 100vh;
-  background-color: white;
+  background-color: var(--light-color);
   color: black;
 }
 
 @media (prefers-color-scheme: dark) {
   body {
-    color: rgb(238, 238, 238);
+    color: var(--light-color);
     background-color: var(--dark-color);
     background-image: radial-gradient(
         circle 500px at 50% 0px,
@@ -113,33 +113,74 @@ nav {
   position: fixed;
   z-index: 9;
   width: 100%;
-  padding: var(--nav-height) 14px 10px;
+  height: 100vh;
+  overflow: hidden;
+  padding: var(--nav-height) 14px 0;
   background-color: var(--dark-color);
   border-radius: 0 0 30px 30px;
   user-select: none;
 }
 
 .menu-header {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.menu-filter-divider {
+  width: 2px;
+  height: 18px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  background-color: var(--light-color);
+  opacity: 0.4;
+}
+
+.menu-filter-button {
   padding-top: 30px;
   padding-bottom: 10px;
-  text-transform: uppercase;
   font-size: 15px;
   letter-spacing: 0.5px;
+  text-transform: uppercase;
+  opacity: 0.4;
+  cursor: pointer;
+}
+
+.menu-filter-button.active {
+  opacity: 1;
 }
 
 .menu-ol {
   list-style: none;
   margin: 0;
   padding: 0;
+  overflow: auto;
+  height: calc(100% - var(--nav-height));
+  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.menu-ol::-webkit-scrollbar {
+  display: none;
 }
 
 .menu-li {
   border-top: 1px solid var(--border-color);
   padding: 20px 10px;
-  color: white;
+  color: var(--light-color);
   font-size: 20px;
   font-weight: 600;
   cursor: pointer;
+}
+
+.menu-li:first-of-type {
+  border-top: none;
+}
+
+.menu-li:last-of-type {
+  padding-bottom: 30px;
 }
 
 .menu-li * + * {

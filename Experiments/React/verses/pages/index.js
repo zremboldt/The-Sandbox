@@ -12,7 +12,7 @@ export default function Home({ data }) {
   return (
     <div>
       <Head>
-        <title>✨ Word App</title>
+        <title>Word</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -32,11 +32,13 @@ export const getStaticProps = async () => {
 
   const transformedData = verse.map((verse, i) => {
     const db = database[i];
+    const tags = db.properties.Tags.multi_select.map(({ name }) => name);
 
     return {
       verse,
       id: db.id,
       reference: db.properties.Name.title[0].plain_text,
+      tags,
     };
   });
 
