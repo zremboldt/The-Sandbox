@@ -107,8 +107,8 @@ const getSelectedData = ({ day, data, isViewAllSelected }) => {
     Sunday: "Inheritance",
     Monday: "Joy of the Lord",
     Tuesday: "Seeking Him",
-    Wednesday: "Inheritance",
-    Thursday: "Love of God",
+    Wednesday: "Love of God",
+    Thursday: "Inheritance",
     Friday: "Joy of the Lord",
     Saturday: "Love of God",
   };
