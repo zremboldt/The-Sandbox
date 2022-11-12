@@ -40,46 +40,30 @@ const Verse = ({ verse, density, shuffleNum }) => {
   });
 };
 
-const VerseRenderer = ({ blocks }) => {
+export default function VerseView({ selectedVerse }) {
   const [shuffleNum, setShuffleNum] = useState(0);
 
-  if (!blocks) {
-    return <h3>Select a verse to begin.</h3>;
-  }
-
-  return (
-    <>
-      {blocks.map(({ type, paragraph, id }) => {
-        if (paragraph?.rich_text) {
-          return paragraph.rich_text.map(({ plain_text }, i) => (
-            <div key={i} className={"verse"}>
-              <Verse verse={plain_text} density={3} shuffleNum={shuffleNum} />
-            </div>
-          ));
-        }
-
-        return `❌ Unsupported block (${
-          type === "unsupported" ? "unsupported by Notion API" : type
-        })`;
-      })}
-
-      <div className="verse-button-bar">
-        <Button
-          onClick={() => setShuffleNum(shuffleNum + 1)}
-          className={"verse-button-shuffle"}
-        >
-          <ShuffleIcon />
-        </Button>
-      </div>
-    </>
-  );
-};
-
-export default function VerseView({ blocks }) {
   return (
     <main className="verse-wrap">
       <section className="verse-container">
-        <VerseRenderer blocks={blocks} />
+        {selectedVerse &&
+          selectedVerse.map((block, i) => {
+            return (
+              <Fragment key={i}>
+                <div className={"verse"}>
+                  <Verse verse={block} density={3} shuffleNum={shuffleNum} />
+                </div>
+                <div className="verse-button-bar">
+                  <Button
+                    onClick={() => setShuffleNum(shuffleNum + 1)}
+                    className={"verse-button-shuffle"}
+                  >
+                    <ShuffleIcon />
+                  </Button>
+                </div>
+              </Fragment>
+            );
+          })}
       </section>
     </main>
   );

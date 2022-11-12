@@ -51,13 +51,13 @@ export default function Menu({
               onClick={() => handleSelect(verse)}
               className={"menu-li"}
             >
-              <span className="menu-verse-tag" style={getTagColor(tags[0])}>
-                {tags[0]}
-              </span>
+              {tags[0] && (
+                <span className="menu-verse-tag" style={getTagColor(tags[0])}>
+                  {tags[0]}
+                </span>
+              )}
               <h3 className="menu-verse-heading">{reference}</h3>
-              <p className="menu-verse-body">
-                {verse[0].paragraph.rich_text[0].plain_text}
-              </p>
+              <p className="menu-verse-body">{verse[0]}</p>
             </li>
           );
         })}
@@ -71,7 +71,9 @@ const getTagColor = (tag) => {
     indigo: "hsla(257, 100%, 70%, 1)",
     pink: "hsla(322, 100%, 68%, 1)",
     green: "hsla(160, 100%, 48%, 1)",
-    blue: "hsla(213, 100%, 60%, 1)",
+    blue: "hsla(194, 100%, 50%, 1)",
+    yellow: "hsla(47, 100%, 50%, 1)",
+    red: "hsla(16, 100%, 50%, 1)",
   };
 
   const tagToColorMap = {
@@ -90,6 +92,10 @@ const getTagColor = (tag) => {
     "Love of God": {
       border: `1px solid ${colors.blue}`,
       color: colors.blue,
+    },
+    "Awe of God": {
+      border: `1px solid ${colors.yellow}`,
+      color: colors.yellow,
     },
   };
 
@@ -110,7 +116,7 @@ const getSelectedData = ({ day, data, isViewAllSelected }) => {
     Wednesday: "Love of God",
     Thursday: "Inheritance",
     Friday: "Joy of the Lord",
-    Saturday: "Love of God",
+    Saturday: "Awe of God",
   };
 
   if (isViewAllSelected) {
