@@ -21,6 +21,10 @@ const Word = ({ children, blank }) => {
 };
 
 const Verse = ({ verse, density, shuffleNum }) => {
+  // Look into this! 
+  // `Intl.Segmenter` for spliting sentences by different levels of granularity.
+  // https://twitter.com/stefanjudis/status/1596922615582830593?s=20&t=20W6JFITdW8FjOprl_j96A
+  
   const words = verse.split(" ");
 
   return words.map((word, i) => {
@@ -47,23 +51,19 @@ export default function VerseView({ selectedVerse }) {
     <main className="verse-wrap">
       <section className="verse-container">
         {selectedVerse &&
-          selectedVerse.map((block, i) => {
-            return (
-              <Fragment key={i}>
-                <div className={"verse"}>
-                  <Verse verse={block} density={3} shuffleNum={shuffleNum} />
-                </div>
-                <div className="verse-button-bar">
-                  <Button
-                    onClick={() => setShuffleNum(shuffleNum + 1)}
-                    className={"verse-button-shuffle"}
-                  >
-                    <ShuffleIcon />
-                  </Button>
-                </div>
-              </Fragment>
-            );
-          })}
+          selectedVerse.map((block, i) => (
+            <div className={"verse"} key={i}>
+              <Verse verse={block} density={3} shuffleNum={shuffleNum} />
+            </div>
+          ))}
+          <div className="verse-button-bar">
+            <Button
+              onClick={() => setShuffleNum(shuffleNum + 1)}
+              className={"verse-button-shuffle"}
+            >
+              <ShuffleIcon />
+            </Button>
+          </div>
       </section>
     </main>
   );
