@@ -1,9 +1,9 @@
 class TasksController < ApplicationController
+
   def index
-    @page = params[:page].to_i
-    @tasks = Task.order(:position)
+    # @tasks = Task.order(:position)
   end
-  
+
   def show
     @task = Task.find(params[:id])
   end
@@ -11,7 +11,6 @@ class TasksController < ApplicationController
   def new
     @count = Task.count
     @task = Task.new(position: @count + 1)
-    @categories = Category.all
   end
 
   def create
@@ -19,18 +18,18 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to tasks_path
     else
-      # The new action is not being called here this is just rendering the new template
+      # The 'new' action is NOT being called here
+      # Assign any instance variables needed
+      # @count = Task.count
       render('new')
     end
   end
 
   def edit
     @task = Task.find(params[:id])
-    @categories = Category.all
   end
-  
+
   def update
-    # @category = Category.find(params[:category_id])
     @task = Task.find(params[:id])
     if @task.update(task_params)
       redirect_to task_path(@task)
@@ -42,7 +41,7 @@ class TasksController < ApplicationController
   def delete
     @task = Task.find(params[:id])
   end
-  
+
   def destroy
     @task = Task.find(params[:id])
     @task.destroy
@@ -53,11 +52,11 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(
-      :name, 
-      :position, 
-      :category_id,
-      :completed, 
+      :name,
+      :position,
+      :completed,
       :description
     )
   end
+
 end

@@ -1,7 +1,10 @@
-<h1>About</h1>
-<p>Find me in app/views/main/about.html.erb</p>
+<%= link_to('Back to Menu', menu_path, class: 'back-link') %><br />
 
-<p>Created by <%= @author %></p>
+<div class="main about">
+  <h2>About</h2>
 
-<p>coming_from: <%= @coming_from %> page</p>
-<p>user_id: <%= @user_id %></p>
+  <p>Description of the Task Manager.</p>
+
+  <p>Created by <%= @created_by %></p>
+
+</div>

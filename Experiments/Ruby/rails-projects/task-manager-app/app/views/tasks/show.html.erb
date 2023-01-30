@@ -1,11 +1,11 @@
-<%= link_to("Back to list", tasks_path, class: "back-link") %><br />
+<%= link_to("Back to List", tasks_path, class: 'back-link') %>
 
 <div class="tasks show">
-  <h2>Show task</h2>
+  <h2>Show Task</h2>
 
   <div class="actions">
     <%= link_to('Edit', edit_task_path(@task)) %>
-    <%= link_to("Delete", delete_task_path(@task)) %>
+    <%= link_to('Delete', delete_task_path(@task)) %>
   </div>
 
   <table summary="Task detail view">
@@ -19,7 +19,7 @@
     </tr>
     <tr>
       <th>Completed</th>
-      <td><%= @task.completed? ? "Yes" : "No" %></td>
+      <td><%= @task.completed? ? 'Yes' : 'No' %></td>
     </tr>
     <tr>
       <th>Description</th>
@@ -27,7 +27,11 @@
     </tr>
     <tr>
       <th>Category</th>
-      <td><%= @task.category&.name || "-" %></td>
+      <td>
+        <% if @task.category %>
+          <%= @task.category.name %>
+        <% end %>
+      </td>
     </tr>
     <tr>
       <th>Created</th>
@@ -38,4 +42,5 @@
       <td><%= @task.updated_at %></td>
     </tr>
   </table>
+
 </div>
