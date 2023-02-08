@@ -21,6 +21,10 @@
       <% end %>
     </header>
 
+    <% if flash[:notice].present? %>
+      <div class='flash-notification'><%= flash[:notice] %></div>
+    <% end %>
+
     <main>
       <%= yield %>
     </main>

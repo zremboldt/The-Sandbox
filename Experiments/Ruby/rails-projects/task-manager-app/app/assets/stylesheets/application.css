@@ -19,6 +19,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   margin: 0;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 header {
@@ -37,6 +38,15 @@ header {
 
 .header-right > * + * {
   margin-left: 1rem;
+}
+
+.flash-notification {
+  box-shadow: 0 0 0 4px hsla(51, 100%, 50%, 0.25);
+  background-color: gold;
+  border-radius: 3px;
+  color: black;
+  margin: 10px;
+  padding: 10px;
 }
 
 main {

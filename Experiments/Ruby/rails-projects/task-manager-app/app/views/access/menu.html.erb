@@ -1,16 +1,5 @@
-<% if flash[:notice].present? %>
-  <div style="border: 1px solid green; color: green; padding: 10px;">
-    <%= flash[:notice] %>
-  </div>
-<% end %>
-
 <div class="access index">
   <h1>Menu</h1>
-
-  <p>User: <%= @username %></p>
-  <p>User ID: <%= @user_id %></p>
-
-  <%= button_to('Logout', logout_path, {method: :delete}) %>
 
   <ul>
     <li><%= link_to('Manage Tasks', tasks_path) %></li>
