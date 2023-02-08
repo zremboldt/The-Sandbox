@@ -1,14 +1,19 @@
 class AccessController < ApplicationController
 
+  before_action :confirm_logged_in, except: [:new, :create]
+
   # display menu
   def menu
-    get_user_info_from_session
+    # render('menu') # default behavior of the menu method. This just makes it explicit.
+    # render(plain: 'Just render some plain text')
+    # render(html: '<p>Render some html</p>')
+    # render(json: Task.first) # This is good for creating an API. Providing a json response from some of your routes.
+    # render(xml: ['cat', 'dog', 'turtle'])
+    # render(plain: 'OK', status: 200)
   end
 
   # display login form
   def new
-    get_user_info_from_session
-
     if logged_in?
       redirect_to(menu_path)
     end
