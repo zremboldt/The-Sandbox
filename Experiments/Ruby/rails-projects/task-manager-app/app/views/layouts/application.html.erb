@@ -11,6 +11,22 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <h3 class='header-logo'>Task Manager</h3>
+      <% if session[:user_id].present? %>
+        <div class='header-right'>
+          <p><%= @username %></p>
+          <%= button_to('Logout', logout_path, {method: :delete}) %>
+        </div>
+      <% end %>
+    </header>
+
+    <main>
+      <%= yield %>
+    </main>
+
+    <footer>
+      Copyright <%= Time.now.year %>
+    </footer>
   </body>
 </html>

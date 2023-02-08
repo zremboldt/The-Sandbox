@@ -10,6 +10,11 @@ class AccessController < ApplicationController
     # render(json: Task.first) # This is good for creating an API. Providing a json response from some of your routes.
     # render(xml: ['cat', 'dog', 'turtle'])
     # render(plain: 'OK', status: 200)
+    # path_to_404 = Rails.root.join('public', '404.html')
+    # render(file: path_to_404)
+    # send_file(path_to_404)
+    # string = render_to_string(file: path_to_404)
+    # logger.debug(string)
   end
 
   # display login form
