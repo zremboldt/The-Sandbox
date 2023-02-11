@@ -51,7 +51,7 @@ export default function Goon({ boardWidthInPx, gridCellSize, mapLayout }) {
     }
   }
 
-  useInterval(() => moveGoon(), 300);
+  useInterval(() => moveGoon(), 700);
 
   return (
     <GoonComponent gridCellSize={gridCellSize} xPos={xPos} yPos={yPos}>
