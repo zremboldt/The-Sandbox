@@ -1,0 +1,8 @@
+.flash-notification {
+  box-shadow: 0 0 0 1px gold;
+  background-color: hsla(50, 100%, 50%, 0.2);
+  border-radius: 3px;
+  color: black;
+  margin: 10px;
+  padding: 10px;
+}

@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TaskManagerApp</title>
+    <title>Task Manager<%= ' - ' + yield(:title) if content_for?(:title) %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <%= yield(:script) %>
   </head>
 
   <body>
     <header>
-      <h3 class='header-logo'>Task Manager</h3>
+      <%# <h3 class='header-logo'>Task Manager</h3> %>
+      <%= link_to(menu_path) do %>
+        <%= image_tag('tasky-logo-white.png', class: 'logo') %>
+      <% end %>
       <% if session[:user_id].present? %>
         <div class='header-right'>
           <p><%= @username %></p>

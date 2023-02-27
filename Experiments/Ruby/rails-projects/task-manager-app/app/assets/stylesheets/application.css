@@ -14,6 +14,10 @@
  *= require_self
  */
 
+:root {
+  --color-nav: hsl(15, 100%, 68%);
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -26,9 +30,14 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: aquamarine;
+  background-color: var(--color-nav);
   padding: 0 1rem;
   height: 60px;
+}
+
+.logo {
+  display: block;
+  width: 150px;
 }
 
 .header-right {
@@ -40,15 +49,6 @@ header {
   margin-left: 1rem;
 }
 
-.flash-notification {
-  box-shadow: 0 0 0 4px hsla(51, 100%, 50%, 0.25);
-  background-color: gold;
-  border-radius: 3px;
-  color: black;
-  margin: 10px;
-  padding: 10px;
-}
-
 main {
   padding: 1rem;
   margin-bottom: auto;
@@ -57,7 +57,7 @@ main {
 footer {
   display: flex;
   align-items: center;
-  background-color: aquamarine;
+  background-color: var(--color-nav);
   padding: 0 1rem;
   height: 60px;
 }
