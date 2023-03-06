@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
 
   def index
-    # @tasks = Task.order(:position)
+    @tasks = Task.order(:position)
   end
 
   def show
