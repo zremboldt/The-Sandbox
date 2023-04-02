@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { tileDefinition } from './tile-definition';
 
-export default function Gameboard({ boardWidth = 10, gridCellSize = 80 }) {
+export default function Gameboard({ boardWidth = 10, gridCellSize = 100 }) {
   const [mapLayout, setMapLayout] = useState();
   const boardWidthInPx = gridCellSize * (boardWidth - 1);
 
@@ -12,10 +12,17 @@ export default function Gameboard({ boardWidth = 10, gridCellSize = 80 }) {
 
     for (let i = 0; i < boardHeight; i++) {
       for (let j = 0; j < boardWidth; j++) {
-        let tile = {
-          xPos: j * gridCellSize,
-          yPos: i * gridCellSize,
-        };
+        const xPos = j * gridCellSize;
+        const yPos = i * gridCellSize;
+
+        let tile = { xPos, yPos };
+
+        // if (xPos === 600 && yPos === 200) {
+        //   tile = {
+        //     ...tile,
+        //     ...tileDefinition.grass
+        //   }
+        // }
 
         if (Math.random() > 0.2) {
           tile = {
@@ -32,6 +39,9 @@ export default function Gameboard({ boardWidth = 10, gridCellSize = 80 }) {
         tileDistribution.push(tile);
       }
     }
+
+    // const lowestEntropy = tileDistribution.reduce()
+    
 
     setMapLayout(tileDistribution);
   }, [boardWidth, gridCellSize]);
@@ -81,6 +91,7 @@ const Board = styled.div`
 
 const GridCell = styled.div`
   background-image: url(${(props) => props.image});
+  background-color: hsla(260,100%,50%,0.4);
   background-position: center;
   background-size: cover;
   font-size: 14px;
