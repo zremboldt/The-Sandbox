@@ -1,4 +1,23 @@
-<%= link_to('Back to Menu', menu_path, class: 'back-link') %><br />
+<%= link_to('Back to Menu', menu_path, class: 'back-link') %>
+<br />
+
+
+
+<br />
+<%# <%= (1..10).find {|n| n == 5 } %>
+<%= (1..10).find_all {|n| n % 3 == 0 } %>
+</br>
+
+<% fruits = ['bananna', 'apple', 'orange'] %>
+<%= fruits.find {|fruit| fruit == 'apple'} %>
+</br>
+
+<% pantry = {'bananna' => 5, 'pineapple' => 0, 'apple' => 2, 'orange' => 0} %>
+<%= pantry.find_all {|key, value| value == 0 } %>
+</br>
+
+
+
 
 <div class="tasks index">
   <h2>Tasks</h2>
@@ -18,7 +37,7 @@
       <tr>
         <td><%= task.position %></td>
         <td><%= task.name %></td>
-        <td><%= task.completed? ? 'Yes' : 'No' %></td>
+        <td><%= status_tag(task.completed?) %></td>
         <td><%= task.category&.name || '-' %></td>
         <td class="actions">
           <%= link_to("Show", task_path(task), class: 'action show') %>
