@@ -26,4 +26,24 @@ end
 
 p longestFruitName
 
+puts '----------------------------------'
 
+# Optional Arguments
+
+def welcome(greeting, options={})
+  name = options[:name] || 'friend'
+  punct = options[:punct] || '!'
+  "#{greeting} #{name}#{punct}"
+end
+
+puts welcome('Yo', {:name => 'bro'})
+
+puts '----------------------------------'
+
+# Multiple Assignment (called array destructuring in JS)
+
+myArray = [1,2,3]
+a, b, c = myArray
+puts a
+puts b
+puts c
