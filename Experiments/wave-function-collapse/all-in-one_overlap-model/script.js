@@ -44,4 +44,4 @@ const start = function(id) {
   console.log('isSuccess:', success);
 }
 
-img_url_to_data('./test.png', start);
+img_url_to_data('./wfc-5.png', start);

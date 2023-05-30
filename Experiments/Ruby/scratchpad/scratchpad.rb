@@ -47,5 +47,3 @@ a, b, c = myArray
 puts a
 puts b
 puts c
-
-# 
