@@ -4,6 +4,7 @@ class CreateEnableds < ActiveRecord::Migration[7.0]
       t.string :display_name
       t.string :name
       t.boolean :enabled
+      t.references :feature, foreign_key: true
 
       t.timestamps
     end

@@ -3,7 +3,9 @@
 one:
   display_name: MyString
   name: MyString
+  description: MyString
 
 two:
   display_name: MyString
   name: MyString
+  description: MyString

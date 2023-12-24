@@ -4,6 +4,7 @@ class CreateConditions < ActiveRecord::Migration[7.0]
       t.string :display_name
       t.string :name
       t.string :conditions
+      t.references :feature, foreign_key: true
 
       t.timestamps
     end
