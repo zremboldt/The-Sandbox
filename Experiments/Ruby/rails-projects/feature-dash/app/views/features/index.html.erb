@@ -1,23 +1,33 @@
-<div class="page_features">
-  <h2>Features</h2>
+<div class="page_wrap">
+  <div class="list_features">
+  <h2>Experiences</h2>
 
   <%# <%= link_to("Add New Feature", new_feature_path, class: 'action new') %>
 
-  <% @features.each do |feature| %>
-    <div class="tile_feature">
-      <h3><%= feature.display_name %></h3>
-      <div class="feature_row">
-        <label class="switch">
-          <input type="checkbox" <%= feature.enabled.enabled ? "checked" : "" %> >
-          <span class="slider"></span>
-        </label>
+    <% @features.each do |feature| %>
+      <div class="tile_feature">
+        <h4><%= feature.display_name %></h4>
+        <% if feature.description %>
+          <p class="description"><%= feature.description %></p>
+        <% end %>
+        <hr>
+        <p>
+          <span><strong><%= "Enabled:" %></strong></span>
+          <span><%= feature.enabled.enabled %></span>
+        </p>
         <% if feature.condition %>
           <p>
             <span><strong><%= "#{feature.condition.display_name}:" %></strong></span>
             <span><%= feature.condition.conditions %></span>
           </p>
         <% end %>
+        <%# <div class="switch_container"> %>
+          <%# <label class="switch"> %>
+            <%# <input type="checkbox" <%= feature.enabled.enabled ? "checked" : "" %> 
+            <%# <span class="slider"></span> %>
+          <%# </label> %>
+        <%# </div> %>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>

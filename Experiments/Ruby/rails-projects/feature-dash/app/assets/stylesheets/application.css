@@ -14,22 +14,15 @@
  *= require_self
  *= require global
  *= require toggle
+ *= require feature
  */
+.page_wrap {
+  max-width: 800px;
+}
 
-.page_features > * + * {
+.list_features > * + * {
   margin-top: 20px;
 }
 
-.tile_feature {
-  background-color: #f9f9f9;
-  border: 1px solid #d4d4d4;
-  border-radius: 8px;
-  padding: 8px 20px;
-  margin-bottom: 10px;
-}
-
-.tile_feature > * + * {
-  margin-top: 10px;
-}
 
  

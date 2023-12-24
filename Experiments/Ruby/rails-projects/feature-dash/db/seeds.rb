@@ -9,7 +9,7 @@
 
 features = [
   { display_name: "Skip report ordering", name: "skip_report_ordering", description: "When enabled, organic traffic in specified markets will be bucketed to skip prefill report ordering." },
-  { display_name: "SkipPhone", name: "skip_phone", description: "Bucketed users will not be asked to provide their phone number." }
+  { display_name: "SkipPhone", name: "skip_phone", description: "When enabled, bucketed users will not be asked to provide their phone number." }
 ]
 
 features.each do |feature_params|
