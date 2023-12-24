@@ -1,0 +1,23 @@
+<div class="page_features">
+  <h2>Features</h2>
+
+  <%# <%= link_to("Add New Feature", new_feature_path, class: 'action new') %>
+
+  <% @features.each do |feature| %>
+    <div class="tile_feature">
+      <h3><%= feature.display_name %></h3>
+      <div class="feature_row">
+        <label class="switch">
+          <input type="checkbox" <%= feature.enabled.enabled ? "checked" : "" %> >
+          <span class="slider"></span>
+        </label>
+        <% if feature.condition %>
+          <p>
+            <span><strong><%= "#{feature.condition.display_name}:" %></strong></span>
+            <span><%= feature.condition.conditions %></span>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,7 +1,11 @@
 class FeaturesController < ApplicationController
 
-  # def index
-  #   @categories = Category.order(:name)
+  def index
+    @features = Feature.order(:name)
+  end
+
+  # def show
+  #   @feature = Category.find(params[:id])
   # end
 
   # def show
@@ -52,6 +56,15 @@ class FeaturesController < ApplicationController
   # end
 
   private
+
+  def feature_params
+    params.require(:feature).permit(
+      :name,
+      :display_name,
+      :enabled, 
+      :condition
+    )
+  end
 
   # def feature_params
   #   params.require(:feature).permit(:name, :tasks)

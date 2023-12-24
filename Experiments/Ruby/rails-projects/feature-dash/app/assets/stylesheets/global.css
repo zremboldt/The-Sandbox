@@ -1,0 +1,14 @@
+*, *:before, *:after {
+  margin: 0;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 20px;
+}
+
+.feature_row {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
