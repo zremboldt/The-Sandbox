@@ -18,7 +18,7 @@
 
       <!-- Fields for the Condition model -->
       <% if @feature.condition %>
-        <%= feature_field.fields_for :condition do |condition_field| %>
+        <%= feature_field.fields_for(:condition, @feature.condition) do |condition_field| %>
           <div class="form_field">
             <%= condition_field.label(condition_field.object.display_name) %>
             <%= condition_field.text_field(:conditions) %>
@@ -27,17 +27,19 @@
       <% end %>
 
       <!-- Fields for the Enabled model -->
-      <%= feature_field.fields_for :enabled do |enabled_field| %>
-        <div class="form_field">
-          <%= enabled_field.label("Enabled") %>
+      <% if @feature.enabled %>
+        <%= feature_field.fields_for(:enabled, @feature.enabled) do |enabled_field| %>
+          <div class="form_field">
+            <%= enabled_field.label("Enabled") %>
 
-          <div class="switch_container">
-            <label class="switch">
-              <%= enabled_field.check_box(:is_enabled) %>
-              <span class="slider"></span>
-            </label>
+            <div class="switch_container">
+              <label class="switch">
+                <%= enabled_field.check_box(:is_enabled) %>
+                <span class="slider"></span>
+              </label>
+            </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
 
       <div class="form_button_row">

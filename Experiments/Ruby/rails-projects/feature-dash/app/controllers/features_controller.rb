@@ -27,8 +27,6 @@ class FeaturesController < ApplicationController
 
   def edit
     @feature = Feature.find(params[:id])
-    @enabled = @feature.enabled
-    @condition = @feature.condition
   end
 
   def update
@@ -61,15 +59,10 @@ class FeaturesController < ApplicationController
   def feature_params
     params.require(:feature).permit(
       :name,
-      :description,
       :display_name,
-      enabled_attributes: [:is_enabled],
-      condition_attributes: [:conditions],
+      :description,
+      enabled_attributes: [:id, :name, :display_name, :is_enabled],
+      condition_attributes: [:id, :name, :display_name, :conditions],
     )
   end
-
-  # def feature_params
-  #   params.require(:feature).permit(:name, :tasks)
-  # end
-
 end
