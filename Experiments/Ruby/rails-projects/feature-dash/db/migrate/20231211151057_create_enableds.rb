@@ -3,7 +3,7 @@ class CreateEnableds < ActiveRecord::Migration[7.0]
     create_table :enableds do |t|
       t.string :display_name
       t.string :name
-      t.boolean :enabled
+      t.boolean :is_enabled
       t.references :feature, foreign_key: true
 
       t.timestamps

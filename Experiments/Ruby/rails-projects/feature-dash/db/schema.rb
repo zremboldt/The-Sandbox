@@ -24,7 +24,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_18_134920) do
   create_table "enableds", force: :cascade do |t|
     t.string "display_name"
     t.string "name"
-    t.boolean "enabled"
+    t.boolean "is_enabled"
     t.integer "feature_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

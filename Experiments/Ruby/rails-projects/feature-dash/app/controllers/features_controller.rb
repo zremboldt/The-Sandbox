@@ -25,25 +25,26 @@ class FeaturesController < ApplicationController
   #   end
   # end
 
-  # def edit
-  #   @category = Category.find(params[:id])
-  #   @tasks = Task.all
-  # end
+  def edit
+    @feature = Feature.find(params[:id])
+    @enabled = @feature.enabled
+    @condition = @feature.condition
+  end
 
-  # def update
-  #   @category = Category.find(params[:id])
+  def update
+    @feature = Feature.find(params[:id])
 
-  #   puts "IT IS UPDATING!"
-  #   puts "------------------------"
-  #   puts params
-  #   puts "------------------------"
+    puts "IT IS UPDATING!"
+    puts "------------------------"
+    puts params
+    puts "------------------------"
 
-  #   if @category.update(category_params)
-  #     redirect_to(categories_path)
-  #   else
-  #     render('edit')
-  #   end
-  # end
+    if @feature.update(feature_params)
+      redirect_to(features_path)
+    else
+      render('edit')
+    end
+  end
 
   # def delete
   #   @category = Category.find(params[:id])
@@ -60,9 +61,9 @@ class FeaturesController < ApplicationController
   def feature_params
     params.require(:feature).permit(
       :name,
+      :description,
       :display_name,
-      :enabled, 
-      :condition
+      enabled_attributes: [:is_enabled],
     )
   end
 

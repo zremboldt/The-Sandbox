@@ -13,16 +13,18 @@
  *= require_tree .
  *= require_self
  *= require global
+ *= require form
  *= require toggle
  *= require feature
  */
 .page_wrap {
+  width: 100%;
   max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.list_features > * + * {
-  margin-top: 20px;
-}
 
 
  

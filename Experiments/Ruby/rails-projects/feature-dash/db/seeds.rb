@@ -27,8 +27,8 @@ end
 
 # Create enableds and associate them with features
 enabled = [
-  { name: "enabled", display_name: "Enabled", enabled: true, feature: Feature.find_by(name: "skip_report_ordering") },
-  { name: "enabled", display_name: "Enabled", enabled: false, feature: Feature.find_by(name: "skip_phone") }
+  { name: "enabled", display_name: "Enabled", is_enabled: true, feature: Feature.find_by(name: "skip_report_ordering") },
+  { name: "enabled", display_name: "Enabled", is_enabled: false, feature: Feature.find_by(name: "skip_phone") }
 ]
 
 enabled.each do |enabled_params|

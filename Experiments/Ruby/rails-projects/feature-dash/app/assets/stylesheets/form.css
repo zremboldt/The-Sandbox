@@ -1,0 +1,61 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form_field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+}
+
+form input[type=text],
+form textarea {
+  display: block;
+  padding: 20px;
+  border: 1px solid var(--gray-30);
+  border-radius: 5px;
+  font-family: inherit;
+}
+
+form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+form label {
+  position: absolute;
+  top: -13px;
+  left: 14px;
+  font-weight: bold;
+  background-color: white;
+  padding: 1px 6px;
+  border-radius: 99px;
+}
+
+.button {
+  padding: 10px 42px;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button_secondary {
+  color: black;
+  border: 2px solid var(--primary);
+}
+
+.button_primary {
+  color: white;
+  background-color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.form_button_row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+}

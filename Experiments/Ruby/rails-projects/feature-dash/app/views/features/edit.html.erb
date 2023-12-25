@@ -1,0 +1,34 @@
+<div class="page_wrap">
+  <header>
+    <h2>Update experience</h2>
+  </header>
+
+  <div class="tile_feature">
+    <%= form_with(model: @feature) do |feature_field| %>
+      <!-- Fields for the Feature model -->
+      <div class="form_field">
+        <%= feature_field.label("Name") %>
+        <%= feature_field.text_field(:display_name) %>
+      </div>
+
+      <div class="form_field">
+        <%= feature_field.label("Description") %>
+        <%= feature_field.text_area(:description) %>
+      </div>
+
+      <!-- Fields for the Enabled model -->
+      <%= feature_field.fields_for :enabled do |enabled_field| %>
+        <div class="form_field">
+          <%= enabled_field.label("Enabled") %>
+          <%= enabled_field.check_box(:is_enabled) %>
+        </div>
+          <%# <%= enabled_field.text_field :display_name %>
+      <% end %>
+
+      <div class="form_button_row">
+        <%= link_to("Cancel", "/features", class: "button button_secondary") %>
+        <%= feature_field.submit("Save", class: "button button_primary") %>
+      </div>
+    <% end %>
+  </div>
+</div>

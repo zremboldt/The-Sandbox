@@ -17,12 +17,16 @@
   --gray-70: hsla(240, 7%, 50%, 0.70);
   --gray-60: hsla(240, 7%, 50%, 0.60);
   --gray-50: hsla(240, 7%, 50%, 0.50);
+  --gray-30: hsla(240, 7%, 50%, 0.30);
+  --gray-20: hsla(240, 7%, 50%, 0.20);
+  --background-gray: hsl(240, 50%, 97%);
+  --primary: hsl(20, 100%, 50%);
 }
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding: 20px;
-  background-color: hsl(240, 50%, 97%);
+  background-color: var(--background-gray);
   line-height: 1.5;
   display: flex;
   justify-content: center;
