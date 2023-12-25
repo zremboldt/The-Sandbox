@@ -64,6 +64,7 @@ class FeaturesController < ApplicationController
       :description,
       :display_name,
       enabled_attributes: [:is_enabled],
+      condition_attributes: [:conditions],
     )
   end
 

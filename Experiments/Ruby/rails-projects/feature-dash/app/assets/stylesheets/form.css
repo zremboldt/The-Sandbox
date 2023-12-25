@@ -11,8 +11,8 @@ form {
   position: relative;
 }
 
-form input[type=text],
-form textarea {
+.form_field > input[type=text],
+.form_field > textarea {
   display: block;
   padding: 20px;
   border: 1px solid var(--gray-30);
@@ -20,12 +20,12 @@ form textarea {
   font-family: inherit;
 }
 
-form textarea {
+.form_field > textarea {
   resize: vertical;
   min-height: 80px;
 }
 
-form label {
+.form_field > label {
   position: absolute;
   top: -13px;
   left: 14px;
@@ -33,6 +33,11 @@ form label {
   background-color: white;
   padding: 1px 6px;
   border-radius: 99px;
+}
+
+.form_field > .switch_container {
+  border-top: 1px solid var(--gray-30);
+  padding-top: 22px;
 }
 
 .button {

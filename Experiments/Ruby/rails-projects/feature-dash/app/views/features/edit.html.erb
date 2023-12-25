@@ -16,13 +16,28 @@
         <%= feature_field.text_area(:description) %>
       </div>
 
+      <!-- Fields for the Condition model -->
+      <% if @feature.condition %>
+        <%= feature_field.fields_for :condition do |condition_field| %>
+          <div class="form_field">
+            <%= condition_field.label(condition_field.object.display_name) %>
+            <%= condition_field.text_field(:conditions) %>
+          </div>
+        <% end %>
+      <% end %>
+
       <!-- Fields for the Enabled model -->
       <%= feature_field.fields_for :enabled do |enabled_field| %>
         <div class="form_field">
           <%= enabled_field.label("Enabled") %>
-          <%= enabled_field.check_box(:is_enabled) %>
+
+          <div class="switch_container">
+            <label class="switch">
+              <%= enabled_field.check_box(:is_enabled) %>
+              <span class="slider"></span>
+            </label>
+          </div>
         </div>
-          <%# <%= enabled_field.text_field :display_name %>
       <% end %>
 
       <div class="form_button_row">
