@@ -25,9 +25,6 @@
   --text-100: hsla(0, 0%, 100%, 1);               /* active input text */
   --text-75: hsla(var(--primary-hue), 22%, 75%, 1); /* text on light */
   --text-55: hsla(var(--primary-hue), 13%, 55%, 1); /* text on dark */
-  /* Colors deprecated */
-  --gray-50: hsla(240, 7%, 50%, 0.50);
-  --primary: hsl(20, 100%, 50%);
   /* Misc */
   --radius-elements: 8px;
 }
@@ -43,6 +40,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+::selection { background: var(--primary-70); }
+::-moz-selection { background: var(--primary-70); }
 
 h1 {
   font-size: var(--size-900);
@@ -87,7 +86,7 @@ hr {
 
 .page_wrap {
   width: 100%;
-  max-width: 680px;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
   gap: 10px;
