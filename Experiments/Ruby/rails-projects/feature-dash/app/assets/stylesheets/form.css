@@ -24,7 +24,7 @@ textarea {
 input[type=text]:focus,
 textarea:focus {
   outline: none;
-  box-shadow: 0 0 0 3px var(--primary-30);
+  box-shadow: 0 0 0 var(--selection-outline-width) var(--primary-30);
   border-color: var(--primary-100);
   color: var(--text-100);
   transition: 100ms ease-in-out;
@@ -51,16 +51,22 @@ textarea {
   border: 1px solid var(--primary-100);
 }
 
-.button:active {
-  transform: scale(0.98);
-}
-
 .button_primary {
   background-color: var(--primary-100);
 }
 
 .button_secondary {
   color: var(--primary-100);
+}
+
+.button:focus-visible {
+  outline: none;
+  border-color: var(--primary-100);
+  box-shadow: 0 0 0 var(--selection-outline-width) var(--primary-30);
+}
+
+.button:active {
+  transform: scale(0.98);
 }
 
 .form_button_row {

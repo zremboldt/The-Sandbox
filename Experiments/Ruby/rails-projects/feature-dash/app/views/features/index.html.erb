@@ -7,11 +7,13 @@
 
   <% @features.each do |feature| %>
     <%= link_to(edit_feature_path(feature), :class => "feature-tile") do %>
-      <h4><%= feature.name %></h4>
-      <% if feature.description %>
-        <p class="description"><%= feature.description %></p>
-      <% end %>
-      <hr>
+      <div class="tile-inner tile-inner-header">
+        <h4><%= feature.name %></h4>
+        <% if feature.description %>
+          <p class="description"><%= feature.description %></p>
+        <% end %>
+      </div>
+      <%# <hr> %>
       <p>
         <span><strong><%= "Enabled:" %></strong></span>
         <span><%= feature.enabled.is_enabled %></span>

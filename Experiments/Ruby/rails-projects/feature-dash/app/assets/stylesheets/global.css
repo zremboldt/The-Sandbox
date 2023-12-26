@@ -27,6 +27,7 @@
   --text-55: hsla(var(--primary-hue), 13%, 55%, 1); /* text on dark */
   /* Misc */
   --radius-elements: 8px;
+  --selection-outline-width: 4px;
 }
 
 body {
@@ -89,5 +90,5 @@ hr {
   max-width: 600px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 16px;
 }
