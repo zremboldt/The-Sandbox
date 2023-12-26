@@ -59,10 +59,9 @@ class FeaturesController < ApplicationController
   def feature_params
     params.require(:feature).permit(
       :name,
-      :display_name,
       :description,
-      enabled_attributes: [:id, :name, :display_name, :is_enabled],
-      condition_attributes: [:id, :name, :display_name, :conditions],
+      enabled_attributes: [:id, :name, :is_enabled],
+      condition_attributes: [:id, :name, :conditions],
     )
   end
 end

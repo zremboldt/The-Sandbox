@@ -3,49 +3,47 @@
     <h2>Update experience</h2>
   </header>
 
-  <div class="tile_feature">
-    <%= form_with(model: @feature) do |feature_field| %>
-      <!-- Fields for the Feature model -->
-      <div class="form_field">
-        <%= feature_field.label("Name") %>
-        <%= feature_field.text_field(:display_name) %>
-      </div>
+  <%= form_with(model: @feature) do |feature_field| %>
+    <!-- Fields for the Feature model -->
+    <div class="form_field">
+      <%= feature_field.label("Name") %>
+      <%= feature_field.text_field(:name) %>
+    </div>
 
-      <div class="form_field">
-        <%= feature_field.label("Description") %>
-        <%= feature_field.text_area(:description) %>
-      </div>
+    <div class="form_field">
+      <%= feature_field.label("Description") %>
+      <%= feature_field.text_area(:description) %>
+    </div>
 
-      <!-- Fields for the Condition model -->
-      <% if @feature.condition %>
-        <%= feature_field.fields_for(:condition, @feature.condition) do |condition_field| %>
-          <div class="form_field">
-            <%= condition_field.label(condition_field.object.display_name) %>
-            <%= condition_field.text_field(:conditions) %>
-          </div>
-        <% end %>
+    <!-- Fields for the Condition model -->
+    <% if @feature.condition %>
+      <%= feature_field.fields_for(:condition, @feature.condition) do |condition_field| %>
+        <div class="form_field">
+          <%= condition_field.label(condition_field.object.name) %>
+          <%= condition_field.text_field(:conditions) %>
+        </div>
       <% end %>
-
-      <!-- Fields for the Enabled model -->
-      <% if @feature.enabled %>
-        <%= feature_field.fields_for(:enabled, @feature.enabled) do |enabled_field| %>
-          <div class="form_field">
-            <%= enabled_field.label("Enabled") %>
-
-            <div class="switch_container">
-              <label class="switch">
-                <%= enabled_field.check_box(:is_enabled) %>
-                <span class="slider"></span>
-              </label>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-
-      <div class="form_button_row">
-        <%= link_to("Cancel", "/features", class: "button button_secondary") %>
-        <%= feature_field.submit("Save", class: "button button_primary") %>
-      </div>
     <% end %>
-  </div>
+
+    <!-- Fields for the Enabled model -->
+    <% if @feature.enabled %>
+      <%= feature_field.fields_for(:enabled, @feature.enabled) do |enabled_field| %>
+        <div class="form_field">
+          <%= enabled_field.label("Enabled") %>
+
+          <div class="switch_container">
+            <label class="switch">
+              <%= enabled_field.check_box(:is_enabled) %>
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+    <div class="form_button_row">
+      <%= link_to("Cancel", "/features", class: "button button_secondary") %>
+      <%= feature_field.submit("Save", class: "button button_primary") %>
+    </div>
+  <% end %>
 </div>

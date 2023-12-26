@@ -1,7 +1,6 @@
 class CreateConditions < ActiveRecord::Migration[7.0]
   def change
     create_table :conditions do |t|
-      t.string :display_name
       t.string :name
       t.string :conditions
       t.references :feature, foreign_key: true

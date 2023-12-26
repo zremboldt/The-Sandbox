@@ -8,7 +8,7 @@
   <% @features.each do |feature| %>
     <%= link_to(edit_feature_path(feature), :class => "unstyled-anchor") do %>
       <div class="tile_feature">
-        <h4><%= feature.display_name %></h4>
+        <h4><%= feature.name %></h4>
         <% if feature.description %>
           <p class="description"><%= feature.description %></p>
         <% end %>
@@ -19,7 +19,7 @@
         </p>
         <% if feature.condition %>
           <p>
-            <span><strong><%= "#{feature.condition.display_name}:" %></strong></span>
+            <span><strong><%= "#{feature.condition.name}:" %></strong></span>
             <span><%= feature.condition.conditions %></span>
           </p>
         <% end %>

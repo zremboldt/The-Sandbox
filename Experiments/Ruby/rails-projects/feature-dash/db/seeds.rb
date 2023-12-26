@@ -8,8 +8,8 @@
 
 
 features = [
-  { display_name: "Skip report ordering", name: "skip_report_ordering", description: "When enabled, organic traffic in specified markets will be bucketed to skip prefill report ordering." },
-  { display_name: "SkipPhone", name: "skip_phone", description: "When enabled, bucketed users will not be asked to provide their phone number." }
+  { name: "Skip report ordering", description: "When enabled, organic traffic in specified markets will be bucketed to skip prefill report ordering." },
+  { name: "SkipPhone", description: "When enabled, bucketed users will not be asked to provide their phone number." }
 ]
 
 features.each do |feature_params|
@@ -18,7 +18,7 @@ end
 
 # Create conditions and associate them with features
 conditions = [
-  { name: "markets", display_name: "Markets", conditions: "WI, IA, ME, AZ", feature: Feature.find_by(name: "skip_report_ordering") }
+  { name: "Markets", conditions: "WI, IA, ME, AZ", feature: Feature.find_by(name: "Skip report ordering") }
 ]
 
 conditions.each do |condition_params|
@@ -27,8 +27,8 @@ end
 
 # Create enableds and associate them with features
 enabled = [
-  { name: "enabled", display_name: "Enabled", is_enabled: true, feature: Feature.find_by(name: "skip_report_ordering") },
-  { name: "enabled", display_name: "Enabled", is_enabled: false, feature: Feature.find_by(name: "skip_phone") }
+  { name: "Enabled", is_enabled: true, feature: Feature.find_by(name: "Skip report ordering") },
+  { name: "Enabled", is_enabled: false, feature: Feature.find_by(name: "SkipPhone") }
 ]
 
 enabled.each do |enabled_params|

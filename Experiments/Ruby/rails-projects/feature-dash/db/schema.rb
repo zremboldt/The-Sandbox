@@ -12,7 +12,6 @@
 
 ActiveRecord::Schema[7.0].define(version: 2023_12_18_134920) do
   create_table "conditions", force: :cascade do |t|
-    t.string "display_name"
     t.string "name"
     t.string "conditions"
     t.integer "feature_id"
@@ -22,7 +21,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_18_134920) do
   end
 
   create_table "enableds", force: :cascade do |t|
-    t.string "display_name"
     t.string "name"
     t.boolean "is_enabled"
     t.integer "feature_id"
@@ -32,7 +30,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_18_134920) do
   end
 
   create_table "features", force: :cascade do |t|
-    t.string "display_name"
     t.string "name"
     t.string "description"
     t.datetime "created_at", null: false
