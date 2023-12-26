@@ -13,24 +13,36 @@
   --size-900: clamp(2.67rem, 2.07rem + 3vw, 4.21rem);
   --size-1000: clamp(3.34rem, 2.45rem + 4.43vw, 5.61rem);
   /* Colors */
-  --gray-80: hsla(240, 7%, 50%, 0.78);
-  --gray-70: hsla(240, 7%, 50%, 0.70);
-  --gray-60: hsla(240, 7%, 50%, 0.60);
+  --primary-hue: 222; /* 222 */
+  --primary-100: hsla(var(--primary-hue), 100%, 56%, 1); 
+  --primary-70: hsla(var(--primary-hue), 100%, 56%, 0.7); /* rare */
+  --primary-30: hsla(var(--primary-hue), 100%, 56%, 0.3); /* outer ring for focused elements */
+  --dark-30-border: hsla(var(--primary-hue), 15%, 32%, 1); /* input border */
+  --dark-20-input: hsla(var(--primary-hue), 15%, 21%, 1); /* input background */
+  --dark-18: hsla(var(--primary-hue), 15%, 18%, 1); /* active input background */
+  --dark-12-bg: hsla(var(--primary-hue), 11%, 12%, 1); /* main screen background */
+  --dark-10: hsla(var(--primary-hue), 11%, 10%, 1); /* element background */
+  --text-100: hsla(0, 0%, 100%, 1);               /* active input text */
+  --text-75: hsla(var(--primary-hue), 22%, 75%, 1); /* text on light */
+  --text-55: hsla(var(--primary-hue), 13%, 55%, 1); /* text on dark */
+  /* Colors deprecated */
   --gray-50: hsla(240, 7%, 50%, 0.50);
-  --gray-30: hsla(240, 7%, 50%, 0.30);
-  --gray-20: hsla(240, 7%, 50%, 0.20);
-  --background-gray: hsl(240, 50%, 97%);
   --primary: hsl(20, 100%, 50%);
+  /* Misc */
+  --radius-elements: 8px;
 }
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding: 20px;
-  background-color: var(--background-gray);
+  background-color: var(--dark-12-bg);
   line-height: 1.5;
   display: flex;
   justify-content: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
 
 h1 {
   font-size: var(--size-900);
@@ -52,11 +64,31 @@ h5 {
   font-size: var(--size-500);
 }
 
+h1, h2 {
+  font-weight: 300;
+}
+
+h3, h4, h5 {
+  font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, p, li, a, label {
+  color: var(--text-55);
+}
+
 p, li, a, label, button, input, textarea, select {
   font-size: var(--size-400);
 }
 
 hr {
   border: 0;
-  border-top: 1px solid hsl(240, 50%, 90%);
+  border-top: 1px solid var(--dark-30-border);
+}
+
+.page_wrap {
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }

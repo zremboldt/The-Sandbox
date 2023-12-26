@@ -15,15 +15,9 @@
  *= require global
  *= require form
  *= require toggle
- *= require feature
+ *= require feature-tile
  */
-.page_wrap {
-  width: 100%;
-  max-width: 680px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+
 
 
 

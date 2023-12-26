@@ -1,62 +1,62 @@
 form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 34px;
 }
 
 .form_field {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  position: relative;
+  gap: 6px;
 }
 
-.form_field > input[type=text],
-.form_field > textarea {
+input[type=text],
+textarea {
   display: block;
-  padding: 20px;
-  border: 1px solid var(--gray-30);
-  border-radius: 5px;
+  padding: 14px;
+  background-color: var(--dark-20-input);
+  border: 1px solid var(--dark-30-border);
+  border-radius: var(--radius-elements);
+  color: var(--text-75);
   font-family: inherit;
 }
 
-.form_field > textarea {
-  resize: vertical;
-  min-height: 80px;
+input[type=text]:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--primary-30);
+  border-color: var(--primary-100);
+  color: var(--text-100);
+  transition: 100ms ease-in-out;
 }
 
-.form_field > label {
-  position: absolute;
-  top: -13px;
-  left: 14px;
-  font-weight: bold;
-  background-color: white;
-  padding: 1px 6px;
-  border-radius: 99px;
+textarea {
+  resize: none;
+  min-height: 90px;
 }
 
-.form_field > .switch_container {
-  border-top: 1px solid var(--gray-30);
-  padding-top: 22px;
+.switch_container {
+  border-top: 1px solid var(--dark-30-border);
+  padding-top: 16px;
 }
 
 .button {
-  padding: 10px 42px;
-  border-radius: 5px;
+  color: white;
+  padding: 10px 50px;
+  border-radius: var(--radius-elements);
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-}
-
-.button_secondary {
-  color: black;
-  border: 2px solid var(--primary);
+  border: 1px solid var(--primary-100);
+  /* box-shadow: 0 10px 14px -4px var(--primary-30); */
 }
 
 .button_primary {
-  color: white;
-  background-color: var(--primary);
-  border: 2px solid var(--primary);
+  background-color: var(--primary-100);
+}
+
+.button_secondary {
+  color: var(--primary-100);
 }
 
 .form_button_row {

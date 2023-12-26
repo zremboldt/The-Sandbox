@@ -5,9 +5,9 @@
 }
 
 .tile_feature {
-  background-color: white;
-  border: 1px solid #d4d4d4;
-  box-shadow: 0 3px 8px -2px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--dark-30-border);
+  background-color: var(--dark-18);
+  box-shadow: 0 6px 12px -4px rgba(0, 0, 0, 0.4);
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 10px;
@@ -19,5 +19,4 @@
 
 .description {
   margin-top: 4px;
-  color: var(--gray-80);
 }
