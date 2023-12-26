@@ -6,24 +6,22 @@
   <%# <%= link_to("Add New Feature", new_feature_path, class: 'action new') %>
 
   <% @features.each do |feature| %>
-    <%= link_to(edit_feature_path(feature), :class => "unstyled-anchor") do %>
-      <div class="tile_feature">
-        <h4><%= feature.name %></h4>
-        <% if feature.description %>
-          <p class="description"><%= feature.description %></p>
-        <% end %>
-        <hr>
+    <%= link_to(edit_feature_path(feature), :class => "feature-tile") do %>
+      <h4><%= feature.name %></h4>
+      <% if feature.description %>
+        <p class="description"><%= feature.description %></p>
+      <% end %>
+      <hr>
+      <p>
+        <span><strong><%= "Enabled:" %></strong></span>
+        <span><%= feature.enabled.is_enabled %></span>
+      </p>
+      <% if feature.condition %>
         <p>
-          <span><strong><%= "Enabled:" %></strong></span>
-          <span><%= feature.enabled.is_enabled %></span>
+          <span><strong><%= "#{feature.condition.name}:" %></strong></span>
+          <span><%= feature.condition.conditions %></span>
         </p>
-        <% if feature.condition %>
-          <p>
-            <span><strong><%= "#{feature.condition.name}:" %></strong></span>
-            <span><%= feature.condition.conditions %></span>
-          </p>
-        <% end %>
-      </div>
+      <% end %>
     <% end %>
   <% end %>
 </div>

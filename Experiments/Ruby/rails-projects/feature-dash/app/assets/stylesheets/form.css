@@ -47,8 +47,12 @@ textarea {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
+  transition: 100ms ease-in-out;
   border: 1px solid var(--primary-100);
-  /* box-shadow: 0 10px 14px -4px var(--primary-30); */
+}
+
+.button:active {
+  transform: scale(0.98);
 }
 
 .button_primary {

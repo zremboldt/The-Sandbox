@@ -1,19 +1,27 @@
-.unstyled-anchor {
+.feature-tile {
   display: block;
   color: inherit;
   text-decoration: none;
-}
-
-.tile_feature {
   border: 1px solid var(--dark-30-border);
   background-color: var(--dark-18);
   box-shadow: 0 6px 12px -4px rgba(0, 0, 0, 0.4);
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 10px;
+  transition: 100ms ease-in-out;
 }
 
-.tile_feature > * + * {
+.feature-tile:active {
+  transform: scale(0.99);
+}
+
+.feature-tile:focus-visible {
+  outline: none;
+  border-color: var(--primary-100);
+  box-shadow: 0 0 0 3px var(--primary-30);
+}
+
+.feature-tile > * + * {
   margin-top: 14px;
 }
 
