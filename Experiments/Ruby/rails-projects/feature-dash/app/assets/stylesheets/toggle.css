@@ -46,5 +46,5 @@ input:checked + .slider:before {
 }
 
 input:checked + .slider {
-  box-shadow: 0 0 0 1px var(--primary-100), 0 0 8px var(--primary-100);
+  box-shadow: 0 0 0 1px var(--primary-100);
 }

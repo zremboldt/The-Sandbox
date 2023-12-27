@@ -35,12 +35,24 @@ textarea {
   min-height: 90px;
 }
 
+::placeholder {
+  color: var(--text-55);
+}
+
 .switch_container {
   border-top: 1px solid var(--dark-30-border);
   padding-top: 16px;
 }
 
+.button_row {
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: flex-end; */
+  gap: 14px;
+}
+
 .button {
+  flex: 1;
   color: white;
   padding: 10px 50px;
   border-radius: var(--radius-elements);
@@ -69,8 +81,21 @@ textarea {
   transform: scale(0.98);
 }
 
-.form_button_row {
+/* ************ */
+/* Search field */
+/* ************ */
+
+.search_form {
   display: flex;
-  justify-content: flex-end;
-  gap: 14px;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.search_field {
+  flex: 10;
+}
+
+.search_button {
+  padding: 0;
+  min-width: 50px;
 }

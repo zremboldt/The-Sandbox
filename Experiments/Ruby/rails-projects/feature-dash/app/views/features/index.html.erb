@@ -3,27 +3,33 @@
     <h2>Experiences</h2>
   </header>
 
+  <%= form_tag(features_path, :method => "get", :class => "search_form") do %>
+    <%= text_field_tag :search, params[:search], :placeholder => "Search", :class => "search_field" %>
+    <%= submit_tag "⇨", :name => nil, :class => "button button_primary search_button" %>
+  <% end %>
+
   <%# <%= link_to("Add New Feature", new_feature_path, class: 'action new') %>
 
   <% @features.each do |feature| %>
-    <%= link_to(edit_feature_path(feature), :class => "feature-tile") do %>
-      <div class="tile-inner tile-inner-header">
-        <h4><%= feature.name %></h4>
-        <% if feature.description %>
-          <p class="description"><%= feature.description %></p>
+    <%= link_to(edit_feature_path(feature), :class => "feature_tile") do %>
+      <div class="feature_enabled_light<%= feature.enabled.is_enabled ? " active" : nil %>"></div>
+      <h4 class="feature_name"><%= feature.name %></h4>
+      <% if feature.description %>
+        <p><%= feature.description %></p>
+      <% end %>
+      <%# <hr> %>
+      <div class="tile_details">
+        <p>
+          <span><strong><%= "Enabled:" %></strong></span>
+          <span><%= feature.enabled.is_enabled ? "Yes" : "No" %></span>
+        </p>
+        <% if feature.condition %>
+          <p>
+            <span><strong><%= "#{feature.condition.name}:" %></strong></span>
+            <span><%= feature.condition.conditions %></span>
+          </p>
         <% end %>
       </div>
-      <%# <hr> %>
-      <p>
-        <span><strong><%= "Enabled:" %></strong></span>
-        <span><%= feature.enabled.is_enabled %></span>
-      </p>
-      <% if feature.condition %>
-        <p>
-          <span><strong><%= "#{feature.condition.name}:" %></strong></span>
-          <span><%= feature.condition.conditions %></span>
-        </p>
-      <% end %>
     <% end %>
   <% end %>
 </div>
