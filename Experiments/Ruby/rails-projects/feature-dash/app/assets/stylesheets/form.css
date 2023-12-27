@@ -27,7 +27,7 @@ textarea:focus {
   box-shadow: 0 0 0 var(--selection-outline-width) var(--primary-30);
   border-color: var(--primary-100);
   color: var(--text-100);
-  transition: 100ms ease-in-out;
+  transition: 300ms var(--ease-out-quart);
 }
 
 textarea {
@@ -47,7 +47,6 @@ textarea {
 .button_row {
   display: flex;
   flex-wrap: wrap;
-  /* justify-content: flex-end; */
   gap: 14px;
 }
 
@@ -56,10 +55,11 @@ textarea {
   color: white;
   padding: 10px 50px;
   border-radius: var(--radius-elements);
+  font-weight: 500;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  transition: 100ms ease-in-out;
+  transition: 300ms var(--ease-out-quart);
   border: 1px solid var(--primary-100);
 }
 

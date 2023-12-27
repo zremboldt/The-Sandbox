@@ -26,12 +26,14 @@
   --text-75: hsla(var(--primary-hue), 22%, 75%, 1); /* text on light */
   --text-55: hsla(var(--primary-hue), 13%, 55%, 1); /* text on dark */
   /* Misc */
+  --ease-out-quart: cubic-bezier(0.165, 0.85, 0.45, 1);
   --radius-elements: 8px;
   --selection-outline-width: 4px;
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
   padding: 20px;
   background-color: var(--dark-12-bg);
   line-height: 1.5;

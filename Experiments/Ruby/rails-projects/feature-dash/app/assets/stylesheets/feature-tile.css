@@ -10,12 +10,16 @@
   box-shadow: 0 6px 8px -2px rgba(0, 0, 0, 0.25);
   border-radius: 16px;
   padding: 18px;
-  transition: 100ms ease-in-out;
+  transition: 300ms var(--ease-out-quart);
   user-select: none;
 }
 
+.feature_tile:hover {
+  transform: scale(1.01);
+}
+
 .feature_tile:active {
-  transform: scale(0.99);
+  transform: scale(1);
 }
 
 .feature_tile:focus-visible {
