@@ -49,10 +49,16 @@
   padding-right: 30px;
 }
 
+.feature_key {
+  color: var(--text-75);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
 .tile_details {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   padding: 16px 20px;
   margin-top: 10px;
   border: 1px solid var(--dark-30-border);

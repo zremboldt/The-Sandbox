@@ -3,7 +3,7 @@ class Feature < ApplicationRecord
   has_one :condition, dependent: :destroy
   accepts_nested_attributes_for :enabled, :condition
 
-  validates :name, presence: true, uniqueness: true
+  validates :constant, presence: true, uniqueness: true
 
   def self.search(query)
     if query

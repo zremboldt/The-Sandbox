@@ -13,6 +13,9 @@ features = [
   { name: "Coll/comp warning modal", constant: "AB_TEST_COLL_COMP_WARNING_MODAL", description: "When enabled, users who said that they are financing a vehicle and who are then bucketed, will see a warning modal when toggling coll/comp coverages off." },
   { name: "Skip report ordering", constant: "SKIP_PREFILL_REPORT_ORDERING", description: "When enabled, organic traffic in specified markets will be bucketed to skip prefill report ordering." },
   { name: "Multi-driver invite", constant: "AB_TEST_MULTI_DRIVER_INVITE", description: "When enabled, the PNI will be prompted after bind, to send SMS invites to others on their policy." },
+  { name: "License scan", constant: "AB_TEST_LICENSE_SCAN", description: "When enabled, bucketed users will be prompted to either \"scan\" their driver's license or manually enter their information." },
+  { name: "Address verification", constant: "AB_TEST_ADDRESS_VERIFICATION", description: "When enabled, bucketed users will not be hard blocked when entering an address the Lob doesn't recognize as residential." },
+  { name: "Paid referrals", constant: "PAID_REFERRALS", description: "When enabled, users in enabled markets will be allowed to send and receive paid referrals." },
 ]
 
 features.each do |feature_params|
@@ -22,7 +25,8 @@ end
 # Create conditions and associate them with features
 conditions = [
   { name: "Markets", conditions: "WI, IA, ME, AZ, KS", feature: Feature.find_by(constant: "SKIP_PREFILL_REPORT_ORDERING") },
-  { name: "Markets", conditions: "OH, IA, TX", feature: Feature.find_by(constant: "AB_TEST_COLL_COMP_WARNING_MODAL") }
+  { name: "Markets", conditions: "OH, IA, TX", feature: Feature.find_by(constant: "AB_TEST_COLL_COMP_WARNING_MODAL") },
+  { name: "Markets", conditions: "AK, AL, AR, AZ, CO, CT, DC, DE, FL, GA, HI, IA, IL, IN, KS, KY, LA, MD, MI, MN, MO, MS, MT, NC, NE, NH, NM, NV, NY, OH, OK, OR, PA, RI, SC, TN, TX, UT, VA, WA, WI", feature: Feature.find_by(constant: "PAID_REFERRALS") },
 ]
 
 conditions.each do |condition_params|
@@ -35,7 +39,10 @@ enabled = [
   { name: "Enabled", is_enabled: false, feature: Feature.find_by(constant: "AB_TEST_WEB_SKIP_PREFILL_PHONE_NUMBER") },
   { name: "Enabled", is_enabled: true, feature: Feature.find_by(constant: "AB_TEST_COLL_COMP_WARNING_MODAL") },
   { name: "Enabled", is_enabled: true, feature: Feature.find_by(constant: "AB_TEST_FAMILY_PLAN_LOGIN") },
-  { name: "Enabled", is_enabled: false, feature: Feature.find_by(constant: "AB_TEST_MULTI_DRIVER_INVITE") },
+  { name: "Enabled", is_enabled: true, feature: Feature.find_by(constant: "AB_TEST_MULTI_DRIVER_INVITE") },
+  { name: "Enabled", is_enabled: false, feature: Feature.find_by(constant: "AB_TEST_LICENSE_SCAN") },
+  { name: "Enabled", is_enabled: true, feature: Feature.find_by(constant: "AB_TEST_ADDRESS_VERIFICATION") },
+  { name: "Enabled", is_enabled: true, feature: Feature.find_by(constant: "PAID_REFERRALS") },
 ]
 
 enabled.each do |enabled_params|

@@ -14,25 +14,29 @@
 
   <% @features.each do |feature| %>
     <%= link_to(edit_feature_path(feature), :class => "feature_tile") do %>
-      <div class="feature_enabled_light<%= feature.enabled.is_enabled ? " active" : nil %>"></div>
+      <% if feature.enabled %>
+        <div class="feature_enabled_light<%= feature.enabled&.is_enabled ? " active" : nil %>"></div>
+      <% end %>
       <h4 class="feature_name"><%= feature.name %></h4>
       <% if feature.description %>
         <p><%= feature.description %></p>
       <% end %>
       <div class="tile_details">
-        <p>
-          <span><strong><%= "Enabled:" %></strong></span>
-          <span><%= feature.enabled.is_enabled ? "Yes" : "No" %></span>
-        </p>
+        <% if feature.enabled %>
+          <p>
+            <span class="feature_key"><%= "Enabled:" %></span>
+            <span><%= feature.enabled.is_enabled ? "Yes" : "No" %></span>
+          </p>
+        <% end %>
         <% if feature.constant %>
           <p>
-            <span><strong>Codename:</strong></span>
+            <span class="feature_key">Codename:</span>
             <span><%= feature.constant %></span>
           </p>
         <% end %>
         <% if feature.condition %>
           <p>
-            <span><strong><%= "#{feature.condition.name}:" %></strong></span>
+            <span class="feature_key"><%= "#{feature.condition.name}:" %></span>
             <span><%= feature.condition.conditions %></span>
           </p>
         <% end %>
