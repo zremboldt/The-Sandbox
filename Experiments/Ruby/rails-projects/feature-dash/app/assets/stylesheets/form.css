@@ -100,7 +100,7 @@ textarea {
 .search_form {
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 18px;
 }
 
 .search_field {
@@ -111,4 +111,11 @@ textarea {
   flex: 0;
   padding: 0;
   min-width: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search_button svg {
+  fill: var(--text-100);
 }
