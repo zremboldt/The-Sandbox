@@ -1,7 +1,12 @@
 class FeaturesController < ApplicationController
 
   def index
-    @features = Feature.order(:name)
+    # @features = Feature.all
+    @features = if params[:search].present?
+      Feature.search(params[:search])
+    else
+      Feature.order(:name)
+    end
   end
 
   # def show
@@ -31,11 +36,6 @@ class FeaturesController < ApplicationController
 
   def update
     @feature = Feature.find(params[:id])
-
-    puts "IT IS UPDATING!"
-    puts "------------------------"
-    puts params
-    puts "------------------------"
 
     if @feature.update(feature_params)
       redirect_to(features_path)
