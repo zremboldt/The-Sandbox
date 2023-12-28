@@ -23,6 +23,18 @@
   height: 100%;
 }
 
+.title_tag {
+  position: fixed;
+  bottom: -8px;
+  left: 8px;
+  transform: rotate(-90deg);
+  transform-origin: left top;
+  color: var(--dark-20-input);
+  font-family: 'IBM Plex Mono', monospace;
+  pointer-events: none;
+}
+
 @media screen and (max-width: 715px) {
   .root_caret { display: none; }
+  .title_tag { display: none; }
 }
