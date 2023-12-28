@@ -17,12 +17,17 @@
       <% if feature.description %>
         <p><%= feature.description %></p>
       <% end %>
-      <%# <hr> %>
       <div class="tile_details">
         <p>
           <span><strong><%= "Enabled:" %></strong></span>
           <span><%= feature.enabled.is_enabled ? "Yes" : "No" %></span>
         </p>
+        <% if feature.constant %>
+          <p>
+            <span><strong>Codename:</strong></span>
+            <span><%= feature.constant %></span>
+          </p>
+        <% end %>
         <% if feature.condition %>
           <p>
             <span><strong><%= "#{feature.condition.name}:" %></strong></span>

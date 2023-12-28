@@ -57,4 +57,5 @@
   margin-top: 10px;
   border: 1px solid var(--dark-30-border);
   border-radius: var(--radius-elements);
+  font-family: 'IBM Plex Mono', monospace;
 }

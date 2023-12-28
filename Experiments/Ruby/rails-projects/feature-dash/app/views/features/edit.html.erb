@@ -5,9 +5,26 @@
 
   <%= form_with(model: @feature) do |feature_field| %>
     <!-- Fields for the Feature model -->
-    <div class="form_field">
-      <%= feature_field.label("Name") %>
-      <%= feature_field.text_field(:name) %>
+    <div class="form_top_row">
+      <div class="form_field">
+        <%= feature_field.label("Name") %>
+        <%= feature_field.text_field(:name) %>
+      </div>
+      <!-- Fields for the Enabled model -->
+      <% if @feature.enabled %>
+        <%= feature_field.fields_for(:enabled, @feature.enabled) do |enabled_field| %>
+          <div class="form_field switch_field">
+            <%= enabled_field.label("Enabled") %>
+
+            <div class="switch_container">
+              <label class="switch">
+                <%= enabled_field.check_box(:is_enabled) %>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
     </div>
 
     <div class="form_field">
@@ -21,22 +38,6 @@
         <div class="form_field">
           <%= condition_field.label(condition_field.object.name) %>
           <%= condition_field.text_field(:conditions) %>
-        </div>
-      <% end %>
-    <% end %>
-
-    <!-- Fields for the Enabled model -->
-    <% if @feature.enabled %>
-      <%= feature_field.fields_for(:enabled, @feature.enabled) do |enabled_field| %>
-        <div class="form_field">
-          <%= enabled_field.label("Enabled") %>
-
-          <div class="switch_container">
-            <label class="switch">
-              <%= enabled_field.check_box(:is_enabled) %>
-              <span class="slider"></span>
-            </label>
-          </div>
         </div>
       <% end %>
     <% end %>
