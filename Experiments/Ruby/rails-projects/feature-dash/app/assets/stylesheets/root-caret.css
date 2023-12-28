@@ -25,13 +25,14 @@
 
 .title_tag {
   position: fixed;
-  bottom: -8px;
+  bottom: -12px;
   left: 8px;
   transform: rotate(-90deg);
   transform-origin: left top;
   color: var(--dark-20-input);
   font-family: 'IBM Plex Mono', monospace;
   pointer-events: none;
+  text-transform: uppercase;
 }
 
 @media screen and (max-width: 715px) {
