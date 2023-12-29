@@ -73,6 +73,7 @@ h5 {
 
 h1, h2, h3, h4, h5, p, li, a, label {
   color: var(--text-55);
+  user-select: none;
 }
 
 p, li, a, label, button, input, textarea, select {
