@@ -15,7 +15,7 @@
   <% @features.each do |feature| %>
     <%= link_to(edit_feature_path(feature), :class => "feature_tile") do %>
       <% if feature.enabled %>
-        <div class="feature_enabled_light<%= feature.enabled&.is_enabled ? " active" : nil %>"></div>
+        <div class="feature_enabled_light<%= feature.enabled.is_enabled ? " active" : nil %>"></div>
       <% end %>
       <h4 class="feature_name"><%= feature.name %></h4>
       <% if feature.description %>
