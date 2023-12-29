@@ -23,7 +23,7 @@
   height: 100%;
 }
 
-.title_tag {
+.root_title_tag {
   position: fixed;
   bottom: -12px;
   left: 8px;
@@ -37,5 +37,5 @@
 
 @media screen and (max-width: 715px) {
   .root_caret { display: none; }
-  .title_tag { display: none; }
+  .root_title_tag { display: none; }
 }

@@ -49,6 +49,10 @@
   padding-right: 30px;
 }
 
+.feature_description {
+  text-wrap: pretty;
+}
+
 .feature_key {
   color: var(--text-75);
   font-weight: 600;

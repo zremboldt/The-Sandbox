@@ -99,13 +99,14 @@ textarea {
 
 .search_form {
   position: sticky;
-  top: 20px;
+  top: 16px;
+  margin: 16px 0 4px;
   z-index: 10;
   display: flex;
   flex-direction: row;
   gap: 18px;
   background-color: var(--dark-12-bg);
-  box-shadow: 0 0 16px 20px var(--dark-12-bg);
+  box-shadow: 0 -6px 14px 28px var(--dark-12-bg);
 }
 
 .search_field {

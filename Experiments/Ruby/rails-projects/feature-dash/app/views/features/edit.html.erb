@@ -8,7 +8,7 @@
     <div class="form_top_row">
       <div class="form_field">
         <%= feature_field.label("Name") %>
-        <%= feature_field.text_field(:name) %>
+        <%= feature_field.text_field(:name, :autocomplete => "off") %>
       </div>
 
       <!-- Fields for the Enabled model -->
@@ -38,7 +38,7 @@
       <%= feature_field.fields_for(:condition, @feature.condition) do |condition_field| %>
         <div class="form_field">
           <%= condition_field.label(condition_field.object.name) %>
-          <%= condition_field.text_field(:conditions) %>
+          <%= condition_field.text_field(:conditions, :autocomplete => "off") %>
         </div>
       <% end %>
     <% end %>
