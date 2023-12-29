@@ -9,27 +9,6 @@ class FeaturesController < ApplicationController
     end
   end
 
-  # def show
-  #   @feature = Category.find(params[:id])
-  # end
-
-  # def show
-  #   @category = Category.find(params[:id])
-  # end
-
-  # def new
-  #   @category = Category.new
-  # end
-
-  # def create
-  #   @category = Category.new(category_params)
-  #   if @category.save
-  #     redirect_to(categories_path)
-  #   else
-  #     render('new')
-  #   end
-  # end
-
   def edit
     @feature = Feature.find(params[:id])
   end
@@ -43,16 +22,6 @@ class FeaturesController < ApplicationController
       render('edit')
     end
   end
-
-  # def delete
-  #   @category = Category.find(params[:id])
-  # end
-
-  # def destroy
-  #   @category = Category.find(params[:id])
-  #   @category.destroy
-  #   redirect_to(categories_path)
-  # end
 
   private
 
