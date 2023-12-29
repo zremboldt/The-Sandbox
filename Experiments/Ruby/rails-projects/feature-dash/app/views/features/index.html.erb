@@ -8,8 +8,6 @@
     <% end %>
   <% end %>
 
-  <%# <%= link_to("Add New Feature", new_feature_path, class: 'action new') %>
-
   <% @features.each do |feature| %>
     <%= link_to(edit_feature_path(feature), :class => "feature_tile") do %>
       <% if feature.enabled %>

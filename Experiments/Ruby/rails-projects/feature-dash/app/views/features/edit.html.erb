@@ -2,14 +2,12 @@
   <h2>Update experience</h2>
 
   <%= form_with(model: @feature) do |feature_field| %>
-    <!-- Fields for the Feature model -->
     <div class="form_top_row">
       <div class="form_field">
         <%= feature_field.label("Name") %>
         <%= feature_field.text_field(:name, :autocomplete => "off") %>
       </div>
 
-      <!-- Fields for the Enabled model -->
       <% if @feature.enabled %>
         <%= feature_field.fields_for(:enabled, @feature.enabled) do |enabled_field| %>
           <div class="form_field switch_field">
@@ -31,7 +29,6 @@
       <%= feature_field.text_area(:description) %>
     </div>
 
-    <!-- Fields for the Condition model -->
     <% if @feature.condition %>
       <%= feature_field.fields_for(:condition, @feature.condition) do |condition_field| %>
         <div class="form_field">
