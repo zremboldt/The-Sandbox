@@ -20,27 +20,35 @@
       <div class="tile_details_toggle" data-feature-tile-target="target">
         <div class="tile_details">
           <% if feature.enabled %>
-            <p class="feature_key"><%= "Enabled" %></p>
-            <p><%= feature.enabled.is_enabled ? "Yes" : "No" %></p>
+            <div class="detail">
+              <p class="feature_key"><%= "Enabled" %></p>
+              <p><%= feature.enabled.is_enabled ? "Yes" : "No" %></p>
+            </div>
           <% end %>
           <% if feature.constant %>
-            <p class="feature_key">Codename</p>
-            <p><%= feature.constant %></p>
+            <div class="detail">
+              <p class="feature_key">Codename</p>
+              <p><%= feature.constant %></p>
+            </div>
           <% end %>
           <% if feature.condition %>
-            <p class="feature_key"><%= "#{feature.condition.name}" %></p>
-            <p><%= feature.condition.conditions %></p>
+            <div class="detail">
+              <p class="feature_key"><%= "#{feature.condition.name}" %></p>
+              <p><%= feature.condition.conditions %></p>
+            </div>
           <% end %>
           <% if feature.bucket %>
-            <p class="feature_key"><%= "#{feature.bucket.name}" %></p>
-            <% feature.bucket.buckets.each do |b| %>
-              <p>
-                <% b.each do |key, value| %>
-                  <span><%= key %>:</span>
-                  <span><%= value %></span>
-                <% end %>
-              </p>
-            <% end %>
+            <div class="detail">
+              <p class="feature_key"><%= "#{feature.bucket.name}" %></p>
+              <% feature.bucket.buckets.each do |b| %>
+                <p>
+                  <% b.each do |key, value| %>
+                    <span><%= key %>:</span>
+                    <span><%= value %></span>
+                  <% end %>
+                </p>
+              <% end %>
+            </div>
           <% end %>
         </div>
         <%= link_to(edit_feature_path(feature), :class => "button primary small flex_end") do %>Edit<% end %>

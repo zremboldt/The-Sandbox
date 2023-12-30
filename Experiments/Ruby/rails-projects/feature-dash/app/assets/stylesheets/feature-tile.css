@@ -72,7 +72,7 @@
 .tile_details {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   padding: 16px 20px;
   margin-top: 10px;
   border: 1px solid var(--dark-30-border);
