@@ -1,7 +1,8 @@
 class Feature < ApplicationRecord
   has_one :enabled, dependent: :destroy
   has_one :condition, dependent: :destroy
-  accepts_nested_attributes_for :enabled, :condition
+  has_one :bucket, dependent: :destroy
+  accepts_nested_attributes_for :enabled, :condition, :bucket
 
   validates :constant, presence: true, uniqueness: true
 

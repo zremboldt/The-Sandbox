@@ -19,22 +19,27 @@
       <% end %>
       <div class="tile_details">
         <% if feature.enabled %>
-          <p>
-            <span class="feature_key"><%= "Enabled:" %></span>
-            <span><%= feature.enabled.is_enabled ? "Yes" : "No" %></span>
-          </p>
+          <p class="feature_key"><%= "Enabled" %></p>
+          <p><%= feature.enabled.is_enabled ? "Yes" : "No" %></p>
         <% end %>
         <% if feature.constant %>
-          <p>
-            <span class="feature_key">Codename:</span>
-            <span><%= feature.constant %></span>
-          </p>
+          <p class="feature_key">Codename</p>
+          <p><%= feature.constant %></p>
         <% end %>
         <% if feature.condition %>
-          <p>
-            <span class="feature_key"><%= "#{feature.condition.name}:" %></span>
-            <span><%= feature.condition.conditions %></span>
-          </p>
+          <p class="feature_key"><%= "#{feature.condition.name}" %></p>
+          <p><%= feature.condition.conditions %></p>
+        <% end %>
+        <% if feature.bucket %>
+          <p class="feature_key"><%= "#{feature.bucket.name}" %></p>
+          <% feature.bucket.buckets.each do |b| %>
+            <p>
+              <% b.each do |key, value| %>
+                <span><%= key %>:</span>
+                <span><%= value %></span>
+              <% end %>
+            </p>
+          <% end %>
         <% end %>
       </div>
     <% end %>

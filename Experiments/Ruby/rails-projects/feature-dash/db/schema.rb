@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_18_134920) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_29_155830) do
+  create_table "buckets", force: :cascade do |t|
+    t.string "name"
+    t.string "buckets"
+    t.integer "feature_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["feature_id"], name: "index_buckets_on_feature_id"
+  end
+
   create_table "conditions", force: :cascade do |t|
     t.string "name"
     t.string "conditions"
@@ -37,6 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_18_134920) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "buckets", "features"
   add_foreign_key "conditions", "features"
   add_foreign_key "enableds", "features"
 end

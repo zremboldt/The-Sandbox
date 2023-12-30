@@ -31,6 +31,7 @@ class FeaturesController < ApplicationController
       :description,
       enabled_attributes: [:id, :name, :is_enabled],
       condition_attributes: [:id, :name, :conditions],
+      bucket_attributes: [:id, :name, :buckets],
     )
   end
 end
