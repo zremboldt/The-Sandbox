@@ -59,6 +59,16 @@
   letter-spacing: 0.5px;
 }
 
+.tile_details_toggle {
+  display: none;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.tile_details_toggle.active {
+  display: flex;
+}
+
 .tile_details {
   display: flex;
   flex-direction: column;

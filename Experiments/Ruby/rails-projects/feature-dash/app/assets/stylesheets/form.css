@@ -64,6 +64,7 @@ textarea {
 
 .button {
   flex: 1;
+  display: block;
   color: white;
   padding: 10px 50px;
   border-radius: var(--radius-elements);
@@ -74,21 +75,23 @@ textarea {
   transition: 300ms var(--ease-out-quart);
   border: 1px solid var(--primary-100);
 }
-
-.button_primary {
+.button.primary {
   background-color: var(--primary-100);
 }
-
-.button_secondary {
+.button.secondary {
   color: var(--primary-100);
 }
-
+.button.small {
+  padding: 6px 28px;
+}
+.button.flex_end {
+  align-self: flex-end;
+}
 .button:focus-visible {
   outline: none;
   border-color: var(--primary-100);
   box-shadow: 0 0 0 var(--selection-outline-width) var(--primary-30);
 }
-
 .button:active {
   transform: scale(0.98);
 }

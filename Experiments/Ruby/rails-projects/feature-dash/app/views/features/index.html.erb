@@ -3,13 +3,13 @@
 
   <%= form_tag(features_path, :method => "get", :class => "search_form") do %>
     <%= text_field_tag :search, params[:search], :placeholder => "Search", :class => "search_field", :autofocus => true, :autocomplete => "off" %>
-    <%= button_tag(type: 'submit', class: 'button button_primary search_button') do %>
+    <%= button_tag(type: 'submit', class: 'button primary search_button') do %>
       <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
     <% end %>
   <% end %>
 
   <% @features.each do |feature| %>
-    <%= link_to(edit_feature_path(feature), :class => "feature_tile") do %>
+    <div class="feature_tile" data-controller="feature-tile" data-action="click->feature-tile#toggleDetailsVisible">
       <% if feature.enabled %>
         <div class="feature_enabled_light<%= feature.enabled.is_enabled ? " active" : nil %>"></div>
       <% end %>
@@ -17,31 +17,34 @@
       <% if feature.description %>
         <p class="feature_description"><%= feature.description %></p>
       <% end %>
-      <div class="tile_details">
-        <% if feature.enabled %>
-          <p class="feature_key"><%= "Enabled" %></p>
-          <p><%= feature.enabled.is_enabled ? "Yes" : "No" %></p>
-        <% end %>
-        <% if feature.constant %>
-          <p class="feature_key">Codename</p>
-          <p><%= feature.constant %></p>
-        <% end %>
-        <% if feature.condition %>
-          <p class="feature_key"><%= "#{feature.condition.name}" %></p>
-          <p><%= feature.condition.conditions %></p>
-        <% end %>
-        <% if feature.bucket %>
-          <p class="feature_key"><%= "#{feature.bucket.name}" %></p>
-          <% feature.bucket.buckets.each do |b| %>
-            <p>
-              <% b.each do |key, value| %>
-                <span><%= key %>:</span>
-                <span><%= value %></span>
-              <% end %>
-            </p>
+      <div class="tile_details_toggle" data-feature-tile-target="target">
+        <div class="tile_details">
+          <% if feature.enabled %>
+            <p class="feature_key"><%= "Enabled" %></p>
+            <p><%= feature.enabled.is_enabled ? "Yes" : "No" %></p>
           <% end %>
-        <% end %>
+          <% if feature.constant %>
+            <p class="feature_key">Codename</p>
+            <p><%= feature.constant %></p>
+          <% end %>
+          <% if feature.condition %>
+            <p class="feature_key"><%= "#{feature.condition.name}" %></p>
+            <p><%= feature.condition.conditions %></p>
+          <% end %>
+          <% if feature.bucket %>
+            <p class="feature_key"><%= "#{feature.bucket.name}" %></p>
+            <% feature.bucket.buckets.each do |b| %>
+              <p>
+                <% b.each do |key, value| %>
+                  <span><%= key %>:</span>
+                  <span><%= value %></span>
+                <% end %>
+              </p>
+            <% end %>
+          <% end %>
+        </div>
+        <%= link_to(edit_feature_path(feature), :class => "button primary small flex_end") do %>Edit<% end %>
       </div>
-    <% end %>
+    </div>
   <% end %>
 </div>
