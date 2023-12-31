@@ -40,9 +40,9 @@
           <% if feature.bucket %>
             <div class="detail">
               <p class="feature_key"><%= "#{feature.bucket.name}" %></p>
-              <% feature.bucket.buckets.each do |b| %>
+              <% feature.bucket.buckets.each do |bucket| %>
                 <p>
-                  <% b.each do |key, value| %>
+                  <% bucket.each do |key, value| %>
                     <span><%= key %>:</span>
                     <span><%= value %></span>
                   <% end %>

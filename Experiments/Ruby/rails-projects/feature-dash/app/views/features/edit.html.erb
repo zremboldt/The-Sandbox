@@ -38,6 +38,30 @@
       <% end %>
     <% end %>
 
+
+
+    <% if @feature.bucket %>
+      <%= feature_field.fields_for(:bucket_attributes, @feature.bucket) do |bucket_field| %>
+        <div class="form_field">
+          <%= bucket_field.label("Buckets") %>
+          <% @feature.bucket.buckets.each_with_index do |bucket, index| %>
+            <div class="bucket_input_fields">
+              <% bucket.each do |key, value| %>
+                <div class="bucket_input_field">
+                  <%= bucket_field.label "buckets[][#{key}]", key.capitalize %>
+                  <%= bucket_field.text_field "buckets[][#{key}]", value: value %>
+                  <%# <%= bucket_field.label("#{key}") %>
+                  <%# <%= bucket_field.text_field("buckets[#{index}][#{key}]", value: value) %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+
+
+
     <div class="button_row">
       <%= link_to("Cancel", "/features", class: "button secondary") %>
       <%= feature_field.submit("Save", class: "button primary") %>

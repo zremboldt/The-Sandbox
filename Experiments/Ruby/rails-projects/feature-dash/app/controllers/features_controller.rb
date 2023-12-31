@@ -16,7 +16,32 @@ class FeaturesController < ApplicationController
   def update
     @feature = Feature.find(params[:id])
 
-    if @feature.update(feature_params)
+    p '--- params ↓ ---'
+    p params
+    p '--- params ↑ ---'
+
+    p '--- feature_params ↓ ---'
+    p feature_params
+    p '--- feature_params ↑ ---'
+
+    # return
+
+
+
+
+
+    updated_buckets = params[:feature][:bucket_attributes][:buckets].map do |bucket|
+      bucket.transform_keys(&:to_sym)
+    end
+
+
+    p '--- updated_buckets ↓ ---'
+    p updated_buckets
+    p '--- updated_buckets ↑ ---'
+
+
+    if @feature.update(bucket_attributes: { buckets: updated_buckets })
+    # if @feature.update(params)
       redirect_to(features_path)
     else
       render('edit')
@@ -31,7 +56,10 @@ class FeaturesController < ApplicationController
       :description,
       enabled_attributes: [:id, :name, :is_enabled],
       condition_attributes: [:id, :name, :conditions],
-      bucket_attributes: [:id, :name, :buckets],
+      bucket_attributes: [:id, :name, buckets: [:permit!]],
+      # bucket_attributes: [:id, :name, buckets: [:key, :value, :id]],
+      # bucket_attributes: [:id, :name, buckets: [:bucket => [:key, :value, :id]]]
+      # bucket_attributes: [:id, :name, { buckets: [:key, :value, :id] }]
     )
   end
 end
