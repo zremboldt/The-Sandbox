@@ -16,32 +16,12 @@ class FeaturesController < ApplicationController
   def update
     @feature = Feature.find(params[:id])
 
-    p '--- params ↓ ---'
-    p params
-    p '--- params ↑ ---'
+    # TODO: This is a hack to get around the fact that the buckets are not being passed in correctly
+    updated_buckets = params.permit![:feature][:bucket_attributes][:buckets].first.to_h.map { |key, value| { key => value } }
+    ba = { bucket_attributes: { buckets: updated_buckets } }
+    merged_params = params[:feature].merge(ba)
 
-    p '--- feature_params ↓ ---'
-    p feature_params
-    p '--- feature_params ↑ ---'
-
-    # return
-
-
-
-
-
-    updated_buckets = params[:feature][:bucket_attributes][:buckets].map do |bucket|
-      bucket.transform_keys(&:to_sym)
-    end
-
-
-    p '--- updated_buckets ↓ ---'
-    p updated_buckets
-    p '--- updated_buckets ↑ ---'
-
-
-    if @feature.update(bucket_attributes: { buckets: updated_buckets })
-    # if @feature.update(params)
+    if @feature.update(merged_params)
       redirect_to(features_path)
     else
       render('edit')
@@ -56,10 +36,7 @@ class FeaturesController < ApplicationController
       :description,
       enabled_attributes: [:id, :name, :is_enabled],
       condition_attributes: [:id, :name, :conditions],
-      bucket_attributes: [:id, :name, buckets: [:permit!]],
-      # bucket_attributes: [:id, :name, buckets: [:key, :value, :id]],
-      # bucket_attributes: [:id, :name, buckets: [:bucket => [:key, :value, :id]]]
-      # bucket_attributes: [:id, :name, { buckets: [:key, :value, :id] }]
+      bucket_attributes: [:id, :name, buckets: []],
     )
   end
 end
