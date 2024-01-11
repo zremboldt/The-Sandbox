@@ -35,13 +35,13 @@
   width: 12px;
   height: 12px;
   border-radius: 99px;
-  background-image: radial-gradient(circle, hsl(206, 34%, 28%), hsl(210, 30%, 22%), hsl(208, 100%, 17%));
+  background-image: radial-gradient(circle, hsl(var(--led-hue), 34%, 22%), hsl(var(--led-hue), 30%, 18%), hsl(var(--led-hue), 100%, 10%));
   box-shadow: 0 0 0 1px var(--dark-12-bg), 0 0 0 5px hsla(222, 15%, 0%, 0.1);
 }
 
 .feature_enabled_light.active {
-  background-image: radial-gradient(circle, hsl(204, 100%, 99%), hsl(204, 100%, 84%), hsl(208, 89%, 52%));
-  box-shadow: 0 0 0 1px hsl(206, 100%, 26%), 0 0 0 4px hsla(206, 100%, 50%, 0.08), 0 0 4px hsl(214, 100%, 50%), 0 0 10px var(--primary-100), 0 0 20px var(--primary-100), 0 0 30px var(--primary-100);
+  background-image: radial-gradient(circle, hsl(var(--led-hue), 100%, 99%), hsl(var(--led-hue), 100%, 84%), hsl(var(--led-hue), 89%, 52%));
+  box-shadow: 0 0 0 1px hsl(var(--led-hue), 100%, 26%), 0 0 0 4px hsla(206, 100%, 50%, 0.08), 0 0 4px hsl(var(--led-hue), 100%, 50%), 0 0 10px var(--led-glow), 0 0 20px var(--led-glow), 0 0 30px var(--led-glow);
 }
 
 .feature_name {
