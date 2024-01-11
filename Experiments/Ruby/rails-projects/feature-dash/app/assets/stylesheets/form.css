@@ -28,6 +28,7 @@ form {
 }
 
 input[type=text],
+input[type=number],
 textarea {
   display: block;
   padding: 14px;
@@ -39,12 +40,18 @@ textarea {
 }
 
 input[type=text]:focus,
+input[type=number]:focus,
 textarea:focus {
   outline: none;
   box-shadow: 0 0 0 var(--selection-outline-width) var(--primary-30);
   border-color: var(--primary-100);
   color: var(--text-100);
   transition: 300ms var(--ease-out-quart);
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    display: none;
 }
 
 textarea {

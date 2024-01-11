@@ -46,7 +46,7 @@
               <% bucket.each do |key, value| %>
                 <div class="form_field">
                   <%= bucket_field.label "buckets[][#{key}]", key.upcase %>
-                  <%= bucket_field.text_field("buckets[][#{key}]", value: value, :autocomplete => "off") %>
+                  <%= bucket_field.number_field("buckets[][#{key}]", value: value, :autocomplete => "off", :step => 10, :min => 0, :max => 100) %>
                 </div>
               <% end %>
           <% end %>
