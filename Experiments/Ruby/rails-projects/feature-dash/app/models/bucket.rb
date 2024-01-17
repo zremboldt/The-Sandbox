@@ -1,5 +1,6 @@
 class Bucket < ApplicationRecord
   include ActiveModel::Serializers::JSON
+  # before_update :transform_buckets
 
   belongs_to :feature
   
