@@ -16,16 +16,7 @@ class FeaturesController < ApplicationController
   def update
     @feature = Feature.find(params[:id])
 
-    if (permit_params[:feature][:bucket_attributes])
-      # TODO: This is a hack to get around the fact that the buckets are not being passed in correctly from the form
-      updated_buckets = permit_params[:feature][:bucket_attributes][:buckets].first.to_h.map { |key, value| { key => value } }
-      ba = { bucket_attributes: { buckets: updated_buckets } }
-      merged_params = permit_params[:feature].merge(ba)
-    else
-      merged_params = permit_params[:feature]
-    end
-
-    if @feature.update(merged_params)
+    if @feature.update(permit_params[:feature])
       redirect_to(features_path)
     else
       render('edit')
