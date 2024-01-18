@@ -18,10 +18,6 @@
   transform: scale(1.01);
 }
 
-/* .feature_tile:active {
-  transform: scale(1);
-} */
-
 .feature_tile:focus-visible {
   outline: none;
   border-color: var(--primary-100);
