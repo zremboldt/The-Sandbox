@@ -28,6 +28,14 @@
 
     let mapData;
     let player = { x: 80, y: 80, size: 10, speed: 7 };
+    let bomb = { 
+      x: 0, 
+      y: 0, 
+      size: 5,
+      fuse: 3, 
+      blastSize: 50,
+      isPlaced: false 
+    };
 
     function handleImage(event) {
       const input = event.target;
@@ -82,6 +90,37 @@
       ctx.fillRect(player.x, player.y, player.size, player.size);
     }
 
+    function renderBomb(ctx) {
+      ctx.fillStyle = 'red';
+      ctx.fillRect(bomb.x, bomb.y, bomb.size, bomb.size);
+    }
+
+    function explodeBomb(ctx) {
+      bomb.isPlaced = false;
+
+      // Calculate bomb explosion area
+      const halfBlastSize = Math.floor(bomb.blastSize / 2);
+      const explosionXArea = [...Array(bomb.blastSize)].map((_, i) => (bomb.x - halfBlastSize + i));
+      const explosionYArea = [...Array(bomb.blastSize)].map((_, i) => (bomb.y - halfBlastSize + i) * 500);
+
+      // Update map data
+      explosionYArea.forEach((y) => {
+        explosionXArea.forEach((x) => {
+          const pixelInExplosion = (y + x) * 4;
+          mapData[pixelInExplosion] = 255;
+          mapData[pixelInExplosion + 1] = 255;
+          mapData[pixelInExplosion + 2] = 255;
+          mapData[pixelInExplosion + 3] = 255;
+        })
+      })
+
+      // Redraw the map and player
+      const canvas = document.getElementById('outputCanvas');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.putImageData(new ImageData(mapData, canvas.width, canvas.height), 0, 0);
+      renderPlayer(ctx);
+    }
+
     function movePlayer(direction) {
       const dx = (direction === 'right') ? player.speed : (direction === 'left') ? -player.speed : 0;
       const dy = (direction === 'down') ? player.speed : (direction === 'up') ? -player.speed : 0;
@@ -115,6 +154,27 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.putImageData(new ImageData(mapData, canvas.width, canvas.height), 0, 0);
       renderPlayer(ctx);
+
+      if (bomb.isPlaced) {
+        renderBomb(ctx);
+        setTimeout(() => explodeBomb(ctx), bomb.fuse * 1000);
+      }
+    }
+
+    function placeItem(item) {
+      if (item === 'bomb') {
+        bomb.x = player.x;
+        bomb.y = player.y;
+        bomb.isPlaced = true;
+      }
+
+      // Redraw the map and player
+      const canvas = document.getElementById('outputCanvas');
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.putImageData(new ImageData(mapData, canvas.width, canvas.height), 0, 0);
+      renderPlayer(ctx);
+      renderBomb(ctx);
     }
 
     // Handle player movement with arrow keys
@@ -123,6 +183,7 @@
       else if (event.key === 'ArrowLeft') movePlayer('left');
       else if (event.key === 'ArrowDown') movePlayer('down');
       else if (event.key === 'ArrowUp') movePlayer('up');
+      else if (event.key === 'b') placeItem('bomb');
     });
   </script>
 </body>
