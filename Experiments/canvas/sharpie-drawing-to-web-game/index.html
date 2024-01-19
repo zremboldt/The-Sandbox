@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sharpie Adventure</title>
+  <style>
+    body {
+      max-width: 700px;
+      margin: 20px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    canvas {
+      border: 1px solid #000;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <input type="file" id="imageInput" accept="image/*">
+  <canvas id="outputCanvas" width="500" height="500"></canvas>
+
+  <script>
+    document.getElementById('imageInput').addEventListener('change', handleImage);
+
+    let mapData;
+    let player = { x: 80, y: 80, size: 10, speed: 7 };
+
+    function handleImage(event) {
+      const input = event.target;
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          const img = new Image();
+          img.src = e.target.result;
+
+          img.onload = function () {
+            const canvas = document.getElementById('outputCanvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+            // Store map data
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            mapData = imageData.data;
+
+            // Define a set of 2 colors
+            const grayscaleColors = [
+              [0, 0, 0, 255],       // Black
+              [255, 255, 255, 255], // White
+            ];
+
+            for (let i = 0; i < mapData.length; i += 4) {
+              // Get lightness value of the current pixel
+              const lightness = (mapData[i] + mapData[i + 1] + mapData[i + 2]) / 3;
+
+              // Map lightness value to the index of the predefined colors
+              const colorIndex = Math.floor(lightness / (255 / grayscaleColors.length));
+
+              // Set new color values for each pixel based on lightness
+              mapData[i] = grayscaleColors[colorIndex][0];
+              mapData[i + 1] = grayscaleColors[colorIndex][1];
+              mapData[i + 2] = grayscaleColors[colorIndex][2];
+              mapData[i + 3] = grayscaleColors[colorIndex][3];
+            }
+
+            // Render player
+            renderPlayer(ctx);
+          };
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    function renderPlayer(ctx) {
+      ctx.fillStyle = 'mediumseagreen';
+      ctx.fillRect(player.x, player.y, player.size, player.size);
+    }
+
+    function movePlayer(direction) {
+      const dx = (direction === 'right') ? player.speed : (direction === 'left') ? -player.speed : 0;
+      const dy = (direction === 'down') ? player.speed : (direction === 'up') ? -player.speed : 0;
+
+      // Calculate next player position
+      const nextXArea = [...Array(player.size)].map((_, i) => (player.x + i) + dx);
+      const nextYArea = [...Array(player.size)].map((_, i) => ((player.y + i) + dy) * 500);
+
+      let isWall = false;
+
+      // Check if the next position is a wall
+      nextYArea.forEach((y) => {
+        nextXArea.forEach((x) => {
+          const pixelInPlayer = (y + x) * 4
+          console.log(mapData[pixelInPlayer])
+          if (mapData[pixelInPlayer] === 0) {
+            isWall = true;
+          }
+        })
+      })
+
+      if (isWall) { return; }
+
+      // Update player position
+      player.x += dx;
+      player.y += dy;
+
+      // Redraw the map and player
+      const canvas = document.getElementById('outputCanvas');
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.putImageData(new ImageData(mapData, canvas.width, canvas.height), 0, 0);
+      renderPlayer(ctx);
+    }
+
+    // Handle player movement with arrow keys
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'ArrowRight') movePlayer('right');
+      else if (event.key === 'ArrowLeft') movePlayer('left');
+      else if (event.key === 'ArrowDown') movePlayer('down');
+      else if (event.key === 'ArrowUp') movePlayer('up');
+    });
+  </script>
+</body>
+</html>
