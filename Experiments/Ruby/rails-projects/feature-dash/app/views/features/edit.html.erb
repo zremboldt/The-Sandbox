@@ -38,20 +38,21 @@
       <% end %>
     <% end %>
 
-    <% if @feature.bucket %>
-      <%= feature_field.fields_for(:bucket_attributes, @feature.bucket) do |bucket_field| %>
-        <div class="form_field">
-          <%= bucket_field.label("Buckets") %>
-          <% @feature.bucket.buckets.each_with_index do |bucket, index| %>
-              <% bucket.each do |key, value| %>
-                <div class="form_field">
-                  <%= bucket_field.label "buckets[][#{key}]", key.upcase %>
-                  <%= bucket_field.number_field("buckets[][#{key}]", value: value, :autocomplete => "off", :step => 10, :min => 0, :max => 100) %>
-                </div>
+    <% if @feature.buckets.present? %>
+      <div class="form_field">
+        <%= feature_field.label("Buckets") %>
+        <div class="fieldset">
+          <div class="fieldset_indicator"></div>
+          <div class="form_field">
+            <% @feature.buckets.each do |bucket| %>
+              <%= feature_field.fields_for(:buckets, bucket) do |bucket_field| %>
+                <%= bucket_field.label(bucket.name, bucket.name.upcase) %>
+                <%= bucket_field.number_field(:value, :autocomplete => "off", :step => 10, :min => 0, :max => 100) %>
               <% end %>
-          <% end %>
+            <% end %>
+          </div>
         </div>
-      <% end %>
+      </div>
     <% end %>
 
     <div class="button_row">

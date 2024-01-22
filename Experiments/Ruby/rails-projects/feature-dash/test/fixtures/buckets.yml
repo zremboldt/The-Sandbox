@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  buckets: MyString
+  value: 1
 
 two:
   name: MyString
-  buckets: MyString
+  value: 1

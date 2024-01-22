@@ -35,9 +35,13 @@ end
 
 # Create buckets and associate them with features
 buckets = [
-  { name: "Buckets", buckets: [{ "BLOCKING_MODAL": 50 }, { "NON_BLOCKING_MODAL": 50 }], feature: Feature.find_by(constant: "AB_TEST_ADDRESS_VERIFICATION") },
-  { name: "Buckets", buckets: [{ "SKIP_REPORT_ORDERING": 10 }, { "DONT_SKIP_REPORT_ORDERING": 90 }], feature: Feature.find_by(constant: "SKIP_PREFILL_REPORT_ORDERING") },
-  { name: "Buckets", buckets: [{ "DONT_PROMPT_INVITE": 50 }, { "PROMPT_INVITE_SERVER": 50 }, { "PROMPT_INVITE_NATIVE": 0 }], feature: Feature.find_by(constant: "AB_TEST_MULTI_DRIVER_INVITE") },
+  { name: "BLOCKING_MODAL", value: 50, feature: Feature.find_by(constant: "AB_TEST_ADDRESS_VERIFICATION") },
+  { name: "NON_BLOCKING_MODAL", value: 50, feature: Feature.find_by(constant: "AB_TEST_ADDRESS_VERIFICATION") },
+  { name: "SKIP_REPORT_ORDERING", value: 10, feature: Feature.find_by(constant: "SKIP_PREFILL_REPORT_ORDERING") },
+  { name: "DONT_SKIP_REPORT_ORDERING", value: 90, feature: Feature.find_by(constant: "SKIP_PREFILL_REPORT_ORDERING") },
+  { name: "DONT_PROMPT_INVITE", value: 50, feature: Feature.find_by(constant: "AB_TEST_MULTI_DRIVER_INVITE") },
+  { name: "PROMPT_INVITE_SERVER", value: 50, feature: Feature.find_by(constant: "AB_TEST_MULTI_DRIVER_INVITE") },
+  { name: "PROMPT_INVITE_NATIVE", value: 0, feature: Feature.find_by(constant: "AB_TEST_MULTI_DRIVER_INVITE") },
 ]
 
 buckets.each do |bucket_params|

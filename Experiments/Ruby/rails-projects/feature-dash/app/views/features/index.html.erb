@@ -9,7 +9,7 @@
   <% end %>
 
   <% @features.each do |feature| %>
-    <div class="feature_tile" data-controller="feature-tile" data-action="click->feature-tile#toggleDetailsVisible">
+    <div class="feature_tile" data-controller="feature-tile" data-action="click->feature-tile#toggleDetailsVisible keypress->feature-tile#toggleDetailsVisible" tabindex="0">
       <% if feature.enabled %>
         <div class="feature_enabled_light<%= feature.enabled.is_enabled ? " active" : nil %>"></div>
       <% end %>
@@ -37,15 +37,13 @@
               <p><%= feature.condition.conditions %></p>
             </div>
           <% end %>
-          <% if feature.bucket %>
+          <% if feature.buckets.present? %>
             <div class="detail">
               <p class="feature_key">Buckets</p>
-              <% feature.bucket.buckets.each do |bucket| %>
+              <% feature.buckets.each do |bucket| %>
                 <p>
-                  <% bucket.each do |key, value| %>
-                    <span><%= key %>:</span>
-                    <span><%= value %></span>
-                  <% end %>
+                  <span><%= bucket.name %>:</span>
+                  <span><%= bucket.value %></span>
                 </p>
               <% end %>
             </div>

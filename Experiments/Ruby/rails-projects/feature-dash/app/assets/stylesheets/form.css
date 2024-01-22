@@ -17,6 +17,18 @@ form {
   gap: 6px;
 }
 
+.fieldset {
+  display: flex;
+  gap: 16px;
+}
+
+.fieldset_indicator {
+  width: 4px;
+  border-radius: 100px;
+  background-color: var(--dark-20-input);
+  margin-top: 8px;
+}
+
 .form_field.switch_field {
   flex: 0;
 }
