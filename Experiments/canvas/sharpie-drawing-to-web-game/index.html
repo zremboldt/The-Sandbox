@@ -5,14 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sharpie Adventure</title>
   <style>
+    * {
+      box-sizing: border-box; 
+      margin: 0; 
+      line-height: 1.5;
+    }
     body {
-      max-width: 700px;
-      margin: 20px;
-      padding: 0;
+      padding: 20px;
+      font-family: system-ui, -apple-system, sans-serif;
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    main { 
+      width: 800px;
+      display: flex; 
+      flex-direction: column; 
       gap: 20px;
     }
+    ul { padding-left: 20px; }
     canvas {
       border: 1px solid #000;
       border-radius: 6px;
@@ -20,22 +31,32 @@
   </style>
 </head>
 <body>
-  <input type="file" id="imageInput" accept="image/*">
-  <canvas id="outputCanvas" width="500" height="500"></canvas>
+  <main>
+    <h1>Sharpie Adventure</h1>
+    <ul>
+      <li>Draw your own adventure (black sharpie on white paper works best).</li>
+      <li>Then snap a photo and load it here to play!</li>
+    </ul>
+    <input type="file" id="imageInput" accept="image/*">
+    <canvas id="outputCanvas"></canvas>
+  </main>
 
   <script>
     document.getElementById('imageInput').addEventListener('change', handleImage);
 
+    const MAP_SIZE = 800;
+
     let mapData;
-    let player = { x: 80, y: 80, size: 10, speed: 7 };
+    let player = { x: 50, y: 50, size: 10, speed: 7 };
     let bomb = { 
       x: 0, 
       y: 0, 
       size: 5,
-      fuse: 3, 
-      blastSize: 50,
+      fuse: 2, 
+      blastSize: 80,
       isPlaced: false 
     };
+    let checkItemDots
 
     function handleImage(event) {
       const input = event.target;
@@ -48,6 +69,8 @@
 
           img.onload = function () {
             const canvas = document.getElementById('outputCanvas');
+            canvas.width = MAP_SIZE;
+            canvas.height = MAP_SIZE;
             const ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
@@ -101,7 +124,7 @@
       // Calculate bomb explosion area
       const halfBlastSize = Math.floor(bomb.blastSize / 2);
       const explosionXArea = [...Array(bomb.blastSize)].map((_, i) => (bomb.x - halfBlastSize + i));
-      const explosionYArea = [...Array(bomb.blastSize)].map((_, i) => (bomb.y - halfBlastSize + i) * 500);
+      const explosionYArea = [...Array(bomb.blastSize)].map((_, i) => (bomb.y - halfBlastSize + i) * MAP_SIZE);
 
       // Update map data
       explosionYArea.forEach((y) => {
@@ -127,7 +150,7 @@
 
       // Calculate next player position
       const nextXArea = [...Array(player.size)].map((_, i) => (player.x + i) + dx);
-      const nextYArea = [...Array(player.size)].map((_, i) => ((player.y + i) + dy) * 500);
+      const nextYArea = [...Array(player.size)].map((_, i) => ((player.y + i) + dy) * MAP_SIZE);
 
       let isWall = false;
 
