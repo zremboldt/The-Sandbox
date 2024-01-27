@@ -21,12 +21,23 @@
       width: 800px;
       display: flex; 
       flex-direction: column; 
-      gap: 20px;
+      gap: 10px;
     }
     ul { padding-left: 20px; }
+    .canvas_wrap {
+      position: relative;
+    }
     canvas {
+      width: 100%;
       border: 1px solid #000;
       border-radius: 6px;
+    }
+    input[type="file"] {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: transparent;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -37,8 +48,11 @@
       <li>Draw your own adventure (black sharpie on white paper works best).</li>
       <li>Then snap a photo and load it here to play!</li>
     </ul>
-    <input type="file" id="imageInput" accept="image/*">
-    <canvas id="outputCanvas"></canvas>
+    <p id="bombCount"></p>
+    <div class="canvas_wrap">
+      <input type="file" id="imageInput" accept="image/*">
+      <canvas id="outputCanvas"></canvas>
+    </div>
   </main>
 
   <script>
@@ -54,9 +68,18 @@
       size: 5,
       fuse: 2, 
       blastSize: 80,
-      isPlaced: false 
+      isPlaced: false,
+      count: 2,
     };
-    let checkItemDots
+    const itemPickupBombs = {
+      x: 500,
+      y: 200,
+      size: 5,
+      count: 2,
+    }
+
+    const bombCountEl = document.getElementById('bombCount');
+    bombCountEl.innerText = `Bombs: ${bomb.count}`;
 
     function handleImage(event) {
       const input = event.target;
@@ -101,6 +124,7 @@
 
             // Render player
             renderPlayer(ctx);
+            renderItem(ctx);
           };
         };
 
@@ -111,6 +135,11 @@
     function renderPlayer(ctx) {
       ctx.fillStyle = 'mediumseagreen';
       ctx.fillRect(player.x, player.y, player.size, player.size);
+    }
+
+    function renderItem(ctx) {
+      ctx.fillStyle = 'red';
+      ctx.fillRect(itemPickupBombs.x, itemPickupBombs.y, itemPickupBombs.size, itemPickupBombs.size);
     }
 
     function renderBomb(ctx) {
@@ -177,6 +206,7 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.putImageData(new ImageData(mapData, canvas.width, canvas.height), 0, 0);
       renderPlayer(ctx);
+      renderItem(ctx);
 
       if (bomb.isPlaced) {
         renderBomb(ctx);
@@ -184,12 +214,12 @@
       }
     }
 
-    function placeItem(item) {
-      if (item === 'bomb') {
-        bomb.x = player.x;
-        bomb.y = player.y;
-        bomb.isPlaced = true;
-      }
+    function placeBomb() {
+      bomb.x = player.x;
+      bomb.y = player.y;
+      bomb.isPlaced = true;
+      bomb.count = bomb.count - 1;
+      bombCountEl.innerText = `Bombs: ${bomb.count}`;
 
       // Redraw the map and player
       const canvas = document.getElementById('outputCanvas');
@@ -206,7 +236,7 @@
       else if (event.key === 'ArrowLeft') movePlayer('left');
       else if (event.key === 'ArrowDown') movePlayer('down');
       else if (event.key === 'ArrowUp') movePlayer('up');
-      else if (event.key === 'b') placeItem('bomb');
+      else if (event.key === 'b' && bomb.count !== 0) placeBomb();
     });
   </script>
 </body>
