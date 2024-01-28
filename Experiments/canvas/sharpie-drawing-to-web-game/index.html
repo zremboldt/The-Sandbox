@@ -58,15 +58,17 @@
   <script>
     // Global variables
     const MAP_SIZE = 800;
+    const PLAYER_INITIAL_POS = { x: 50, y: 50 };
+    const BOMB_INITIAL_FUSE = 10;
     
     let mapData;
-    let playerInitialPos = { x: 50, y: 50 };
-    let player = { ...playerInitialPos, size: 10, speed: 7 };
+    let player = { ...PLAYER_INITIAL_POS, size: 10, speed: 7 };
+    
     let bomb = { 
       x: 0, 
       y: 0, 
       size: 5,
-      fuse: 2, 
+      fuse: BOMB_INITIAL_FUSE, 
       blastSize: 80,
       isPlaced: false,
       count: 3,
@@ -188,8 +190,8 @@
           // if explosion pixel is touching player
           if (pixelInExplosion === (player.y * MAP_SIZE + player.x) * 4) {
             // reset player
-            player.x = playerInitialPos.x;
-            player.y = playerInitialPos.y;
+            player.x = PLAYER_INITIAL_POS.x;
+            player.y = PLAYER_INITIAL_POS.y;
           }
 
           mapData[pixelInExplosion] = 255;
@@ -253,7 +255,13 @@
 
       if (bomb.isPlaced) {
         renderBomb();
-        setTimeout(() => explodeBomb(), bomb.fuse * 1000);
+        // Explode bomb after 10 steps
+        if (bomb.fuse === 0) {
+          explodeBomb();
+          bomb.fuse = BOMB_INITIAL_FUSE;
+        } else {
+          bomb.fuse = bomb.fuse - 1;
+        }
       }
     }
 
