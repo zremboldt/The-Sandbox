@@ -62,6 +62,7 @@
     const BOMB_INITIAL_FUSE = 10;
     
     let mapData;
+
     let player = { ...PLAYER_INITIAL_POS, size: 10, speed: 7 };
     
     let bomb = { 
@@ -71,14 +72,21 @@
       fuse: BOMB_INITIAL_FUSE, 
       blastSize: 80,
       isPlaced: false,
-      count: 3,
+      count: 2,
     };
-    const itemBombs = {
-      x: 200,
-      y: 200,
+
+    let itemBombs = {
+      x: null,
+      y: null,
       size: 5,
-      count: 3,
-    }
+      count: 2,
+    };
+
+    let goal = {
+      x: null,
+      y: null,
+      size: 5,
+    };
     
     // Global Elements
     const imageInput = document.getElementById('imageInput')
@@ -109,22 +117,30 @@
             // Store map data
             mapData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
 
-            // Define a set of 2 colors
             const grayscaleColors = [
               [0, 0, 0, 255],       // Black
               [255, 255, 255, 255], // White
             ];
 
             for (let i = 0; i < mapData.length; i += 4) {
+              let colorIndex;
+
               // Get lightness value of the current pixel
               const lightness = (mapData[i] + mapData[i + 1] + mapData[i + 2]) / 3;
 
-              // Map lightness value to the index of the predefined colors
-              const colorIndex = Math.floor(lightness / (255 / grayscaleColors.length));
+              lightness > 90 ? colorIndex = 1 : colorIndex = 0;
 
               if (checkIsBlue(mapData, i)) {
-                // console.log('Blue', {1: mapData[i], 2: mapData[i + 1], 3: mapData[i + 2]})
+                // set goal position to be the center of the blue pixel
+                goal.x = Math.floor((i / 4) % MAP_SIZE);
+                goal.y = Math.floor((i / 4) / MAP_SIZE);
 
+                // set pixel to be white
+                mapData[i] = 255;
+                mapData[i + 1] = 255;
+                mapData[i + 2] = 255;
+                mapData[i + 3] = 255;
+              } else if (checkIsRed(mapData, i)) {
                 // set itemBombs position to be the center of the blue pixel
                 itemBombs.x = Math.floor((i / 4) % MAP_SIZE);
                 itemBombs.y = Math.floor((i / 4) / MAP_SIZE);
@@ -135,7 +151,7 @@
                 mapData[i + 2] = 255;
                 mapData[i + 3] = 255;
               } else {
-                // Set new color values for each pixel based on lightness
+                // Pixels should be set to either white or black based on lightness
                 mapData[i] = grayscaleColors[colorIndex][0];
                 mapData[i + 1] = grayscaleColors[colorIndex][1];
                 mapData[i + 2] = grayscaleColors[colorIndex][2];
@@ -147,6 +163,7 @@
             renderMap();
             renderPlayer();
             renderItem();
+            renderGoal();
           };
         };
 
@@ -154,8 +171,13 @@
       }
     }
 
+    function checkIsRed(mapData, i) {
+      if ((mapData[i] > 100 && mapData[i] < 220) && mapData[i + 1] < 80 && mapData[i + 2] < 90) { return true }
+      return false;
+    }
+
     function checkIsBlue(mapData, i) {
-      if (mapData[i] < 100 && (mapData[i + 1] > 120 && mapData[i + 1] < 220) && mapData[i + 2] > 140) { return true }
+      if (mapData[i] < 60 && (mapData[i + 1] > 60 && mapData[i + 1] < 160) && mapData[i + 2] > 140) { return true }
       return false;
     }
 
@@ -170,8 +192,15 @@
     }
 
     function renderItem() {
+      if (itemBombs.x === null) { return; }
       ctx.fillStyle = 'red';
       ctx.fillRect(itemBombs.x, itemBombs.y, itemBombs.size, itemBombs.size);
+    }
+
+    function renderGoal() {
+      if (goal.x === null) { return; }
+      ctx.fillStyle = 'deepskyblue';
+      ctx.fillRect(goal.x, goal.y, goal.size, goal.size);
     }
 
     function renderBomb() {
@@ -210,6 +239,7 @@
       renderMap();
       renderPlayer();
       renderItem();
+      renderGoal();
     }
 
     function movePlayer(direction) {
@@ -223,6 +253,10 @@
       let isWall = false;
       let isItem = false;
 
+      // check if next position is outside the canvas
+      if (player.x + dx < 0 || (player.x + dx + 5) > MAP_SIZE) { return; }
+      if (player.y + dy < 0 || (player.y + dy + 5) > MAP_SIZE) { return; }
+
       // Check if the next position intersects with...
       nextYArea.forEach((y) => {
         nextXArea.forEach((x) => {
@@ -234,6 +268,10 @@
           // an item
           if (pixelInPlayer === (itemBombs.y * MAP_SIZE + itemBombs.x) * 4) {
             isItem = true;
+          }
+          // if player is touching goal
+          if (pixelInPlayer === (goal.y * MAP_SIZE + goal.x) * 4) {
+            alert('You win!');
           }
         })
       })
@@ -248,6 +286,7 @@
       renderMap();
       renderItem();
       renderPlayer();
+      renderGoal();
 
       if (isItem) {
         bomb.count = bomb.count + itemBombs.count;
@@ -282,6 +321,7 @@
       renderPlayer();
       renderBomb();
       renderItem();
+      renderGoal();
     }
 
     // Handle player movement with arrow keys
