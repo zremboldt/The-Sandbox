@@ -122,9 +122,9 @@
               // Map lightness value to the index of the predefined colors
               const colorIndex = Math.floor(lightness / (255 / grayscaleColors.length));
 
-              // if pixel is any shade of blue
-              if (mapData[i] < 100 && mapData[i + 1] < 200 && mapData[i + 2] > 130) {
-                console.log('Blue')
+              if (checkIsBlue(mapData, i)) {
+                // console.log('Blue', {1: mapData[i], 2: mapData[i + 1], 3: mapData[i + 2]})
+
                 // set itemBombs position to be the center of the blue pixel
                 itemBombs.x = Math.floor((i / 4) % MAP_SIZE);
                 itemBombs.y = Math.floor((i / 4) / MAP_SIZE);
@@ -152,6 +152,11 @@
 
         reader.readAsDataURL(input.files[0]);
       }
+    }
+
+    function checkIsBlue(mapData, i) {
+      if (mapData[i] < 100 && (mapData[i + 1] > 120 && mapData[i + 1] < 220) && mapData[i + 2] > 140) { return true }
+      return false;
     }
 
     function renderMap() {
@@ -241,8 +246,8 @@
 
       // Redraw the map and player
       renderMap();
-      renderPlayer();
       renderItem();
+      renderPlayer();
 
       if (isItem) {
         bomb.count = bomb.count + itemBombs.count;
