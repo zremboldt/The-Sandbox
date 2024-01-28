@@ -43,11 +43,11 @@
 </head>
 <body>
   <main>
-    <h1>Sharpie Adventure</h1>
+    <!-- <h1>Sharpie Adventure</h1>
     <ul>
       <li>Draw your own adventure (black sharpie on white paper works best).</li>
       <li>Then snap a photo and load it here to play!</li>
-    </ul>
+    </ul> -->
     <p id="bombCount"></p>
     <div class="canvas_wrap">
       <input type="file" id="imageInput" accept="image/*">
@@ -56,10 +56,9 @@
   </main>
 
   <script>
-    document.getElementById('imageInput').addEventListener('change', handleImage);
-
+    // Global variables
     const MAP_SIZE = 800;
-
+    
     let mapData;
     let player = { x: 50, y: 50, size: 10, speed: 7 };
     let bomb = { 
@@ -69,18 +68,28 @@
       fuse: 2, 
       blastSize: 80,
       isPlaced: false,
-      count: 2,
+      count: 3,
     };
-    const itemPickupBombs = {
+    const itemBombs = {
       x: 500,
       y: 200,
       size: 5,
-      count: 2,
+      count: 3,
     }
-
+    
+    // Global Elements
+    const imageInput = document.getElementById('imageInput')
+    const canvas = document.getElementById('outputCanvas');
     const bombCountEl = document.getElementById('bombCount');
-    bombCountEl.innerText = `Bombs: ${bomb.count}`;
 
+    imageInput.addEventListener('change', handleImage);
+    
+    canvas.width = MAP_SIZE;
+    canvas.height = MAP_SIZE;
+    const ctx = canvas.getContext('2d');
+
+    bombCountEl.innerText = `Bombs: ${bomb.count}`;
+    
     function handleImage(event) {
       const input = event.target;
       if (input.files && input.files[0]) {
@@ -91,16 +100,11 @@
           img.src = e.target.result;
 
           img.onload = function () {
-            const canvas = document.getElementById('outputCanvas');
-            canvas.width = MAP_SIZE;
-            canvas.height = MAP_SIZE;
-            const ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
             // Store map data
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            mapData = imageData.data;
+            mapData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
 
             // Define a set of 2 colors
             const grayscaleColors = [
@@ -123,8 +127,9 @@
             }
 
             // Render player
-            renderPlayer(ctx);
-            renderItem(ctx);
+            renderMap();
+            renderPlayer();
+            renderItem();
           };
         };
 
@@ -132,22 +137,27 @@
       }
     }
 
-    function renderPlayer(ctx) {
+    function renderMap() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.putImageData(new ImageData(mapData, canvas.width, canvas.height), 0, 0);
+    }
+
+    function renderPlayer() {
       ctx.fillStyle = 'mediumseagreen';
       ctx.fillRect(player.x, player.y, player.size, player.size);
     }
 
-    function renderItem(ctx) {
+    function renderItem() {
       ctx.fillStyle = 'red';
-      ctx.fillRect(itemPickupBombs.x, itemPickupBombs.y, itemPickupBombs.size, itemPickupBombs.size);
+      ctx.fillRect(itemBombs.x, itemBombs.y, itemBombs.size, itemBombs.size);
     }
 
-    function renderBomb(ctx) {
+    function renderBomb() {
       ctx.fillStyle = 'red';
       ctx.fillRect(bomb.x, bomb.y, bomb.size, bomb.size);
     }
 
-    function explodeBomb(ctx) {
+    function explodeBomb() {
       bomb.isPlaced = false;
 
       // Calculate bomb explosion area
@@ -167,10 +177,9 @@
       })
 
       // Redraw the map and player
-      const canvas = document.getElementById('outputCanvas');
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.putImageData(new ImageData(mapData, canvas.width, canvas.height), 0, 0);
-      renderPlayer(ctx);
+      renderMap();
+      renderPlayer();
+      renderItem();
     }
 
     function movePlayer(direction) {
@@ -182,14 +191,19 @@
       const nextYArea = [...Array(player.size)].map((_, i) => ((player.y + i) + dy) * MAP_SIZE);
 
       let isWall = false;
+      let isItem = false;
 
-      // Check if the next position is a wall
+      // Check if the next position intersects with...
       nextYArea.forEach((y) => {
         nextXArea.forEach((x) => {
-          const pixelInPlayer = (y + x) * 4
-          console.log(mapData[pixelInPlayer])
+          const pixelInPlayer = (y + x) * 4;
+          // a wall
           if (mapData[pixelInPlayer] === 0) {
             isWall = true;
+          }
+          // an item
+          if (pixelInPlayer === (itemBombs.y * MAP_SIZE + itemBombs.x) * 4) {
+            isItem = true;
           }
         })
       })
@@ -201,16 +215,22 @@
       player.y += dy;
 
       // Redraw the map and player
-      const canvas = document.getElementById('outputCanvas');
-      const ctx = canvas.getContext('2d');
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.putImageData(new ImageData(mapData, canvas.width, canvas.height), 0, 0);
-      renderPlayer(ctx);
-      renderItem(ctx);
+      renderMap();
+      renderPlayer();
+      renderItem();
+
+      if (isItem) {
+        bomb.count = bomb.count + itemBombs.count;
+        bombCountEl.innerText = `Bombs: ${bomb.count}`;
+        itemBombs.x = null;
+        itemBombs.y = null;
+        itemBombs.size = null;
+        renderItem();
+      }
 
       if (bomb.isPlaced) {
-        renderBomb(ctx);
-        setTimeout(() => explodeBomb(ctx), bomb.fuse * 1000);
+        renderBomb();
+        setTimeout(() => explodeBomb(), bomb.fuse * 1000);
       }
     }
 
@@ -222,12 +242,10 @@
       bombCountEl.innerText = `Bombs: ${bomb.count}`;
 
       // Redraw the map and player
-      const canvas = document.getElementById('outputCanvas');
-      const ctx = canvas.getContext('2d');
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.putImageData(new ImageData(mapData, canvas.width, canvas.height), 0, 0);
-      renderPlayer(ctx);
-      renderBomb(ctx);
+      renderMap();
+      renderPlayer();
+      renderBomb();
+      renderItem();
     }
 
     // Handle player movement with arrow keys
