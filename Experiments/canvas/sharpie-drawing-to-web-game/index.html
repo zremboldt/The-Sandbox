@@ -60,7 +60,8 @@
     const MAP_SIZE = 800;
     
     let mapData;
-    let player = { x: 50, y: 50, size: 10, speed: 7 };
+    let playerInitialPos = { x: 50, y: 50 };
+    let player = { ...playerInitialPos, size: 10, speed: 7 };
     let bomb = { 
       x: 0, 
       y: 0, 
@@ -71,7 +72,7 @@
       count: 3,
     };
     const itemBombs = {
-      x: 500,
+      x: 200,
       y: 200,
       size: 5,
       count: 3,
@@ -119,11 +120,25 @@
               // Map lightness value to the index of the predefined colors
               const colorIndex = Math.floor(lightness / (255 / grayscaleColors.length));
 
-              // Set new color values for each pixel based on lightness
-              mapData[i] = grayscaleColors[colorIndex][0];
-              mapData[i + 1] = grayscaleColors[colorIndex][1];
-              mapData[i + 2] = grayscaleColors[colorIndex][2];
-              mapData[i + 3] = grayscaleColors[colorIndex][3];
+              // if pixel is any shade of blue
+              if (mapData[i] < 100 && mapData[i + 1] < 200 && mapData[i + 2] > 130) {
+                console.log('Blue')
+                // set itemBombs position to be the center of the blue pixel
+                itemBombs.x = Math.floor((i / 4) % MAP_SIZE);
+                itemBombs.y = Math.floor((i / 4) / MAP_SIZE);
+
+                // set pixel to be white
+                mapData[i] = 255;
+                mapData[i + 1] = 255;
+                mapData[i + 2] = 255;
+                mapData[i + 3] = 255;
+              } else {
+                // Set new color values for each pixel based on lightness
+                mapData[i] = grayscaleColors[colorIndex][0];
+                mapData[i + 1] = grayscaleColors[colorIndex][1];
+                mapData[i + 2] = grayscaleColors[colorIndex][2];
+                mapData[i + 3] = grayscaleColors[colorIndex][3];
+              }
             }
 
             // Render player
@@ -169,6 +184,14 @@
       explosionYArea.forEach((y) => {
         explosionXArea.forEach((x) => {
           const pixelInExplosion = (y + x) * 4;
+
+          // if explosion pixel is touching player
+          if (pixelInExplosion === (player.y * MAP_SIZE + player.x) * 4) {
+            // reset player
+            player.x = playerInitialPos.x;
+            player.y = playerInitialPos.y;
+          }
+
           mapData[pixelInExplosion] = 255;
           mapData[pixelInExplosion + 1] = 255;
           mapData[pixelInExplosion + 2] = 255;
