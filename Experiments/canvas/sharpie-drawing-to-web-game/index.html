@@ -27,9 +27,14 @@
     .canvas_wrap {
       position: relative;
     }
+    header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+    }
     canvas {
       width: 100%;
-      border: 1px solid #000;
+      border: 2px solid #000;
       border-radius: 6px;
     }
     input[type="file"] {
@@ -48,7 +53,11 @@
       <li>Draw your own adventure (black sharpie on white paper works best).</li>
       <li>Then snap a photo and load it here to play!</li>
     </ul> -->
-    <p id="bombCount"></p>
+
+    <header>
+      <p>Sharpie Adventure</p>
+      <p id="bombCount"></p>
+    </header>
     <div class="canvas_wrap">
       <input type="file" id="imageInput" accept="image/*">
       <canvas id="outputCanvas"></canvas>
@@ -211,6 +220,9 @@
     function explodeBomb() {
       bomb.isPlaced = false;
 
+      const audio = new Audio('./sfx/explode_bomb.wav');
+      audio.play();
+
       // Calculate bomb explosion area
       const halfBlastSize = Math.floor(bomb.blastSize / 2);
       const explosionXArea = [...Array(bomb.blastSize)].map((_, i) => (bomb.x - halfBlastSize + i));
@@ -271,7 +283,9 @@
           }
           // if player is touching goal
           if (pixelInPlayer === (goal.y * MAP_SIZE + goal.x) * 4) {
-            alert('You win!');
+            const audio = new Audio('./sfx/goal.wav');
+            audio.play();
+            setTimeout(() => alert('You win!'), 1000);
           }
         })
       })
@@ -289,6 +303,9 @@
       renderGoal();
 
       if (isItem) {
+        const audio = new Audio('./sfx/pickup_item.wav');
+        audio.play();
+
         bomb.count = bomb.count + itemBombs.count;
         bombCountEl.innerText = `Bombs: ${bomb.count}`;
         itemBombs.x = null;
@@ -310,6 +327,12 @@
     }
 
     function placeBomb() {
+      if (bomb.count === 0) { return; }
+      if (bomb.isPlaced) { return; }
+
+      const audio = new Audio('./sfx/place_bomb.wav');
+      audio.play();
+
       bomb.x = player.x;
       bomb.y = player.y;
       bomb.isPlaced = true;
@@ -330,7 +353,7 @@
       else if (event.key === 'ArrowLeft') movePlayer('left');
       else if (event.key === 'ArrowDown') movePlayer('down');
       else if (event.key === 'ArrowUp') movePlayer('up');
-      else if (event.key === 'b' && bomb.count !== 0) placeBomb();
+      else if (event.key === 'b') placeBomb();
     });
   </script>
 </body>
