@@ -6,8 +6,8 @@
   <title>Sharpie Adventure</title>
   <style>
     * {
-      box-sizing: border-box; 
-      margin: 0; 
+      box-sizing: border-box;
+      margin: 0;
       line-height: 1.5;
     }
     body {
@@ -17,10 +17,10 @@
       align-items: center;
       justify-content: center;
     }
-    main { 
+    main {
       width: 800px;
-      display: flex; 
-      flex-direction: column; 
+      display: flex;
+      flex-direction: column;
       gap: 10px;
     }
     ul { padding-left: 20px; }
@@ -69,16 +69,16 @@
     const MAP_SIZE = 800;
     const PLAYER_INITIAL_POS = { x: 50, y: 50 };
     const BOMB_INITIAL_FUSE = 10;
-    
+
     let mapData;
 
     let player = { ...PLAYER_INITIAL_POS, size: 10, speed: 7 };
-    
-    let bomb = { 
-      x: 0, 
-      y: 0, 
+
+    let bomb = {
+      x: 0,
+      y: 0,
       size: 5,
-      fuse: BOMB_INITIAL_FUSE, 
+      fuse: BOMB_INITIAL_FUSE,
       blastSize: 80,
       isPlaced: false,
       count: 2,
@@ -96,20 +96,25 @@
       y: null,
       size: 5,
     };
-    
+
     // Global Elements
     const imageInput = document.getElementById('imageInput')
     const canvas = document.getElementById('outputCanvas');
     const bombCountEl = document.getElementById('bombCount');
 
     imageInput.addEventListener('change', handleImage);
-    
+
     canvas.width = MAP_SIZE;
     canvas.height = MAP_SIZE;
     const ctx = canvas.getContext('2d');
 
     bombCountEl.innerText = `Bombs: ${bomb.count}`;
-    
+
+    const audioPickupItem = new Audio('./sfx/pickup_item.wav');
+    const audioPlaceBomb = new Audio('./sfx/place_bomb.wav');
+    const audioExplodeBomb = new Audio('./sfx/explode_bomb.wav');
+    const audioGoal = new Audio('./sfx/goal.wav');
+
     function handleImage(event) {
       const input = event.target;
       if (input.files && input.files[0]) {
@@ -220,8 +225,7 @@
     function explodeBomb() {
       bomb.isPlaced = false;
 
-      const audio = new Audio('./sfx/explode_bomb.wav');
-      audio.play();
+      audioExplodeBomb.play();
 
       // Calculate bomb explosion area
       const halfBlastSize = Math.floor(bomb.blastSize / 2);
@@ -283,8 +287,8 @@
           }
           // if player is touching goal
           if (pixelInPlayer === (goal.y * MAP_SIZE + goal.x) * 4) {
-            const audio = new Audio('./sfx/goal.wav');
-            audio.play();
+            audioGoal.play();
+            window.location = 'raycast://extensions/raycast/raycast/confetti'
             setTimeout(() => alert('You win!'), 1000);
           }
         })
@@ -303,8 +307,7 @@
       renderGoal();
 
       if (isItem) {
-        const audio = new Audio('./sfx/pickup_item.wav');
-        audio.play();
+        audioPickupItem.play();
 
         bomb.count = bomb.count + itemBombs.count;
         bombCountEl.innerText = `Bombs: ${bomb.count}`;
@@ -330,8 +333,8 @@
       if (bomb.count === 0) { return; }
       if (bomb.isPlaced) { return; }
 
-      const audio = new Audio('./sfx/place_bomb.wav');
-      audio.play();
+
+      audioPlaceBomb.play();
 
       bomb.x = player.x;
       bomb.y = player.y;
