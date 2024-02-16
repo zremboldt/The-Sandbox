@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "quote-on-remix",
-    "slug": "quote-on-remix",
+    "name": "mobile-on-expo",
+    "slug": "mobile-on-expo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
