@@ -3,9 +3,10 @@ import { json, redirect } from "@remix-run/node";
 import { Form, useFetcher, useActionData, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 
-import { getUserById } from "~/models/user.server";
+import { getUserById, updateUser } from "~/models/user.server";
 
 
+// Not necessary but I'll keep it as an example
 export const loader = async ({
   params,
 }: LoaderFunctionArgs) => {
@@ -18,23 +19,18 @@ export const loader = async ({
 };
 
 
-export const action = async ({ request }: ActionFunctionArgs) => {
+export const action = async ({ request, params }: ActionFunctionArgs) => {
+  invariant(params.userId, "Missing userId param");
   const formData = await request.formData();
-  const firstName = formData.get("firstName");
-  const lastName = formData.get("lastName");
+  const dob = formData.get("dob");
 
-  if (typeof firstName !== "string" || firstName.length === 0) {
-    return json(
-      { errors: { firstName: "First name is required", lastName: null } },
-      { status: 400 },
-    );
-  }
+  console.log(typeof dob);
 
-  if (typeof lastName !== "string" || lastName.length === 0) {
-    return json(
-      { errors: { firstName: null, lastName: "First name is required",  } },
-      { status: 400 },
-    );
+  
+  if (dob && typeof dob === "string") {
+    const dobDateObj = new Date(dob);
+    await updateUser(params.userId, "dob", dobDateObj);
+    return redirect(`/onboarding/address/${params.userId}`);
   }
 };
 
@@ -53,25 +49,13 @@ export default function DobScene() {
       }}
     >
       <h2>Hi {user.firstName} 👋</h2>
-      <p>Please enter your dob</p>
+      <p>When’s your birthday?</p>
       <div>
-        {/* <input
-          ref={firstNameRef}
-          name="firstName"
-          placeholder="First name"
-          className="flex-1 rounded-md border-2 border-blue-500 px-3 text-lg leading-loose"
-          aria-invalid={actionData?.errors?.firstName ? true : undefined}
-          aria-errormessage={
-            actionData?.errors?.firstName ? "firstName-error" : undefined
-          }
-        /> */}
-        {/* <label for="dob">Date of Birth:</label> */}
-        <input type="date" id="dob" name="dob"></input>
-        {/* {actionData?.errors?.firstName ? (
-          <div className="pt-1 text-red-700" id="firstName-error">
-            {actionData.errors.firstName}
-          </div>
-        ) : null} */}
+        <input
+          type="date" 
+          id="dob" 
+          name="dob"
+        ></input>
       </div>
 
       <div className="text-right">
@@ -79,7 +63,7 @@ export default function DobScene() {
           type="submit"
           className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-400"
         >
-          Save
+          Continue
         </button>
       </div>
     </Form>

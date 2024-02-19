@@ -57,6 +57,10 @@ export default function NameScene() {
         width: "100%",
       }}
     >
+      <h2>Get a quote in less than 5 minutes</h2>
+      <p>--</p>
+      <h3>Let’s start with your name</h3>
+      <p>Please make sure it matches the information on your license.</p>
       <div>
         <input
           ref={firstNameRef}
@@ -97,7 +101,7 @@ export default function NameScene() {
         type="submit"
         className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-400"
       >
-        Save
+        Continue
       </button>
     </Form>
   );

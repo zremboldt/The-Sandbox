@@ -1,3 +1,16 @@
+# ZR Notes
+
+## Interact with the DB via Prisma Studio
+`npx prisma studio`
+
+## Aligning models and data
+1. [Via Prisma Client](https://www.prisma.io/docs/orm/overview/introduction/data-modeling#using-only-prisma-client)
+2. [Via Prisma Migrate](https://www.prisma.io/docs/orm/overview/introduction/data-modeling#using-prisma-client-and-prisma-migrate)
+
+
+
+
+
 # Remix Blues Stack
 
 ![The Remix Blues Stack](https://repository-images.githubusercontent.com/461012689/37d5bd8b-fa9c-4ab0-893c-f0a199d5012d)

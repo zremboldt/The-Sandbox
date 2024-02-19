@@ -21,6 +21,20 @@ export async function createUser(
   });
 }
 
+export async function updateUser<T extends keyof User>(
+  id: User["id"],
+  column: T,
+  value: User[T]
+) {
+  const data: Partial<User> = {};
+  data[column] = value;
+
+  return prisma.user.update({
+    where: { id },
+    data,
+  });
+}
+
 // export async function getUserByEmail(email: User["email"]) {
 //   return prisma.user.findUnique({ where: { email } });
 // }
