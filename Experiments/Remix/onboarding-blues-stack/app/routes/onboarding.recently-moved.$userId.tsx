@@ -10,44 +10,39 @@ import { updateUser } from "~/models/user.server";
 export const action = async ({ request, params }: ActionFunctionArgs) => {
   invariant(params.userId, "Missing userId param");
   const formData = await request.formData();
-  const homeowner = formData.get("homeowner");
+  // const homeowner = formData.get("homeowner");
 
-  console.log(typeof homeowner)
+  // if (typeof homeowner !== "string" || homeowner.length === 0) {
+  //   return json(
+  //     { errors: { homeowner: "Selection is required" } },
+  //     { status: 400 },
+  //   );
+  // }
 
-  if (!homeowner) {
-    return json(
-      { errors: { homeowner: "Selection is required" } },
-      { status: 400 },
-    );
-  }
+  // await updateUser(params.userId, "homeowner", homeowner);
 
-  const isHomeowner = homeowner === "true" ? true : false;
-
-  await updateUser(params.userId, "homeowner", isHomeowner);
-
-  return redirect(`/onboarding/recently-moved/${params.userId}`);
+  // return redirect(`/onboarding/recently-moved/${params.userId}`);
 };
 
 export default function HomeownerScene() {
-  const actionData = useActionData<typeof action>();
+  // const actionData = useActionData<typeof action>();
+  // const addressRef = useRef<HTMLInputElement>(null);
 
   return (
     <Form method="post">
-      <h2>Do you rent or own your home?</h2>
-      <div>
+      <h2>Have you moved in the last 6 months?</h2>
+      {/* <div>
         <label htmlFor="rent-option">
-          <input type="radio" name="homeowner" value="false" />
+          <input type="radio" name="homeowner" value="rent" />
           Rent
         </label>
         <label htmlFor="own-option">
-          <input type="radio" name="homeowner" value="true" />
+          <input type="radio" name="homeowner" value="own" />
           Own
         </label>
-        {actionData?.errors?.homeowner ? (
-          <div>{actionData.errors.homeowner}</div>
-        ) : null}
-      </div>
-
+      </div> */}
+      
+      
       {/* <div>
         <input
           ref={addressRef}

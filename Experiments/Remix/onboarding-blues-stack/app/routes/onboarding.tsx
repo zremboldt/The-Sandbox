@@ -17,14 +17,14 @@ export default function NotesPage() {
   // const user = useUser();
 
   return (
-    <div className="flex h-full min-h-screen flex-col">
-      <header className="flex items-center justify-between bg-slate-800 p-4 text-white">
-        <h1 className="text-3xl font-bold">
+    <div>
+      <header>
+        <h1>
           <Link to=".">Root</Link>
         </h1>
       </header>
 
-      <main className="flex h-full bg-white">
+      <main>
         <Outlet />
       </main>
     </div>

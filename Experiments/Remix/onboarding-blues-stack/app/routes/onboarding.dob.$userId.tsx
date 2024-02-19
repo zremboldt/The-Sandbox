@@ -39,15 +39,7 @@ export default function DobScene() {
   // const actionData = useActionData<typeof action>();
 
   return (
-    <Form
-      method="post"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 8,
-        width: "100%",
-      }}
-    >
+    <Form method="post">
       <h2>Hi {user.firstName} 👋</h2>
       <p>When’s your birthday?</p>
       <div>
@@ -58,11 +50,8 @@ export default function DobScene() {
         ></input>
       </div>
 
-      <div className="text-right">
-        <button
-          type="submit"
-          className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-400"
-        >
+      <div>
+        <button type="submit">
           Continue
         </button>
       </div>
