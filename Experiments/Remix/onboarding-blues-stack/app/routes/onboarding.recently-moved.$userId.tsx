@@ -1,3 +1,4 @@
+import { Button, Heading } from "@radix-ui/themes";
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, useFetcher, useActionData } from "@remix-run/react";
@@ -30,7 +31,7 @@ export default function HomeownerScene() {
 
   return (
     <Form method="post">
-      <h2>Have you moved in the last 6 months?</h2>
+      <Heading size='8'>Have you moved in the last 6 months?</Heading>
       {/* <div>
         <label htmlFor="rent-option">
           <input type="radio" name="homeowner" value="rent" />
@@ -61,9 +62,9 @@ export default function HomeownerScene() {
         ) : null}
       </div> */}
 
-      <button type="submit">
+      <Button type="submit" size='3'>
         Continue
-      </button>
+      </Button>
     </Form>
   );
 }

@@ -1,5 +1,6 @@
 // import type { LoaderFunctionArgs } from "@remix-run/node";
 // import { json } from "@remix-run/node";
+import { Container } from "@radix-ui/themes";
 import { Form, Link, NavLink, Outlet, useLoaderData } from "@remix-run/react";
 
 // import { getNoteListItems } from "~/models/note.server";
@@ -17,16 +18,16 @@ export default function NotesPage() {
   // const user = useUser();
 
   return (
-    <div>
+    <>
       <header>
-        <h1>
-          <Link to=".">Root</Link>
-        </h1>
+        {/* <h1><Link to=".">Root</Link></h1> */}
       </header>
 
       <main>
-        <Outlet />
+        <Container size="1" mt='9'>
+          <Outlet />
+        </Container>
       </main>
-    </div>
+    </>
   );
 }

@@ -1,3 +1,4 @@
+import { Flex, Text, Button, TextField, Heading, Separator, Container } from '@radix-ui/themes';
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
@@ -49,46 +50,50 @@ export default function NameScene() {
 
   return (
     <Form method="post">
-      <h2>Get a quote in less than 5 minutes</h2>
-      <p>--</p>
-      <h3>Let’s start with your name</h3>
-      <p>Please make sure it matches the information on your license.</p>
-      <div>
-        <input
-          ref={firstNameRef}
-          name="firstName"
-          placeholder="First name"
-          aria-invalid={actionData?.errors?.firstName ? true : undefined}
-          aria-errormessage={
-            actionData?.errors?.firstName ? "firstName-error" : undefined
-          }
-        />
-        {actionData?.errors?.firstName ? (
-          <div>{actionData.errors.firstName}</div>
-        ) : null}
-      </div>
-
-      <div>
-        <input
-          ref={lastNameRef}
-          name="lastName"
-          placeholder="Last name"
-          
-          aria-invalid={actionData?.errors?.lastName ? true : undefined}
-          aria-errormessage={
-            actionData?.errors?.lastName ? "lastName-error" : undefined
-          }
-        />
-        {actionData?.errors?.lastName ? (
+        <Flex direction="column" gap="3">
+          <Heading size='8'>Get a quote in less than 5 minutes</Heading>
+          <Separator orientation="horizontal" size="3" style={{height: 4, backgroundColor: 'var(--tomato-9)'}} />
+          <Heading size='6'>Let’s start with your name</Heading>
+          <Text>Please make sure it matches the information on your license.</Text>
           <div>
-            {actionData.errors.lastName}
+            <TextField.Input
+              size='3'
+              ref={firstNameRef}
+              name="firstName"
+              placeholder="First name"
+              aria-invalid={actionData?.errors?.firstName ? true : undefined}
+              aria-errormessage={
+                actionData?.errors?.firstName ? "firstName-error" : undefined
+              }
+            />
+            {actionData?.errors?.firstName ? (
+              <div>{actionData.errors.firstName}</div>
+            ) : null}
           </div>
-        ) : null}
-      </div>
 
-      <button type="submit">
-        Continue
-      </button>
+          <div>
+            <TextField.Input
+              size='3'
+              ref={lastNameRef}
+              name="lastName"
+              placeholder="Last name"
+              
+              aria-invalid={actionData?.errors?.lastName ? true : undefined}
+              aria-errormessage={
+                actionData?.errors?.lastName ? "lastName-error" : undefined
+              }
+            />
+            {actionData?.errors?.lastName ? (
+              <div>
+                {actionData.errors.lastName}
+              </div>
+            ) : null}
+          </div>
+
+          <Button type="submit" size='3'>
+            Continue
+          </Button>
+        </Flex>
     </Form>
   );
 }

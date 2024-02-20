@@ -1,3 +1,4 @@
+import { Button, Flex, Heading, TextField } from "@radix-ui/themes";
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, useFetcher, useActionData } from "@remix-run/react";
@@ -32,9 +33,12 @@ export default function AddressScene() {
 
   return (
     <Form method="post">
-      <h2>What’s your home address?</h2>
+      <Flex direction="column" gap="3">
+      <Heading size='8'>What’s your home address?</Heading>
+
       <div>
-        <input
+        <TextField.Input
+          size='3'
           ref={addressRef}
           name="address"
           placeholder="Address, city, state, ZIP"
@@ -50,9 +54,10 @@ export default function AddressScene() {
         ) : null}
       </div>
 
-      <button type="submit">
+      <Button type="submit" size='3'>
         Continue
-      </button>
+      </Button>
+      </Flex>
     </Form>
   );
 }

@@ -1,3 +1,4 @@
+import { Button, Flex, Heading, RadioGroup, Text } from "@radix-ui/themes";
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, useFetcher, useActionData } from "@remix-run/react";
@@ -12,6 +13,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const homeowner = formData.get("homeowner");
 
+  console.log(homeowner)
   console.log(typeof homeowner)
 
   if (!homeowner) {
@@ -33,16 +35,33 @@ export default function HomeownerScene() {
 
   return (
     <Form method="post">
-      <h2>Do you rent or own your home?</h2>
+      <Flex direction="column" gap="3">
+      <Heading size='8'>Do you rent or own your home?</Heading>
+
+      <RadioGroup.Root name="homeowner">
+        <Flex gap="2" direction="column">
+          <Text as="label" size="4">
+            <Flex gap="2">
+              <RadioGroup.Item value="false" /> Rent
+            </Flex>
+          </Text>
+          <Text as="label" size="4">
+            <Flex gap="2">
+              <RadioGroup.Item value="true" /> Own
+            </Flex>
+          </Text>
+        </Flex>
+      </RadioGroup.Root>
+
       <div>
-        <label htmlFor="rent-option">
+        {/* <label htmlFor="rent-option">
           <input type="radio" name="homeowner" value="false" />
           Rent
         </label>
         <label htmlFor="own-option">
           <input type="radio" name="homeowner" value="true" />
           Own
-        </label>
+        </label> */}
         {actionData?.errors?.homeowner ? (
           <div>{actionData.errors.homeowner}</div>
         ) : null}
@@ -66,9 +85,10 @@ export default function HomeownerScene() {
         ) : null}
       </div> */}
 
-      <button type="submit">
-        Continue
-      </button>
+        <Button type="submit" size='3'>
+          Continue
+        </Button>
+        </Flex>
     </Form>
   );
 }
