@@ -37,14 +37,14 @@ export default function App() {
         <Links />
       </head>
 
-      <Theme accentColor="tomato" grayColor="sand" radius="small">
         <body>
-          <Outlet />
-          <ScrollRestoration />
-          <Scripts />
-          <LiveReload />
+          <Theme accentColor="tomato" grayColor="slate" radius="small" scaling='110%' appearance='dark'>
+            <Outlet />
+            <ScrollRestoration />
+            <Scripts />
+            <LiveReload />
+          </Theme>
         </body>
-      </Theme>
     </html>
   );
 }
