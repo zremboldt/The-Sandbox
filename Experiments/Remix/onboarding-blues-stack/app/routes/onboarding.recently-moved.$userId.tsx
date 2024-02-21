@@ -1,4 +1,4 @@
-import { Button, Heading } from "@radix-ui/themes";
+import { Box, Button, Flex, Heading, RadioGroup, Separator, Text } from "@radix-ui/themes";
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, useFetcher, useActionData } from "@remix-run/react";
@@ -11,60 +11,58 @@ import { updateUser } from "~/models/user.server";
 export const action = async ({ request, params }: ActionFunctionArgs) => {
   invariant(params.userId, "Missing userId param");
   const formData = await request.formData();
-  // const homeowner = formData.get("homeowner");
+  const recentlyMoved = formData.get("recentlyMoved");
 
-  // if (typeof homeowner !== "string" || homeowner.length === 0) {
-  //   return json(
-  //     { errors: { homeowner: "Selection is required" } },
-  //     { status: 400 },
-  //   );
-  // }
+  if (!recentlyMoved) {
+    return json(
+      { errors: { recentlyMoved: "Selection is required" } },
+      { status: 400 },
+    );
+  }
 
-  // await updateUser(params.userId, "homeowner", homeowner);
+  const hasRecentlyMoved = recentlyMoved === "true" ? true : false;
+
+  await updateUser(params.userId, "recentlyMoved", hasRecentlyMoved);
 
   // return redirect(`/onboarding/recently-moved/${params.userId}`);
+  return null
 };
 
-export default function HomeownerScene() {
-  // const actionData = useActionData<typeof action>();
+export default function RecentlyMovedScene() {
+  const actionData = useActionData<typeof action>();
   // const addressRef = useRef<HTMLInputElement>(null);
 
   return (
     <Form method="post">
-      <Heading size='8'>Have you moved in the last 6 months?</Heading>
-      {/* <div>
-        <label htmlFor="rent-option">
-          <input type="radio" name="homeowner" value="rent" />
-          Rent
-        </label>
-        <label htmlFor="own-option">
-          <input type="radio" name="homeowner" value="own" />
-          Own
-        </label>
-      </div> */}
+      <Flex gap="5" direction="column">
+      <Heading size='7'>Have you moved in the last 6 months?</Heading>
       
-      
-      {/* <div>
-        <input
-          ref={addressRef}
-          name="address"
-          placeholder="Address, city, state, ZIP"
-          className="flex-1 rounded-md border-2 border-blue-500 px-3 text-lg leading-loose"
-          aria-invalid={actionData?.errors?.address ? true : undefined}
-          aria-errormessage={
-            actionData?.errors?.address ? "address-error" : undefined
-          }
-        />
-        {actionData?.errors?.address ? (
-          <div className="pt-1 text-red-700" id="address-error">
-            {actionData.errors.address}
-          </div>
-        ) : null}
-      </div> */}
+      <RadioGroup.Root name="recentlyMoved" size="3">
+        <Separator size="4" />
+          <Text as="label" size="4">
+            <Box px='4' py='4'>
+              <Flex justify='between'>
+                Yes <RadioGroup.Item value="true" />
+              </Flex>
+            </Box>
+          </Text>
+        <Separator size="4" />
+          <Text as="label" size="4">
+            <Box px='4' py='4'>
+              <Flex justify='between'>
+                No <RadioGroup.Item value="false" />
+              </Flex>
+            </Box>
+          </Text>
+        <Separator size="4" />
+      </RadioGroup.Root>
 
-      <Button type="submit" size='3'>
-        Continue
-      </Button>
+      {actionData?.errors?.recentlyMoved ? (
+        <Text size='1' color='red' trim='start'>{actionData.errors.recentlyMoved}</Text>
+      ) : null}
+
+      <Button type="submit" size='3'>Continue</Button>
+          </Flex>
     </Form>
   );
 }

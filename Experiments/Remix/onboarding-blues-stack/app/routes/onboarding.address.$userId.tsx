@@ -1,4 +1,4 @@
-import { Button, Flex, Heading, TextField } from "@radix-ui/themes";
+import { Button, Flex, Heading, Text, TextField } from "@radix-ui/themes";
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, useFetcher, useActionData } from "@remix-run/react";
@@ -33,30 +33,25 @@ export default function AddressScene() {
 
   return (
     <Form method="post">
-      <Flex direction="column" gap="3">
-      <Heading size='8'>What’s your home address?</Heading>
+      <Flex direction="column" gap="5">
+        <Heading size='7'>What’s your home address?</Heading>
 
-      <div>
-        <TextField.Input
-          size='3'
-          ref={addressRef}
-          name="address"
-          placeholder="Address, city, state, ZIP"
-          aria-invalid={actionData?.errors?.address ? true : undefined}
-          aria-errormessage={
-            actionData?.errors?.address ? "address-error" : undefined
-          }
-        />
-        {actionData?.errors?.address ? (
-          <div id="address-error">
-            {actionData.errors.address}
-          </div>
-        ) : null}
-      </div>
+        <Flex direction="column" gap="3">
+          <TextField.Input
+            size='3'
+            ref={addressRef}
+            name="address"
+            placeholder="Address, city, state, ZIP"
+            aria-invalid={actionData?.errors?.address ? true : undefined}
+            aria-errormessage={actionData?.errors?.address ? "address-error" : undefined}
+          />
 
-      <Button type="submit" size='3'>
-        Continue
-      </Button>
+          {actionData?.errors?.address ? (
+            <Text size='1' color='red' trim='start'>{actionData.errors.address}</Text>
+          ) : null}
+
+          <Button type="submit" size='3'>Continue</Button>
+        </Flex>
       </Flex>
     </Form>
   );

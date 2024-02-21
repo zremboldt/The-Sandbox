@@ -1,6 +1,5 @@
 import './theme-config.css';
-import { Theme } from '@radix-ui/themes';
-// import '@radix-ui/themes/styles.css';
+import { Theme, ThemePanel } from '@radix-ui/themes';
 import stylesheet from '@radix-ui/themes/styles.css';
 import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
@@ -15,8 +14,6 @@ import {
 } from "@remix-run/react";
 
 import { getUser } from "~/session.server";
-
-// import stylesheet from "~/tailwind.css";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
@@ -35,10 +32,26 @@ export default function App() {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         <Links />
+        <style>
+          {`
+            body {
+              margin: 0;
+            }
+            header {
+              padding: 14px;
+              border-bottom: 1px solid #ddd;
+            }
+            .logo-link {
+              display: flex;
+              color: inherit;
+            }
+          `}
+        </style>
       </head>
 
         <body>
-          <Theme accentColor="tomato" grayColor="slate" radius="small" scaling='110%' appearance='dark'>
+          <Theme accentColor="tomato" radius="small" scaling='105%' appearance='light'>
+          {/* <ThemePanel /> */}
             <Outlet />
             <ScrollRestoration />
             <Scripts />

@@ -1,4 +1,4 @@
-import { Button, Flex, Heading, RadioGroup, Text } from "@radix-ui/themes";
+import { Box, Button, Flex, Heading, RadioGroup, Separator, Text } from "@radix-ui/themes";
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, useFetcher, useActionData } from "@remix-run/react";
@@ -35,60 +35,35 @@ export default function HomeownerScene() {
 
   return (
     <Form method="post">
-      <Flex direction="column" gap="3">
-      <Heading size='8'>Do you rent or own your home?</Heading>
+      <Flex direction="column" gap="5">
+        <Heading size='7'>Do you rent or own your home?</Heading>
 
-      <RadioGroup.Root name="homeowner">
-        <Flex gap="2" direction="column">
-          <Text as="label" size="4">
-            <Flex gap="2">
-              <RadioGroup.Item value="false" /> Rent
-            </Flex>
-          </Text>
-          <Text as="label" size="4">
-            <Flex gap="2">
-              <RadioGroup.Item value="true" /> Own
-            </Flex>
-          </Text>
-        </Flex>
-      </RadioGroup.Root>
+        <RadioGroup.Root name="homeowner">
+          <Separator size="4" />
+            <Text as="label" size="4">
+              <Box px='4' py='4'>
+                <Flex justify='between'>
+                  Rent <RadioGroup.Item value="false" />
+                </Flex>
+              </Box>
+            </Text>
+          <Separator size="4" />
+            <Text as="label" size="4">
+              <Box px='4' py='4'>
+                <Flex justify='between'>
+                  Own <RadioGroup.Item value="true" />
+                </Flex>
+              </Box>
+            </Text>
+          <Separator size="4" />
+        </RadioGroup.Root>
 
-      <div>
-        {/* <label htmlFor="rent-option">
-          <input type="radio" name="homeowner" value="false" />
-          Rent
-        </label>
-        <label htmlFor="own-option">
-          <input type="radio" name="homeowner" value="true" />
-          Own
-        </label> */}
         {actionData?.errors?.homeowner ? (
-          <div>{actionData.errors.homeowner}</div>
+          <Text size='1' color='red' trim='start'>{actionData.errors.homeowner}</Text>
         ) : null}
-      </div>
 
-      {/* <div>
-        <input
-          ref={addressRef}
-          name="address"
-          placeholder="Address, city, state, ZIP"
-          className="flex-1 rounded-md border-2 border-blue-500 px-3 text-lg leading-loose"
-          aria-invalid={actionData?.errors?.address ? true : undefined}
-          aria-errormessage={
-            actionData?.errors?.address ? "address-error" : undefined
-          }
-        />
-        {actionData?.errors?.address ? (
-          <div className="pt-1 text-red-700" id="address-error">
-            {actionData.errors.address}
-          </div>
-        ) : null}
-      </div> */}
-
-        <Button type="submit" size='3'>
-          Continue
-        </Button>
-        </Flex>
+        <Button type="submit" size='3'>Continue</Button>
+      </Flex>
     </Form>
   );
 }

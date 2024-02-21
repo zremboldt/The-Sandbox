@@ -1,4 +1,4 @@
-import { Button, Container, Flex, Heading, TextField } from "@radix-ui/themes";
+import { Button, Container, Flex, Heading, Text, TextField } from "@radix-ui/themes";
 import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, useFetcher, useActionData, useLoaderData } from "@remix-run/react";
@@ -24,23 +24,32 @@ export const loader = async ({
 export const action = async ({ request, params }: ActionFunctionArgs) => {
   invariant(params.userId, "Missing userId param");
   const formData = await request.formData();
-  // const month = formData.get("month");
-  // const day = formData.get("day");
-  // const year = formData.get("year");
-  const dob = formData.get("dob");
+  const month = formData.get("month");
+  const day = formData.get("day");
+  const year = formData.get("year");
 
-  // console.log(typeof dob);
+  if (month && day && year) {
+    const dob = new Date(`${year}-${month}-${day}`);
 
-  // if (typeof month !== 'string') {
-  //   return json(
-  //     { errors: { month: "First name is required", lastName: null } },
-  //     { status: 400 },
-  //   );
-  // }
-  
-  if (dob && typeof dob === "string") {
-    const dobDateObj = new Date(dob);
-    await updateUser(params.userId, "dob", dobDateObj);
+    if (isNaN(dob.getTime())) {
+      return json(
+        { errors: { dob: "Invalid date" } },
+        { status: 400 },
+      );
+    }
+
+    // ensure user is at least 18
+    const eighteenYearsAgo = new Date();
+    eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
+
+    if (dob.getTime() > eighteenYearsAgo.getTime()) {
+      return json(
+        { errors: { dob: "You must be at least 18 years old" } },
+        { status: 400 },
+      );
+    }
+    
+    await updateUser(params.userId, "dob", dob);
     return redirect(`/onboarding/address/${params.userId}`);
   }
 };
@@ -52,59 +61,65 @@ export default function DobScene() {
   const dayRef = useRef<HTMLInputElement>(null);
   const yearRef = useRef<HTMLInputElement>(null);
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target;
+    // don't allow non-numeric characters
+    input.value = input.value.replace(/[^0-9]/g, "");
+
+    if (input === yearRef.current) { return; }
+
+    if (input.value.length === input.maxLength) {
+      if (input === monthRef.current) {
+        dayRef.current?.focus();
+      } else {
+        yearRef.current?.focus();
+      }
+    }
+  };
+
   return (
     <Form method="post">
-      <Flex direction="column" gap="3">
-        <h2>Hi {user.firstName} 👋</h2>
-        <Heading size='8'>When’s your birthday?</Heading>
-          <input
-            type="date" 
-            id="dob" 
-            name="dob"
-          ></input>
+      <Flex direction="column" gap="5">
+        {/* <h2>Hi {user.firstName} 👋</h2> */}
+        <Heading size='7'>When’s your birthday?</Heading>
 
+        <Flex direction="column" gap="3">
           <Flex direction="row" gap="3">
             <TextField.Input
-              size='3'
-              ref={monthRef}
               name="month"
               placeholder="MM"
+              ref={monthRef}
               maxLength={2}
-              // aria-invalid={actionData?.errors?.month ? true : undefined}
-              // aria-errormessage={
-              //   actionData?.errors?.month ? "month-error" : undefined
-              // }
-            />
-
-            <TextField.Input
               size='3'
-              ref={dayRef}
+              onChange={handleInputChange}
+              autoComplete="off"
+            />
+            <TextField.Input
               name="day"
               placeholder="DD"
+              ref={dayRef}
               maxLength={2}
-              // aria-invalid={actionData?.errors?.day ? true : undefined}
-              // aria-errormessage={
-              //   actionData?.errors?.day ? "day-error" : undefined
-              // }
-            />
-
-            <TextField.Input
               size='3'
-              ref={yearRef}
+              onChange={handleInputChange}
+              autoComplete="off"
+            />
+            <TextField.Input
               name="year"
               placeholder="YYYY"
+              ref={yearRef}
               maxLength={4}
-              // aria-invalid={actionData?.errors?.year ? true : undefined}
-              // aria-errormessage={
-              //   actionData?.errors?.year ? "year-error" : undefined
-              // }
+              size='3'
+              onChange={handleInputChange}
+              autoComplete="off"
             />
           </Flex>
 
-    
-        <Button type="submit" size='3'>
-          Continue
-        </Button>
+          {actionData?.errors?.dob ? (
+            <Text size='1' color='red' trim='start'>{actionData.errors.dob}</Text>
+          ) : null}
+
+          <Button type="submit" size='3'>Continue</Button>
+        </Flex>
       </Flex>
     </Form>
   );
