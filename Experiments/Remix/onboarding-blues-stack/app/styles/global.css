@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+}
+
+/* ************************************ */
+/* HEADER */
+
+header {
+  padding: 10px;
+  border-bottom: 1px solid hsla(0, 0%, 50%, 0.2);
+}
+
+.logo-link {
+  display: inline-flex;
+  color: inherit;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+.logo-link:focus-visible {
+  outline: 1px solid tomato;
+}
+
+/* ************************************ */
+/* MAIN */
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: min(150px, 16vw) 10px 10px;
+}
+
+/* ************************************ */
+/* FOOTER */
+
+.theme-button {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}

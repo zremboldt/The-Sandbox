@@ -33,7 +33,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
     if (isNaN(dob.getTime())) {
       return json(
-        { errors: { dob: "Invalid date" } },
+        { errors: { dob: "This date is invalid" } },
         { status: 400 },
       );
     }
@@ -50,7 +50,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     }
     
     await updateUser(params.userId, "dob", dob);
-    return redirect(`/onboarding/address/${params.userId}`);
+    return redirect(`/address/${params.userId}`);
   }
 };
 
@@ -63,15 +63,25 @@ export default function DobScene() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target;
+    const atMaxLength = input.value.length === input.maxLength;
+    
     // don't allow non-numeric characters
     input.value = input.value.replace(/[^0-9]/g, "");
 
     if (input === yearRef.current) { return; }
 
-    if (input.value.length === input.maxLength) {
-      if (input === monthRef.current) {
+    if (input === monthRef.current) {
+      const atMaxInt = parseInt(input.value) > 1;
+
+      if (atMaxLength || atMaxInt) {
         dayRef.current?.focus();
-      } else {
+      }
+    }
+
+    if (input === dayRef.current) {
+      const atMaxInt = parseInt(input.value) > 3;
+
+      if (atMaxLength || atMaxInt) {
         yearRef.current?.focus();
       }
     }
@@ -86,6 +96,7 @@ export default function DobScene() {
         <Flex direction="column" gap="3">
           <Flex direction="row" gap="3">
             <TextField.Input
+              autoFocus
               name="month"
               placeholder="MM"
               ref={monthRef}

@@ -24,7 +24,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
   // IDEA: Have a fn that looks at what values are missing in the User object and just redirects to the next step. 
   // The end of every action in onboarding would call this. I don't know that we even need xState.
-  return redirect(`/onboarding/homeowner/${params.userId}`);
+  return redirect(`/homeowner/${params.userId}`);
 };
 
 export default function AddressScene() {
@@ -38,6 +38,7 @@ export default function AddressScene() {
 
         <Flex direction="column" gap="3">
           <TextField.Input
+            autoFocus
             size='3'
             ref={addressRef}
             name="address"

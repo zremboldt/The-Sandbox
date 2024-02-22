@@ -1,8 +1,7 @@
 import { Box, Button, Flex, Heading, RadioGroup, Separator, Text } from "@radix-ui/themes";
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { Form, useFetcher, useActionData } from "@remix-run/react";
-import { useRef } from "react";
+import { Form, useActionData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 
 import { updateUser } from "~/models/user.server";
@@ -27,7 +26,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
   await updateUser(params.userId, "homeowner", isHomeowner);
 
-  return redirect(`/onboarding/recently-moved/${params.userId}`);
+  return redirect(`/recently-moved/${params.userId}`);
 };
 
 export default function HomeownerScene() {

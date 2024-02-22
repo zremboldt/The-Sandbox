@@ -1,4 +1,4 @@
-import { Flex, Text, Button, TextField, Heading, Separator, Container } from '@radix-ui/themes';
+import { Flex, Text, Button, TextField, Heading, Separator } from '@radix-ui/themes';
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
@@ -28,9 +28,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   }
 
   const user = await createUser( firstName, lastName );
-  console.log(user);
 
-  return redirect(`/onboarding/dob/${user.id}`);
+  return redirect(`/dob/${user.id}`);
 };
 
 
@@ -53,13 +52,14 @@ export default function NameScene() {
       <Flex direction="column" gap="5">
         <Flex direction="column" gap="3">
           <Heading size='8'>Get a quote in less than 5 minutes</Heading>
-          <Separator orientation="horizontal" size="3" style={{height: 3}} />
+          <Separator orientation="horizontal" size="3" my='3' style={{height: 3}} />
           <Heading size='7'>Let’s start with your name</Heading>
           <Text>Please make sure it matches the information on your license.</Text>
         </Flex>
 
         <Flex direction="column" gap="3">
           <TextField.Input
+            autoFocus
             size='3'
             ref={firstNameRef}
             name="firstName"
@@ -69,6 +69,7 @@ export default function NameScene() {
               actionData?.errors?.firstName ? "firstName-error" : undefined
             }
           />
+          
           {actionData?.errors?.firstName ? (
             <Text size='1' color='red' trim='start'>{actionData.errors.firstName}</Text>
           ) : null}
@@ -78,12 +79,12 @@ export default function NameScene() {
             ref={lastNameRef}
             name="lastName"
             placeholder="Last name"
-            
             aria-invalid={actionData?.errors?.lastName ? true : undefined}
             aria-errormessage={
               actionData?.errors?.lastName ? "lastName-error" : undefined
             }
           />
+
           {actionData?.errors?.lastName ? (
             <Text size='1' color='red' trim='start'>{actionData.errors.lastName}</Text>
           ) : null}

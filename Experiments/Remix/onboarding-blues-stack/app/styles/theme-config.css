@@ -1,9 +1,10 @@
 .radix-themes {
   /* --default-font-size: 18px; */
+  --tomato-9: hsla(17, 100%, 54%, 1);
 }
 
 .rt-Heading {
-  text-wrap: balance;
+  text-wrap: pretty;
 }
 .rt-Text {
   text-wrap: pretty;

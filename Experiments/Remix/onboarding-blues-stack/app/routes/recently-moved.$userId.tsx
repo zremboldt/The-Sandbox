@@ -24,8 +24,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
   await updateUser(params.userId, "recentlyMoved", hasRecentlyMoved);
 
-  // return redirect(`/onboarding/recently-moved/${params.userId}`);
-  return null
+  return redirect(`/marital-status/${params.userId}`);
 };
 
 export default function RecentlyMovedScene() {
