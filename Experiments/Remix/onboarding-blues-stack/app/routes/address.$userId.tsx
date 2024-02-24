@@ -6,7 +6,7 @@ import { useRef } from "react";
 import invariant from "tiny-invariant";
 
 import { updateUser } from "~/models/user.server";
-
+import { createVehicle } from "~/models/vehicle.server";
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
   invariant(params.userId, "Missing userId param");
@@ -21,8 +21,9 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   }
 
   await updateUser(params.userId, "address", address);
+  await prefillRequest({ userId: params.userId });
 
-  // IDEA: Have a fn that looks at what values are missing in the User object and just redirects to the next step. 
+  // IDEA: Have a fn that looks at what values are missing in the User object and just redirects to the next step.
   // The end of every action in onboarding would call this. I don't know that we even need xState.
   return redirect(`/homeowner/${params.userId}`);
 };
@@ -34,26 +35,51 @@ export default function AddressScene() {
   return (
     <Form method="post">
       <Flex direction="column" gap="5">
-        <Heading size='7'>What’s your home address?</Heading>
+        <Heading size="7">What’s your home address?</Heading>
 
         <Flex direction="column" gap="3">
           <TextField.Input
             autoFocus
-            size='3'
+            size="3"
             ref={addressRef}
             name="address"
             placeholder="Address, city, state, ZIP"
             aria-invalid={actionData?.errors?.address ? true : undefined}
-            aria-errormessage={actionData?.errors?.address ? "address-error" : undefined}
+            aria-errormessage={
+              actionData?.errors?.address ? "address-error" : undefined
+            }
           />
 
           {actionData?.errors?.address ? (
-            <Text size='1' color='red' trim='start'>{actionData.errors.address}</Text>
+            <Text size="1" color="red" trim="start">
+              {actionData.errors.address}
+            </Text>
           ) : null}
 
-          <Button type="submit" size='3'>Continue</Button>
+          <Button type="submit" size="3">
+            Continue
+          </Button>
         </Flex>
       </Flex>
     </Form>
   );
 }
+
+// This simulates us making our prefill request.
+const prefillRequest = async ({ userId }: { userId: string }) => {
+  await createVehicle({
+    year: 2021,
+    make: "Honda",
+    model: "Accord",
+    vin: "1HGBH41JXMN109186",
+    userId,
+  });
+
+  await createVehicle({
+    year: 2020,
+    make: "Dodge",
+    model: "Grand Caravan",
+    vin: "1HGBH41JXMN109187",
+    userId,
+  });
+};

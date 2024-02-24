@@ -1,11 +1,18 @@
-import { Box, Button, Flex, Heading, RadioGroup, Separator, Text } from "@radix-ui/themes";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  RadioGroup,
+  Separator,
+  Text,
+} from "@radix-ui/themes";
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 
 import { updateUser } from "~/models/user.server";
-
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
   invariant(params.userId, "Missing userId param");
@@ -31,41 +38,45 @@ export default function MaritalStatusScene() {
   return (
     <Form method="post">
       <Flex direction="column" gap="5">
-        <Heading size='7'>What’s your marital status?</Heading>
+        <Heading size="7">What’s your marital status?</Heading>
 
-        <RadioGroup.Root name="marital-status">
+        <RadioGroup.Root name="marital-status" size="3">
           <Separator size="4" />
-            <Text as="label" size="4">
-              <Box px='4' py='4'>
-                <Flex justify='between'>
-                  Single <RadioGroup.Item value="single" />
-                </Flex>
-              </Box>
-            </Text>
+          <Text as="label" size="4">
+            <Box px="4" py="4">
+              <Flex justify="between">
+                Single <RadioGroup.Item value="single" />
+              </Flex>
+            </Box>
+          </Text>
           <Separator size="4" />
-            <Text as="label" size="4">
-              <Box px='4' py='4'>
-                <Flex justify='between'>
-                  Married <RadioGroup.Item value="married" />
-                </Flex>
-              </Box>
-            </Text>
+          <Text as="label" size="4">
+            <Box px="4" py="4">
+              <Flex justify="between">
+                Married <RadioGroup.Item value="married" />
+              </Flex>
+            </Box>
+          </Text>
           <Separator size="4" />
-            <Text as="label" size="4">
-              <Box px='4' py='4'>
-                <Flex justify='between'>
-                  Widowed <RadioGroup.Item value="widowed" />
-                </Flex>
-              </Box>
-            </Text>
+          <Text as="label" size="4">
+            <Box px="4" py="4">
+              <Flex justify="between">
+                Widowed <RadioGroup.Item value="widowed" />
+              </Flex>
+            </Box>
+          </Text>
           <Separator size="4" />
         </RadioGroup.Root>
 
         {actionData?.errors?.maritalStatus ? (
-          <Text size='1' color='red' trim='start'>{actionData.errors.maritalStatus}</Text>
+          <Text size="1" color="red" trim="start">
+            {actionData.errors.maritalStatus}
+          </Text>
         ) : null}
 
-        <Button type="submit" size='3'>Continue</Button>
+        <Button type="submit" size="3">
+          Continue
+        </Button>
       </Flex>
     </Form>
   );

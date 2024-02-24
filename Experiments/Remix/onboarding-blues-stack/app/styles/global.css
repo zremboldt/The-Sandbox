@@ -28,7 +28,11 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: min(150px, 16vw) 10px 10px;
+  padding: min(150px, 16vw) 10px 40px;
+}
+
+.main-content-wrap {
+  width: min(100%, 500px);
 }
 
 /* ************************************ */

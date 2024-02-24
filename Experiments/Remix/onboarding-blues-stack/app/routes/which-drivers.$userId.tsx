@@ -1,5 +1,6 @@
 import { InfoCircledIcon, PlusCircledIcon } from "@radix-ui/react-icons";
 import {
+  Avatar,
   Box,
   Button,
   Callout,
@@ -16,7 +17,6 @@ import {
   useActionData,
   useFetcher,
   useLoaderData,
-  useNavigate,
 } from "@remix-run/react";
 import { FunctionComponent, useState } from "react";
 import invariant from "tiny-invariant";
@@ -29,7 +29,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   if (!vehicles.length) {
     throw new Response("Not Found", { status: 404 });
   }
-  return json({ vehicles, userId: params.userId });
+  return json({ vehicles });
 };
 
 export const action = async ({ params, request }: ActionFunctionArgs) => {
@@ -50,15 +50,37 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
 };
 
 export default function MaritalStatusScene() {
-  const { vehicles, userId } = useLoaderData<typeof loader>();
-  const navigate = useNavigate();
+  const { vehicles } = useLoaderData<typeof loader>();
 
   return (
     <Flex direction="column" gap="7">
       <Flex direction="column" gap="3">
-        <Heading size="7">Which vehicles do you want to insure?</Heading>
+        <Heading size="7">
+          Which drivers will be covered on your policy?
+        </Heading>
+
+        <Card size="2">
+          <Flex gap="4" align="center">
+            <Avatar size="5" radius="full" fallback="T" color="tomato" />
+            <Box>
+              <Text as="div" size="2" weight="bold" color="tomato">
+                ROOT SAVINGS TIP
+              </Text>
+              <Text as="div" size="3" weight="bold">
+                To maximize your savings, everyone on your policy must take the
+                test drive.
+              </Text>
+            </Box>
+          </Flex>
+        </Card>
+
         <Text color="gray">
-          Need to add another vehicle? No worries, you can add more later.
+          All household members with a valid driver’s license, and other regular
+          operators of the insured vehicle(s), must be listed on your policy.
+        </Text>
+        <Text color="gray">
+          Household members with a valid driver’s license will only be covered
+          if they are listed.
         </Text>
       </Flex>
 
@@ -69,11 +91,11 @@ export default function MaritalStatusScene() {
             ))
           : null}
 
-        <Button size="2" variant="outline">
-          <PlusCircledIcon width="16" height="16" /> Add vehicle
+        <Button type="submit" size="2" variant="outline">
+          <PlusCircledIcon width="16" height="16" /> Add driver
         </Button>
 
-        <Button onClick={() => navigate(`/which-drivers/${userId}`)} size="3">
+        <Button type="submit" size="3">
           Continue
         </Button>
       </Flex>
