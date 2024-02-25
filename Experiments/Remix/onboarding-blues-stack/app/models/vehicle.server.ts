@@ -27,7 +27,7 @@ export function getVehicleListItems({ userId }: { userId: User["id"] }) {
       vin: true,
       includedOnPolicy: true,
     },
-    orderBy: { year: "desc" },
+    orderBy: { id: "desc" },
   });
 }
 

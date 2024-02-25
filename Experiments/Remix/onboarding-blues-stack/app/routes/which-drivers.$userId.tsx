@@ -62,15 +62,15 @@ export default function MaritalStatusScene() {
         <Card size="2">
           <Flex gap="4" align="center">
             <Avatar size="5" radius="full" fallback="T" color="tomato" />
-            <Box>
-              <Text as="div" size="2" weight="bold" color="tomato">
+            <Flex direction="column" gap="2">
+              <Text as="div" size="1" weight="bold" color="tomato">
                 ROOT SAVINGS TIP
               </Text>
               <Text as="div" size="3" weight="bold">
                 To maximize your savings, everyone on your policy must take the
                 test drive.
               </Text>
-            </Box>
+            </Flex>
           </Flex>
         </Card>
 
