@@ -7,14 +7,17 @@ import {
   Separator,
 } from "@radix-ui/themes";
 import type { ActionFunctionArgs } from "@remix-run/node";
-import { json, redirect } from "@remix-run/node";
+import { createCookie, json, redirect } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import { useEffect, useRef } from "react";
 
 import { createUser } from "~/models/user.server";
+import { createUserSession } from "~/session.server";
+import { safeRedirect } from "~/utils";
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
+  const redirectTo = safeRedirect(formData.get("redirectTo"), "/dob");
   const firstName = formData.get("firstName");
   const lastName = formData.get("lastName");
 
@@ -34,7 +37,12 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   const user = await createUser(firstName, lastName);
 
-  return redirect(`/dob/${user.id}`);
+  return createUserSession({
+    redirectTo,
+    remember: false,
+    request,
+    userId: user.id,
+  });
 };
 
 export default function NameScene() {
