@@ -69,7 +69,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
     userId: string;
   }) {
     const vin = formData.get("vin");
-    if (!vin || typeof vin !== "string") {
+    if (typeof vin !== "string" || !/^[A-HJ-NPR-Z0-9]{17}$/i.test(vin)) {
       return json(
         { errors: { vin: "Please enter a valid VIN" } },
         { status: 400 },
@@ -80,12 +80,12 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
   }
 };
 
-export default function MaritalStatusScene() {
+export default function WhichVehiclesScene() {
   const { vehicles, userId } = useLoaderData<typeof loader>();
   const navigate = useNavigate();
 
   return (
-    <Flex direction="column" gap="7">
+    <Flex direction="column" gap="5">
       <Flex direction="column" gap="3">
         <Heading size="7">Which vehicles do you want to insure?</Heading>
         <Text color="gray">
@@ -177,8 +177,10 @@ const AddVehicleDialog = () => {
   const [open, setOpen] = useState(false);
   const fetcher = useFetcher();
 
-  const fetcherSuccess = fetcher.formData?.get("vin");
-  if (fetcherSuccess && open) {
+  const response = fetcher.data?.vin;
+  const request = fetcher.formData ? fetcher.formData?.get("vin") : "";
+
+  if (open && request === response) {
     setOpen(false);
   }
 
@@ -196,7 +198,12 @@ const AddVehicleDialog = () => {
         <fetcher.Form method="post">
           <input type="hidden" name="_action" value="ADD_VEHICLE" />
           <Flex direction="column" gap="3">
-            <TextField.Input size="3" name="vin" placeholder="VIN" />
+            <TextField.Input
+              size="3"
+              name="vin"
+              placeholder="VIN"
+              onChange={(e) => (e.target.value = e.target.value.toUpperCase())}
+            />
 
             {fetcher.data?.errors?.vin ? (
               <Text size="1" color="red" trim="start">
