@@ -4,24 +4,23 @@ import {
   Button,
   Callout,
   Card,
-  Dialog,
   Flex,
   Heading,
   Switch,
   Text,
-  TextField,
 } from "@radix-ui/themes";
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useFetcher, useLoaderData, useNavigate } from "@remix-run/react";
+import {
+  Outlet,
+  useFetcher,
+  useLoaderData,
+  useNavigate,
+} from "@remix-run/react";
 import { FunctionComponent, useState } from "react";
 import invariant from "tiny-invariant";
 
-import {
-  createVehicle,
-  getVehicleListItems,
-  updateVehicle,
-} from "~/models/vehicle.server";
+import { getVehicleListItems, updateVehicle } from "~/models/vehicle.server";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   invariant(params.userId, "Missing contactId param");
@@ -34,50 +33,17 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
   invariant(params.userId, "Missing userId param");
   const formData = await request.formData();
 
-  const _action = formData.get("_action");
+  const vehicleId = formData.get("vehicleId");
+  const includedOnPolicy = formData.get("includedOnPolicy") === "true";
 
-  if (_action === "ADD_VEHICLE") {
-    return handleAddVehicle({ formData, userId: params.userId });
-  }
-  if (_action === "TOGGLE_VEHICLE_INCLUDED") {
-    return handleToggleVehicleIncluded({ formData });
-  }
-
-  async function handleToggleVehicleIncluded({
-    formData,
-  }: {
-    formData: FormData;
-  }) {
-    const vehicleId = formData.get("vehicleId");
-    const includedOnPolicy = formData.get("includedOnPolicy") === "true";
-
-    if (typeof vehicleId !== "string") {
-      return json(
-        { errors: { vehicleId: "Vehicle ID is required" } },
-        { status: 400 },
-      );
-    }
-
-    return updateVehicle(vehicleId, "includedOnPolicy", includedOnPolicy);
+  if (typeof vehicleId !== "string") {
+    return json(
+      { errors: { vehicleId: "Vehicle ID is required" } },
+      { status: 400 },
+    );
   }
 
-  async function handleAddVehicle({
-    formData,
-    userId,
-  }: {
-    formData: FormData;
-    userId: string;
-  }) {
-    const vin = formData.get("vin");
-    if (typeof vin !== "string" || !/^[A-HJ-NPR-Z0-9]{17}$/i.test(vin)) {
-      return json(
-        { errors: { vin: "Please enter a valid VIN" } },
-        { status: 400 },
-      );
-    }
-
-    return createRandomVehicle(userId, vin);
-  }
+  return updateVehicle(vehicleId, "includedOnPolicy", includedOnPolicy);
 };
 
 export default function WhichVehiclesScene() {
@@ -100,7 +66,17 @@ export default function WhichVehiclesScene() {
             ))
           : null}
 
-        <AddVehicleDialog />
+        <Outlet />
+
+        <Button
+          size="2"
+          variant="outline"
+          onClick={() =>
+            navigate(`/which-vehicles/${userId}/add-vehicle-dialog`)
+          }
+        >
+          <PlusCircledIcon width="16" height="16" /> Add vehicle
+        </Button>
 
         <Button onClick={() => navigate(`/which-drivers/${userId}`)} size="3">
           Continue
@@ -151,11 +127,6 @@ const VehicleCard: FunctionComponent<{
             </Text>
           </Box>
           <fetcher.Form method="post">
-            <input
-              type="hidden"
-              name="_action"
-              value="TOGGLE_VEHICLE_INCLUDED"
-            />
             <input type="hidden" name="vehicleId" value={vehicle.id} />
             <Switch
               type="submit"
@@ -171,108 +142,4 @@ const VehicleCard: FunctionComponent<{
       </Card>
     </Text>
   );
-};
-
-const AddVehicleDialog = () => {
-  const [open, setOpen] = useState(false);
-  const fetcher = useFetcher();
-
-  const response = fetcher.data?.vin;
-  const request = fetcher.formData ? fetcher.formData?.get("vin") : "";
-
-  if (open && request === response) {
-    setOpen(false);
-  }
-
-  return (
-    <Dialog.Root open={open} onOpenChange={setOpen}>
-      <Dialog.Trigger>
-        <Button size="2" variant="outline">
-          <PlusCircledIcon width="16" height="16" /> Add vehicle
-        </Button>
-      </Dialog.Trigger>
-
-      <Dialog.Content style={{ maxWidth: 450 }}>
-        <Dialog.Title>What’s the VIN?</Dialog.Title>
-
-        <fetcher.Form method="post">
-          <input type="hidden" name="_action" value="ADD_VEHICLE" />
-          <Flex direction="column" gap="3">
-            <TextField.Input
-              size="3"
-              name="vin"
-              placeholder="VIN"
-              onChange={(e) => (e.target.value = e.target.value.toUpperCase())}
-            />
-
-            {fetcher.data?.errors?.vin ? (
-              <Text size="1" color="red" trim="start">
-                {fetcher.data?.errors.vin}
-              </Text>
-            ) : null}
-          </Flex>
-
-          <Flex gap="3" mt="4" justify="end">
-            <Dialog.Close>
-              <Button variant="soft" color="gray">
-                Cancel
-              </Button>
-            </Dialog.Close>
-            <Button type="submit">Add vehicle</Button>
-          </Flex>
-        </fetcher.Form>
-      </Dialog.Content>
-    </Dialog.Root>
-  );
-};
-
-const createRandomVehicle = async (userId: string, vin: string) => {
-  const randomNumber = Math.random();
-
-  if (randomNumber < 0.2) {
-    return createVehicle({
-      year: 2024,
-      make: "Honda",
-      model: "Odyssey",
-      vin,
-      userId,
-      includedOnPolicy: true,
-    });
-  } else if (randomNumber < 0.4) {
-    return createVehicle({
-      year: 2023,
-      make: "Dodge",
-      model: "Challenger",
-      vin,
-      userId,
-      includedOnPolicy: true,
-    });
-  } else if (randomNumber < 0.6) {
-    return createVehicle({
-      year: 2021,
-      make: "Honda",
-      model: "Civic",
-      vin,
-      userId,
-      includedOnPolicy: true,
-    });
-  } else if (randomNumber < 0.8) {
-    return createVehicle({
-      year: 2020,
-      make: "Toyota",
-      model: "Camry",
-      vin,
-      userId,
-      includedOnPolicy: true,
-    });
-  } else {
-    return createVehicle({
-      year: 2022,
-      make: "Toyota",
-      model: "Highlander",
-      vin,
-      userId,
-      includedOnPolicy: true,
-    });
-  }
 };
