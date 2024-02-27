@@ -6,8 +6,13 @@ body {
 /* HEADER */
 
 header {
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  width: 100%;
   padding: 10px;
   border-bottom: 1px solid hsla(0, 0%, 50%, 0.2);
+  background-color: var(--color-page-background);
 }
 
 .logo-link {
@@ -28,7 +33,8 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: min(150px, 16vw) 10px 40px;
+  margin-top: 60px;
+  padding: min(150px, 12vw) 10px 40px;
 }
 
 .main-content-wrap {

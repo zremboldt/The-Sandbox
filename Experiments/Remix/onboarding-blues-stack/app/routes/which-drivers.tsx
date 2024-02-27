@@ -12,7 +12,7 @@ import {
 } from "@radix-ui/themes";
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useFetcher, useLoaderData } from "@remix-run/react";
+import { useFetcher, useLoaderData, useNavigate } from "@remix-run/react";
 import { FunctionComponent, useState } from "react";
 
 import { getUsersOnAccount, updateUser } from "~/models/user.server";
@@ -42,6 +42,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
 export default function WhichDriversScene() {
   const { users } = useLoaderData<typeof loader>();
+  const navigate = useNavigate();
 
   return (
     <Flex direction="column" gap="7">
@@ -84,7 +85,7 @@ export default function WhichDriversScene() {
           <PlusCircledIcon width="16" height="16" /> Add driver
         </Button>
 
-        <Button type="submit" size="3">
+        <Button onClick={() => navigate(`/recent-accident`)} size="3">
           Continue
         </Button>
       </Flex>
