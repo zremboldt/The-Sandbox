@@ -1,4 +1,4 @@
-import type { User, Vehicle } from "@prisma/client";
+import type { Account, User, Vehicle } from "@prisma/client";
 
 import { prisma } from "~/db.server";
 
@@ -6,19 +6,23 @@ export type { Vehicle } from "@prisma/client";
 
 export function getVehicle({
   id,
-  userId,
+  accountId,
 }: Pick<Vehicle, "id"> & {
-  userId: User["id"];
+  accountId: Account["id"];
 }) {
   return prisma.vehicle.findFirst({
     select: { id: true, year: true, make: true, model: true },
-    where: { id, userId },
+    where: { id, accountId },
   });
 }
 
-export function getVehicleListItems({ userId }: { userId: User["id"] }) {
+export function getVehicleListItems({
+  accountId,
+}: {
+  accountId: Account["id"];
+}) {
   return prisma.vehicle.findMany({
-    where: { userId },
+    where: { accountId },
     select: {
       id: true,
       year: true,
@@ -36,10 +40,10 @@ export function createVehicle({
   make,
   model,
   vin,
-  userId,
+  accountId,
   includedOnPolicy,
 }: Pick<Vehicle, "year" | "make" | "model" | "vin" | "includedOnPolicy"> & {
-  userId: User["id"];
+  accountId: Account["id"];
 }) {
   return prisma.vehicle.create({
     data: {
@@ -48,9 +52,9 @@ export function createVehicle({
       model,
       vin,
       includedOnPolicy,
-      user: {
+      account: {
         connect: {
-          id: userId,
+          id: accountId,
         },
       },
     },
@@ -73,9 +77,9 @@ export async function updateVehicle<T extends keyof Vehicle>(
 
 export function deleteVehicle({
   id,
-  userId,
-}: Pick<Vehicle, "id"> & { userId: User["id"] }) {
+  accountId,
+}: Pick<Vehicle, "id"> & { accountId: Account["id"] }) {
   return prisma.vehicle.deleteMany({
-    where: { id, userId },
+    where: { id, accountId },
   });
 }

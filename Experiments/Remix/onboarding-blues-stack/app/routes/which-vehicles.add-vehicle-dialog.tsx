@@ -3,12 +3,12 @@ import type { ActionFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, useActionData, useNavigate } from "@remix-run/react";
 import { useState } from "react";
-import invariant from "tiny-invariant";
 
-import { createVehicle } from "~/models/vehicle.server";
+import { requireUser } from "~/session.server";
+import { createRandomVehicle } from "~/utils";
 
-export const action = async ({ params, request }: ActionFunctionArgs) => {
-  invariant(params.userId, "Missing userId param");
+export const action = async ({ request }: ActionFunctionArgs) => {
+  const { accountId } = await requireUser(request);
   const formData = await request.formData();
   const vin = formData.get("vin");
 
@@ -19,9 +19,9 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
     );
   }
 
-  await createRandomVehicle(params.userId, vin);
+  await createRandomVehicle({ accountId, vin });
 
-  return redirect(`/which-vehicles/${params.userId}`);
+  return redirect(`/which-vehicles`);
 };
 
 export default function AddVehicleDialog() {
@@ -31,7 +31,7 @@ export default function AddVehicleDialog() {
 
   const handleClose = () => {
     setOpen(false);
-    navigate(-1);
+    setTimeout(() => navigate(-1), 200); // allow time for the dialog to animate before navigating
   };
 
   return (
@@ -68,54 +68,3 @@ export default function AddVehicleDialog() {
     </Dialog.Root>
   );
 }
-
-const createRandomVehicle = async (userId: string, vin: string) => {
-  const randomNumber = Math.random();
-
-  if (randomNumber < 0.2) {
-    return createVehicle({
-      year: 2024,
-      make: "Honda",
-      model: "Odyssey",
-      vin,
-      userId,
-      includedOnPolicy: true,
-    });
-  } else if (randomNumber < 0.4) {
-    return createVehicle({
-      year: 2023,
-      make: "Dodge",
-      model: "Challenger",
-      vin,
-      userId,
-      includedOnPolicy: true,
-    });
-  } else if (randomNumber < 0.6) {
-    return createVehicle({
-      year: 2021,
-      make: "Honda",
-      model: "Civic",
-      vin,
-      userId,
-      includedOnPolicy: true,
-    });
-  } else if (randomNumber < 0.8) {
-    return createVehicle({
-      year: 2020,
-      make: "Toyota",
-      model: "Camry",
-      vin,
-      userId,
-      includedOnPolicy: true,
-    });
-  } else {
-    return createVehicle({
-      year: 2022,
-      make: "Toyota",
-      model: "Highlander",
-      vin,
-      userId,
-      includedOnPolicy: true,
-    });
-  }
-};

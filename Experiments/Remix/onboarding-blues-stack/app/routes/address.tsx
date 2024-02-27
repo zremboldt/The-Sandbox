@@ -1,15 +1,15 @@
 import { Button, Flex, Heading, Text, TextField } from "@radix-ui/themes";
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { Form, useFetcher, useActionData } from "@remix-run/react";
+import { Form, useActionData } from "@remix-run/react";
 import { useRef } from "react";
-import invariant from "tiny-invariant";
 
 import { updateUser } from "~/models/user.server";
-import { createVehicle } from "~/models/vehicle.server";
+import { requireUser } from "~/session.server";
+import { prefillRequest } from "~/utils";
 
-export const action = async ({ request, params }: ActionFunctionArgs) => {
-  invariant(params.userId, "Missing userId param");
+export const action = async ({ request }: ActionFunctionArgs) => {
+  const { id, accountId } = await requireUser(request);
   const formData = await request.formData();
   const address = formData.get("address");
 
@@ -20,12 +20,10 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     );
   }
 
-  await updateUser(params.userId, "address", address);
-  await prefillRequest({ userId: params.userId });
+  await updateUser(id, "address", address);
+  await prefillRequest({ accountId });
 
-  // IDEA: Have a fn that looks at what values are missing in the User object and just redirects to the next step.
-  // The end of every action in onboarding would call this. I don't know that we even need xState.
-  return redirect(`/homeowner/${params.userId}`);
+  return redirect(`/homeowner`);
 };
 
 export default function AddressScene() {
@@ -39,7 +37,7 @@ export default function AddressScene() {
 
         <Flex direction="column" gap="3">
           <TextField.Input
-            autoFocus
+            autoFocus // eslint-disable-line jsx-a11y/no-autofocus
             size="3"
             ref={addressRef}
             name="address"
@@ -64,22 +62,3 @@ export default function AddressScene() {
     </Form>
   );
 }
-
-// This simulates us making our prefill request.
-const prefillRequest = async ({ userId }: { userId: string }) => {
-  await createVehicle({
-    year: 2021,
-    make: "Honda",
-    model: "Accord",
-    vin: "1HGBH41JXMN109186",
-    userId,
-  });
-
-  await createVehicle({
-    year: 2020,
-    make: "Dodge",
-    model: "Grand Caravan",
-    vin: "1HGBH41JXMN109187",
-    userId,
-  });
-};

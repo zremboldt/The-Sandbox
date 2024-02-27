@@ -18,19 +18,18 @@ import {
   useNavigate,
 } from "@remix-run/react";
 import { FunctionComponent, useState } from "react";
-import invariant from "tiny-invariant";
 
 import { getVehicleListItems, updateVehicle } from "~/models/vehicle.server";
+import { requireUser } from "~/session.server";
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
-  invariant(params.userId, "Missing contactId param");
-  const vehicles = await getVehicleListItems({ userId: params.userId });
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  const { accountId } = await requireUser(request);
+  const vehicles = await getVehicleListItems({ accountId });
 
-  return json({ vehicles, userId: params.userId });
+  return json({ vehicles });
 };
 
-export const action = async ({ params, request }: ActionFunctionArgs) => {
-  invariant(params.userId, "Missing userId param");
+export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
 
   const vehicleId = formData.get("vehicleId");
@@ -47,7 +46,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
 };
 
 export default function WhichVehiclesScene() {
-  const { vehicles, userId } = useLoaderData<typeof loader>();
+  const { vehicles } = useLoaderData<typeof loader>();
   const navigate = useNavigate();
 
   return (
@@ -71,14 +70,12 @@ export default function WhichVehiclesScene() {
         <Button
           size="2"
           variant="outline"
-          onClick={() =>
-            navigate(`/which-vehicles/${userId}/add-vehicle-dialog`)
-          }
+          onClick={() => navigate(`/which-vehicles/add-vehicle-dialog`)}
         >
           <PlusCircledIcon width="16" height="16" /> Add vehicle
         </Button>
 
-        <Button onClick={() => navigate(`/which-drivers/${userId}`)} size="3">
+        <Button onClick={() => navigate(`/which-drivers`)} size="3">
           Continue
         </Button>
       </Flex>

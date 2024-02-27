@@ -9,14 +9,13 @@ import {
 } from "@radix-ui/themes";
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { Form, useFetcher, useActionData } from "@remix-run/react";
-import { useRef } from "react";
-import invariant from "tiny-invariant";
+import { Form, useActionData } from "@remix-run/react";
 
 import { updateUser } from "~/models/user.server";
+import { requireUserId } from "~/session.server";
 
-export const action = async ({ request, params }: ActionFunctionArgs) => {
-  invariant(params.userId, "Missing userId param");
+export const action = async ({ request }: ActionFunctionArgs) => {
+  const userId = await requireUserId(request);
   const formData = await request.formData();
   const recentlyMoved = formData.get("recentlyMoved");
 
@@ -29,14 +28,13 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
   const hasRecentlyMoved = recentlyMoved === "true" ? true : false;
 
-  await updateUser(params.userId, "recentlyMoved", hasRecentlyMoved);
+  await updateUser(userId, "recentlyMoved", hasRecentlyMoved);
 
-  return redirect(`/marital-status/${params.userId}`);
+  return redirect(`/marital-status`);
 };
 
 export default function RecentlyMovedScene() {
   const actionData = useActionData<typeof action>();
-  // const addressRef = useRef<HTMLInputElement>(null);
 
   return (
     <Form method="post">

@@ -7,10 +7,11 @@ import {
   Separator,
 } from "@radix-ui/themes";
 import type { ActionFunctionArgs } from "@remix-run/node";
-import { createCookie, json, redirect } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import { useEffect, useRef } from "react";
 
+import { createAccount } from "~/models/account.server";
 import { createUser } from "~/models/user.server";
 import { createUserSession } from "~/session.server";
 import { safeRedirect } from "~/utils";
@@ -35,7 +36,13 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     );
   }
 
-  const user = await createUser(firstName, lastName);
+  const account = await createAccount();
+  const user = await createUser({
+    firstName,
+    lastName,
+    accountId: account.id,
+    pni: true,
+  });
 
   return createUserSession({
     redirectTo,
@@ -77,7 +84,7 @@ export default function NameScene() {
 
         <Flex direction="column" gap="3">
           <TextField.Input
-            autoFocus
+            autoFocus // eslint-disable-line jsx-a11y/no-autofocus
             size="3"
             ref={firstNameRef}
             name="firstName"

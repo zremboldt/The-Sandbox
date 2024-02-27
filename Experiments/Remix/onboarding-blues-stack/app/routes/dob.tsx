@@ -3,7 +3,6 @@ import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import { useRef } from "react";
-import invariant from "tiny-invariant";
 
 import { getUserById, updateUser } from "~/models/user.server";
 import { requireUserId } from "~/session.server";
@@ -22,7 +21,6 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const userId = await requireUserId(request);
-  invariant(userId, "Missing userId");
 
   const formData = await request.formData();
   const month = formData.get("month");
@@ -96,7 +94,7 @@ export default function DobScene() {
         <Flex direction="column" gap="3">
           <Flex direction="row" gap="3">
             <TextField.Input
-              autoFocus
+              autoFocus // eslint-disable-line jsx-a11y/no-autofocus
               name="month"
               placeholder="MM"
               ref={monthRef}

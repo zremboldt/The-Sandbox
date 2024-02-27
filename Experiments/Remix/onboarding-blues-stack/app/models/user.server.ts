@@ -1,4 +1,4 @@
-import type { Password, User } from "@prisma/client";
+import type { Account, Password, User } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 import { prisma } from "~/db.server";
@@ -9,14 +9,27 @@ export async function getUserById(id: User["id"]) {
   return prisma.user.findUnique({ where: { id } });
 }
 
-export async function createUser(
-  firstName: User["firstName"], 
-  lastName: User["lastName"]
-) {
+export async function createUser({
+  firstName,
+  lastName,
+  accountId,
+  pni,
+}: {
+  firstName: User["firstName"];
+  lastName: User["lastName"];
+  accountId: User["accountId"];
+  pni: User["pni"];
+}) {
   return prisma.user.create({
     data: {
       firstName,
       lastName,
+      pni,
+      account: {
+        connect: {
+          id: accountId,
+        },
+      },
     },
   });
 }
@@ -24,7 +37,7 @@ export async function createUser(
 export async function updateUser<T extends keyof User>(
   id: User["id"],
   column: T,
-  value: User[T]
+  value: User[T],
 ) {
   const data: Partial<User> = {};
   data[column] = value;
@@ -32,6 +45,20 @@ export async function updateUser<T extends keyof User>(
   return prisma.user.update({
     where: { id },
     data,
+  });
+}
+
+export function getUsersOnAccount({ accountId }: { accountId: Account["id"] }) {
+  return prisma.user.findMany({
+    where: { accountId },
+    select: {
+      id: true,
+      firstName: true,
+      lastName: true,
+      pni: true,
+      includedOnPolicy: true,
+    },
+    orderBy: { id: "desc" },
   });
 }
 

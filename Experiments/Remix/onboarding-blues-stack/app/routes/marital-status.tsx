@@ -10,12 +10,12 @@ import {
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
-import invariant from "tiny-invariant";
 
 import { updateUser } from "~/models/user.server";
+import { requireUserId } from "~/session.server";
 
-export const action = async ({ request, params }: ActionFunctionArgs) => {
-  invariant(params.userId, "Missing userId param");
+export const action = async ({ request }: ActionFunctionArgs) => {
+  const userId = await requireUserId(request);
   const formData = await request.formData();
   const maritalStatus = formData.get("marital-status");
 
@@ -26,10 +26,10 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     );
   }
 
-  await updateUser(params.userId, "maritalStatus", maritalStatus);
+  await updateUser(userId, "maritalStatus", maritalStatus);
 
   // return null;
-  return redirect(`/which-vehicles/${params.userId}`);
+  return redirect(`/which-vehicles`);
 };
 
 export default function MaritalStatusScene() {

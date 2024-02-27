@@ -11,46 +11,37 @@ import {
   Text,
 } from "@radix-ui/themes";
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
-import { json, redirect } from "@remix-run/node";
-import {
-  Form,
-  useActionData,
-  useFetcher,
-  useLoaderData,
-} from "@remix-run/react";
+import { json } from "@remix-run/node";
+import { useFetcher, useLoaderData } from "@remix-run/react";
 import { FunctionComponent, useState } from "react";
-import invariant from "tiny-invariant";
 
-import { getVehicleListItems, updateVehicle } from "~/models/vehicle.server";
+import { getUsersOnAccount, updateUser } from "~/models/user.server";
+import { requireUser } from "~/session.server";
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
-  invariant(params.userId, "Missing contactId param");
-  const vehicles = await getVehicleListItems({ userId: params.userId });
-  if (!vehicles.length) {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  const { accountId } = await requireUser(request);
+  const users = await getUsersOnAccount({ accountId });
+  if (!users.length) {
     throw new Response("Not Found", { status: 404 });
   }
-  return json({ vehicles });
+  return json({ users });
 };
 
-export const action = async ({ params, request }: ActionFunctionArgs) => {
-  invariant(params.userId, "Missing userId param");
+export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
 
-  const vehicleId = formData.get("vehicleId");
+  const userId = formData.get("userId");
   const includedOnPolicy = formData.get("includedOnPolicy") === "true";
 
-  if (typeof vehicleId !== "string") {
-    return json(
-      { errors: { vehicleId: "Vehicle ID is required" } },
-      { status: 400 },
-    );
+  if (typeof userId !== "string") {
+    return json({ errors: { userId: "userId is required" } }, { status: 400 });
   }
 
-  return updateVehicle(vehicleId, "includedOnPolicy", includedOnPolicy);
+  return updateUser(userId, "includedOnPolicy", includedOnPolicy);
 };
 
-export default function MaritalStatusScene() {
-  const { vehicles } = useLoaderData<typeof loader>();
+export default function WhichDriversScene() {
+  const { users } = useLoaderData<typeof loader>();
 
   return (
     <Flex direction="column" gap="7">
@@ -85,11 +76,9 @@ export default function MaritalStatusScene() {
       </Flex>
 
       <Flex direction="column" gap="3">
-        {vehicles.length
-          ? vehicles.map((vehicle) => (
-              <VehicleCard key={vehicle.id} vehicle={vehicle} />
-            ))
-          : null}
+        {users.map((user) => (
+          <UserCard key={user.id} user={user} />
+        ))}
 
         <Button type="submit" size="2" variant="outline">
           <PlusCircledIcon width="16" height="16" /> Add driver
@@ -114,47 +103,49 @@ export default function MaritalStatusScene() {
   );
 }
 
-const VehicleCard: FunctionComponent<{
-  vehicle: {
+const UserCard: FunctionComponent<{
+  user: {
     id: string;
-    year: number;
-    make: string;
-    model: string;
+    firstName: string;
+    lastName: string;
+    pni: boolean;
     includedOnPolicy: boolean;
   };
-}> = ({ vehicle }) => {
+}> = ({ user }) => {
   const fetcher = useFetcher();
 
   const includedOnPolicy = fetcher.formData
     ? fetcher.formData.get("includedOnPolicy") === "true"
-    : vehicle.includedOnPolicy;
+    : user.includedOnPolicy;
 
   const [isChecked, setIsChecked] = useState(includedOnPolicy);
 
   return (
-    <Text key={vehicle.id} as="label">
+    <Text key={user.id} as="label">
       <Card size="2">
         <Flex gap="4" align="center" justify="between">
           <Box>
             <Text as="div" weight="bold">
-              {vehicle.year} {vehicle.make} {vehicle.model}
+              {user.firstName} {user.lastName}
             </Text>
             <Text as="div" color="gray">
-              {includedOnPolicy ? "Added" : "Not added"}
+              {includedOnPolicy ? "Covered" : "Not covered"}
             </Text>
           </Box>
-          <fetcher.Form method="post">
-            <input type="hidden" name="vehicleId" value={vehicle.id} />
-            <Switch
-              type="submit"
-              name="includedOnPolicy"
-              value={includedOnPolicy ? "false" : "true"}
-              checked={isChecked}
-              onCheckedChange={() => setIsChecked(!isChecked)}
-              radius="full"
-              size="3"
-            />
-          </fetcher.Form>
+          {user.pni ? null : (
+            <fetcher.Form method="post">
+              <input type="hidden" name="userId" value={user.id} />
+              <Switch
+                type="submit"
+                name="includedOnPolicy"
+                value={includedOnPolicy ? "false" : "true"}
+                checked={isChecked}
+                onCheckedChange={() => setIsChecked(!isChecked)}
+                radius="full"
+                size="3"
+              />
+            </fetcher.Form>
+          )}
         </Flex>
       </Card>
     </Text>
