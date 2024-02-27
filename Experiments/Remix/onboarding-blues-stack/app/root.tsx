@@ -48,7 +48,7 @@ export default function App() {
         <Theme
           accentColor="tomato"
           radius="small"
-          scaling="105%"
+          scaling="100%"
           appearance={"light"}
         >
           {/* <ThemePanel /> */}

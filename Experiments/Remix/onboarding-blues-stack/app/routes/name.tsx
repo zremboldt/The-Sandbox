@@ -74,7 +74,10 @@ export default function NameScene() {
             orientation="horizontal"
             size="3"
             my="3"
-            style={{ height: 3 }}
+            style={{
+              height: 3,
+              backgroundColor: "var(--color-focus-root)",
+            }}
           />
           <Heading size="7">Let’s start with your name</Heading>
           <Text color="gray">

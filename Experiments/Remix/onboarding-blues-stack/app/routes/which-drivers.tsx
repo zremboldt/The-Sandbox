@@ -53,9 +53,14 @@ export default function WhichDriversScene() {
 
         <Card size="2">
           <Flex gap="4" align="center">
-            <Avatar size="5" radius="full" fallback="T" color="tomato" />
+            <Avatar size="5" radius="full" fallback="T" />
             <Flex direction="column" gap="2">
-              <Text as="div" size="1" weight="bold" color="tomato">
+              <Text
+                as="div"
+                size="1"
+                weight="bold"
+                style={{ color: "var(--accent-9)" }}
+              >
                 ROOT SAVINGS TIP
               </Text>
               <Text as="div" size="3" weight="bold">
