@@ -87,7 +87,6 @@ export default function NameScene() {
 
         <Flex direction="column" gap="3">
           <TextField.Input
-            autoFocus // eslint-disable-line jsx-a11y/no-autofocus
             size="3"
             ref={firstNameRef}
             name="firstName"

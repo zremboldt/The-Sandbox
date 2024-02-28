@@ -94,7 +94,6 @@ export default function DobScene() {
         <Flex direction="column" gap="3">
           <Flex direction="row" gap="3">
             <TextField.Input
-              autoFocus // eslint-disable-line jsx-a11y/no-autofocus
               name="month"
               placeholder="MM"
               ref={monthRef}
