@@ -3,6 +3,7 @@ import { useMemo } from "react";
 
 import { createUser, type User } from "~/models/user.server";
 
+import { accountHasVehicles } from "./models/account.server";
 import { Vehicle, createVehicle } from "./models/vehicle.server";
 
 const DEFAULT_REDIRECT = "/";
@@ -83,6 +84,11 @@ export function validateEmail(email: unknown): email is string {
 export const prefillRequest = async ({
   accountId,
 }: Pick<Vehicle, "accountId">) => {
+  const hasVehicles = await accountHasVehicles(accountId);
+  if (hasVehicles) {
+    return;
+  }
+
   await createVehicle({
     year: 2021,
     make: "Honda",

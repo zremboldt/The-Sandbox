@@ -1,24 +1,17 @@
-import { InfoCircledIcon, PlusCircledIcon } from "@radix-ui/react-icons";
+import { PlusCircledIcon } from "@radix-ui/react-icons";
 import {
   Avatar,
   Box,
   Button,
-  Callout,
   Card,
   Flex,
   Heading,
-  Switch,
   Text,
 } from "@radix-ui/themes";
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import {
-  Outlet,
-  useFetcher,
-  useLoaderData,
-  useNavigate,
-} from "@remix-run/react";
-import { FunctionComponent, useState } from "react";
+import { Outlet, useLoaderData, useNavigate } from "@remix-run/react";
+import { FunctionComponent } from "react";
 
 import { getUsersOnAccount } from "~/models/user.server";
 import { getVehicleListItems, updateVehicle } from "~/models/vehicle.server";

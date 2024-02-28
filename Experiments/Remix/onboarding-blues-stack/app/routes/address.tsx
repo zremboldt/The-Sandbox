@@ -2,7 +2,6 @@ import { Button, Flex, Heading, Text, TextField } from "@radix-ui/themes";
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
-import { useRef } from "react";
 
 import { updateUser } from "~/models/user.server";
 import { requireUser } from "~/session.server";
@@ -28,7 +27,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
 export default function AddressScene() {
   const actionData = useActionData<typeof action>();
-  const addressRef = useRef<HTMLInputElement>(null);
 
   return (
     <Form method="post">
@@ -38,7 +36,6 @@ export default function AddressScene() {
         <Flex direction="column" gap="3">
           <TextField.Input
             size="3"
-            ref={addressRef}
             name="address"
             placeholder="Address, city, state, ZIP"
             aria-invalid={actionData?.errors?.address ? true : undefined}

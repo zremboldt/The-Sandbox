@@ -28,7 +28,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   await updateUser(userId, "maritalStatus", maritalStatus);
 
-  // return null;
   return redirect(`/which-vehicles`);
 };
 

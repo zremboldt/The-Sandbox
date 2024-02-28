@@ -7,9 +7,8 @@ import {
   Separator,
 } from "@radix-ui/themes";
 import type { ActionFunctionArgs } from "@remix-run/node";
-import { json, redirect } from "@remix-run/node";
-import { Form, useActionData } from "@remix-run/react";
-import { useEffect, useRef } from "react";
+import { json } from "@remix-run/node";
+import { Form, Link, useActionData } from "@remix-run/react";
 
 import { createAccount } from "~/models/account.server";
 import { createUser } from "~/models/user.server";
@@ -54,16 +53,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
 export default function NameScene() {
   const actionData = useActionData<typeof action>();
-  const firstNameRef = useRef<HTMLInputElement>(null);
-  const lastNameRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (actionData?.errors?.firstName) {
-      firstNameRef.current?.focus();
-    } else if (actionData?.errors?.lastName) {
-      lastNameRef.current?.focus();
-    }
-  }, [actionData]);
 
   return (
     <Form method="post">
@@ -88,7 +77,6 @@ export default function NameScene() {
         <Flex direction="column" gap="3">
           <TextField.Input
             size="3"
-            ref={firstNameRef}
             name="firstName"
             placeholder="First name"
             aria-invalid={actionData?.errors?.firstName ? true : undefined}
@@ -105,7 +93,6 @@ export default function NameScene() {
 
           <TextField.Input
             size="3"
-            ref={lastNameRef}
             name="lastName"
             placeholder="Last name"
             aria-invalid={actionData?.errors?.lastName ? true : undefined}
@@ -124,6 +111,15 @@ export default function NameScene() {
             Continue
           </Button>
         </Flex>
+        <Text align={"center"} color="gray">
+          Been here before?{" "}
+          <Link
+            to="/sign-in"
+            className="rt-Text rt-reset rt-Link rt-underline-auto"
+          >
+            Finish signing up
+          </Link>
+        </Text>
       </Flex>
     </Form>
   );
