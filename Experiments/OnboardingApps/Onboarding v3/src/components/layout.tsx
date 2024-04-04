@@ -10,7 +10,7 @@ export const getDefaultLayout = (page: React.ReactElement) => {
     <div vaul-drawer-wrapper="" className="relative bg-background">
       <img
         src={holo}
-        className="absolute top-0 right-0 z-0 min-h-2/5 opacity-80 dark:hue-rotate-90 dark:opacity-25"
+        className="absolute top-0 right-0 z-0 pointer-events-none min-h-2/5 opacity-80 dark:hue-rotate-90 dark:opacity-25"
         alt=""
       />
       {/* <div className="h-min-screen"> */}

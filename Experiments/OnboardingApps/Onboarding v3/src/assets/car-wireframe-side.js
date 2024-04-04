@@ -15,4 +15,4 @@ export const CarWireframeSide = ({ className }) => (
     <circle cx="9.5" cy="18" r="4" stroke="#BBBBBB" strokeWidth="0.8" />
     <circle cx="36" cy="18" r="4" stroke="#BBBBBB" strokeWidth="0.8" />
   </svg>
-);
+)

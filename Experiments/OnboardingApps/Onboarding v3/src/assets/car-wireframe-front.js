@@ -16,4 +16,4 @@ export const CarWireframeFront = ({ className }) => (
       strokeLinejoin="round"
     />
   </svg>
-);
+)
