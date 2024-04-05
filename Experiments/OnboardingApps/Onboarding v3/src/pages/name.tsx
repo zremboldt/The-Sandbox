@@ -1,27 +1,31 @@
 import { Helmet } from 'react-helmet'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button } from 'src/components/ui/button'
 
 import { useForm } from 'react-hook-form'
 import { Input } from 'src/components/ui/input'
-import * as z from 'zod'
-
-const schema = z.object({
-  firstName: z.string(),
-  lastName: z.string(),
-})
-
-type Schema = z.infer<typeof schema>
+import useLocalStorageState from 'src/hooks/use-localstorage-state'
 
 export default function NameScene() {
+  const navigate = useNavigate()
   const { register, formState, handleSubmit } = useForm()
+  const [, setFirstName] = useLocalStorageState('firstName')
+  const [, setLastName] = useLocalStorageState('lastName')
+
   // const { register, formState, handleSubmit } = useForm<Schema>({
   //   resolver: zodResolver(schema),
   // })
 
-  const onSubmit = (data: Schema) => {
-    console.log(data)
+  const updateProfile = async ({ firstName, lastName }) => {
+    setFirstName(firstName)
+    setLastName(lastName)
   }
+
+  const onSubmit = async (data) => {
+    await updateProfile(data)
+    navigate('/dob')
+  }
+
   // const onSubmit = (data) => {
   //   console.log(data)
   // }

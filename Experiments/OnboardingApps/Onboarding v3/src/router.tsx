@@ -3,11 +3,26 @@ import { createHashRouter, RouteObject } from 'react-router-dom'
 import ErrorPage from './components/error-page'
 import { getDefaultLayout } from './components/layout'
 import NameScene from './pages/name'
+import DobScene from './pages/dob'
+import AddressScene from './pages/address'
+import HomeownerScene from './pages/homeowner'
 
 export const routerObjects: RouteObject[] = [
   {
     path: '/',
     Component: NameScene,
+  },
+  {
+    path: '/dob',
+    Component: DobScene,
+  },
+  {
+    path: '/address',
+    Component: AddressScene,
+  },
+  {
+    path: '/homeowner',
+    Component: HomeownerScene,
   },
 ]
 
