@@ -3,18 +3,16 @@ import { useNavigate } from 'react-router-dom'
 import { Button } from 'src/components/ui/button'
 
 import { useForm } from 'react-hook-form'
-import useLocalStorageState from 'src/hooks/use-localstorage-state'
 import { Input } from 'src/components/ui/input'
+import { useProfileStore } from 'src/hooks/profile-store'
 
 export default function AddressScene() {
   const navigate = useNavigate()
   const { register, formState, handleSubmit } = useForm()
-  const [, setAddress] = useLocalStorageState('address')
+  const updateAddress = useProfileStore((state) => state.updateAddress)
 
-  const updateProfile = async ({ address }) => setAddress(address)
-
-  const onSubmit = async (data) => {
-    await updateProfile(data)
+  const onSubmit = ({ address }) => {
+    updateAddress(address)
     navigate('/homeowner')
   }
 

@@ -4,34 +4,23 @@ import { Button } from 'src/components/ui/button'
 
 import { useForm } from 'react-hook-form'
 import { Input } from 'src/components/ui/input'
-import useLocalStorageState from 'src/hooks/use-localstorage-state'
+import { useProfileStore } from 'src/hooks/profile-store'
 
 export default function NameScene() {
   const navigate = useNavigate()
   const { register, formState, handleSubmit } = useForm()
-  const [, setFirstName] = useLocalStorageState('firstName')
-  const [, setLastName] = useLocalStorageState('lastName')
+  const updateFirstName = useProfileStore((state) => state.updateFirstName)
+  const updateLastName = useProfileStore((state) => state.updateLastName)
 
   // const { register, formState, handleSubmit } = useForm<Schema>({
   //   resolver: zodResolver(schema),
   // })
 
-  const updateProfile = async ({ firstName, lastName }) => {
-    setFirstName(firstName)
-    setLastName(lastName)
-  }
-
-  const onSubmit = async (data) => {
-    await updateProfile(data)
+  const onSubmit = ({ firstName, lastName }) => {
+    updateFirstName(firstName)
+    updateLastName(lastName)
     navigate('/dob')
   }
-
-  // const onSubmit = (data) => {
-  //   console.log(data)
-  // }
-
-  console.log('formState', formState)
-  console.log('formState.errors', formState.errors)
 
   return (
     <>
