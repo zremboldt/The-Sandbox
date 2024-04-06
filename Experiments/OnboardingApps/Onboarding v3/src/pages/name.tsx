@@ -2,21 +2,34 @@ import { Helmet } from 'react-helmet'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button } from 'src/components/ui/button'
 
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 import { Input } from 'src/components/ui/input'
 import { useProfileStore } from 'src/hooks/profile-store'
 
+const FormSchema = z.object({
+  firstName: z.string().min(1, {
+    message: 'First name is required.',
+  }),
+  lastName: z.string().min(1, {
+    message: 'Last name is required.',
+  }),
+})
+
 export default function NameScene() {
   const navigate = useNavigate()
-  const { register, formState, handleSubmit } = useForm()
   const updateFirstName = useProfileStore((state) => state.updateFirstName)
   const updateLastName = useProfileStore((state) => state.updateLastName)
+  const { register, formState, handleSubmit } = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+    },
+  })
 
-  // const { register, formState, handleSubmit } = useForm<Schema>({
-  //   resolver: zodResolver(schema),
-  // })
-
-  const onSubmit = ({ firstName, lastName }) => {
+  const onSubmit = ({ firstName, lastName }: z.infer<typeof FormSchema>) => {
     updateFirstName(firstName)
     updateLastName(lastName)
     navigate('/dob')
@@ -40,17 +53,17 @@ export default function NameScene() {
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
           <Input {...register('firstName', { required: true, maxLength: 64 })} placeholder="First name" />
 
-          {formState.errors.firstName?.type === 'required' && (
+          {formState.errors?.firstName?.message && (
             <p role="alert" className="text-destructive text-sm -mt-2">
-              First name is required
+              {formState.errors.firstName.message}
             </p>
           )}
 
           <Input {...register('lastName', { required: true, maxLength: 64 })} placeholder="Last name" />
 
-          {formState.errors.lastName?.type === 'required' && (
+          {formState.errors?.lastName?.message && (
             <p role="alert" className="text-destructive text-sm -mt-2">
-              Last name is required
+              {formState.errors.lastName.message}
             </p>
           )}
 
