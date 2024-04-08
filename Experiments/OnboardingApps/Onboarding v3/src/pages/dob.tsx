@@ -47,8 +47,10 @@ export default function DobScene() {
       year: '',
     },
   })
+  const { ref: hookFormDayRef, onChange: hookFormOnDayChange, ...restDay } = register('day')
+  const { ref: hookFormYearRef, onChange: hookFormOnYearChange, ...restYear } = register('year')
   const dayRef = useRef(null)
-  const { ref: formDayRef, ...rest } = register('day')
+  const yearRef = useRef(null)
 
   const onSubmit = (data) => {
     const dob = new Date(data.year, data.month - 1, data.day)
@@ -77,12 +79,11 @@ export default function DobScene() {
     e.target.value = e.target.value.replace(/[^0-9]/g, '') // don't allow non-numeric characters
 
     if (e.target.value.length === 1 && parseInt(e.target.value) > 1) {
-      e.target.value = '' // don't allow a first digit greater than 1
-      return
+      e.target.value = `0${e.target.value}` // first digits greater than 1 are prefixed with a 0
     }
 
     if (e.target.value.length === 2 && parseInt(e.target.value) > 12) {
-      e.target.value = e.target.value.replace(/.$/, '') // don't allow a second digit greater than 2
+      e.target.value = e.target.value.replace(/.$/, '') // don't allow a total digit greater than 12
       return
     }
 
@@ -94,24 +95,39 @@ export default function DobScene() {
   const handleDayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.target.value = e.target.value.replace(/[^0-9]/g, '') // don't allow non-numeric characters
 
-    if (e.target.value.length === 1 && parseInt(e.target.value) > 1) {
-      e.target.value = '' // don't allow a first digit greater than 1
-      return
+    if (e.target.value.length === 1 && parseInt(e.target.value) > 3) {
+      e.target.value = `0${e.target.value}` // first digits greater than 3 are prefixed with a 0
     }
 
-    if (e.target.value.length === 2 && parseInt(e.target.value) > 12) {
-      e.target.value = e.target.value.replace(/.$/, '') // don't allow a second digit greater than 2
+    if (e.target.value.length === 2 && parseInt(e.target.value) > 31) {
+      e.target.value = e.target.value.replace(/.$/, '') // don't allow a total digit greater than 31
       return
     }
 
     if (e.target.value.length === 2) {
-      dayRef.current?.focus()
+      yearRef.current?.focus()
+    }
+  }
+
+  const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.target.value = e.target.value.replace(/[^0-9]/g, '') // don't allow non-numeric characters
+
+    if (e.target.value.length === 1) {
+      if (parseInt(e.target.value) < 1 || parseInt(e.target.value) > 2) {
+        e.target.value = '' // don't allow a first digit less than 1 or greater than 2
+      }
+      return
+    }
+
+    if (e.target.value.length === 2) {
+      if (parseInt(e.target.value) < 19 || parseInt(e.target.value) > 20) {
+        e.target.value = e.target.value.replace(/.$/, '') // don't allow the second digit total to equal less than 19 or more than 20
+      }
+      return
     }
   }
 
   const errors = formState.errors
-
-  console.log(errors)
 
   return (
     <>
@@ -128,14 +144,29 @@ export default function DobScene() {
               })}
             />
             <DobInputDay
-              {...rest}
+              {...restDay}
               name="day"
+              onChange={(e) => {
+                hookFormOnDayChange(e)
+                handleDayChange(e)
+              }}
               ref={(e) => {
-                formDayRef(e)
-                dayRef.current = e // you can still assign to ref
+                hookFormDayRef(e)
+                dayRef.current = e
               }}
             />
-            <DobInputYear {...register('year')} />
+            <DobInputYear
+              {...restYear}
+              name="year"
+              onChange={(e) => {
+                hookFormOnYearChange(e)
+                handleYearChange(e)
+              }}
+              ref={(e) => {
+                hookFormYearRef(e)
+                yearRef.current = e
+              }}
+            />
           </DobInputGroup>
 
           {(errors.month?.message || errors.day?.message || errors.year?.message) && (
