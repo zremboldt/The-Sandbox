@@ -25,7 +25,7 @@ export default function AddressScene() {
       <div className="flex flex-col gap-8 w-full max-w-md">
         <p>{firstName}</p>
         <p>{lastName}</p>
-        <p>{dob}</p>
+        <p>{dob.toString()}</p>
         <p>{address}</p>
 
         {/* <h2 className="text-3xl">What’s your home address?</h2> */}

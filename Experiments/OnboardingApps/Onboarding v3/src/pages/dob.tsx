@@ -8,6 +8,7 @@ import { DobInputDay, DobInputGroup, DobInputMonth, DobInputYear } from 'src/com
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useRef } from 'react'
+import { isOldEnough, isYoungEnough, DEFAULT_MAX_AGE, DEFAULT_MIN_AGE } from 'src/lib/dob'
 
 const FormSchema = z.object({
   month: z
@@ -39,7 +40,7 @@ const FormSchema = z.object({
 export default function DobScene() {
   const navigate = useNavigate()
   const updateDob = useProfileStore((state) => state.updateDob)
-  const { register, formState, handleSubmit } = useForm<z.infer<typeof FormSchema>>({
+  const { register, formState, setError, handleSubmit } = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       month: '',
@@ -52,24 +53,26 @@ export default function DobScene() {
   const dayRef = useRef(null)
   const yearRef = useRef(null)
 
+  const errors = formState.errors
+
   const onSubmit = (data) => {
     const dob = new Date(data.year, data.month - 1, data.day)
 
-    // if (isNaN(dob.getTime())) {
-    //   return json({ errors: { dob: 'Please enter a valid date' } }, { status: 400 })
-    // }
+    if (!isYoungEnough({ dob })) {
+      console.log('is not young enough')
+      return setError('month', {
+        type: 'manual',
+        message: `You must be ${DEFAULT_MAX_AGE} years or younger to sign up`,
+      })
+    }
 
-    // // ensure user is at least 18
-    // const eighteenYearsAgo = new Date()
-    // eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18)
-
-    // if (dob.getTime() > eighteenYearsAgo.getTime()) {
-    //   return json({ errors: { dob: 'You must be at least 18 years old' } }, { status: 400 })
-    // }
-
-    console.log(dob)
-
-    return
+    if (!isOldEnough({ dob })) {
+      console.log('is not old enough')
+      return setError('month', {
+        type: 'manual',
+        message: `You must be ${DEFAULT_MIN_AGE} years or older to sign up`,
+      })
+    }
 
     updateDob(dob)
     navigate('/address')
@@ -126,8 +129,6 @@ export default function DobScene() {
       return
     }
   }
-
-  const errors = formState.errors
 
   return (
     <>
