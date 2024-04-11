@@ -10,7 +10,7 @@ import { z } from 'zod'
 import { useRef } from 'react'
 import { isOldEnough, isYoungEnough, DEFAULT_MAX_AGE, DEFAULT_MIN_AGE } from 'src/lib/dob'
 
-const FormSchema = z.object({
+const formSchema = z.object({
   month: z
     .string()
     .min(2, {
@@ -40,8 +40,8 @@ const FormSchema = z.object({
 export default function DobScene() {
   const navigate = useNavigate()
   const updateDob = useProfileStore((state) => state.updateDob)
-  const { register, formState, setError, handleSubmit } = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const { register, formState, setError, handleSubmit } = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       month: '',
       day: '',
@@ -55,8 +55,8 @@ export default function DobScene() {
 
   const errors = formState.errors
 
-  const onSubmit = (data) => {
-    const dob = new Date(data.year, data.month - 1, data.day)
+  const onSubmit = ({ month, day, year }: z.infer<typeof formSchema>) => {
+    const dob = new Date(parseInt(year), parseInt(month) - 1, parseInt(day))
 
     if (!isYoungEnough({ dob })) {
       console.log('is not young enough')

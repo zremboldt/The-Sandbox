@@ -4,7 +4,7 @@ import { persist } from 'zustand/middleware'
 type State = {
   firstName: string
   lastName: string
-  dob: string
+  dob: Date | null
   address: string
 }
 
@@ -20,7 +20,7 @@ export const useProfileStore = create(
     (set) => ({
       firstName: '',
       lastName: '',
-      dob: '',
+      dob: null,
       address: '',
       updateFirstName: (firstName) => set(() => ({ firstName: firstName })),
       updateLastName: (lastName) => set(() => ({ lastName: lastName })),

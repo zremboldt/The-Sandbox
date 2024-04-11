@@ -8,7 +8,7 @@ import { z } from 'zod'
 import { Input } from 'src/components/ui/input'
 import { useProfileStore } from 'src/hooks/profile-store'
 
-const FormSchema = z.object({
+const formSchema = z.object({
   firstName: z.string().min(1, {
     message: 'First name is required',
   }),
@@ -21,15 +21,15 @@ export default function NameScene() {
   const navigate = useNavigate()
   const updateFirstName = useProfileStore((state) => state.updateFirstName)
   const updateLastName = useProfileStore((state) => state.updateLastName)
-  const { register, formState, handleSubmit } = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const { register, formState, handleSubmit } = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       firstName: '',
       lastName: '',
     },
   })
 
-  const onSubmit = ({ firstName, lastName }: z.infer<typeof FormSchema>) => {
+  const onSubmit = ({ firstName, lastName }: z.infer<typeof formSchema>) => {
     updateFirstName(firstName)
     updateLastName(lastName)
     navigate('/dob')
