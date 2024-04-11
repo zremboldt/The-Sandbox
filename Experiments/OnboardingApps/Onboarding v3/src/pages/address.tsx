@@ -3,15 +3,28 @@ import { useNavigate } from 'react-router-dom'
 import { Button } from 'src/components/ui/button'
 
 import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 import { Input } from 'src/components/ui/input'
 import { useProfileStore } from 'src/hooks/profile-store'
 
+const formSchema = z.object({
+  address: z.string().min(1, {
+    message: 'Address is required',
+  }),
+})
+
 export default function AddressScene() {
   const navigate = useNavigate()
-  const { register, formState, handleSubmit } = useForm()
   const updateAddress = useProfileStore((state) => state.updateAddress)
+  const { register, formState, handleSubmit } = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      address: '',
+    },
+  })
 
-  const onSubmit = ({ address }) => {
+  const onSubmit = ({ address }: z.infer<typeof formSchema>) => {
     updateAddress(address)
     navigate('/homeowner')
   }
