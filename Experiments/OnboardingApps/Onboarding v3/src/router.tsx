@@ -6,6 +6,7 @@ import NameScene from './pages/name'
 import DobScene from './pages/dob'
 import AddressScene from './pages/address'
 import HomeownerScene from './pages/homeowner'
+import RecentlyMovedScene from './pages/recently-moved'
 
 export const routerObjects: RouteObject[] = [
   {
@@ -23,6 +24,10 @@ export const routerObjects: RouteObject[] = [
   {
     path: '/homeowner',
     Component: HomeownerScene,
+  },
+  {
+    path: '/recently-moved',
+    Component: RecentlyMovedScene,
   },
 ]
 

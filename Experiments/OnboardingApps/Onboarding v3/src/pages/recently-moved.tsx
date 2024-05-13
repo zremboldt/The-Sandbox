@@ -12,51 +12,53 @@ import { RadioGroup, RadioGroupItem } from 'src/components/ui/radio-group'
 import { Label } from 'src/components/ui/label'
 
 const formSchema = z.object({
-  homeowner: z.string(),
+  homeowner: z.boolean().nullable(),
 })
 
-export default function HomeownerScene() {
+export default function RecentlyMovedScene() {
   const navigate = useNavigate()
+  const homeowner = useProfileStore((state) => state.homeowner)
   const updateHomeowner = useProfileStore((state) => state.updateHomeowner)
   const { register, formState, handleSubmit } = useForm<z.infer<typeof formSchema>>({
-    // resolver: zodResolver(formSchema),
-    // defaultValues: {
-    //   homeowner: '',
-    // },
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      homeowner: null,
+    },
   })
 
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log(data)
+  const onSubmit = ({ homeowner }: z.infer<typeof formSchema>) => {
     updateHomeowner(homeowner)
-    // navigate('/recently-moved')
+    navigate('/recently-moved')
   }
 
-  console.log(formState.errors.homeowner)
+  console.log('homeowner: ', homeowner)
 
   return (
     <>
       <Helmet>
-        <title>{'Homeowner | Root Insurance'}</title>
+        <title>{'Recently moved | Root Insurance'}</title>
       </Helmet>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8 w-full max-w-md">
-        <h2 className="text-3xl">Do you rent or own your home?</h2>
+        <h2 className="text-3xl">Have you moved in the last 6 months?</h2>
 
-        <RadioGroup>
+        {homeowner}
+
+        <RadioGroup {...register('homeowner', { required: true })}>
           <Separator />
           <Label className="flex items-center justify-between py-5 px-3">
             Rent
-            <RadioGroupItem {...register('homeowner')} value="rent" />
+            <RadioGroupItem value="false" />
           </Label>
           <Separator />
           <Label className="flex items-center justify-between py-5 px-3">
             Own
-            <RadioGroupItem {...register('homeowner')} value="own" />
+            <RadioGroupItem value="true" />
           </Label>
           <Separator />
 
-          {formState.errors.homeowner?.message && (
+          {formState.errors.homeowner?.type === 'required' && (
             <p role="alert" className="text-destructive text-sm -mt-2">
-              {formState.errors.homeowner.message}
+              Date of birth is required
             </p>
           )}
         </RadioGroup>
