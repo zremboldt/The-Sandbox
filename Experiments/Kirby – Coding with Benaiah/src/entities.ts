@@ -11,6 +11,7 @@ import {
   SpriteComp,
 } from "kaboom";
 import { scale } from "./constants";
+import { globalGameState } from "./state";
 
 type PlayerGameObj = GameObj<
   SpriteComp &
@@ -57,8 +58,7 @@ export function makePlayer(k: KaboomCtx, posX: number, posY: number) {
 
     if (player.hp() === 0) {
       k.destroy(player);
-      // k.go(globalGameState.currentScene);
-      k.go("level-1");
+      k.go(globalGameState.currentScene);
       return;
     }
 
@@ -80,8 +80,7 @@ export function makePlayer(k: KaboomCtx, posX: number, posY: number) {
   });
 
   player.onCollide("exit", () => {
-    // k.go(globalGameState.nextScene);
-    k.go("level-2");
+    k.go(globalGameState.nextScene);
     // alert("You win!");
   });
 
@@ -113,8 +112,7 @@ export function makePlayer(k: KaboomCtx, posX: number, posY: number) {
 
   player.onUpdate(() => {
     if (player.pos.y > 2000) {
-      // k.go(globalGameState.currentScene);
-      k.go("level-1");
+      k.go(globalGameState.currentScene);
     }
   });
 
