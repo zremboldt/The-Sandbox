@@ -1,0 +1,56 @@
+import { scale } from './constants';
+import galaxyMapData from '../levels/galaxy.json';
+
+export async function makeMap(k, name) {
+  const maps = {
+    galaxy: galaxyMapData,
+  };
+
+  const mapData = maps[name];
+
+  console.log(mapData);
+
+  const map = k.make([k.sprite(name), k.scale(scale), k.pos(0)]);
+
+  const grid = k.make([
+    k.sprite('grid'), // Specify the sprite to use
+    k.color(10, 20, 40), // Set the color tint of the image (optional)
+  ]);
+
+  // const spawnPoints = {};
+
+  // for (const layer of mapData.layers) {
+  //   if (layer.name === 'colliders') {
+  //     for (const collider of layer.objects) {
+  //       map.add([
+  //         k.area({
+  //           shape: new k.Rect(k.vec2(0), collider.width, collider.height),
+  //           collisionIgnore: ['platform', 'exit'],
+  //         }),
+  //         collider.name !== 'exit' ? k.body({ isStatic: true }) : null,
+  //         k.pos(collider.x, collider.y),
+  //         collider.name !== 'exit' ? 'platform' : 'exit',
+  //       ]);
+  //     }
+  //     continue;
+  //   }
+  //   if (layer.name === 'spawnpoints') {
+  //     for (const spawnPoint of layer.objects) {
+  //       if (spawnPoints[spawnPoint.name]) {
+  //         spawnPoints[spawnPoint.name].push({
+  //           x: spawnPoint.x,
+  //           y: spawnPoint.y,
+  //         });
+  //         continue;
+  //       }
+  //       spawnPoints[spawnPoint.name] = [{ x: spawnPoint.x, y: spawnPoint.y }];
+  //     }
+  //   }
+  // }
+
+  return {
+    map,
+    grid,
+    // spawnPoints
+  };
+}

@@ -1,0 +1,25 @@
+.wrapper {
+  display: grid;
+  height: 100svh;
+  width: 100vw;
+  place-items: center;
+}
+
+.phone {
+  display: grid;
+  place-items: center;
+  width: 300px;
+  height: 600px;
+  background: hsl(0 0% 5%);
+  border: 5px solid hsl(0 0% 22%);
+  border-radius: 36px;
+  box-shadow: 0 0 20px hsla(0 0% 0% / 0.2);
+  overflow: hidden;
+  position: relative;
+}
+
+.element {
+  width: 48px;
+  height: 48px;
+  background: hsl(79, 94%, 66%);
+}

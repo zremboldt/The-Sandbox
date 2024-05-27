@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oscillating Hue Background</title>
+<style>
+  :root {
+    --hue: 120;
+  }
+  body {
+    margin: 0;
+    height: 100svh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: oklch(50%, 100%, var(--hue));
+  }
+</style>
+</head>
+<body>
+<script>
+  let root = document.documentElement;
+  let oscillatingHue = 280;
+  const oscillationSpeed = 0.1;
+
+  function updateHue() {
+    root.style.setProperty('--hue', oscillatingHue += oscillationSpeed);
+    requestAnimationFrame(updateHue);
+  }
+
+  requestAnimationFrame(updateHue);
+ </script>
+</body>
+</html>
