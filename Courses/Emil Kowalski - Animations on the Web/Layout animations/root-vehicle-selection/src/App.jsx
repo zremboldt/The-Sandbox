@@ -55,10 +55,31 @@ export default function App() {
                       layoutId={`vehicle-image-${activeVehicle.id}`}
                     />
                     <div className="content">
-                      <motion.h2 layoutId={`vehicle-title-${activeVehicle.id}`}>
-                        {activeVehicle.year} {activeVehicle.make}{" "}
-                        {activeVehicle.model}
-                      </motion.h2>
+                      <div className="header">
+                        <div className="text-content">
+                          <motion.h2
+                            layoutId={`vehicle-title-${activeVehicle.id}`}
+                          >
+                            {activeVehicle.year} {activeVehicle.make}{" "}
+                            {activeVehicle.model}
+                          </motion.h2>
+                          <motion.p
+                            layoutId={`vehicle-covered-${activeVehicle.id}`}
+                          >
+                            {activeVehicle.isCovered
+                              ? "Covered"
+                              : "Not covered"}
+                          </motion.p>
+                        </div>
+                        <motion.div
+                          layoutId={`vehicle-covered-indicator-${activeVehicle.id}`}
+                          className={
+                            activeVehicle.isCovered
+                              ? "indicator active"
+                              : "indicator"
+                          }
+                        />
+                      </div>
                       <motion.div
                         className="sub-content"
                         initial={{ opacity: 0 }}
@@ -66,7 +87,7 @@ export default function App() {
                           opacity: 1,
                           transition: { delay: 0.1, duration: 0.2 },
                         }}
-                        exit={{ opacity: 0 }}
+                        exit={{ opacity: 0, transition: { duration: 0.2 } }}
                       >
                         <div className="content-pairing-wrap">
                           <h6>Garaging Address</h6>
@@ -97,9 +118,20 @@ export default function App() {
                   layoutId={`vehicle-image-${vehicle.id}`}
                 />
                 <div className="content">
-                  <motion.h2 layoutId={`vehicle-title-${vehicle.id}`}>
-                    {vehicle.year} {vehicle.make} {vehicle.model}
-                  </motion.h2>
+                  <div className="text-content">
+                    <motion.h2 layoutId={`vehicle-title-${vehicle.id}`}>
+                      {vehicle.year} {vehicle.make} {vehicle.model}
+                    </motion.h2>
+                    <motion.p layoutId={`vehicle-covered-${vehicle.id}`}>
+                      {vehicle.isCovered ? "Covered" : "Not covered"}
+                    </motion.p>
+                  </div>
+                  <motion.div
+                    layoutId={`vehicle-covered-indicator-${vehicle.id}`}
+                    className={
+                      vehicle.isCovered ? "indicator active" : "indicator"
+                    }
+                  />
                 </div>
               </motion.li>
             ))}
@@ -119,6 +151,7 @@ const VEHICLES = [
     model: "Odyssey",
     plate: "206 SOL",
     address: "202 E Grand Ave.",
+    isCovered: true,
   },
   {
     id: 2,
@@ -128,6 +161,7 @@ const VEHICLES = [
     model: "Civic",
     plate: "128 DEW",
     address: "206 N Floral St.",
+    isCovered: false,
   },
   {
     id: 3,
@@ -137,6 +171,7 @@ const VEHICLES = [
     model: "Highlander",
     plate: "101 BUN",
     address: "300 S Wheatridge Rd.",
+    isCovered: true,
   },
   {
     id: 4,
@@ -146,6 +181,7 @@ const VEHICLES = [
     model: "WRX STI",
     plate: "397 KIQ",
     address: "901 S Lincoln St.",
+    isCovered: true,
   },
   {
     id: 5,
@@ -155,5 +191,6 @@ const VEHICLES = [
     model: "Challenger",
     plate: "145 YIT",
     address: "207 E Grand Ave.",
+    isCovered: false,
   },
 ];

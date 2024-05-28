@@ -24,6 +24,9 @@
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 0 0% 98%;
 
+  --success: 156 90% 50%;
+  --success-foreground: 0 0% 98%;
+
   --border: 240 5.9% 90%;
   --input: 240 5.9% 90%;
   --ring: var(--primary-base);
@@ -54,6 +57,9 @@
 
     --destructive: 0 85% 60%;
     --destructive-foreground: 60 9.1% 97.8%;
+
+    --success: 156 90% 50%;
+    --success-foreground: 0 0% 98%;
 
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
