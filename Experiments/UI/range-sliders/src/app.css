@@ -160,22 +160,20 @@
   &.reflect-green {
     --light-color: 162 26% 40%;
     --light-bright: 162 60% 90%;
-    --offset-distance: -8%;
-    --opacity: 0.5;
+    /* --offset-distance: -8%; */
   }
   &.reflect-orange {
     --light-color: 10 26% 40%;
     --light-bright: 10 100% 80%;
-    --offset-distance: 86%;
-    --opacity: 0.6;
+    /* --offset-distance: 86%; */
   }
 
   position: absolute;
   inset: 0;
-  width: 40px;
-  height: 80px;
+  width: 60px;
+  width: 60px;
   offset-path: rect(0% auto 100% auto);
-  offset-distance: var(--offset-distance);
+  /* offset-distance: var(--offset-distance); */
   background: radial-gradient(
     hsl(var(--light-bright)) 0%,
     hsl(var(--light-color)) 30%,

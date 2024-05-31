@@ -46,6 +46,8 @@ export default function App() {
     setValue(clampedProgress);
   };
 
+  const sliderGlowPos = 80 + indicatorValue / 10;
+
   return (
     <>
       <div>{value}</div>
@@ -112,7 +114,8 @@ export default function App() {
               <div className="slider-thumb-half">
                 <motion.div
                   animate={{
-                    opacity: value < 20 ? value / 50 : 0.5,
+                    opacity: indicatorValue < 20 ? indicatorValue / 50 : 0.5,
+                    offsetDistance: `${sliderGlowPos}%`,
                   }}
                   className="glow reflect-green"
                 />
@@ -121,7 +124,8 @@ export default function App() {
               <div className="slider-thumb-half">
                 <motion.div
                   animate={{
-                    opacity: value < 20 ? value / 50 : 0.5,
+                    opacity: indicatorValue < 20 ? indicatorValue / 50 : 0.5,
+                    offsetDistance: `${sliderGlowPos}%`,
                   }}
                   className="glow reflect-green"
                 />
