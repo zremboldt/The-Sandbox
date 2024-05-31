@@ -32,7 +32,7 @@ export default function App() {
   }, [handleY, value]);
 
   const handleDragEnd = () => {
-    setIndicatorValue(value);
+    setIndicatorValue(value < 2.5 ? 2.5 : value);
   };
 
   const handleDrag = () => {
@@ -41,10 +41,12 @@ export default function App() {
     const progressBarBounds = progressBarRef.current.getBoundingClientRect();
     const progress =
       (middleOfHandle - progressBarBounds.top) / progressBarBounds.height; // Calculate the progress based on the middle of the handle relative to the invisible inner progress bar
-    const scaledProgress = progress * (MAX - MIN); // Scale the progress to the min-max range
+    const scaledProgress = Math.round(progress * (MAX - MIN)); // Scale the progress to the min-max range
     const clampedProgress = Math.min(MAX, Math.max(MIN, scaledProgress)); // Prevent values outside of 0-100 caused by dragElastic outside of the slider
     setValue(clampedProgress);
   };
+
+  const MULTIPLIER = 20;
 
   return (
     <>
@@ -69,14 +71,16 @@ export default function App() {
                 <motion.div
                   className="indicator-light indicator-light-green"
                   animate={{
-                    // opacity: indicatorValue / 10,
+                    opacity: value / MULTIPLIER,
                     height: indicatorLightHeight,
                     transition: {
                       type: "spring",
                       damping: 20,
                     },
                   }}
-                />
+                >
+                  <div className="indicator-light-inner" />
+                </motion.div>
               </div>
             </div>
           </div>
