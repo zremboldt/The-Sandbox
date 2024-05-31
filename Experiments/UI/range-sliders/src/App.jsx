@@ -25,9 +25,8 @@ export default function App() {
   const handleRef = useRef();
 
   useEffect(() => {
-    const newProgress = value / (MAX - MIN);
+    const newProgress = (MAX - value) / (MAX - MIN);
     const progressBarBounds = progressBarRef.current.getBoundingClientRect();
-
     handleY.set(newProgress * progressBarBounds.height);
   }, [handleY, value]);
 
@@ -41,12 +40,11 @@ export default function App() {
     const progressBarBounds = progressBarRef.current.getBoundingClientRect();
     const progress =
       (middleOfHandle - progressBarBounds.top) / progressBarBounds.height; // Calculate the progress based on the middle of the handle relative to the invisible inner progress bar
-    const scaledProgress = Math.round(progress * (MAX - MIN)); // Scale the progress to the min-max range
+    const reversedProgress = 1 - progress; // Reverse the progress
+    const scaledProgress = Math.round(reversedProgress * (MAX - MIN)); // Scale the progress to the min-max range
     const clampedProgress = Math.min(MAX, Math.max(MIN, scaledProgress)); // Prevent values outside of 0-100 caused by dragElastic outside of the slider
     setValue(clampedProgress);
   };
-
-  const MULTIPLIER = 20;
 
   return (
     <>
@@ -71,7 +69,7 @@ export default function App() {
                 <motion.div
                   className="indicator-light indicator-light-green"
                   animate={{
-                    opacity: value / MULTIPLIER,
+                    opacity: value / 20,
                     height: indicatorLightHeight,
                     transition: {
                       type: "spring",
@@ -96,7 +94,8 @@ export default function App() {
                 width: "2px",
                 background: "gray",
                 borderRadius: "99px",
-                opacity: 0.1,
+                // opacity: 0.08,
+                opacity: 0,
               }}
             />
             <motion.div
@@ -111,11 +110,21 @@ export default function App() {
               style={{ height: `${handleHeight}px`, y: handleY }}
             >
               <div className="slider-thumb-half">
-                <div className="glow reflect-green"></div>
+                <motion.div
+                  animate={{
+                    opacity: value < 20 ? value / 50 : 0.5,
+                  }}
+                  className="glow reflect-green"
+                />
                 <div className="slider-thumb-top"></div>
               </div>
               <div className="slider-thumb-half">
-                <div className="glow reflect-green"></div>
+                <motion.div
+                  animate={{
+                    opacity: value < 20 ? value / 50 : 0.5,
+                  }}
+                  className="glow reflect-green"
+                />
                 <div className="slider-thumb-bottom"></div>
               </div>
             </motion.div>
