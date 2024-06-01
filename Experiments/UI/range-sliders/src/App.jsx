@@ -116,6 +116,7 @@ export default function App() {
                   animate={{
                     opacity: indicatorValue < 20 ? indicatorValue / 50 : 0.5,
                     offsetDistance: `${sliderGlowPos}%`,
+                    transition: { duration: 0.5 },
                   }}
                   className="glow reflect-green"
                 />
@@ -126,6 +127,7 @@ export default function App() {
                   animate={{
                     opacity: indicatorValue < 20 ? indicatorValue / 50 : 0.5,
                     offsetDistance: `${sliderGlowPos}%`,
+                    transition: { duration: 0.5 },
                   }}
                   className="glow reflect-green"
                 />
