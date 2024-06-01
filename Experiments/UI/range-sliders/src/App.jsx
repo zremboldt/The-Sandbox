@@ -1,4 +1,3 @@
-import "./app.css";
 import { ControlSet } from "./control-set";
 
 export default function App() {

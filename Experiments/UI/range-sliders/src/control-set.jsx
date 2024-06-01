@@ -14,13 +14,13 @@ export const ControlSet = ({
 
   const [value, setValue] = useState(startingPosition);
   const [indicatorValue, setIndicatorValue] = useState(startingPosition);
-  const handleY = useMotionValue(0);
-  const indicatorLightHeight = `${indicatorValue}%`;
-  const sliderGlowPos = 80 + indicatorValue / 10;
-
   const constraintsRef = useRef();
   const progressBarRef = useRef();
   const handleRef = useRef();
+
+  const handleY = useMotionValue(0);
+  const indicatorLightHeight = `${indicatorValue}%`;
+  const sliderGlowPos = 80 + indicatorValue / 10;
 
   useEffect(() => {
     const newProgress = (MAX - value) / (MAX - MIN);
@@ -28,9 +28,7 @@ export const ControlSet = ({
     handleY.set(newProgress * progressBarBounds.height);
   }, [handleY, value]);
 
-  const handleDragEnd = () => {
-    setIndicatorValue(value < 2.5 ? 2.5 : value);
-  };
+  const handleDragEnd = () => setIndicatorValue(value < 2.5 ? 2.5 : value);
 
   const handleDrag = () => {
     const handleBounds = handleRef.current.getBoundingClientRect();
@@ -67,7 +65,6 @@ export const ControlSet = ({
                   damping: 20,
                 },
               }}
-              // style={{ transitionBehavior}}
             >
               <div className="indicator-light-inner" />
             </motion.div>
@@ -77,7 +74,7 @@ export const ControlSet = ({
       <div className="slider-container" ref={constraintsRef}>
         <div className="slider-track"></div>
         <div
-          data-test="slider-progress"
+          // This invisible progress bar is used to calculate the progress of the handle along the slider from the handle's centerpoint.
           ref={progressBarRef}
           style={{
             position: "absolute",
@@ -92,11 +89,11 @@ export const ControlSet = ({
           dragConstraints={constraintsRef}
           onDrag={handleDrag}
           onDragEnd={handleDragEnd}
-          className="slider-thumb-container"
+          className="slider-handle-container"
           ref={handleRef}
           style={{ height: `${handleHeight}px`, y: handleY }}
         >
-          <div className="slider-thumb-half">
+          <div className="slider-handle-half-container">
             <motion.div
               animate={{
                 opacity: indicatorValue < 20 ? indicatorValue / 50 : 0.5,
@@ -105,9 +102,9 @@ export const ControlSet = ({
               }}
               className={`glow ${lightColor}`}
             />
-            <div className="slider-thumb-top"></div>
+            <div className="slider-handle-top-half"></div>
           </div>
-          <div className="slider-thumb-half">
+          <div className="slider-handle-half-container">
             <motion.div
               animate={{
                 opacity: indicatorValue < 20 ? indicatorValue / 50 : 0.5,
@@ -116,7 +113,7 @@ export const ControlSet = ({
               }}
               className={`glow ${lightColor}`}
             />
-            <div className="slider-thumb-bottom"></div>
+            <div className="slider-handle-bottom-half"></div>
           </div>
         </motion.div>
       </div>

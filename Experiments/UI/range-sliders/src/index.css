@@ -5,54 +5,20 @@
 }
 
 :root {
-  /* --primary-base: 15 100% 54%; */ /* More vivid Root orange */
-  --primary-base: 80 100% 54%;
-}
-
-:root {
+  /* Colors */
   --background: 240 10% 3.9%;
   --foreground: 60 9.1% 97.8%;
-
   --card: 244 20% 9%;
   --card-foreground: 250 3% 70%;
-
-  --popover: 240 10% 10%;
-  --popover-foreground: 60 9.1% 97.8%;
-
-  --primary: var(--primary-base);
-  --primary-foreground: 60 9.1% 97.8%;
-
-  --secondary: 240 3.7% 15.9%;
-  --secondary-foreground: 60 9.1% 97.8%;
-
-  --muted: 240 3.7% 15.9%;
-  --muted-foreground: 240 5% 64.9%;
-
-  --accent: 12 6.5% 15.1%;
-  --accent-foreground: 60 9.1% 97.8%;
-
-  --destructive: 0 85% 60%;
-  --destructive-foreground: 60 9.1% 97.8%;
-
-  --success: 156 90% 50%;
-  --success-foreground: 0 0% 98%;
-
   --border: 244 17% 18%;
-  --input: 240 3.7% 15.9%;
-  --ring: var(--primary-base);
 }
 
 :root {
-  --radius: 0.3rem;
-  --ease-out-quart: cubic-bezier(0.165, 0.85, 0.45, 1);
-  --ring-width: 4px;
+  background-color: hsl(var(--background));
 
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color: hsl(var(--foreground));
-  background-color: hsl(var(--background));
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -64,182 +30,233 @@ body {
   margin: 0;
 }
 
-#root {
+#main {
   display: grid;
   place-items: center;
   min-height: 100svh;
-  padding: 5rem 1rem;
+  padding: 1rem;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-  color: hsl(var(--foreground));
-  font-weight: 600;
-  line-height: 1.2;
-}
+.board {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 90px;
+  padding: 60px 110px 60px 60px;
+  border-radius: 20px;
+  border-top: 1.5px solid hsl(var(--border));
+  background-image: linear-gradient(
+    200deg,
+    hsl(var(--card)),
+    hsl(var(--card) / 0.2)
+  );
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-button,
-a,
-p,
-label,
-img {
-  user-select: none;
-}
-
-p,
-li,
-button,
-a,
-label,
-input,
-textarea,
-select {
-  margin: 0;
-  color: hsl(var(--foreground));
-  font-size: 1rem;
-}
-
-h1 {
-  font-size: 3rem;
-  font-weight: 800;
-}
-
-h2 {
-  font-size: 2.5rem;
-}
-
-h3 {
-  font-size: 2rem;
-}
-
-h4 {
-  font-size: 1.5rem;
-}
-
-h5 {
-  font-size: 1.25rem;
-}
-
-h6 {
-  font-size: 1rem;
-}
-
-ul {
-  padding-left: 1rem;
-}
-
-a {
-  font-weight: 500;
-  text-decoration: inherit;
-}
-
-li {
-  list-style: none;
-}
-
-header {
-  position: fixed;
-  padding: 20px;
-  z-index: 10;
-
-  svg {
-    display: block;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0.35;
+    mix-blend-mode: overlay;
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/5/5c/Image_gaussian_noise_example.png);
   }
+
+  @media (max-width: 800px) {
+    padding: 60px 86px 60px 36px;
+  }
+}
+
+.control-set {
+  display: flex;
+  gap: 45px;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/* Buttons */
+/* Indicator */
 
-button {
-  flex: 1;
-  padding: 14px 30px;
-  background-color: hsl(var(--background));
-  border: 1px solid hsl(var(--input));
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-  color: hsl(var(--foreground) / 0.7);
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 200ms var(--ease-out-quart);
-
-  &:hover {
-    color: hsl(var(--foreground));
-    background-color: hsl(var(--foreground) / 0.02);
-  }
-
-  &:active {
-    background-color: hsl(var(--foreground) / 0.05);
-  }
-
-  &:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 var(--ring-width) hsl(var(--ring) / 0.3);
-    border-color: hsl(var(--primary));
-  }
+.indicator-container {
+  display: flex;
+  gap: 18px;
 }
 
-button.btn-sm {
-  padding: 8px 12px;
-}
+.indicator-left {
+  display: flex;
+  gap: 10px;
 
-button.btn-icon {
-  display: grid;
-  place-content: center;
-  padding: 0;
-  width: 40px;
-  height: 40px;
+  .text-container {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    text-align: end;
 
-  & > span {
-    display: inline-flex;
-  }
-
-  & svg {
-    opacity: 0.8;
-  }
-
-  &:hover {
-    & svg {
-      opacity: 1;
+    label {
+      font-weight: 600;
+    }
+    label,
+    span {
+      margin: 0;
+      font-size: 1rem;
+      color: hsl(var(--foreground) / 0.5);
+      user-select: none;
     }
   }
 }
 
-button.btn-primary {
-  background-color: hsl(var(--primary));
-  color: hsl(var(--primary-foreground));
-  border: 1px solid hsl(var(--primary));
-  box-shadow: 0 20px 25px -5px hsl(var(--primary) / 0.3),
-    0 8px 10px -6px hsl(var(--primary) / 0.3);
+.indicator-right {
+  display: flex;
+  flex-direction: column;
+  padding-top: 40px;
+}
 
-  &:hover {
-    background-color: hsl(var(--primary) / 0.9);
+.indicator-track {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  background-color: hsl(var(--background) / 0.8);
+  box-shadow: inset 0 -2px 0 0 hsl(var(--border)),
+    inset 0 0 0 2px hsl(var(--background));
+  border-radius: 999px;
+  padding: 2.5px;
+  width: 12px;
+}
+
+.indicator-light {
+  &.green-light {
+    --light-color-dull: 162 30% 50%;
+    --light-color: 162 56% 70%;
+    --light-bright: 162 100% 90%;
+  }
+  &.orange-light {
+    --light-color-dull: 22 30% 50%;
+    --light-color: 22 56% 70%;
+    --light-bright: 22 100% 90%;
   }
 
-  &:active {
-    background-color: hsl(var(--primary) / 0.8);
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  border-radius: 999px;
+  padding: 2px;
+  box-shadow: 0 -10px 20px -3px hsl(var(--light-color) / 0.3),
+    0 -15px 40px 2px hsl(var(--light-color) / 0.4),
+    0 -20px 40px 0px hsl(var(--light-bright) / 0.1);
+
+  background-image: linear-gradient(
+    to top,
+    hsl(var(--light-color-dull) / 0) 0%,
+    hsl(var(--light-color-dull)) 90%
+  );
+
+  & .indicator-light-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 999px;
+    background-image: linear-gradient(
+      to top,
+      hsl(var(--light-color) / 0.05) 0%,
+      hsl(var(--light-color) / 0.9) 30%,
+      hsl(var(--light-bright)) 100%
+    );
   }
 }
 
-button.btn-destructive {
-  color: hsl(var(--destructive));
-  border: 1px solid hsl(var(--destructive));
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+/* Slider */
 
-  &:hover {
-    background-color: hsl(var(--destructive) / 0.05);
-  }
+.slider-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+  width: 45px;
+}
 
+.slider-track {
+  flex: 1;
+  background-color: hsl(var(--background) / 0.8);
+  box-shadow: inset 0 -2px 0 0 hsl(var(--border)),
+    inset 0 0 0 2px hsl(var(--background));
+  border-radius: 999px;
+  width: 12px;
+}
+
+.slider-handle-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 50px;
+  padding: 3px;
+  background-color: hsl(var(--background));
+  border-radius: 8px;
+  border-top: 1px solid hsl(var(--border));
+  box-shadow: 4px 10px 18px 4px hsl(var(--background));
+  cursor: grab;
   &:active {
-    background-color: hsl(var(--destructive) / 0);
+    cursor: grabbing;
   }
+}
+
+.slider-handle-half-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  border-radius: 6px;
+  padding: 1px;
+}
+
+.glow {
+  &.green-light {
+    --light-color: 162 26% 40%;
+    --light-bright: 162 60% 90%;
+  }
+  &.orange-light {
+    --light-color: 22 26% 40%;
+    --light-bright: 22 100% 80%;
+  }
+
+  position: absolute;
+  inset: 0;
+  width: 60px;
+  width: 60px;
+  offset-path: rect(0% auto 100% auto);
+  offset-distance: 84%; /* default value keeps reflections from spinning on initial render */
+  background: radial-gradient(
+    hsl(var(--light-bright)) 0%,
+    hsl(var(--light-color)) 30%,
+    transparent 60%
+  );
+}
+
+.slider-handle-top-half,
+.slider-handle-bottom-half {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: hsl(var(--background));
+}
+
+.slider-handle-top-half {
+  background-image: linear-gradient(
+    to bottom,
+    hsl(var(--border) / 0.3) 0%,
+    hsl(var(--border)) 30%,
+    hsl(var(--border) / 0.2) 34%,
+    hsl(var(--border) / 0.4) 100%
+  );
+}
+
+.slider-handle-bottom-half {
+  background-image: linear-gradient(
+    to bottom,
+    hsl(var(--border) / 0.35) 0%,
+    hsl(var(--border)) 66%,
+    hsl(var(--border) / 0.2) 70%,
+    hsl(var(--border) / 0.2) 100%
+  );
 }
