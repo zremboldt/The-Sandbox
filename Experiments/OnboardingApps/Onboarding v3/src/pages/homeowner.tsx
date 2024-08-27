@@ -31,8 +31,6 @@ export default function HomeownerScene() {
     // navigate('/recently-moved')
   }
 
-  console.log(formState.errors.homeowner)
-
   return (
     <>
       <Helmet>

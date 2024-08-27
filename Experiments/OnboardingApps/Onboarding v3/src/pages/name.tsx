@@ -51,7 +51,7 @@ export default function NameScene() {
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
-          <Input {...register('firstName', { required: true, maxLength: 64 })} placeholder="First name" />
+          <Input {...register('firstName', { required: true, maxLength: 64 })} autoFocus placeholder="First name" />
 
           {formState.errors?.firstName?.message && (
             <p role="alert" className="text-destructive text-sm -mt-2">

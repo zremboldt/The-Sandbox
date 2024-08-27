@@ -37,7 +37,7 @@ export default function AddressScene() {
       <div className="flex flex-col gap-8 w-full max-w-md">
         <h2 className="text-3xl">What’s your home address?</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3 relative">
-          <Input {...register('address', { required: true })} placeholder="Address, city, state, ZIP" />
+          <Input autoFocus {...register('address', { required: true })} placeholder="Address, city, state, ZIP" />
 
           {formState.errors.address?.type === 'required' && (
             <p role="alert" className="text-destructive text-sm -mt-2">

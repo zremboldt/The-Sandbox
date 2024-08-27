@@ -1,0 +1,32 @@
+.wrap {
+  display: grid;
+  min-height: 100svh;
+  width: 100vw;
+  place-items: center;
+}
+
+.box {
+  width: 400px;
+  height: 400px;
+  border: 1px solid var(--border-new);
+  background-color: var(--card-new);
+  border-radius: 20px;
+}
+
+.dot-matrix {
+  background-image: radial-gradient(var(--border-new) 1px, transparent 0);
+  background-position: 50% center;
+  background-size: 20px 20px;
+}
+
+.draggable {
+  width: 40px;
+  height: 40px;
+  background-color: #c3ff4fff;
+  border-radius: 50%;
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
