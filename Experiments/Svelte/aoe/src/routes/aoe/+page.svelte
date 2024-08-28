@@ -19,6 +19,22 @@
 	import stable from '$lib/images/structure/stable.png';
 	import blacksmith from '$lib/images/structure/blacksmith.png';
 
+	interface Land {
+		type: string;
+		images: string[];
+	}
+
+	interface Building {
+		type: string;
+		images: string[];
+	}
+
+	interface Tile {
+		id: number;
+		land: Land;
+		building: Building;
+	}
+
 	const MAP_WIDTH = 30;
 
 	const LANDS = [
@@ -95,12 +111,12 @@
 	let mapNameToSave = $state('');
 	let mapNameToLoad = $state('');
 
-	let selectedTileTypeIndex = $state(0);
-	let selectedTileType = $derived(TILE_TYPES[selectedTileTypeIndex]);
+	let selectedToolTypeIndex = $state(0);
+	let selectedToolType = $derived(TILE_TYPES[selectedToolTypeIndex]);
 
 	const initialMapType = LANDS[Math.floor(Math.random() * LANDS.length)];
 
-	let generatedMap = $state(
+	let generatedMap: Tile[] = $state(
 		[...Array(MAP_WIDTH * MAP_WIDTH)].map((_, i) => {
 			return {
 				id: i,
@@ -110,45 +126,43 @@
 		})
 	);
 
-	const handleTileClick = (event) => {
+	const handleTileClick = (event: MouseEvent) => {
 		if (event.buttons !== 1) return;
 
-		const tileId = event.currentTarget.dataset.tileid;
-		const tile = generatedMap[tileId];
+		const tileId = (event.currentTarget as HTMLElement).dataset.tileid;
+		if (!tileId) return; // ensure it exists to make TS happy
+		const tileIndex = parseInt(tileId); // convert to number to make TS happy
+		const clickedTile = generatedMap[tileIndex];
 
-		const isSelectedLand = LANDS.includes(selectedTileType);
-		const isSelectedBuilding = BUILDINGS.includes(selectedTileType);
+		const isLandToolSelected = LANDS.includes(selectedToolType);
+		const isBuildingToolSelected = BUILDINGS.includes(selectedToolType);
 
-		// console.log(tile);
-		console.log(selectedTileType);
-
-		if (isSelectedLand) {
-			tile.land = selectedTileType;
-			// tile.image.type = selectedTileType.images[0];
+		if (isLandToolSelected) {
+			clickedTile.land = selectedToolType;
 			return;
 		}
-		if (isSelectedBuilding) {
-			if (tile.land.type === 'water') return;
-			if (tile.land.type === 'forest') {
+		if (isBuildingToolSelected) {
+			if (clickedTile.land.type === 'water') return;
+			if (clickedTile.land.type === 'forest') {
 				// if you place a building on forest, it will clear the forest
-				tile.land = LANDS.find((land) => land.type === 'grass');
+				clickedTile.land = LANDS.find((land) => land.type === 'grass')!;
 			}
-			tile.building = selectedTileType;
+			clickedTile.building = selectedToolType;
 			return;
 		}
-		if (selectedTileType.type === 'delete') {
-			tile.building = { type: '', images: [] };
+		if (selectedToolType.type === 'delete') {
+			clickedTile.building = { type: '', images: [] };
 			return;
 		}
 	};
 
 	const openSaveModal = () => {
-		const saveModal = document.getElementById('save-modal');
+		const saveModal = document.getElementById('save-modal') as HTMLDialogElement;
 		saveModal.showModal();
 	};
 
 	const openLoadModal = () => {
-		const loadModal = document.getElementById('load-modal');
+		const loadModal = document.getElementById('load-modal') as HTMLDialogElement;
 		loadModal.showModal();
 	};
 
@@ -171,8 +185,14 @@
 	};
 
 	const handleLoad = () => {
-		const map = JSON.parse(localStorage.getItem(mapNameToLoad));
-		generatedMap = map;
+		const mapDataAsString = localStorage.getItem(mapNameToLoad);
+		if (!mapDataAsString) return;
+
+		// assign the loaded map to the current map on screen
+		generatedMap = JSON.parse(mapDataAsString);
+
+		// After loading and updating a map, it's likely that the user will want to save thier changes.
+		// This next line makes that easy by prepopulating the save modal with the name of the currently loaded map.
 		mapNameToSave = mapNameToLoad.replace(saveMapPrefix, '');
 		closeModal();
 	};
@@ -192,7 +212,7 @@
 
 <header>
 	<h2>Tile Kingdoms</h2>
-	<tt>Selected tileType: {selectedTileType.type}</tt>
+	<tt>Selected tileType: {selectedToolType.type}</tt>
 </header>
 <div class="interface">
 	<nav class="toolbar">
@@ -202,7 +222,7 @@
 			{:else if tileType === TOOLS[0]}<h3 style="margin-top: 10px">Tools</h3>
 			{/if}
 			<label>
-				<input type="radio" name="tileType" value={i} bind:group={selectedTileTypeIndex} />
+				<input type="radio" name="tileType" value={i} bind:group={selectedToolTypeIndex} />
 				<!-- <img src={tileType.images[0]} /> -->
 				<span>{tileType.type}</span>
 			</label>
@@ -226,14 +246,12 @@
 				onmouseover={handleTileClick}
 				onmousedown={handleTileClick}
 			>
-				<span class="tile-number">{tile.id}</span>
 				{#if tile.building.type}
 					<img
 						data-building={tile.building.type}
 						src={tile.building.images[randomNumInRange(tile.building.images.length)]}
 						alt="building"
 					/>
-					<!-- <div class="building" data-building={tile.building.type}></div> -->
 				{/if}
 			</div>
 		{/each}
@@ -271,11 +289,6 @@
 <style>
 	:root {
 		--white: hsl(0, 0%, 100%);
-		--water: hsl(207, 100%, 58%);
-		--grass: hsl(105, 66%, 65%);
-		--forest: hsl(153, 45%, 45%);
-		--farm: hsl(49, 87%, 65%);
-		--lumbercamp: hsl(24, 23%, 65%);
 
 		--radius: 8px;
 		--border: hsl(210, 21%, 81%);
@@ -329,7 +342,6 @@
 	.tile {
 		aspect-ratio: 1;
 		font-size: 8px;
-		/* padding: 6%; */
 		border-right: 1px solid var(--grid);
 		border-bottom: 1px solid var(--grid);
 		background-size: cover;
@@ -340,40 +352,6 @@
 			width: 100%;
 			height: 100%;
 			pointer-events: none;
-		}
-
-		/* &[data-tileType='forest'] {
-			background-color: var(--forest);
-		}
-		&[data-tileType='water'] {
-			background-color: var(--water);
-		} */
-
-		/* & .building {
-			position: relative;
-			z-index: 2;
-			width: 100%;
-			height: 100%;
-			border-radius: 10%;
-		} */
-
-		/* & [data-building] {
-			border: 1px solid hsla(0, 0%, 0%, 0.2);
-		}
-		& [data-building='farm'] {
-			background-color: var(--farm);
-		}
-		& [data-building='mine'] {
-			background-color: hsl(0, 0%, 79%);
-		}
-		& [data-building='lumbercamp'] {
-			background-color: var(--lumbercamp);
-		} */
-
-		& .tile-number {
-			user-select: none;
-			position: absolute;
-			display: none;
 		}
 	}
 
