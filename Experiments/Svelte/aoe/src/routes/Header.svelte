@@ -19,6 +19,9 @@
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 				<a href="/">Home</a>
 			</li>
+			<li>
+				<a href="/aoe">AOE</a>
+			</li>
 			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
 				<a href="/about">About</a>
 			</li>
@@ -40,6 +43,7 @@
 
 <style>
 	header {
+		margin-top: -20px;
 		display: flex;
 		justify-content: space-between;
 	}

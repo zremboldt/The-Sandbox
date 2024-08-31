@@ -1,0 +1,82 @@
+import { setContext, getContext } from 'svelte';
+import { writable } from 'svelte/store';
+import { MAP_WIDTH, LANDS } from './constants';
+import type { Tile } from './constants';
+
+// https://www.youtube.com/watch?v=EyDV5XLfagg
+
+// type UserData = {
+// 	name: string;
+// 	email: string;
+// };
+
+// const USER_CTX = 'USER_CTX';
+
+// // getContext and setContext can only be called during a component's initialization.
+// export function setUserState(initialData: UserData) {
+// 	const userState = $state(initialData); // We're writing our initial data to the store
+// 	setContext(USER_CTX, userState); // We're adding the store to the Svelte context
+// 	return userState;
+// }
+
+// export function getUserState() {
+// 	return getContext<UserData>(USER_CTX); // We're getting the store from the Svelte context
+// }
+
+
+
+export const selectedToolTypeIndex = writable(0);
+
+
+const INITIAL_MAP_CTX = 'INITIAL_MAP_CTX';
+
+// WIP: Want to use this to replace some of the other code in this file
+export function initializeMap(initialData: Tile[] = []) {
+  const initialMapType = LANDS[Math.floor(Math.random() * LANDS.length)];
+  const selectRandomImage = (images: string[]) => images[Math.floor(Math.random() * images.length)];
+
+  const generatedMap = $state([...Array(MAP_WIDTH * MAP_WIDTH)].map((_, i) => ({
+		id: i,
+		land: { type: initialMapType.type, image: selectRandomImage(initialMapType.images) },
+		building: { type: '', image: '' }
+	})));
+
+  setContext(INITIAL_MAP_CTX, generatedMap); // We're adding the store to the Svelte context
+  return generatedMap;
+}
+
+export function getInitialMap() {
+  return getContext<Tile[]>(INITIAL_MAP_CTX); // We're getting the store from the Svelte context
+}
+
+
+
+
+
+// ALL DEPRECATED 👇
+
+function createMap() {
+	const initialMapType = LANDS[Math.floor(Math.random() * LANDS.length)];
+	return [...Array(MAP_WIDTH * MAP_WIDTH)].map((_, i) => ({
+		id: i,
+		land: initialMapType,
+		building: { type: '', images: [] }
+	}));
+}
+
+export const generatedMap = writable(createMap());
+
+export function updateTile(index, newTileData) {
+	generatedMap.update((map) => {
+		map[index] = { ...map[index], ...newTileData };
+		return map;
+	});
+}
+
+export function saveMap() {
+	// Implementation for saving the map
+}
+
+export function loadMap(savedMap) {
+	generatedMap.set(savedMap);
+}

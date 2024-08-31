@@ -1,5 +1,14 @@
 <script>
 	import '../app.css';
+  import { initializeMap } from '$lib/state.svelte';
+	// import { setUserState } from '$lib/state.svelte';
+  
+  initializeMap();
+
+	// setUserState({
+	// 	name: 'First Last',
+	// 	email: 'zzz@gmail.com'
+	// });
 </script>
 
 <div class="app">

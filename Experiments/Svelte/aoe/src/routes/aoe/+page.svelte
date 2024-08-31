@@ -1,206 +1,30 @@
 <script lang="ts">
-	import grass1 from '$lib/images/tile/grass-1.png';
-	import grass2 from '$lib/images/tile/grass-2.png';
-	import water1 from '$lib/images/tile/water-1.png';
-	import water2 from '$lib/images/tile/water-2.png';
-	import sand1 from '$lib/images/tile/sand-1.png';
-	import sand2 from '$lib/images/tile/sand-2.png';
-	import dirt1 from '$lib/images/tile/dirt-1.png';
-	import dirt2 from '$lib/images/tile/dirt-2.png';
-	import forest1 from '$lib/images/tile/forest-1.png';
-	import forest2 from '$lib/images/tile/forest-2.png';
-	import forest3 from '$lib/images/tile/forest-3.png';
-	import forest4 from '$lib/images/tile/forest-4.png';
+	import { TILE_TYPES, LANDS, BUILDINGS, MAP_WIDTH } from '$lib/constants';
+	import type { Tile } from '$lib/constants';
+	import Toolbar from './components/Toolbar.svelte';
+	import { selectedToolTypeIndex } from '$lib/state.svelte';
+	import { handleTileClick } from '$lib/handleTileClick.svelte';
+  import { getInitialMap } from '$lib/state.svelte';
 
-	import farm1 from '$lib/images/structure/farm-1.png';
-	import farm2 from '$lib/images/structure/farm-2.png';
-	import house1 from '$lib/images/structure/house1.png';
-	import house2 from '$lib/images/structure/house2.png';
-	import stable from '$lib/images/structure/stable.png';
-	import blacksmith from '$lib/images/structure/blacksmith.png';
+	const worldMap = getInitialMap();
 
-	interface Land {
-		type: string;
-		images: string[];
-	}
+	// import { getUserState } from '$lib/state.svelte';
+	// const user = getUserState();
+  
 
-	interface Building {
-		type: string;
-		images: string[];
-	}
-
-	interface Tile {
-		id: number;
-		land: Land;
-		building: Building;
-	}
-
-	const MAP_WIDTH = 30;
-
-	const LANDS = [
-		{
-			type: 'grass',
-			images: [grass1, grass2]
-		},
-		{
-			type: 'water',
-			images: [water1, water2]
-		},
-		{
-			type: 'sand',
-			images: [sand1, sand2]
-		},
-		{
-			type: 'dirt',
-			images: [dirt1, dirt2]
-		},
-		{
-			type: 'forest',
-			images: [forest1, forest2, forest3, forest4]
-		}
-	];
-	const BUILDINGS = [
-		{
-			type: 'farm',
-			images: [farm1, farm2]
-		},
-		{
-			type: 'stable',
-			images: [stable]
-		},
-		{
-			type: 'blacksmith',
-			images: [blacksmith]
-		},
-		{
-			type: 'house',
-			images: [house1, house2]
-		}
-		// {
-		// 	type: 'mine',
-		// 	images: []
-		// },
-		// {
-		// 	type: 'lumbercamp',
-		// 	images: []
-		// }
-		// 'home',
-		// 'dock',
-		// 'wall',
-		// 'tower',
-		// 'castle',
-		// 'blacksmith',
-		// 'barracks',
-		// 'stable'
-	];
-	const TOOLS = [
-		{
-			type: 'delete',
-			images: []
-		}
-	];
-	const TILE_TYPES = [...LANDS, ...BUILDINGS, ...TOOLS];
-
-	const saveMapPrefix = 'map__';
-
-	let savedMaps = $state(
-		typeof window !== 'undefined'
-			? Object.keys(localStorage)?.filter((key) => key.includes(saveMapPrefix))
-			: []
-	);
-	let mapNameToSave = $state('');
-	let mapNameToLoad = $state('');
-
-	let selectedToolTypeIndex = $state(0);
-	let selectedToolType = $derived(TILE_TYPES[selectedToolTypeIndex]);
-
-	const initialMapType = LANDS[Math.floor(Math.random() * LANDS.length)];
-
-	let generatedMap: Tile[] = $state(
-		[...Array(MAP_WIDTH * MAP_WIDTH)].map((_, i) => {
-			return {
-				id: i,
-				land: initialMapType,
-				building: { type: '', images: [] }
-			};
-		})
-	);
-
-	const handleTileClick = (event: MouseEvent) => {
-		if (event.buttons !== 1) return;
-
-		const tileId = (event.currentTarget as HTMLElement).dataset.tileid;
-		if (!tileId) return; // ensure it exists to make TS happy
-		const tileIndex = parseInt(tileId); // convert to number to make TS happy
-		const clickedTile = generatedMap[tileIndex];
-
-		const isLandToolSelected = LANDS.includes(selectedToolType);
-		const isBuildingToolSelected = BUILDINGS.includes(selectedToolType);
-
-		if (isLandToolSelected) {
-			clickedTile.land = selectedToolType;
-			return;
-		}
-		if (isBuildingToolSelected) {
-			if (clickedTile.land.type === 'water') return;
-			if (clickedTile.land.type === 'forest') {
-				// if you place a building on forest, it will clear the forest
-				clickedTile.land = LANDS.find((land) => land.type === 'grass')!;
-			}
-			clickedTile.building = selectedToolType;
-			return;
-		}
-		if (selectedToolType.type === 'delete') {
-			clickedTile.building = { type: '', images: [] };
-			return;
-		}
-	};
-
-	const openSaveModal = () => {
-		const saveModal = document.getElementById('save-modal') as HTMLDialogElement;
-		saveModal.showModal();
-	};
-
-	const openLoadModal = () => {
-		const loadModal = document.getElementById('load-modal') as HTMLDialogElement;
-		loadModal.showModal();
-	};
-
-	const closeModal = () => {
-		const modals = document.querySelectorAll('dialog');
-		modals.forEach((modal) => modal.close());
-	};
-
-	const handleSave = () => {
-		const map = generatedMap.map((tile) => {
-			return {
-				id: tile.id,
-				land: tile.land,
-				building: tile.building
-			};
-		});
-
-		localStorage.setItem(`${saveMapPrefix}${mapNameToSave}`, JSON.stringify(map));
-		closeModal();
-	};
-
-	const handleLoad = () => {
-		const mapDataAsString = localStorage.getItem(mapNameToLoad);
-		if (!mapDataAsString) return;
-
-		// assign the loaded map to the current map on screen
-		generatedMap = JSON.parse(mapDataAsString);
-
-		// After loading and updating a map, it's likely that the user will want to save thier changes.
-		// This next line makes that easy by prepopulating the save modal with the name of the currently loaded map.
-		mapNameToSave = mapNameToLoad.replace(saveMapPrefix, '');
-		closeModal();
-	};
-
-	const randomNumInRange = (itemCount: number) => {
-		return Math.floor(Math.random() * itemCount);
-	};
+	// let selectedToolTypeIndex = $state(0);
+	let selectedTool = $derived(TILE_TYPES[$selectedToolTypeIndex]);
 </script>
+
+<!-- ------------ -->
+<!-- ------------ -->
+
+<!-- ------------ -->
+<!-- START MARKUP -->
+<!-- ------------ -->
+
+<!-- ------------ -->
+<!-- ------------ -->
 
 <svelte:head>
 	<title>Tile Kingdoms</title>
@@ -210,81 +34,50 @@
 	/>
 </svelte:head>
 
+<!-- <h1>Welcome, {user.name}</h1>
+<input type="text" bind:value={user.name} /> -->
+
 <header>
 	<h2>Tile Kingdoms</h2>
-	<tt>Selected tileType: {selectedToolType.type}</tt>
+	<tt>Selected tileType: {selectedTool.type}</tt>
 </header>
-<div class="interface">
-	<nav class="toolbar">
-		{#each TILE_TYPES as tileType, i}
-			{#if tileType === LANDS[0]}<h3>Terrain</h3>
-			{:else if tileType === BUILDINGS[0]}<h3 style="margin-top: 10px">Buildings</h3>
-			{:else if tileType === TOOLS[0]}<h3 style="margin-top: 10px">Tools</h3>
-			{/if}
-			<label>
-				<input type="radio" name="tileType" value={i} bind:group={selectedToolTypeIndex} />
-				<!-- <img src={tileType.images[0]} /> -->
-				<span>{tileType.type}</span>
-			</label>
-		{/each}
-		<div class="button-container">
-			<button onclick={openSaveModal}>Save</button>
-			<button onclick={openLoadModal}>Load</button>
-		</div>
-	</nav>
 
+<div class="interface">
+	<Toolbar />
 	<!-- svelte-ignore a11y_mouse_events_have_key_events -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 
 	<main class="map" style="grid-template-columns: repeat({MAP_WIDTH}, 1fr)">
-		{#each generatedMap as tile}
+		{#each worldMap as tile}
 			<div
 				class="tile"
-				style={`background-image: url("${tile.land.images[randomNumInRange(tile.land.images.length)]}");`}
+				style={`background-image: url("${tile.land.image}");`}
 				data-tileId={tile.id}
 				data-tileType={tile.land.type}
-				onmouseover={handleTileClick}
-				onmousedown={handleTileClick}
+				onmouseover={(e) => handleTileClick(e, tile)}
+				onmousedown={(e) => handleTileClick(e, tile)}
 			>
 				{#if tile.building.type}
 					<img
 						data-building={tile.building.type}
-						src={tile.building.images[randomNumInRange(tile.building.images.length)]}
+						src={tile.building.image}
 						alt="building"
 					/>
 				{/if}
 			</div>
 		{/each}
 	</main>
-
-	<dialog id="save-modal">
-		<div class="dialog-inner">
-			<h2>Save Map</h2>
-			<input bind:value={mapNameToSave} type="text" />
-			<div class="button-row">
-				<button onclick={closeModal}>Cancel</button>
-				<button onclick={handleSave}>Save</button>
-			</div>
-		</div>
-	</dialog>
-
-	<dialog id="load-modal">
-		<div class="dialog-inner">
-			<h2>Load Map</h2>
-
-			<select bind:value={mapNameToLoad} onchange={handleLoad}>
-				<option value="">--Select a map--</option>
-				{#each savedMaps as savedMap}
-					<option value={savedMap}>
-						{savedMap}
-					</option>
-				{/each}
-			</select>
-
-			<button onclick={closeModal}>Cancel</button>
-		</div>
-	</dialog>
 </div>
+
+<!-- ------------ -->
+<!-- ------------ -->
+
+<!-- ------------ -->
+<!-- START STYLES -->
+<!-- ------------ -->
+
+<!-- ------------ -->
+<!-- ------------ -->
 
 <style>
 	:root {
@@ -311,25 +104,6 @@
 		width: 100%;
 	}
 
-	.toolbar {
-		display: flex;
-		flex-direction: column;
-		width: 200px;
-		padding: 10px;
-		border-radius: var(--radius);
-		background-color: var(--white);
-		box-shadow: var(--shadow);
-
-		& .button-container {
-			margin-top: auto;
-			display: flex;
-			gap: 4px;
-		}
-		& button {
-			flex: 1;
-		}
-	}
-
 	.map {
 		flex: 1;
 		display: grid;
@@ -352,30 +126,6 @@
 			width: 100%;
 			height: 100%;
 			pointer-events: none;
-		}
-	}
-
-	dialog {
-		width: min(100%, 350px);
-		padding: 30px;
-		background-color: var(--white);
-		border-radius: var(--radius);
-		border: none;
-		box-shadow: var(--shadow);
-	}
-
-	.dialog-inner {
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-
-		& .button-row {
-			display: flex;
-			gap: 10px;
-
-			& button {
-				flex: 1;
-			}
 		}
 	}
 </style>
