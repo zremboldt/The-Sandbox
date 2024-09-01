@@ -1,26 +1,18 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { GAME_OBJECTS } from '$lib/constants';
 	import type { Tile } from '$lib/constants';
 	import { getMapContext, selectedToolContext } from '$lib/state.svelte';
 
 	const worldMap = getMapContext();
 
-	// Object.keys(GAME_OBJECTS).forEach((key) => {
-	//   console.log(key, GAME_OBJECTS[key]);
-	// });
-
-	// type Props = {
-	// 	selectedToolTypeIndex: number;
-	// 	generatedMap: Tile[];
-	// };
-
 	const saveMapPrefix = 'map__';
 
-	// let savedMaps = $state(
-	// 	typeof window !== 'undefined'
-	// 		? Object.keys(localStorage)?.filter((key) => key.includes(saveMapPrefix))
-	// 		: []
-	// );
+	let savedMaps = $state(
+		typeof window !== 'undefined'
+			? Object.keys(localStorage)?.filter((key) => key.includes(saveMapPrefix))
+			: []
+	);
 
 	let mapNameToSave = $state('');
 	let mapNameToLoad = $state('');
@@ -28,12 +20,17 @@
 	const openSaveModal = () => {
 		const saveModal = document.getElementById('save-modal') as HTMLDialogElement;
 		saveModal.showModal();
+
+		// When the model opens, populate the input field with the current map name to make it easier to save over the current map.
+		const currentURL = new URL(window.location.href);
+		const mapName = currentURL.searchParams.get('map');
+		mapNameToSave = mapName?.split('__')[1] || '';
 	};
 
-	// const openLoadModal = () => {
-	// 	const loadModal = document.getElementById('load-modal') as HTMLDialogElement;
-	// 	loadModal.showModal();
-	// };
+	const openLoadModal = () => {
+		const loadModal = document.getElementById('load-modal') as HTMLDialogElement;
+		loadModal.showModal();
+	};
 
 	const closeModal = () => {
 		const modals = document.querySelectorAll('dialog');
@@ -53,19 +50,20 @@
 		closeModal();
 	};
 
-	// const handleLoad = () => {
-	// 	const mapDataAsString = localStorage.getItem(mapNameToLoad);
-	// 	if (!mapDataAsString) return;
+	const handleLoad = () => {
+		const url = new URL(window.location.href);
 
-	// 	// assign the loaded map to the current map on screen
-	// 	$generatedMap = JSON.parse(mapDataAsString);
+		// Set the map query parameter to the selected map name
+		url.searchParams.set('map', mapNameToLoad);
 
-	// 	// After loading and updating a map, it's likely that the user will want to save thier changes.
-	// 	// This next line makes that easy by prepopulating the save modal with the name of the currently loaded map.
-	// 	mapNameToSave = mapNameToLoad.replace(saveMapPrefix, '');
-	// 	closeModal();
-	// };
+		// Refresh the page with the new query parameter. This will trigger the loadMapFromLocalStorage function in the layout file.
+		window.location.href = `${url.pathname}?${url.searchParams.toString()}`;
+	};
 </script>
+
+<!-- ------------ -->
+<!-- START MARKUP -->
+<!-- ------------ -->
 
 <nav class="toolbar">
 	{#each Object.keys(GAME_OBJECTS) as objType, i}
@@ -86,35 +84,7 @@
 		{/each}
 	{/each}
 
-	<div class="button-container">
-		<button onclick={openSaveModal}>Save</button>
-		<!-- <button onclick={openLoadModal}>Load</button> -->
-	</div>
-
-	<dialog id="save-modal">
-		<div class="dialog-inner">
-			<h2>Save Map</h2>
-			<input bind:value={mapNameToSave} type="text" />
-			<div class="button-row">
-				<button onclick={closeModal}>Cancel</button>
-				<button onclick={handleSave}>Save</button>
-			</div>
-		</div>
-	</dialog>
-</nav>
-
-<!-- <nav class="toolbar">
-	{#each worldMap as tileType, i}
-		{#if tileType === LANDS[0]}<h3>Terrain</h3>
-		{:else if tileType === BUILDINGS[0]}<h3 style="margin-top: 10px">Buildings</h3>
-		{:else if tileType === TOOLS[0]}<h3 style="margin-top: 10px">Tools</h3>
-		{/if}
-		<label>
-			<input type="radio" name="tileType" value={i} bind:group={$selectedToolTypeIndex} />
-			<span>{tileType.type}</span>
-		</label>
-	{/each}
-	<div class="button-container">
+	<div class="toolbar-footer">
 		<button onclick={openSaveModal}>Save</button>
 		<button onclick={openLoadModal}>Load</button>
 	</div>
@@ -146,7 +116,11 @@
 			<button onclick={closeModal}>Cancel</button>
 		</div>
 	</dialog>
-</nav> -->
+</nav>
+
+<!-- ------------ -->
+<!-- START STYLES -->
+<!-- ------------ -->
 
 <style>
 	:root {
@@ -167,15 +141,13 @@
 		border-radius: var(--radius);
 		background-color: var(--white);
 		box-shadow: var(--shadow);
+	}
 
-		& .button-container {
-			margin-top: auto;
-			display: flex;
-			gap: 4px;
-		}
-		& button {
-			flex: 1;
-		}
+	.toolbar-footer {
+		margin-top: auto;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
 	}
 
 	dialog {

@@ -27,18 +27,23 @@ const INITIAL_MAP_CTX = 'INITIAL_MAP_CTX';
 
 // getContext and setContext can only be called during a component's initialization.
 export function initializeMapContext(initialData: Tile[] = []) {
-	const lands = Object.values(GAME_OBJECTS.land);
-	const initialMapType = lands[Math.floor(Math.random() * lands.length)];
-	const selectRandomImage = (images: string[]) => images[Math.floor(Math.random() * images.length)];
+	let generatedMap = $state([]);
 
-	// We're writing our initial data to the store
-	const generatedMap = $state(
-		[...Array(MAP_WIDTH * MAP_WIDTH)].map((_, i) => ({
+	if (initialData.length) {
+		generatedMap = initialData;
+	} else {
+		const lands = Object.values(GAME_OBJECTS.land);
+		const initialMapType = lands[Math.floor(Math.random() * lands.length)];
+		const selectRandomImage = (images: string[]) =>
+			images[Math.floor(Math.random() * images.length)];
+
+		// We're writing our initial data to the store
+		generatedMap = [...Array(MAP_WIDTH * MAP_WIDTH)].map((_, i) => ({
 			id: i,
 			land: { type: initialMapType.type, image: selectRandomImage(initialMapType.images) },
 			building: { type: '', image: '' }
-		}))
-	);
+		}));
+	}
 
 	setContext(INITIAL_MAP_CTX, generatedMap); // We're adding the store to the Svelte context
 	return generatedMap;
@@ -52,6 +57,26 @@ export function getMapContext() {
 
 export const selectedToolContext = writable(GAME_OBJECTS.land.grass);
 
+// function generateMap() {
+// 	const lands = Object.values(GAME_OBJECTS.land);
+// 	const initialMapType = lands[Math.floor(Math.random() * lands.length)];
+// 	return [...Array(MAP_WIDTH * MAP_WIDTH)].map((_, i) => ({
+// 		id: i,
+// 		land: { type: initialMapType.type, image: initialMapType.images[0] },
+// 		building: { type: '', image: '' }
+// 	}));
+// }
+
+// export const worldMap = writable(generateMap());
+
+// ALL DEPRECATED 👇
+// ALL DEPRECATED 👇
+// ALL DEPRECATED 👇
+// ALL DEPRECATED 👇
+// ALL DEPRECATED 👇
+// ALL DEPRECATED 👇
+// ALL DEPRECATED 👇
+// ALL DEPRECATED 👇
 // ALL DEPRECATED 👇
 
 function createMap() {

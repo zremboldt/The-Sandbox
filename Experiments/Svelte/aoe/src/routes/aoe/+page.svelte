@@ -5,9 +5,6 @@
 	import { getMapContext, selectedToolContext } from '$lib/state.svelte';
 
 	const worldMap = getMapContext();
-
-	// let selectedToolTypeIndex = $state(0);
-	// let selectedTool = $derived(TILE_TYPES[$selectedToolTypeIndex]);
 </script>
 
 <!-- ------------ -->
@@ -24,7 +21,7 @@
 
 <header>
 	<h2>Tile Kingdoms</h2>
-	<tt>Selected tool: {$selectedToolContext.type}</tt>
+	<!-- <tt>Selected tool: {$selectedToolContext.type}</tt> -->
 </header>
 
 <div class="interface">
@@ -52,13 +49,7 @@
 </div>
 
 <!-- ------------ -->
-<!-- ------------ -->
-
-<!-- ------------ -->
 <!-- START STYLES -->
-<!-- ------------ -->
-
-<!-- ------------ -->
 <!-- ------------ -->
 
 <style>

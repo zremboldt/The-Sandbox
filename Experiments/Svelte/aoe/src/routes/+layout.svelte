@@ -1,14 +1,23 @@
 <script>
 	import '../app.css';
 	import { initializeMapContext } from '$lib/state.svelte';
-	// import { setUserState } from '$lib/state.svelte';
 
-	initializeMapContext();
+	function loadMapFromLocalStorage() {
+		if (typeof window === 'undefined') return;
 
-	// setUserState({
-	// 	name: 'First Last',
-	// 	email: 'zzz@gmail.com'
-	// });
+		const urlParams = new URLSearchParams(window.location.search);
+		const savedMapName = urlParams.get('map');
+
+		if (!savedMapName) return;
+
+		const mapDataAsString = localStorage.getItem(savedMapName);
+
+		if (!mapDataAsString) return;
+
+		return JSON.parse(mapDataAsString);
+	}
+
+	initializeMapContext(loadMapFromLocalStorage());
 </script>
 
 <div class="app">
