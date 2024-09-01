@@ -1,9 +1,9 @@
 <script>
 	import '../app.css';
-  import { initializeMap } from '$lib/state.svelte';
+  import { initializeMapContext } from '$lib/state.svelte';
 	// import { setUserState } from '$lib/state.svelte';
   
-  initializeMap();
+  initializeMapContext();
 
 	// setUserState({
 	// 	name: 'First Last',

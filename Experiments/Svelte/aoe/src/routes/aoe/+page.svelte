@@ -4,13 +4,9 @@
 	import Toolbar from './components/Toolbar.svelte';
 	import { selectedToolTypeIndex } from '$lib/state.svelte';
 	import { handleTileClick } from '$lib/handleTileClick.svelte';
-  import { getInitialMap } from '$lib/state.svelte';
+  import { getMapContext } from '$lib/state.svelte';
 
-	const worldMap = getInitialMap();
-
-	// import { getUserState } from '$lib/state.svelte';
-	// const user = getUserState();
-  
+	const worldMap = getMapContext();
 
 	// let selectedToolTypeIndex = $state(0);
 	let selectedTool = $derived(TILE_TYPES[$selectedToolTypeIndex]);

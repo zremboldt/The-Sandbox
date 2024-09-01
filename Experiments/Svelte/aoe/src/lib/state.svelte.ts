@@ -25,16 +25,16 @@ import type { Tile } from './constants';
 
 
 
-export const selectedToolTypeIndex = writable(0);
 
 
 const INITIAL_MAP_CTX = 'INITIAL_MAP_CTX';
 
-// WIP: Want to use this to replace some of the other code in this file
-export function initializeMap(initialData: Tile[] = []) {
+// getContext and setContext can only be called during a component's initialization.
+export function initializeMapContext(initialData: Tile[] = []) {
   const initialMapType = LANDS[Math.floor(Math.random() * LANDS.length)];
   const selectRandomImage = (images: string[]) => images[Math.floor(Math.random() * images.length)];
 
+  // We're writing our initial data to the store
   const generatedMap = $state([...Array(MAP_WIDTH * MAP_WIDTH)].map((_, i) => ({
 		id: i,
 		land: { type: initialMapType.type, image: selectRandomImage(initialMapType.images) },
@@ -45,11 +45,11 @@ export function initializeMap(initialData: Tile[] = []) {
   return generatedMap;
 }
 
-export function getInitialMap() {
+export function getMapContext() {
   return getContext<Tile[]>(INITIAL_MAP_CTX); // We're getting the store from the Svelte context
 }
 
-
+export const selectedToolTypeIndex = writable(0);
 
 
 

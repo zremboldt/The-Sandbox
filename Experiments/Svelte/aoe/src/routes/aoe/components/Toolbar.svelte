@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { TILE_TYPES, LANDS, BUILDINGS, TOOLS } from '$lib/constants';
 	import type { Tile } from '$lib/constants';
-	import { selectedToolTypeIndex, generatedMap, getInitialMap } from '$lib/state.svelte';
+	import { selectedToolTypeIndex, generatedMap, getMapContext } from '$lib/state.svelte';
 
-  // const worldMap = getInitialMap();
+  // const worldMap = getMapContext();
 
 	type Props = {
 		selectedToolTypeIndex: number;
