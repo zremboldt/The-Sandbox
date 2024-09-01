@@ -1,6 +1,6 @@
 import { setContext, getContext } from 'svelte';
 import { writable } from 'svelte/store';
-import { MAP_WIDTH, LANDS } from './constants';
+import { MAP_WIDTH, GAME_OBJECTS } from './constants';
 import type { Tile } from './constants';
 
 // https://www.youtube.com/watch?v=EyDV5XLfagg
@@ -23,40 +23,40 @@ import type { Tile } from './constants';
 // 	return getContext<UserData>(USER_CTX); // We're getting the store from the Svelte context
 // }
 
-
-
-
-
 const INITIAL_MAP_CTX = 'INITIAL_MAP_CTX';
 
 // getContext and setContext can only be called during a component's initialization.
 export function initializeMapContext(initialData: Tile[] = []) {
-  const initialMapType = LANDS[Math.floor(Math.random() * LANDS.length)];
-  const selectRandomImage = (images: string[]) => images[Math.floor(Math.random() * images.length)];
+	const lands = Object.values(GAME_OBJECTS.land);
+	const initialMapType = lands[Math.floor(Math.random() * lands.length)];
+	const selectRandomImage = (images: string[]) => images[Math.floor(Math.random() * images.length)];
 
-  // We're writing our initial data to the store
-  const generatedMap = $state([...Array(MAP_WIDTH * MAP_WIDTH)].map((_, i) => ({
-		id: i,
-		land: { type: initialMapType.type, image: selectRandomImage(initialMapType.images) },
-		building: { type: '', image: '' }
-	})));
+	// We're writing our initial data to the store
+	const generatedMap = $state(
+		[...Array(MAP_WIDTH * MAP_WIDTH)].map((_, i) => ({
+			id: i,
+			land: { type: initialMapType.type, image: selectRandomImage(initialMapType.images) },
+			building: { type: '', image: '' }
+		}))
+	);
 
-  setContext(INITIAL_MAP_CTX, generatedMap); // We're adding the store to the Svelte context
-  return generatedMap;
+	setContext(INITIAL_MAP_CTX, generatedMap); // We're adding the store to the Svelte context
+	return generatedMap;
 }
 
 export function getMapContext() {
-  return getContext<Tile[]>(INITIAL_MAP_CTX); // We're getting the store from the Svelte context
+	return getContext<Tile[]>(INITIAL_MAP_CTX); // We're getting the store from the Svelte context
 }
 
-export const selectedToolTypeIndex = writable(0);
+// export const selectedToolTypeIndex = writable(0);
 
-
+export const selectedToolContext = writable(GAME_OBJECTS.land.grass);
 
 // ALL DEPRECATED 👇
 
 function createMap() {
-	const initialMapType = LANDS[Math.floor(Math.random() * LANDS.length)];
+	const lands = Object.values(GAME_OBJECTS.land);
+	const initialMapType = lands[Math.floor(Math.random() * lands.length)];
 	return [...Array(MAP_WIDTH * MAP_WIDTH)].map((_, i) => ({
 		id: i,
 		land: initialMapType,

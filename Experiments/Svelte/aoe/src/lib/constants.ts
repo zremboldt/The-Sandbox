@@ -34,71 +34,61 @@ export interface Tile {
 	building: Building;
 }
 
+export interface Tool {
+	type: string;
+	images: string[];
+}
+
 export const MAP_WIDTH = 30;
 
-export const LANDS = [
-	{
-		type: 'grass',
-		images: [grass1, grass2]
+export const GAME_OBJECTS = {
+	land: {
+		grass: {
+			type: 'grass',
+			images: [grass1, grass2]
+		},
+		water: {
+			type: 'water',
+			images: [water1, water2]
+		},
+		sand: {
+			type: 'sand',
+			images: [sand1, sand2]
+		},
+		dirt: {
+			type: 'dirt',
+			images: [dirt1, dirt2]
+		},
+		forest: {
+			type: 'forest',
+			images: [forest1, forest2, forest3, forest4]
+		}
 	},
-	{
-		type: 'water',
-		images: [water1, water2]
+	building: {
+		farm: {
+			type: 'farm',
+			images: [farm1, farm2]
+		},
+		stable: {
+			type: 'stable',
+			images: [stable]
+		},
+		blacksmith: {
+			type: 'blacksmith',
+			images: [blacksmith]
+		},
+		house: {
+			type: 'house',
+			images: [house1, house2]
+		}
 	},
-	{
-		type: 'sand',
-		images: [sand1, sand2]
-	},
-	{
-		type: 'dirt',
-		images: [dirt1, dirt2]
-	},
-	{
-		type: 'forest',
-		images: [forest1, forest2, forest3, forest4]
+	tool: {
+		delete: {
+			type: 'delete',
+			images: []
+		}
 	}
-];
+};
 
-export const BUILDINGS = [
-	{
-		type: 'farm',
-		images: [farm1, farm2]
-	},
-	{
-		type: 'stable',
-		images: [stable]
-	},
-	{
-		type: 'blacksmith',
-		images: [blacksmith]
-	},
-	{
-		type: 'house',
-		images: [house1, house2]
-	}
-	// {
-	// 	type: 'mine',
-	// 	images: []
-	// },
-	// {
-	// 	type: 'lumbercamp',
-	// 	images: []
-	// }
-	// 'home',
-	// 'dock',
-	// 'wall',
-	// 'tower',
-	// 'castle',
-	// 'blacksmith',
-	// 'barracks',
-	// 'stable'
-];
-
-export const TOOLS = [
-	{
-		type: 'delete',
-		images: []
-	}
-];
-
-export const TILE_TYPES = [...LANDS, ...BUILDINGS, ...TOOLS];
+// Here's why this structure is nice:
+const grassImages = GAME_OBJECTS.land.grass.images;

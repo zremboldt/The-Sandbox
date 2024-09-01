@@ -1,25 +1,17 @@
 <script lang="ts">
-	import { TILE_TYPES, LANDS, BUILDINGS, MAP_WIDTH } from '$lib/constants';
-	import type { Tile } from '$lib/constants';
+	import { MAP_WIDTH } from '$lib/constants';
 	import Toolbar from './components/Toolbar.svelte';
-	import { selectedToolTypeIndex } from '$lib/state.svelte';
 	import { handleTileClick } from '$lib/handleTileClick.svelte';
-  import { getMapContext } from '$lib/state.svelte';
+	import { getMapContext, selectedToolContext } from '$lib/state.svelte';
 
 	const worldMap = getMapContext();
 
 	// let selectedToolTypeIndex = $state(0);
-	let selectedTool = $derived(TILE_TYPES[$selectedToolTypeIndex]);
+	// let selectedTool = $derived(TILE_TYPES[$selectedToolTypeIndex]);
 </script>
 
 <!-- ------------ -->
-<!-- ------------ -->
-
-<!-- ------------ -->
 <!-- START MARKUP -->
-<!-- ------------ -->
-
-<!-- ------------ -->
 <!-- ------------ -->
 
 <svelte:head>
@@ -30,16 +22,14 @@
 	/>
 </svelte:head>
 
-<!-- <h1>Welcome, {user.name}</h1>
-<input type="text" bind:value={user.name} /> -->
-
 <header>
 	<h2>Tile Kingdoms</h2>
-	<tt>Selected tileType: {selectedTool.type}</tt>
+	<tt>Selected tool: {$selectedToolContext.type}</tt>
 </header>
 
 <div class="interface">
 	<Toolbar />
+
 	<!-- svelte-ignore a11y_mouse_events_have_key_events -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 
@@ -50,15 +40,11 @@
 				style={`background-image: url("${tile.land.image}");`}
 				data-tileId={tile.id}
 				data-tileType={tile.land.type}
-				onmouseover={(e) => handleTileClick(e, tile)}
-				onmousedown={(e) => handleTileClick(e, tile)}
+				onmouseover={(e) => handleTileClick(e, $selectedToolContext, tile)}
+				onmousedown={(e) => handleTileClick(e, $selectedToolContext, tile)}
 			>
 				{#if tile.building.type}
-					<img
-						data-building={tile.building.type}
-						src={tile.building.image}
-						alt="building"
-					/>
+					<img data-building={tile.building.type} src={tile.building.image} alt="building" />
 				{/if}
 			</div>
 		{/each}

@@ -1,22 +1,26 @@
 <script lang="ts">
-	import { TILE_TYPES, LANDS, BUILDINGS, TOOLS } from '$lib/constants';
+	import { GAME_OBJECTS } from '$lib/constants';
 	import type { Tile } from '$lib/constants';
-	import { selectedToolTypeIndex, generatedMap, getMapContext } from '$lib/state.svelte';
+	import { getMapContext, selectedToolContext } from '$lib/state.svelte';
 
-  // const worldMap = getMapContext();
+	const worldMap = getMapContext();
 
-	type Props = {
-		selectedToolTypeIndex: number;
-		generatedMap: Tile[];
-	};
+	// Object.keys(GAME_OBJECTS).forEach((key) => {
+	//   console.log(key, GAME_OBJECTS[key]);
+	// });
+
+	// type Props = {
+	// 	selectedToolTypeIndex: number;
+	// 	generatedMap: Tile[];
+	// };
 
 	const saveMapPrefix = 'map__';
 
-	let savedMaps = $state(
-		typeof window !== 'undefined'
-			? Object.keys(localStorage)?.filter((key) => key.includes(saveMapPrefix))
-			: []
-	);
+	// let savedMaps = $state(
+	// 	typeof window !== 'undefined'
+	// 		? Object.keys(localStorage)?.filter((key) => key.includes(saveMapPrefix))
+	// 		: []
+	// );
 
 	let mapNameToSave = $state('');
 	let mapNameToLoad = $state('');
@@ -26,10 +30,10 @@
 		saveModal.showModal();
 	};
 
-	const openLoadModal = () => {
-		const loadModal = document.getElementById('load-modal') as HTMLDialogElement;
-		loadModal.showModal();
-	};
+	// const openLoadModal = () => {
+	// 	const loadModal = document.getElementById('load-modal') as HTMLDialogElement;
+	// 	loadModal.showModal();
+	// };
 
 	const closeModal = () => {
 		const modals = document.querySelectorAll('dialog');
@@ -37,7 +41,7 @@
 	};
 
 	const handleSave = () => {
-		const map = $generatedMap.map((tile) => {
+		const map = worldMap.map((tile) => {
 			return {
 				id: tile.id,
 				land: tile.land,
@@ -49,29 +53,64 @@
 		closeModal();
 	};
 
-	const handleLoad = () => {
-		const mapDataAsString = localStorage.getItem(mapNameToLoad);
-		if (!mapDataAsString) return;
+	// const handleLoad = () => {
+	// 	const mapDataAsString = localStorage.getItem(mapNameToLoad);
+	// 	if (!mapDataAsString) return;
 
-		// assign the loaded map to the current map on screen
-		$generatedMap = JSON.parse(mapDataAsString);
+	// 	// assign the loaded map to the current map on screen
+	// 	$generatedMap = JSON.parse(mapDataAsString);
 
-		// After loading and updating a map, it's likely that the user will want to save thier changes.
-		// This next line makes that easy by prepopulating the save modal with the name of the currently loaded map.
-		mapNameToSave = mapNameToLoad.replace(saveMapPrefix, '');
-		closeModal();
-	};
+	// 	// After loading and updating a map, it's likely that the user will want to save thier changes.
+	// 	// This next line makes that easy by prepopulating the save modal with the name of the currently loaded map.
+	// 	mapNameToSave = mapNameToLoad.replace(saveMapPrefix, '');
+	// 	closeModal();
+	// };
 </script>
 
 <nav class="toolbar">
-	{#each TILE_TYPES as tileType, i}
+	{#each Object.keys(GAME_OBJECTS) as objType, i}
+		{#if objType === 'land'}<h3>Terrain</h3>
+		{:else if objType === 'building'}<h3 style="margin-top: 10px">Buildings</h3>
+		{:else if objType === 'tool'}<h3 style="margin-top: 10px">Tools</h3>
+		{/if}
+		{#each Object.values(GAME_OBJECTS[objType]) as gameObject, j}
+			<label>
+				<input
+					type="radio"
+					name="tileType"
+					value={j}
+					onchange={() => ($selectedToolContext = gameObject)}
+				/>
+				<span>{gameObject.type}</span>
+			</label>
+		{/each}
+	{/each}
+
+	<div class="button-container">
+		<button onclick={openSaveModal}>Save</button>
+		<!-- <button onclick={openLoadModal}>Load</button> -->
+	</div>
+
+	<dialog id="save-modal">
+		<div class="dialog-inner">
+			<h2>Save Map</h2>
+			<input bind:value={mapNameToSave} type="text" />
+			<div class="button-row">
+				<button onclick={closeModal}>Cancel</button>
+				<button onclick={handleSave}>Save</button>
+			</div>
+		</div>
+	</dialog>
+</nav>
+
+<!-- <nav class="toolbar">
+	{#each worldMap as tileType, i}
 		{#if tileType === LANDS[0]}<h3>Terrain</h3>
 		{:else if tileType === BUILDINGS[0]}<h3 style="margin-top: 10px">Buildings</h3>
 		{:else if tileType === TOOLS[0]}<h3 style="margin-top: 10px">Tools</h3>
 		{/if}
 		<label>
 			<input type="radio" name="tileType" value={i} bind:group={$selectedToolTypeIndex} />
-			<!-- <img src={tileType.images[0]} /> -->
 			<span>{tileType.type}</span>
 		</label>
 	{/each}
@@ -107,7 +146,7 @@
 			<button onclick={closeModal}>Cancel</button>
 		</div>
 	</dialog>
-</nav>
+</nav> -->
 
 <style>
 	:root {
