@@ -57,51 +57,24 @@ export function getMapContext() {
 
 export const selectedToolContext = writable(GAME_OBJECTS.land.grass);
 
-// function generateMap() {
-// 	const lands = Object.values(GAME_OBJECTS.land);
-// 	const initialMapType = lands[Math.floor(Math.random() * lands.length)];
-// 	return [...Array(MAP_WIDTH * MAP_WIDTH)].map((_, i) => ({
-// 		id: i,
-// 		land: { type: initialMapType.type, image: initialMapType.images[0] },
-// 		building: { type: '', image: '' }
-// 	}));
-// }
+export const inventoryFood = writable(100);
+export const inventoryWood = writable(300);
+export const inventoryStone = writable(0);
+export const inventoryPopulation = writable(3);
 
-// export const worldMap = writable(generateMap());
+export const errorMessage = writable({ message: '', active: false });
 
-// ALL DEPRECATED 👇
-// ALL DEPRECATED 👇
-// ALL DEPRECATED 👇
-// ALL DEPRECATED 👇
-// ALL DEPRECATED 👇
-// ALL DEPRECATED 👇
-// ALL DEPRECATED 👇
-// ALL DEPRECATED 👇
-// ALL DEPRECATED 👇
+let timeout; // storing the timeout reference prevents timeout stacking
 
-function createMap() {
-	const lands = Object.values(GAME_OBJECTS.land);
-	const initialMapType = lands[Math.floor(Math.random() * lands.length)];
-	return [...Array(MAP_WIDTH * MAP_WIDTH)].map((_, i) => ({
-		id: i,
-		land: initialMapType,
-		building: { type: '', images: [] }
-	}));
-}
-
-export const generatedMap = writable(createMap());
-
-export function updateTile(index, newTileData) {
-	generatedMap.update((map) => {
-		map[index] = { ...map[index], ...newTileData };
-		return map;
-	});
-}
-
-export function saveMap() {
-	// Implementation for saving the map
-}
-
-export function loadMap(savedMap) {
-	generatedMap.set(savedMap);
-}
+// Subscribe to changes in the errorMessage store
+errorMessage.subscribe((value) => {
+	if (value.active) {
+		clearTimeout(timeout); // Clear any existing timeout
+		timeout = setTimeout(() => {
+			// Update the store correctly by calling set
+			errorMessage.update((current) => {
+				return { ...current, active: false };
+			});
+		}, 4000);
+	}
+});

@@ -17,6 +17,9 @@ import house1 from '$lib/images/structure/house1.png';
 import house2 from '$lib/images/structure/house2.png';
 import stable from '$lib/images/structure/stable.png';
 import blacksmith from '$lib/images/structure/blacksmith.png';
+import lumbercamp from '$lib/images/structure/lumbercamp.png';
+import chapel from '$lib/images/structure/chapel.png';
+import mine from '$lib/images/structure/mine.png';
 
 interface Land {
 	type: string;
@@ -65,21 +68,80 @@ export const GAME_OBJECTS = {
 		}
 	},
 	building: {
+		house: {
+			type: 'house',
+			images: [house1, house2],
+			stats: {
+				population: 3,
+				cost: {
+					wood: 50
+				}
+			}
+		},
 		farm: {
 			type: 'farm',
-			images: [farm1, farm2]
+			images: [farm1, farm2],
+			stats: {
+				collectionRate: {
+					food: 3
+				},
+				cost: {
+					wood: 200
+				}
+			}
+		},
+		lumbercamp: {
+			type: 'lumbercamp',
+			images: [lumbercamp],
+			stats: {
+				collectionRate: {
+					wood: 3
+				},
+				cost: {
+					wood: 200
+				}
+			}
+		},
+		mine: {
+			type: 'mine',
+			images: [mine],
+			stats: {
+				collectionRate: {
+					stone: 3
+				},
+				cost: {
+					wood: 200
+				}
+			}
 		},
 		stable: {
 			type: 'stable',
-			images: [stable]
+			images: [stable],
+			stats: {
+				cost: {
+					wood: 500
+				}
+			}
 		},
 		blacksmith: {
 			type: 'blacksmith',
-			images: [blacksmith]
+			images: [blacksmith],
+			stats: {
+				cost: {
+					wood: 500,
+					stone: 200
+				}
+			}
 		},
-		house: {
-			type: 'house',
-			images: [house1, house2]
+		chapel: {
+			type: 'chapel',
+			images: [chapel],
+			stats: {
+				cost: {
+					wood: 300,
+					stone: 200
+				}
+			}
 		}
 	},
 	tool: {

@@ -1,7 +1,35 @@
 import { GAME_OBJECTS } from '$lib/constants';
 import type { Tool, Tile } from '$lib/constants';
+import { inventoryFood, inventoryStone, inventoryWood, errorMessage } from './state.svelte';
+import { get } from 'svelte/store';
 
 const selectRandomImage = (images: string[]) => images[Math.floor(Math.random() * images.length)];
+
+const mapResourceToInventory = {
+	wood: inventoryWood,
+	stone: inventoryStone,
+	food: inventoryFood
+};
+
+const canAffordBuilding = (selectedTool: Tool) => {
+	for (const [resource, amount] of Object.entries(selectedTool.stats.cost)) {
+		const amountInInventory = get(mapResourceToInventory[resource]);
+		if (amountInInventory < amount) {
+			errorMessage.set({
+				message: `❌ Not enough ${resource} to build this ${selectedTool.type}`,
+				active: true
+			});
+			return false;
+		}
+	}
+	return true;
+};
+
+const payBuildingCost = (selectedTool: Tool) => {
+	for (const [resource, amount] of Object.entries(selectedTool.stats.cost)) {
+		mapResourceToInventory[resource].update((inventoryTotal) => inventoryTotal - amount);
+	}
+};
 
 export const handleTileClick = (
 	event: MouseEvent,
@@ -11,9 +39,11 @@ export const handleTileClick = (
 	if (event.buttons !== 1) return;
 
 	const selectedTool = {
-		type: selectedToolContext.type,
+		...selectedToolContext,
 		image: selectRandomImage(selectedToolContext.images)
 	};
+
+	if (!canAffordBuilding(selectedTool)) return;
 
 	function checkToolSelected(typeToCheck: string) {
 		if (Object.keys(GAME_OBJECTS.land).includes(typeToCheck)) {
@@ -40,6 +70,7 @@ export const handleTileClick = (
 			};
 		}
 		clickedTile.building = selectedTool;
+		payBuildingCost(selectedTool);
 	} else if (toolTypeSelected === 'deleteTool') {
 		clickedTile.building = { type: '', image: '' };
 	}

@@ -1,10 +1,45 @@
 <script lang="ts">
-	import { MAP_WIDTH } from '$lib/constants';
+	import { GAME_OBJECTS, MAP_WIDTH } from '$lib/constants';
 	import Toolbar from './components/Toolbar.svelte';
 	import { handleTileClick } from '$lib/handleTileClick.svelte';
-	import { getMapContext, selectedToolContext } from '$lib/state.svelte';
+	import {
+		getMapContext,
+		selectedToolContext,
+		inventoryFood,
+		inventoryWood,
+		inventoryStone,
+		inventoryPopulation,
+		errorMessage
+	} from '$lib/state.svelte';
 
 	const worldMap = getMapContext();
+
+	// Maybe resources should be stored in local storage???
+	const gameLoop = () => {
+		$inventoryPopulation = 0; // Reset population count
+
+		worldMap.forEach((tile) => {
+			const buildingType = tile.building.type;
+
+			// if building has stats.collectionRate then check the key and add the value to the inventory
+			if (buildingType && GAME_OBJECTS.building[buildingType]?.stats?.collectionRate) {
+				const collectionRate = GAME_OBJECTS.building[buildingType].stats.collectionRate;
+				$inventoryFood += collectionRate.food ?? 0;
+				$inventoryWood += collectionRate.wood ?? 0;
+				$inventoryStone += collectionRate.stone ?? 0;
+			}
+
+			if (buildingType && GAME_OBJECTS.building[buildingType]?.stats?.population) {
+				$inventoryPopulation += GAME_OBJECTS.building[buildingType].stats.population;
+			}
+		});
+	};
+
+	// Call the function when the component initializes
+	setInterval(() => {
+		console.log('tick');
+		gameLoop();
+	}, 2000);
 </script>
 
 <!-- ------------ -->
@@ -22,6 +57,12 @@
 <header>
 	<h2>Tile Kingdoms</h2>
 	<!-- <tt>Selected tool: {$selectedToolContext.type}</tt> -->
+	<div class="resources">
+		<p><span>🥩</span>{$inventoryFood}</p>
+		<p><span>🪵</span>{$inventoryWood}</p>
+		<p><span>🪨</span>{$inventoryStone}</p>
+		<p><span>👤</span>{$inventoryPopulation}</p>
+	</div>
 </header>
 
 <div class="interface">
@@ -46,6 +87,9 @@
 			</div>
 		{/each}
 	</main>
+	<div class={`toast ${$errorMessage.active && 'active'}`}>
+		<p>{$errorMessage.message}</p>
+	</div>
 </div>
 
 <!-- ------------ -->
@@ -61,6 +105,7 @@
 		--surface: hsl(218, 21%, 90%);
 		--grid: hsla(240, 100%, 50%, 0.1);
 		--shadow: 0 4px 12px -2px hsla(0, 0%, 0%, 0.2);
+		--easeOutQuart: cubic-bezier(0.165, 0.85, 0.45, 1);
 	}
 
 	header {
@@ -75,6 +120,20 @@
 		display: flex;
 		gap: 10px;
 		width: 100%;
+	}
+
+	.resources {
+		display: flex;
+		gap: 30px;
+
+		p {
+			display: flex;
+			align-items: center;
+			gap: 5px;
+		}
+		span {
+			font-size: 24px;
+		}
 	}
 
 	.map {
@@ -99,6 +158,27 @@
 			width: 100%;
 			height: 100%;
 			pointer-events: none;
+		}
+	}
+
+	.toast {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: 0 auto 20px;
+		padding: 16px 28px;
+		width: fit-content;
+		text-align: center;
+		border-radius: 999px;
+		background-color: var(--white);
+		box-shadow: var(--shadow);
+		pointer-events: none;
+		transition: transform 0.2s var(--easeOutQuart);
+		transform: translateY(80px);
+
+		&.active {
+			transform: translateY(0);
 		}
 	}
 </style>
