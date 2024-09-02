@@ -150,7 +150,7 @@
 		--radius: 8px;
 		--border: hsl(210, 21%, 81%);
 		--surface: hsl(218, 21%, 90%);
-		--grid: hsla(240, 100%, 50%, 0.1);
+		--grid: hsla(240, 100%, 60%, 0.1);
 		--shadow: 0 4px 12px -2px hsla(0, 0%, 0%, 0.2);
 		--easeOutQuart: cubic-bezier(0.165, 0.85, 0.45, 1);
 	}
@@ -208,7 +208,7 @@
 		}
 
 		& [data-building='lumbercamp'] {
-			outline: 1px solid rgba(255, 75, 66, 0.499);
+			outline: 1px solid hsla(0, 100%, 70%, 0.5);
 			outline-offset: 79px;
 			position: relative;
 			z-index: 2;
