@@ -12,11 +12,13 @@ const mapResourceToInventory = {
 };
 
 const canAffordBuilding = (selectedTool: Tool) => {
+	if (!selectedTool.stats?.cost) return true;
+
 	for (const [resource, amount] of Object.entries(selectedTool.stats.cost)) {
 		const amountInInventory = get(mapResourceToInventory[resource]);
 		if (amountInInventory < amount) {
 			errorMessage.set({
-				message: `❌ Not enough ${resource} to build this ${selectedTool.type}`,
+				message: `❌ You need ${amount - amountInInventory} more ${resource} to build this ${selectedTool.type}`,
 				active: true
 			});
 			return false;
@@ -43,8 +45,6 @@ export const handleTileClick = (
 		image: selectRandomImage(selectedToolContext.images)
 	};
 
-	if (!canAffordBuilding(selectedTool)) return;
-
 	function checkToolSelected(typeToCheck: string) {
 		if (Object.keys(GAME_OBJECTS.land).includes(typeToCheck)) {
 			return 'landTool';
@@ -60,6 +60,7 @@ export const handleTileClick = (
 	if (toolTypeSelected === 'landTool') {
 		clickedTile.land = selectedTool;
 	} else if (toolTypeSelected === 'buildingTool') {
+		if (!canAffordBuilding(selectedTool)) return;
 		if (clickedTile.land.type === 'water') return;
 		if (clickedTile.land.type === 'forest') {
 			// if you place a building on forest, it will clear the forest
