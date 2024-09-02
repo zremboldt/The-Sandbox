@@ -1,6 +1,13 @@
 import { GAME_OBJECTS } from '$lib/constants';
 import type { Tool, Tile } from '$lib/constants';
-import { inventoryFood, inventoryStone, inventoryWood, errorMessage } from './state.svelte';
+import {
+	inventoryFood,
+	inventoryStone,
+	inventoryWood,
+	inventoryPopulation,
+	workBuildingCount,
+	errorMessage
+} from './state.svelte';
 import { get } from 'svelte/store';
 
 const selectRandomImage = (images: string[]) => images[Math.floor(Math.random() * images.length)];
@@ -9,6 +16,24 @@ const mapResourceToInventory = {
 	wood: inventoryWood,
 	stone: inventoryStone,
 	food: inventoryFood
+};
+
+// Check to see if the player has enough population to operate a new work building
+export const hasPopulationToOperateBuilding = (selectedTool) => {
+	if (!['farm', 'lumbercamp', 'mine'].includes(selectedTool.type)) return true;
+
+	const currentPopulation = get(inventoryPopulation);
+	const workBuildings = get(workBuildingCount);
+
+	if (currentPopulation <= workBuildings) {
+		errorMessage.set({
+			message: `❌ You need more people to operate this building`,
+			active: true
+		});
+		return false;
+	}
+
+	return true;
 };
 
 const canAffordBuilding = (selectedTool: Tool) => {
@@ -61,6 +86,7 @@ export const handleTileClick = (
 		clickedTile.land = selectedTool;
 	} else if (toolTypeSelected === 'buildingTool') {
 		if (!canAffordBuilding(selectedTool)) return;
+		if (!hasPopulationToOperateBuilding(selectedTool)) return;
 		if (clickedTile.land.type === 'water') return;
 		if (clickedTile.land.type === 'forest') {
 			// if you place a building on forest, it will clear the forest

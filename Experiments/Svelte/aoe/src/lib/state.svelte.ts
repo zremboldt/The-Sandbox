@@ -62,6 +62,8 @@ export const inventoryWood = writable(300);
 export const inventoryStone = writable(0);
 export const inventoryPopulation = writable(3);
 
+export const workBuildingCount = writable(0);
+
 export const errorMessage = writable({ message: '', active: false });
 
 let timeout; // storing the timeout reference prevents timeout stacking

@@ -9,6 +9,7 @@
 		inventoryWood,
 		inventoryStone,
 		inventoryPopulation,
+		workBuildingCount,
 		errorMessage
 	} from '$lib/state.svelte';
 
@@ -35,6 +36,7 @@
 
 	const gameLoop = () => {
 		$inventoryPopulation = 3; // Reset population count
+		$workBuildingCount = 0;
 
 		worldMap.forEach((tile, index) => {
 			const buildingType = tile.building.type;
@@ -67,6 +69,11 @@
 				$inventoryFood += collectionRate.food ?? 0;
 				$inventoryWood += collectionRate.wood ?? 0;
 				$inventoryStone += collectionRate.stone ?? 0;
+			}
+
+			// If building type is one of ['farm', 'lumbercamp', 'mine'], increment workBuildingCount
+			if (['farm', 'lumbercamp', 'mine'].includes(buildingType)) {
+				$workBuildingCount++;
 			}
 
 			if (buildingType && GAME_OBJECTS.building[buildingType]?.stats?.population) {
@@ -198,6 +205,13 @@
 			width: 100%;
 			height: 100%;
 			pointer-events: none;
+		}
+
+		& [data-building='lumbercamp'] {
+			outline: 1px solid rgba(255, 75, 66, 0.499);
+			outline-offset: 79px;
+			position: relative;
+			z-index: 2;
 		}
 	}
 

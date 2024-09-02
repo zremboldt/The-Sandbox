@@ -74,7 +74,8 @@ export const GAME_OBJECTS = {
 			stats: {
 				population: 3,
 				cost: {
-					wood: 50
+					wood: 50,
+					food: 150
 				}
 			}
 		},
