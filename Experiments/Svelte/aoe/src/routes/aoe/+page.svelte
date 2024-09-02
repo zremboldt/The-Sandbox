@@ -14,15 +14,55 @@
 
 	const worldMap = getMapContext();
 
-	// Maybe resources should be stored in local storage???
-	const gameLoop = () => {
-		$inventoryPopulation = 0; // Reset population count
+	// Helper function to get the 1D array index from x, y coordinates
+	const getIndex = (x, y) => (y * MAP_WIDTH + x) % worldMap.length;
 
-		worldMap.forEach((tile) => {
+	// Helper function to get the x, y coordinates from an index
+	const getCoordinates = (index) => ({
+		x: index % MAP_WIDTH,
+		y: Math.floor(index / MAP_WIDTH)
+	});
+
+	// Helper function to get tile safely with wrapping
+	const getTileAt = (x, y) => {
+		// Wrap around x and y if they go out of bounds
+		const wrappedX = (x + MAP_WIDTH) % MAP_WIDTH;
+		const wrappedY =
+			(y + Math.floor(worldMap.length / MAP_WIDTH)) % Math.floor(worldMap.length / MAP_WIDTH);
+		const index = getIndex(wrappedX, wrappedY);
+		return worldMap[index];
+	};
+
+	const gameLoop = () => {
+		$inventoryPopulation = 3; // Reset population count
+
+		worldMap.forEach((tile, index) => {
 			const buildingType = tile.building.type;
 
-			// if building has stats.collectionRate then check the key and add the value to the inventory
-			if (buildingType && GAME_OBJECTS.building[buildingType]?.stats?.collectionRate) {
+			// Check if it's a lumbercamp and then scan surrounding tiles
+			if (buildingType === 'lumbercamp') {
+				const lumberCampCollectionRate =
+					GAME_OBJECTS.building[buildingType]?.stats?.collectionRate?.wood || 0;
+				let extraWoodRate = 0;
+
+				// Get the x, y coordinates of the current tile
+				const { x, y } = getCoordinates(index);
+
+				// Scan the surrounding tiles within a 3-tile radius
+				const radius = 3;
+				for (let dx = -radius; dx <= radius; dx++) {
+					for (let dy = -radius; dy <= radius; dy++) {
+						if (dx === 0 && dy === 0) continue; // Skip the lumbercamp tile itself
+						const neighborTile = getTileAt(x + dx, y + dy);
+						if (neighborTile && neighborTile.land.type === 'forest') {
+							extraWoodRate += 0.2; // Add 0.2 to wood collection rate for each forest tile
+						}
+					}
+				}
+
+				// Add the base collection rate plus extra from forests to the inventory
+				$inventoryWood += Math.ceil(lumberCampCollectionRate + extraWoodRate);
+			} else if (buildingType && GAME_OBJECTS.building[buildingType]?.stats?.collectionRate) {
 				const collectionRate = GAME_OBJECTS.building[buildingType].stats.collectionRate;
 				$inventoryFood += collectionRate.food ?? 0;
 				$inventoryWood += collectionRate.wood ?? 0;

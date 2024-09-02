@@ -95,7 +95,7 @@ export const GAME_OBJECTS = {
 			images: [lumbercamp],
 			stats: {
 				collectionRate: {
-					wood: 3
+					wood: 0
 				},
 				cost: {
 					wood: 200
