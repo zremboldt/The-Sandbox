@@ -27,7 +27,37 @@ const INITIAL_MAP_CTX = 'INITIAL_MAP_CTX';
 
 // getContext and setContext can only be called during a component's initialization.
 export function initializeMapContext(initialData: Tile[] = []) {
+	// Rename this function ☝️ to initializeWorldContext
+
+	// initialData now contains an object that looks like this:
+	// const initialData = {
+	//   worldMap: [
+	//     {
+	//       id: 0,
+	//       land: { type: 'grass', image: 'grass1' },
+	//       building: { type: '', image: '' }
+	//     },
+	//     {
+	//       id: 1,
+	//       land: { type: 'grass', image: 'grass2' },
+	//       building: { type: '', image: '' }
+	//     }
+	//     // ... more tiles
+	//   ],
+	//   inventory: {
+	//     food: 150,
+	//     wood: 300,
+	//     stone: 0,
+	//     population: 3
+	//   }
+	// };
+
 	let generatedMap = $state([]);
+
+	// if (initialData.worldMap.length) {
+	// generatedMap = initialData.worldMap;
+
+	// localStorage.setItem('worldMap', JSON.stringify(initialData));
 
 	if (initialData.length) {
 		generatedMap = initialData;
@@ -50,6 +80,7 @@ export function initializeMapContext(initialData: Tile[] = []) {
 }
 
 export function getMapContext() {
+	// Rename this function ☝️ to getWorldContext
 	return getContext<Tile[]>(INITIAL_MAP_CTX); // We're getting the store from the Svelte context
 }
 
@@ -57,7 +88,7 @@ export function getMapContext() {
 
 export const selectedToolContext = writable(GAME_OBJECTS.land.grass);
 
-export const inventoryFood = writable(100);
+export const inventoryFood = writable(150);
 export const inventoryWood = writable(300);
 export const inventoryStone = writable(0);
 export const inventoryPopulation = writable(3);

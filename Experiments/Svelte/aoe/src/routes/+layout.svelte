@@ -2,22 +2,22 @@
 	import '../app.css';
 	import { initializeMapContext } from '$lib/state.svelte';
 
-	function loadMapFromLocalStorage() {
+	function loadWorldFromLocalStorage() {
 		if (typeof window === 'undefined') return;
 
 		const urlParams = new URLSearchParams(window.location.search);
-		const savedMapName = urlParams.get('map');
+		const savedWorldName = urlParams.get('map');
 
-		if (!savedMapName) return;
+		if (!savedWorldName) return;
 
-		const mapDataAsString = localStorage.getItem(savedMapName);
+		const savedWorldData = localStorage.getItem(savedWorldName);
 
-		if (!mapDataAsString) return;
+		if (!savedWorldData) return;
 
-		return JSON.parse(mapDataAsString);
+		return JSON.parse(savedWorldData);
 	}
 
-	initializeMapContext(loadMapFromLocalStorage());
+	initializeMapContext(loadWorldFromLocalStorage());
 </script>
 
 <div class="app">
