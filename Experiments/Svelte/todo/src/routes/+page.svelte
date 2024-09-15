@@ -14,8 +14,8 @@
 
 	$effect(() => {
 		// console.log(todos);
-		console.log(JSON.stringify(todos));
-		console.log(filter);
+		// console.log(JSON.stringify(todos));
+		// console.log(filter);
 	});
 
 	const addTodo = (e: KeyboardEvent) => {
@@ -40,7 +40,7 @@
 		const checkboxElement = e.target as HTMLInputElement;
 		const index = Number(checkboxElement.dataset.index);
 
-		todos[index].done = !todos[index].done;
+		todos[index].done = checkboxElement.checked;
 	};
 
 	const setFilter = (newFilter: Filters) => {
@@ -56,7 +56,7 @@
 	let filteredTodos = $derived(filterTodos());
 
 	const remaining = () => {
-		return todos.filter((todo) => !todo.completed).length;
+		return todos.filter((todo) => !todo.done).length;
 	};
 </script>
 
@@ -64,7 +64,7 @@
 	<input type="text" onkeydown={addTodo} placeholder="Add todo" />
 
 	<div class="todos">
-		{#each filteredTodos as todo, i}
+		{#each filteredTodos as todo, i (i)}
 			<div class="todo" class:completed={todo.done}>
 				<input onchange={toggleTodo} data-index={i} checked={todo.done} type="checkbox" />
 				<input oninput={editTodo} data-index={i} value={todo.text} type="text" />

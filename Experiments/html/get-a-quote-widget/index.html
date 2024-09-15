@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <button class="theme-button">Theme</button>
+    <button
+      class="sign-in"
+      popovertarget="disclose"
+      popovertargetaction="toggle"
+    >
+      Get a quote
+    </button>
+
+    <div popover="auto" id="disclose" class="disclosure">
+      <header>
+        <span>Get a quote</span>
+        <button popovertarget="disclose" popovertargetaction="close">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </header>
+      <div class="content">
+        <div class="actions">
+          <button>Continue with X</button>
+          <button>Continue with GitHub</button>
+        </div>
+        <div class="divide">
+          <hr />
+          <span>Or</span>
+        </div>
+        <form>
+          <input type="email" required="required" placeholder="Email" />
+          <button>Continue</button>
+        </form>
+      </div>
+    </div>
+    <script src="script.js" type="module"></script>
+  </body>
+</html>
