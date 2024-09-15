@@ -24,8 +24,8 @@ const permissions = {
 } as HealthKitPermissions;
 
 export default function HomeScreen() {
-  const [stepCount, setStepCount] = useState(0);
-  const [distance, setDistance] = useState(0);
+  const [dailySteps, setDailySteps] = useState([]);
+  const [dailyDistance, setDailyDistance] = useState([]);
   const [isAuthorized, setIsAuthorized] = useState(false);
 
   useEffect(() => {
@@ -44,41 +44,47 @@ export default function HomeScreen() {
   }, [isAuthorized]);
 
   const fetchHealthData = async () => {
+    const now = new Date();
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+
     const sharedOptions = {
-      date: new Date().toISOString(),
-      includeManuallyAdded: false,
+      startDate: startOfMonth.toISOString(), // start of the past month
+      endDate: now.toISOString(), // today
+      limit: 5, // optional; default no limit
+      period: 1440, // optional; 1440 minutes(24 hours)
+      ascending: false, // optional; default false
     };
 
     const stepOptions = sharedOptions as HealthInputOptions;
     const distanceOptions = {
-      unit: "mile",
       ...sharedOptions,
+      unit: "mile", // optional; default meter
     } as HealthInputOptions;
 
-    const getStepCount = async () => {
+    const getDailyStepCountSamples = async () => {
       return new Promise((resolve, reject) => {
-        AppleHealthKit.getStepCount(stepOptions, (err, res) => {
+        AppleHealthKit.getDailyStepCountSamples(stepOptions, (err, res) => {
           if (err) reject(err);
-          else resolve(res.value);
+          else resolve(res);
         });
       });
     };
 
-    const getDistanceWalkingRunning = async () => {
+    const getDailyDistanceWalkingRunningSamples = async () => {
       return new Promise((resolve, reject) => {
-        AppleHealthKit.getDistanceWalkingRunning(
+        AppleHealthKit.getDailyDistanceWalkingRunningSamples(
           distanceOptions,
           (err, res) => {
             if (err) reject(err);
-            else resolve(res.value);
+            else resolve(res);
           }
         );
       });
     };
 
     try {
-      const stepData = await getStepCount();
-      const distanceData = await getDistanceWalkingRunning();
+      const stepData = await getDailyStepCountSamples();
+      const distanceData = await getDailyDistanceWalkingRunningSamples();
 
       // Send this to the server for storage
       // await postHealthData({
@@ -86,8 +92,9 @@ export default function HomeScreen() {
       //   distance: distanceData,
       // });
 
-      setStepCount(stepData);
-      setDistance(distanceData);
+      console.log(distanceData);
+      setDailySteps(stepData);
+      setDailyDistance(distanceData);
     } catch (error) {
       console.error("Error fetching health data:", error);
     }
@@ -131,10 +138,22 @@ export default function HomeScreen() {
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">
-          Step count: {stepCount.toString()}
-        </ThemedText>
-        <ThemedText type="subtitle">Distance: {distance.toString()}</ThemedText>
+        <ThemedText type="subtitle">Steps by Day:</ThemedText>
+        {dailySteps.map(({ startDate, value }, index) => {
+          const options = {
+            year: "numeric",
+            month: "long", // Options: 'short', 'long', 'numeric'
+            day: "numeric",
+          };
+
+          return (
+            <ThemedText key={index}>
+              {new Date(startDate).toLocaleDateString("en-US", options)}:{" "}
+              {value} steps
+            </ThemedText>
+          );
+        })}
+
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>
         <ThemedText>
           Edit{" "}
