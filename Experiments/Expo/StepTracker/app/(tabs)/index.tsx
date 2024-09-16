@@ -5,7 +5,7 @@ import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import AppleHealthKit, {
   HealthValue,
   HealthKitPermissions,
@@ -24,8 +24,7 @@ const permissions = {
 } as HealthKitPermissions;
 
 export default function HomeScreen() {
-  const [dailySteps, setDailySteps] = useState([]);
-  const [dailyDistance, setDailyDistance] = useState([]);
+  const [pedometerData, setPedometerData] = useState([]);
   const [isAuthorized, setIsAuthorized] = useState(false);
 
   useEffect(() => {
@@ -86,15 +85,18 @@ export default function HomeScreen() {
       const stepData = await getDailyStepCountSamples();
       const distanceData = await getDailyDistanceWalkingRunningSamples();
 
-      // Send this to the server for storage
-      // await postHealthData({
-      //   steps: stepData,
-      //   distance: distanceData,
-      // });
+      const combinedData = stepData.map((entry: HealthValue, index: number) => {
+        return {
+          date: entry.startDate,
+          steps: entry.value,
+          distance: distanceData[index].value,
+        };
+      });
 
-      console.log(distanceData);
-      setDailySteps(stepData);
-      setDailyDistance(distanceData);
+      // Post this data to my Notion API for storage
+      // await postHealthData(combinedData);
+
+      setPedometerData(combinedData);
     } catch (error) {
       console.error("Error fetching health data:", error);
     }
@@ -138,8 +140,8 @@ export default function HomeScreen() {
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Steps by Day:</ThemedText>
-        {dailySteps.map(({ startDate, value }, index) => {
+        {/* <ThemedText type="subtitle">Pedometer data:</ThemedText> */}
+        {pedometerData.map(({ date, steps, distance }, index) => {
           const options = {
             year: "numeric",
             month: "long", // Options: 'short', 'long', 'numeric'
@@ -147,14 +149,17 @@ export default function HomeScreen() {
           };
 
           return (
-            <ThemedText key={index}>
-              {new Date(startDate).toLocaleDateString("en-US", options)}:{" "}
-              {value} steps
-            </ThemedText>
+            <ThemedView key={index}>
+              <ThemedText type="subtitle">
+                {new Date(date).toLocaleDateString("en-US", options)}
+              </ThemedText>
+              <ThemedText>{steps} steps</ThemedText>
+              <ThemedText>{distance.toFixed(2)} miles</ThemedText>
+            </ThemedView>
           );
         })}
 
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
+        {/* <ThemedText type="subtitle">Step 1: Try it</ThemedText>
         <ThemedText>
           Edit{" "}
           <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{" "}
@@ -163,9 +168,9 @@ export default function HomeScreen() {
             {Platform.select({ ios: "cmd + d", android: "cmd + m" })}
           </ThemedText>{" "}
           to open developer tools.
-        </ThemedText>
+        </ThemedText> */}
       </ThemedView>
-      <ThemedView style={styles.stepContainer}>
+      {/* <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 2: Explore</ThemedText>
         <ThemedText>
           Tap the Explore tab to learn more about what's included in this
@@ -182,7 +187,7 @@ export default function HomeScreen() {
           <ThemedText type="defaultSemiBold">app</ThemedText> to{" "}
           <ThemedText type="defaultSemiBold">app-example</ThemedText>.
         </ThemedText>
-      </ThemedView>
+      </ThemedView> */}
     </ParallaxScrollView>
   );
 }
