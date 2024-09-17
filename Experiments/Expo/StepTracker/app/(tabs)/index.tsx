@@ -198,6 +198,10 @@ export default function HomeScreen() {
           );
         })}
 
+        <Button
+          onPress={() => postHealthData(pedometerData)}
+          title="Post to Notion"
+        />
         {/* <ThemedText type="subtitle">Step 1: Try it</ThemedText>
         <ThemedText>
           Edit{" "}
