@@ -75,6 +75,13 @@ header {
     }
   }
 
+  /* 
+  
+  3. Let's make the header responsive
+  Now, since we didn't add any fixed sizing to the header,
+  changing the flex direction of a couple elements is basically all we need to do to make this header responsive!
+  */
+
   @media screen and (max-width: 540px) {
     flex-direction: column;
 
@@ -93,6 +100,18 @@ header {
   }
 }
 
+/* 
+4. Now for the main content area
+ I will usually add some left and right padding here
+ This will give you the nice space on mobile so that your text never hits the edge of the screen
+ 👉 Add padding to main
+
+ Then on most sites, you'll want to limit the width of your main content area
+ 👉 Show with lorem emmet
+ 👉 Then add width: min(100%, 700px);
+ 👉 May need to center content
+*/
+
 main {
   padding: 120px 20px;
   display: flex;
@@ -101,6 +120,15 @@ main {
   .page-wrap {
     width: min(100%, 700px);
   }
+
+  /* 
+  5. Let's make the hero section
+  In situations where it makes sense, I really like using the flexbox gap property for element spacing.
+  - It makes your spacing consistent.
+  - You're writing or updating the value once vs managing the margins on multiple elements.
+  - If developer number three comes in 6 months later and adds or removes an element, 
+    they don't even have to think about adding margin and the spacing stays consistent across-the-board.
+  */
 
   .hero {
     display: flex;
