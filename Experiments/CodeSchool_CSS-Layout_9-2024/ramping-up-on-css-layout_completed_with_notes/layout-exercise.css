@@ -1,0 +1,121 @@
+:root {
+  --nav-height: 60px;
+  /* Colors */
+  --white: 0 0% 100%;
+  --black: 0 0% 0%;
+  --solar: 64 89% 54%;
+  --forest: 167 38% 15%;
+}
+
+/* 
+Install the Live Server extension in VS Code
+It'll give you hot reloading, which will save you a lot of switching back-and-forth, refreshing the page.
+*/
+
+/* 
+0. This is a CSS layout workshop!
+We're going to focus on using Flexbox to achieve some common layout needs.
+You can ignore the setup.css file. It's just there to make things look a little nicer.
+We're going to focus on the layout-exercise.css file.
+*/
+
+/* 
+1. Let's start by pushing that footer down 
+
+Some pages might be longer and some might be shorter 
+On the shorter pages, we don't ever want to see space under the footer 
+The body wraps the footer 
+So if we want our footer to sit at the bottom of the body, then the body needs to be at least as tall as the viewport 
+👉 add min-height: 100svh to the body;  
+We use min-height, because we're saying we want the body to be at least this tall or taller (in the case of there being more content).
+👉 Show body in the dev tools
+
+Now, if you make the body a flex column and add a margin-top: auto to the footer...
+auto margins inside of a flex area fill space, causing elements to be pushed around.
+*/
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+/* 
+2. Now let's tackle the header
+👉 space things out
+
+👉 Talk about --nav-height
+A super common instinct is to set a height on a header or a card or a section, etc.
+But so so often it's better to let the children dictate the size.
+Let them take up the space they need and then the parent can just shape-shift around the children as needed.
+So rather than setting a height on the header, let's set a height on the children (or even the children's children).
+Setting a fixed size on a parent can lead to overflow, clipping, and even just css that's harder to maintain.
+*/
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo {
+    display: grid;
+    place-items: center;
+    height: var(--nav-height);
+    padding-inline: 20px;
+  }
+
+  nav {
+    display: flex;
+
+    a {
+      display: grid;
+      place-items: center;
+      height: var(--nav-height);
+      padding-inline: 20px;
+    }
+  }
+
+  @media screen and (max-width: 540px) {
+    flex-direction: column;
+
+    .logo {
+      width: 100%;
+    }
+
+    nav {
+      width: 100%;
+      flex-direction: column;
+
+      a {
+        height: 40px;
+      }
+    }
+  }
+}
+
+main {
+  padding: 120px 20px;
+  display: flex;
+  justify-content: center;
+
+  .page-wrap {
+    width: min(100%, 700px);
+  }
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+    p {
+      text-wrap: pretty;
+      max-width: 400px;
+    }
+  }
+}
+
+footer {
+  margin-top: auto;
+  padding: 20px;
+}
