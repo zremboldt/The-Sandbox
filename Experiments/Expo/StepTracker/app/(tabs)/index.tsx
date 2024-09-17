@@ -3,6 +3,7 @@ import { Image, StyleSheet, Platform, View, Text, Button } from "react-native";
 import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
+import { Client } from "@notionhq/client";
 import { ThemedView } from "@/components/ThemedView";
 
 import { useEffect, useState } from "react";
@@ -102,6 +103,11 @@ export default function HomeScreen() {
     }
   };
 
+  const postHealthData = async (data: {
+    date: Date;
+    steps: number;
+    distance: number;
+  }) => {
   // const postHealthData = async (data: { steps: number; distance: number }) => {
   //   try {
   //     const response = await fetch(
@@ -115,15 +121,48 @@ export default function HomeScreen() {
   //       }
   //     );
 
-  //     if (!response.ok) {
-  //       throw new Error(`Server error: ${response.statusText}`);
-  //     }
+    const notion = new Client({
+      auth: notionApiKey,
+    });
 
-  //     console.log("Health data posted successfully");
-  //   } catch (error) {
-  //     console.error("Error posting health data:", error);
-  //   }
-  // };
+    try {
+      // const response = await notion.databases.retrieve({
+      //   database_id: notionDatabaseId,
+      // });
+      // console.log("Database found:", response.title[0].plain_text);
+
+      const response = await notion.pages.create({
+        parent: {
+          type: "database_id",
+          database_id: notionDatabaseId,
+        },
+        properties: {
+          Date: {
+            type: "date",
+            date: { start: data[0].date },
+          },
+          Steps: {
+            type: "number",
+            number: data[0].steps,
+          },
+          Distance: {
+            type: "number",
+            number: parseFloat(data[0].distance.toFixed(2)),
+          },
+        },
+      });
+
+      // if (!response.ok) {
+      //   throw new Error(`Server error: ${response.statusText}`);
+      // }
+
+      console.log("res:", response);
+
+      console.log("Health data posted successfully");
+    } catch (error) {
+      console.error("Error posting health data:", error);
+    }
+  };
 
   return (
     <ParallaxScrollView
