@@ -30,7 +30,15 @@ So if we want our footer to sit at the bottom of the body, then the body needs t
 We use min-height, because we're saying we want the body to be at least this tall or taller (in the case of there being more content).
 👉 Show body in the dev tools
 
-Now, if you make the body a flex column and add a margin-top: auto to the footer...
+Now, if we make the body a flex column we should be able to push that footer down right?
+We want everything else to stay at the top but the footer should be at the bottom so...
+
+align-self: flex-end; doesn't work because we're in a column
+justify-self: flex-end; doesn't work because flex items can only move within their tracks, 
+  and the bottom track doesn't stretch beyond the footer (that's why justify self appears to do nothing in this case).
+  But there is a way...
+
+Let's add a margin-top: auto to the footer... and voila!
 auto margins inside of a flex area fill space, causing elements to be pushed around.
 */
 
