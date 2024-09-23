@@ -9,7 +9,7 @@
   <body>
     <button class="theme-button">Theme</button>
     <button
-      class="sign-in"
+      class="get-quote"
       popovertarget="disclose"
       popovertargetaction="toggle"
     >
@@ -36,20 +36,30 @@
           </svg>
         </button>
       </header>
-      <div class="content">
-        <div class="actions">
-          <button>Continue with X</button>
-          <button>Continue with GitHub</button>
-        </div>
-        <div class="divide">
-          <hr />
-          <span>Or</span>
-        </div>
-        <form>
-          <input type="email" required="required" placeholder="Email" />
-          <button>Continue</button>
-        </form>
-      </div>
+      <form class="form">
+        <fieldset>
+          <input
+            type="text"
+            required="required"
+            placeholder="First name"
+            autocomplete="given-name"
+          />
+          <input
+            type="text"
+            required="required"
+            placeholder="Last name"
+            autocomplete="family-name"
+          />
+        </fieldset>
+        <input
+          type="text"
+          required="required"
+          placeholder="Zip code"
+          autocomplete="address-line3"
+        />
+        <input type="email" required="required" placeholder="Email" />
+        <button>Continue</button>
+      </form>
     </div>
     <script src="script.js" type="module"></script>
   </body>

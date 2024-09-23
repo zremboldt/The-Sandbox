@@ -9,59 +9,42 @@
 [data-theme="light"],
 html {
   --overlay: hsl(0 0% 0% / 0.15);
-  --button: color-mix(in lch, canvas, hsl(190 60% 80%));
+  --background: 0 0% 100%;
+  --foreground: 240 10% 4%;
   color-scheme: light only;
-  background: white;
+  background: hsl(var(--background));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 [data-theme="dark"] {
   --overlay: hsl(0 0% 100% / 0.23);
-  --button: color-mix(in lch, canvas, hsl(190 60% 40%));
+  --background: 240 10% 4%;
+  --foreground: 60 9% 98%;
   color-scheme: dark only;
-  background: black;
+  background: hsl(var(--background));
 }
 @media (prefers-color-scheme: dark) {
   html {
     --overlay: hsl(0 0% 100% / 0.23);
-    --button: color-mix(in lch, canvas, hsl(190 60% 40%));
+    --background: 240 10% 4%;
+    --foreground: 60 9% 98%;
     color-scheme: dark only;
-    background: black;
+    background: hsl(var(--background));
   }
 }
 
 body {
   display: grid;
   place-items: center;
-  min-height: 100vh;
+  min-height: 100svh;
   font-family: "SF Pro Text", "SF Pro Icons", "AOS Icons", "Helvetica Neue",
     Helvetica, Arial, sans-serif, system-ui;
-}
-
-body::before {
-  --size: 45px;
-  --line: color-mix(in lch, canvasText, transparent 85%);
-  content: "";
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
-  background: linear-gradient(
-        90deg,
-        var(--line) 1px,
-        transparent 1px var(--size)
-      )
-      50% 50% / var(--size) var(--size),
-    linear-gradient(var(--line) 1px, transparent 1px var(--size)) 50% 50% /
-      var(--size) var(--size);
-  mask: linear-gradient(-20deg, transparent 50%, white);
-  top: 0;
-  transform-style: flat;
-  pointer-events: none;
-  z-index: -1;
 }
 
 :root {
   --duration: 0.35s;
   --padding: 0.675rem;
-  --radius: 8px;
+  --radius: 6px;
   --ease: linear(
     0 0%,
     0.0036 9.62%,
@@ -136,6 +119,9 @@ body::before {
   --speed: 0.35s;
   --starting: color-mix(in lch, canvas, canvasText 20%);
   --text: canvasText;
+  --primary: 19 100% 50%;
+  --primary-foreground: 0 0% 98%;
+  /* --starting: hsl(var(--foreground)); */
 }
 
 .disclosure {
@@ -147,7 +133,7 @@ body::before {
 a,
 button,
 input {
-  outline-color: red;
+  outline-color: hsl(var(--foreground) / 0.2);
 }
 button {
   cursor: pointer;
@@ -163,17 +149,17 @@ button {
   right: 1rem;
   padding: 0.5rem;
   border: none;
-  border-radius: 6px;
+  border-radius: var(--radius);
   background: var(--overlay);
   color: var(--text);
 }
 
 /* The trigger button that starts it off */
-.sign-in {
+.get-quote {
   position: absolute;
   width: var(--sw);
   height: var(--sh);
-  border-radius: calc(var(--sh) * 0.5);
+  border-radius: calc(var(--sh) * 0.1);
   border: 0;
   anchor-name: --control;
   background: var(--starting);
@@ -182,7 +168,7 @@ button {
 }
 
 /* Outline the popover when focussed */
-.sign-in:focus-visible + [popover] {
+.get-quote:focus-visible + [popover] {
   outline: 1px solid red;
 }
 
@@ -336,7 +322,7 @@ header span svg {
   translate: 0 0;
 }
 
-.content {
+.form {
   width: var(--ew);
   height: calc(var(--eh) - (48px - 0.875rem));
   padding: var(--padding);
@@ -344,97 +330,46 @@ header span svg {
   top: calc(48px - 1rem);
   left: 50%;
   translate: -50% 2rem;
-  display: flex;
-  flex-direction: column;
   font-size: 0.875rem;
   opacity: 0;
   filter: blur(4px);
   transition: translate var(--speed), opacity var(--speed), filter var(--speed);
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding);
+
+  fieldset {
+    display: flex;
+    gap: var(--padding);
+    max-width: 320px;
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  button {
+    padding: calc(var(--padding) * 1.25) 1rem;
+    border-radius: var(--radius);
+    border: 0;
+    /* --overlay: hsl(0 0% 100% / 0.2); */
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    font-weight: 500;
+  }
 }
 
-#disclose:popover-open .content {
+#disclose:popover-open .form {
   opacity: 1;
   translate: -50% 0;
   filter: blur(0);
 }
 
 @starting-style {
-  #disclose:popover-open .content {
+  #disclose:popover-open .form {
     opacity: 0;
     translate: -50% 2rem;
     filter: blur(4px);
   }
-}
-
-.actions,
-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--padding);
-}
-
-.actions button {
-  display: flex;
-  gap: var(--padding);
-  background: var(--button);
-}
-.actions button span:first-of-type {
-  flex: 1;
-  text-align: right;
-}
-.actions button span:last-of-type {
-  flex: 2.5;
-  text-align: left;
-}
-
-button:has(svg) {
-  display: flex;
-  gap: var(--padding);
-  align-items: center;
-  justify-content: center;
-}
-
-button svg {
-  width: 16px;
-}
-
-.divide {
-  flex: 1;
-  position: relative;
-  text-align: center;
-  display: grid;
-  place-items: center;
-}
-
-.divide hr {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  background: transparent;
-  color: transparent;
-  border: 1px solid var(--hr);
-  margin: 0;
-  height: 0;
-  translate: -50% -50%;
-  width: calc(var(--ew) - (2 * var(--padding)));
-  mask: linear-gradient(
-    90deg,
-    white calc(50% - 10ch),
-    transparent calc(50% - 3ch) calc(50% + 3ch),
-    white calc(50% + 10ch)
-  );
-}
-
-.disclosure button:not(.sign-in) {
-  padding: calc(var(--padding) * 1.25) 1rem;
-  border-radius: var(--radius);
-  border: 0;
-}
-
-form button {
-  --overlay: hsl(0 0% 100% / 0.2);
-  background: black;
-  color: white;
 }
 
 input {
@@ -447,9 +382,4 @@ form button span {
   display: inline-block;
   transition: translate var(--speed);
   translate: calc(var(--intent, 0) * -0.5ch) 0;
-}
-
-form button svg {
-  transition: translate var(--speed);
-  translate: calc(var(--intent, 0) * 0.5ch) 0;
 }
