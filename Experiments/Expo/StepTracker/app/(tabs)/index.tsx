@@ -1,17 +1,17 @@
 import { Image, StyleSheet, Platform, View, Text, Button } from "react-native";
-
 import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { Client } from "@notionhq/client";
 import { ThemedView } from "@/components/ThemedView";
-
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AppleHealthKit, {
   HealthValue,
   HealthKitPermissions,
 } from "react-native-health";
 import type { HealthInputOptions } from "react-native-health";
+import ButtonFilled from "@/components/ButtonFilled";
+
 
 const permissions = {
   permissions: {
@@ -25,6 +25,8 @@ const permissions = {
 } as HealthKitPermissions;
 
 export default function HomeScreen() {
+  const hasSyncd = useRef(false);
+  const [isSyncing, setIsSyncing] = useState(false);
   const [pedometerData, setPedometerData] = useState([]);
   const [isAuthorized, setIsAuthorized] = useState(false);
 
@@ -40,17 +42,23 @@ export default function HomeScreen() {
 
   useEffect(() => {
     if (!isAuthorized) return;
-    fetchHealthData();
+    fetchFromHealthkit();
   }, [isAuthorized]);
-
-  const fetchHealthData = async () => {
+  
+  useEffect(() => {
+    if (pedometerData.length === 0) return;
+    if (hasSyncd.current) return; // We only want to auto-sync once when the app opens
+    syncNotionDatabase(pedometerData);
+  }, [pedometerData]);
+  
+  const fetchFromHealthkit = async () => {
     const now = new Date();
     const startOfMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
 
     const sharedOptions = {
       startDate: startOfMonth.toISOString(), // start of the past month
       endDate: now.toISOString(), // today
-      limit: 5, // optional; default no limit
+      limit: 7, // optional; default no limit
       period: 1440, // optional; 1440 minutes(24 hours)
       ascending: false, // optional; default false
     };
@@ -94,73 +102,182 @@ export default function HomeScreen() {
         };
       });
 
-      // Post this data to my Notion API for storage
-      // await postHealthData(combinedData);
-
       setPedometerData(combinedData);
     } catch (error) {
       console.error("Error fetching health data:", error);
     }
   };
 
+  const syncNotionDatabase = async (newHealthkitData) => {
+    hasSyncd.current = true;
+    setIsSyncing(true);
+    const latestNotionEntry = await getLatestNotionEntry();
+    await replaceLatestDatabaseEntry(latestNotionEntry, newHealthkitData);
+    await addAllDaysSinceLatestNotionEntry(latestNotionEntry, newHealthkitData);
+    setIsSyncing(false);
+    console.log('Sync complete!');
+  }
+
+  function areSameDay(date1, date2) {
+    const d1 = new Date(date1);
+    const d2 = new Date(date2);
+    
+    return d1.getUTCFullYear() === d2.getUTCFullYear() &&
+           d1.getUTCMonth() === d2.getUTCMonth() &&
+           d1.getUTCDate() === d2.getUTCDate();
+  }
+
+  const getLatestNotionEntry = async () => {
+    const notion = new Client({
+      auth: NOTION_API_KEY,
+    });
+  
+    try {
+      const response = await notion.databases.query({
+        database_id: NOTION_DATABASE_ID,
+        sorts: [
+          {
+            property: "Date",
+            direction: "descending",
+          },
+        ],
+        page_size: 1,
+      });
+  
+      if (response.results.length > 0) {
+        return response.results[0];
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching latest database entry:", error);
+      throw error;
+    }
+  };
+
+  const replaceLatestDatabaseEntry = async (latestNotionEntry, newHealthkitData) => {
+    // The latest Notion database entry may not have the final count of steps and distance from that day.
+    // This function will replace the latest Notion entry with the final count of steps and distance from that day.
+    const notion = new Client({
+      auth: NOTION_API_KEY,
+    });
+  
+    try {
+      // Step 1: Get the date of the latest Notion entry
+      const latestNotionEntryDate = latestNotionEntry.properties.Date.date.start;
+
+      // Step 2: Find the matching entry in newHealthkitData
+      const latestMatchingEntryFromHealthkit = newHealthkitData.find(({ date }) => areSameDay(date, latestNotionEntryDate));
+
+      if (!latestMatchingEntryFromHealthkit) {
+        throw new Error(`No match found when trying to pair new HealthKit data with Notion DB data. Latest Notion entry date is: ${latestNotionEntryDate}`);
+      }
+
+      // Step 3: Create a new entry with the same date
+      await postHealthData(latestMatchingEntryFromHealthkit);
+  
+      // Step 4: Delete the old entry
+      await notion.pages.update({
+        page_id: latestNotionEntry.id,
+        archived: true,
+      });
+    } catch (error) {
+      console.error("Error replacing latest database entry:", error);
+      throw error;
+    }
+  };
+
+  function formatDateForStorage(dateInput) {
+    let date;
+  
+    // Check if dateInput is already a Date object
+    if (dateInput instanceof Date) {
+      date = dateInput;
+    } else if (typeof dateInput === 'string') {
+      // If it's a string, try to convert it to a Date object
+      date = new Date(dateInput);
+  
+      // Check if the date is valid
+      if (isNaN(date.getTime())) {
+        throw new Error('Invalid date string provided');
+      }
+    } else {
+      throw new Error('Invalid input type. Expected Date object or date string');
+    }
+  
+    // Format the date as YYYY-MM-DD
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+  
+    return `${year}-${month}-${day}`;
+  }
+  
   const postHealthData = async (data: {
     date: Date;
     steps: number;
     distance: number;
   }) => {
-  // const postHealthData = async (data: { steps: number; distance: number }) => {
-  //   try {
-  //     const response = await fetch(
-  //       "https://your-api-endpoint.com/health-dataz",
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify(data),
-  //       }
-  //     );
-
     const notion = new Client({
-      auth: notionApiKey,
+      auth: NOTION_API_KEY,
     });
 
     try {
-      // const response = await notion.databases.retrieve({
-      //   database_id: notionDatabaseId,
-      // });
-      // console.log("Database found:", response.title[0].plain_text);
+      const {date, steps, distance} = data;
 
-      const response = await notion.pages.create({
+      await notion.pages.create({
         parent: {
           type: "database_id",
-          database_id: notionDatabaseId,
+          database_id: NOTION_DATABASE_ID,
         },
         properties: {
           Date: {
             type: "date",
-            date: { start: data[0].date },
+            date: { start: formatDateForStorage(date) },
           },
           Steps: {
             type: "number",
-            number: data[0].steps,
+            number: steps,
           },
           Distance: {
             type: "number",
-            number: parseFloat(data[0].distance.toFixed(2)),
+            number: parseFloat(distance.toFixed(2)),
           },
         },
       });
-
-      // if (!response.ok) {
-      //   throw new Error(`Server error: ${response.statusText}`);
-      // }
-
-      console.log("res:", response);
-
-      console.log("Health data posted successfully");
     } catch (error) {
       console.error("Error posting health data:", error);
+    }
+  };
+
+  const addAllDaysSinceLatestNotionEntry = async (latestNotionEntry, newHealthkitData) => {
+    const latestNotionEntryDate = latestNotionEntry.properties.Date.date.start;
+
+    const today = new Date();
+    let currentIterationDate = new Date(latestNotionEntryDate);
+    currentIterationDate.setDate(currentIterationDate.getDate() + 1); // Start from the day after the latest entry
+  
+    while (currentIterationDate <= today) {
+      const formattedDate = currentIterationDate.toISOString().split('T')[0];
+      const healthData = newHealthkitData.find(({ date }) => date.startsWith(formattedDate));
+  
+      if (healthData) {
+        // If data exists for this day, post it
+        await postHealthData({
+          date: healthData.date,
+          distance: healthData.distance,
+          steps: healthData.steps
+        });
+      } else {
+        // If no data for this day, post with zero values
+        await postHealthData({
+          date: healthData.date,
+          distance: 0,
+          steps: 0
+        });
+      }
+  
+      currentIterationDate.setDate(currentIterationDate.getDate() + 1);
     }
   };
 
@@ -169,14 +286,14 @@ export default function HomeScreen() {
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
       headerImage={
         <Image
-          source={require("@/assets/images/partial-react-logo.png")}
-          style={styles.reactLogo}
+          source={require("@/assets/images/map.jpg")}
+          style={styles.image}
         />
       }
     >
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
+        <ThemedText type="title">Your past 7 days</ThemedText>
+        {/* <HelloWave /> */}
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
         {/* <ThemedText type="subtitle">Pedometer data:</ThemedText> */}
@@ -197,40 +314,12 @@ export default function HomeScreen() {
             </ThemedView>
           );
         })}
-
-        <Button
-          onPress={() => postHealthData(pedometerData)}
-          title="Post to Notion"
-        />
-        {/* <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit{" "}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{" "}
-          to see changes. Press{" "}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: "cmd + d", android: "cmd + m" })}
-          </ThemedText>{" "}
-          to open developer tools.
-        </ThemedText> */}
       </ThemedView>
-      {/* <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this
-          starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{" "}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText>{" "}
-          to get a fresh <ThemedText type="defaultSemiBold">app</ThemedText>{" "}
-          directory. This will move the current{" "}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{" "}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView> */}
+      <ButtonFilled
+        onPress={() => syncNotionDatabase(pedometerData)}
+        title={isSyncing ? "Syncing..." : "Sync to database"}
+        // disabled={isSyncing}
+      />
     </ParallaxScrollView>
   );
 }
@@ -245,9 +334,9 @@ const styles = StyleSheet.create({
     gap: 8,
     marginBottom: 8,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
+  image: {
+    height: '100%',
+    width: '100%',
     bottom: 0,
     left: 0,
     position: "absolute",
