@@ -40,25 +40,35 @@
         <fieldset>
           <input
             type="text"
+            name="firstName"
             required="required"
             placeholder="First name"
             autocomplete="given-name"
           />
           <input
             type="text"
+            name="lastName"
             required="required"
             placeholder="Last name"
             autocomplete="family-name"
           />
         </fieldset>
         <input
+          type="date"
+          name="birthDate"
+          required="required"
+          placeholder="mm.dd.yyyy"
+          date-format="mm.dd.yyyy"
+          autocomplete="bday"
+        />
+        <input
           type="text"
+          name="zip"
           required="required"
           placeholder="Zip code"
-          autocomplete="address-line3"
+          autocomplete="postal-code"
         />
-        <input type="email" required="required" placeholder="Email" />
-        <button>Continue</button>
+        <button>Get estimate now</button>
       </form>
     </div>
     <script src="script.js" type="module"></script>

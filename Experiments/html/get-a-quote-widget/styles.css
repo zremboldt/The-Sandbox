@@ -23,21 +23,12 @@ html {
   color-scheme: dark only;
   background: hsl(var(--background));
 }
-@media (prefers-color-scheme: dark) {
-  html {
-    --overlay: hsl(0 0% 100% / 0.23);
-    --background: 240 10% 4%;
-    --foreground: 60 9% 98%;
-    color-scheme: dark only;
-    background: hsl(var(--background));
-  }
-}
 
 body {
   display: grid;
   place-items: center;
   min-height: 100svh;
-  font-family: "SF Pro Text", "SF Pro Icons", "AOS Icons", "Helvetica Neue",
+  font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue",
     Helvetica, Arial, sans-serif, system-ui;
 }
 
@@ -88,7 +79,7 @@ body {
   --sw: 160px;
   --sh: 48px;
   --ew: 320px;
-  --eh: 300px;
+  --eh: 266px;
 
   /* Shadow */
   --base: hsl(
@@ -168,9 +159,9 @@ button {
 }
 
 /* Outline the popover when focussed */
-.get-quote:focus-visible + [popover] {
+/* .get-quote:focus-visible + [popover] {
   outline: 1px solid red;
-}
+} */
 
 /* The Popover - This acts as a placeholder but shouldn't animate size because it borks things */
 #disclose {
@@ -286,11 +277,6 @@ header span {
   gap: var(--padding);
 }
 
-header span svg {
-  width: 16px;
-  transition: opacity var(--speed), scale var(--speed), translate var(--speed);
-}
-
 #disclose:popover-open header {
   translate: calc(var(--ew) * -0.5 + (50% + 0.25rem)) -0.5rem;
   transition-timing-function: var(--ease-out);
@@ -347,6 +333,13 @@ header span svg {
     margin: 0;
   }
 
+  input {
+    border: 1px solid var(--border);
+    padding: calc(var(--padding) * 1.25) 1rem;
+    border-radius: var(--radius);
+    width: 100%;
+  }
+
   button {
     padding: calc(var(--padding) * 1.25) 1rem;
     border-radius: var(--radius);
@@ -370,16 +363,4 @@ header span svg {
     translate: -50% 2rem;
     filter: blur(4px);
   }
-}
-
-input {
-  border: 1px solid var(--border);
-  padding: calc(var(--padding) * 1.25) 1rem;
-  border-radius: var(--radius);
-}
-
-form button span {
-  display: inline-block;
-  transition: translate var(--speed);
-  translate: calc(var(--intent, 0) * -0.5ch) 0;
 }
