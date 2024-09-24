@@ -81,30 +81,6 @@ body {
   --ew: 320px;
   --eh: 266px;
 
-  /* Shadow */
-  --base: hsl(
-    var(--tint, 214) var(--saturated, 0%) 27% / calc(var(--alpha, 4) * 1%)
-  );
-  --shade: hsl(from var(--base) calc(h + 8) 25 calc(l - 5));
-  --spread: 4;
-  --s1: calc((var(--spread) * 1px) * pow(2, 0));
-  --s2: calc((var(--spread) * 1px) * pow(2, 1));
-  --s3: calc((var(--spread) * 1px) * pow(2, 2));
-  --s4: calc((var(--spread) * 1px) * pow(2, 3));
-  --s5: calc((var(--spread) * 1px) * pow(2, 4));
-  /* this becomes the angle of spread, -1 through to 1 */
-  --x: 0;
-  --perfect-shadow: 0 0 0 1px var(--base), 0 1px 1px -0.5px var(--shade),
-    calc(var(--s1) * var(--x)) var(--s1) var(--s1) calc(var(--s1) * -0.5)
-      var(--shade),
-    calc(var(--s2) * var(--x)) var(--s2) var(--s2) calc(var(--s2) * -0.5)
-      var(--shade),
-    calc(var(--s3) * var(--x)) var(--s3) var(--s3) calc(var(--s3) * -0.5)
-      var(--base),
-    calc(var(--s4) * var(--x)) var(--s4) var(--s4) calc(var(--s4) * -0.5)
-      var(--base),
-    calc(var(--s5) * var(--x)) var(--s5) var(--s5) calc(var(--s5) * -0.5)
-      var(--base);
   --border: color-mix(in lch, canvasText, transparent 90%);
   --hr: color-mix(in lch, canvas, canvasText 10%);
   --speed: 0.35s;
@@ -158,11 +134,6 @@ button {
   padding: 0;
 }
 
-/* Outline the popover when focussed */
-/* .get-quote:focus-visible + [popover] {
-  outline: 1px solid red;
-} */
-
 /* The Popover - This acts as a placeholder but shouldn't animate size because it borks things */
 #disclose {
   margin: 0;
@@ -188,7 +159,7 @@ button {
     height: var(--eh);
     width: var(--ew);
     border-radius: var(--radius);
-    box-shadow: 0 0 0 2px var(--border), var(--perfect-shadow);
+    box-shadow: 0 0 0 2px var(--border), 0 10px 14px -4px hsl(0 0% 0% / 0.15);
     background-color: canvas;
     color: canvasText;
     transition-duration: calc(2 * var(--speed));

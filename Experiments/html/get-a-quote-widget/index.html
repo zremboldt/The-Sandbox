@@ -8,68 +8,74 @@
   </head>
   <body>
     <button class="theme-button">Theme</button>
-    <button
-      class="get-quote"
-      popovertarget="disclose"
-      popovertargetaction="toggle"
-    >
-      Get a quote
-    </button>
 
-    <div popover="auto" id="disclose" class="disclosure">
-      <header>
-        <span>Get a quote</span>
-        <button popovertarget="disclose" popovertargetaction="close">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="size-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18 18 6M6 6l12 12"
+    <div id="root-rc1-widget">
+      <button
+        class="get-quote"
+        popovertarget="disclose"
+        popovertargetaction="toggle"
+      >
+        Get a quote
+      </button>
+
+      <div popover="auto" id="disclose" class="disclosure">
+        <header>
+          <span>Get a quote</span>
+          <button popovertarget="disclose" popovertargetaction="close">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18 18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </header>
+        <form id="root-rc1-form" class="form">
+          <fieldset>
+            <input
+              type="text"
+              name="firstName"
+              required="required"
+              placeholder="First name"
+              autocomplete="given-name"
             />
-          </svg>
-        </button>
-      </header>
-      <form class="form">
-        <fieldset>
+            <input
+              type="text"
+              name="lastName"
+              required="required"
+              placeholder="Last name"
+              autocomplete="family-name"
+            />
+          </fieldset>
           <input
-            type="text"
-            name="firstName"
+            type="date"
+            name="birthDate"
             required="required"
-            placeholder="First name"
-            autocomplete="given-name"
+            placeholder="mm.dd.yyyy"
+            date-format="mm.dd.yyyy"
+            autocomplete="bday"
           />
           <input
             type="text"
-            name="lastName"
+            name="zip"
             required="required"
-            placeholder="Last name"
-            autocomplete="family-name"
+            placeholder="Zip code"
+            autocomplete="postal-code"
           />
-        </fieldset>
-        <input
-          type="date"
-          name="birthDate"
-          required="required"
-          placeholder="mm.dd.yyyy"
-          date-format="mm.dd.yyyy"
-          autocomplete="bday"
-        />
-        <input
-          type="text"
-          name="zip"
-          required="required"
-          placeholder="Zip code"
-          autocomplete="postal-code"
-        />
-        <button>Get estimate now</button>
-      </form>
+          <input type="hidden" name="year" value="${year}" />
+          <input type="hidden" name="make" value="${make}" />
+          <input type="hidden" name="model" value="${model}" />
+          <button>Get estimate now</button>
+        </form>
+      </div>
     </div>
     <script src="script.js" type="module"></script>
   </body>
