@@ -107,6 +107,7 @@ body {
   --padding: 0.675rem;
   --radius: 6px;
   --speed: 0.35s;
+  --ease-out-quart: cubic-bezier(0.165, 0.85, 0.45, 1);
 
   --hr: color-mix(in lch, canvas, canvasText 10%);
   --text: canvasText;
@@ -160,10 +161,13 @@ body {
     background-color: var(--starting);
     font-size: 1rem;
     border: none;
-    color: white;
-    outline-width: 3px;
-    outline-color: hsl(var(--primary) / 0.6);
+    color: var(--starting-cta-text);
     anchor-name: --control;
+    outline: none;
+
+    &:focus-visible {
+      outline: 4px solid hsl(var(--primary) / 0.25);
+    }
   }
 
   /* The Popover */
@@ -361,16 +365,41 @@ body {
       background-position: right 8px center;
     }
 
-    button {
-      padding: calc(var(--padding) * 1.25) 1rem;
+    #calculate-button {
+      height: 46px;
+      overflow: hidden;
+      padding: 0px 20px;
       background-color: hsl(var(--primary));
-      color: hsl(var(--primary-foreground));
       border-radius: var(--radius);
-      font-weight: 500;
-      font-size: 15px;
       cursor: pointer;
-      outline-color: hsl(var(--foreground) / 0.2);
       border: 0;
+      outline: none;
+
+      &:focus-visible {
+        outline: 4px solid hsl(var(--primary) / 0.25);
+      }
+
+      span {
+        display: block;
+        height: 46px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        color: hsl(var(--primary-foreground));
+        font-weight: 500;
+        font-size: 15px;
+        transition: transform 300ms var(--ease-out-quart);
+      }
+
+      svg {
+        animation: spin 1s linear infinite;
+      }
+
+      &.active span {
+        transform: translateY(-46px);
+        cursor: not-allowed;
+      }
     }
   }
 
@@ -386,5 +415,14 @@ body {
       translate: -50% 2rem;
       filter: blur(4px);
     }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }

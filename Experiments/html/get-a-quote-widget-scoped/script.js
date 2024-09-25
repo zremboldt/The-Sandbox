@@ -14,3 +14,11 @@ const toggleWithTransition = () => {
 };
 
 themeButton.addEventListener("click", toggleWithTransition);
+
+const calculateButton = document.querySelector("#calculate-button");
+
+calculateButton.addEventListener("click", (e) => {
+  // e.preventDefault();
+  // e.target.innerText = "Calculating...";
+  calculateButton.classList.add("active");
+});
