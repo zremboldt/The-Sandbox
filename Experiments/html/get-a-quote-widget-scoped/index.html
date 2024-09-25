@@ -48,7 +48,7 @@
               </svg>
             </button>
           </header>
-          <form id="root-rc1-form" class="form">
+          <form id="root-rc1-form" class="active">
             <fieldset>
               <input
                 type="text"
@@ -135,6 +135,7 @@
                 autocomplete="postal-code"
               />
             </fieldset>
+            <input type="hidden" name="vin" value="${VEHICLE.vin}" />
             <input type="hidden" name="year" value="${VEHICLE.year}" />
             <input type="hidden" name="make" value="${VEHICLE.make}" />
             <input type="hidden" name="model" value="${VEHICLE.model}" />
@@ -159,6 +160,20 @@
               </span>
             </button>
           </form>
+          <!-- Add active class to reveal -->
+          <div id="root-rc1-results">
+            <section class="estimate">
+              <h3>Root Insurance Co.</h3>
+              <p>Estimated Monthly Premium<br />for your 2021 Honda Odyssey</p>
+              <h1 class="price">$63.00</h1>
+            </section>
+            <p>Complete your quote on root.com</p>
+            <a
+              href="https://quote.partner-testing.root.com/quote/prefill/name?bridge_auth_id=gNdpXUxD8a9mAV50L7pdI4Ci"
+            >
+              <button>Continue</button>
+            </a>
+          </div>
         </div>
       </div>
     </div>

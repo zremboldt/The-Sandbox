@@ -16,9 +16,15 @@ const toggleWithTransition = () => {
 themeButton.addEventListener("click", toggleWithTransition);
 
 const calculateButton = document.querySelector("#calculate-button");
+const rootRc1Form = document.querySelector("#root-rc1-form");
+const rootRc1Results = document.querySelector("#root-rc1-results");
 
 calculateButton.addEventListener("click", (e) => {
-  // e.preventDefault();
-  // e.target.innerText = "Calculating...";
+  e.preventDefault();
   calculateButton.classList.add("active");
+  setTimeout(() => {
+    calculateButton.classList.remove("active");
+    rootRc1Form.classList.remove("active");
+    rootRc1Results.classList.add("active");
+  }, 1000);
 });
