@@ -12,6 +12,8 @@ import AppleHealthKit, {
 import type { HealthInputOptions } from "react-native-health";
 import ButtonFilled from "@/components/ButtonFilled";
 
+const NOTION_API_KEY = "secret_CZbczrqj0YauenUSrVERvLx1Kxvk0F1OMCM2gH9yIh9";
+const NOTION_DATABASE_ID = "10624d04bccb80e494eecfba18e8434b";
 
 const permissions = {
   permissions: {
@@ -58,7 +60,7 @@ export default function HomeScreen() {
     const sharedOptions = {
       startDate: startOfMonth.toISOString(), // start of the past month
       endDate: now.toISOString(), // today
-      limit: 7, // optional; default no limit
+      limit: 10, // optional; default no limit
       period: 1440, // optional; 1440 minutes(24 hours)
       ascending: false, // optional; default false
     };
