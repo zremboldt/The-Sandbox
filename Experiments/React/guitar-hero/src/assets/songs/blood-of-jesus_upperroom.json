@@ -1,0 +1,548 @@
+{
+  "title": "Blood of Jesus",
+  "artist": "UPPERROOM",
+  "bpm": 69,
+  "timeSignature": "4/4",
+  "key": "G",
+  "notes": "Transcribed from chord chart screenshot. Bar-level timing is accurate for intro/turnarounds/bridge/outro. Verse/Chorus are laid out in common-worship 1-bar-per-chord fashion and can be refined to exact lyric-synced beats if needed.",
+  "sections": [
+    {
+      "name": "Intro",
+      "measures": [
+        {
+          "chords": [
+            {
+              "symbol": "G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "C/G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "C/G",
+              "beats": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Verse 1",
+      "lyricsSnippet": "Where would I be without the cross...",
+      "measures": [
+        {
+          "chords": [
+            {
+              "symbol": "G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "C/G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "D",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "C",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "C/G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "Em7",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "Dadd4",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "G",
+              "beats": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Chorus",
+      "lyricsSnippet": "You save and redeem, You deliver, You set free...",
+      "measures": [
+        {
+          "chords": [
+            {
+              "symbol": "C",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "D",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "Em7",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "C",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "D",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "C",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "D",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "Em7",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "C",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "D",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "C",
+              "beats": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Turnaround A",
+      "measures": [
+        {
+          "chords": [
+            {
+              "symbol": "G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "C/G",
+              "beats": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Verse 2",
+      "lyricsSnippet": "Where would I be without You, Jesus...",
+      "measures": [
+        {
+          "chords": [
+            {
+              "symbol": "G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "C",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "D",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "C",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "C",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "Em7",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "Dadd4",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "G",
+              "beats": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Repeat Chorus",
+      "measuresRef": "Chorus"
+    },
+    {
+      "name": "Turnaround B",
+      "measures": [
+        {
+          "chords": [
+            {
+              "symbol": "G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "D",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "Em7",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "C",
+              "beats": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bridge",
+      "lyricsSnippet": "Nothing but the blood...",
+      "repeat": 2,
+      "measures": [
+        {
+          "chords": [
+            {
+              "symbol": "G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "D",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "Em7",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "C",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "D",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "Em7",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "C",
+              "beats": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Repeat Bridge 2x",
+      "measuresRef": "Bridge",
+      "repeat": 2
+    },
+    {
+      "name": "Repeat Chorus (final)",
+      "measuresRef": "Chorus"
+    },
+    {
+      "name": "Outro",
+      "measures": [
+        {
+          "chords": [
+            {
+              "symbol": "G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "C/G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "G",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "chords": [
+            {
+              "symbol": "C/G",
+              "beats": 4
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
