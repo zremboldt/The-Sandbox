@@ -1,10 +1,7 @@
 import React, { forwardRef, CSSProperties } from "react";
-import classNames from "classnames";
-
-import styles from "./Action.module.css";
 import { styled } from "@mui/material";
 
-export interface Props extends React.HTMLAttributes<HTMLButtonElement> {
+export interface ActionProps extends React.HTMLAttributes<HTMLButtonElement> {
   active?: {
     fill: string;
     background: string;
@@ -12,13 +9,13 @@ export interface Props extends React.HTMLAttributes<HTMLButtonElement> {
   cursor?: CSSProperties["cursor"];
 }
 
-const ActionBase = forwardRef<HTMLButtonElement, Props>(
+export const ActionBase = forwardRef<HTMLButtonElement, ActionProps>(
   ({ active, className, cursor, style, ...props }, ref) => {
     return (
       <button
         ref={ref}
         {...props}
-        className={classNames(styles.Action, className)}
+        className={className}
         tabIndex={0}
         style={
           {
@@ -34,24 +31,25 @@ const ActionBase = forwardRef<HTMLButtonElement, Props>(
 );
 
 export const Action = styled(ActionBase)`
+  --focused-outline-color: #4c9ffe;
+
   display: flex;
-  width: 12px;
-  padding: 15px;
   align-items: center;
   justify-content: center;
-  flex: 0 0 auto;
+  align-self: stretch;
+  width: 28px;
+  cursor: pointer;
   touch-action: none;
-  cursor: var(--cursor, pointer);
-  border-radius: 5px;
+  border-radius: 3px;
   border: none;
   outline: none;
   appearance: none;
-  background-color: transparent;
+  background-color: var(--action-background);
   -webkit-tap-highlight-color: transparent;
 
   @media (hover: hover) {
     &:hover {
-      background-color: var(--action-background, rgba(0, 0, 0, 0.05));
+      background-color: var(--action-hover);
 
       svg {
         fill: #6f7b88;
@@ -78,6 +76,6 @@ export const Action = styled(ActionBase)`
   &:focus-visible {
     outline: none;
     box-shadow: 0 0 0 2px rgba(255, 255, 255, 0),
-      0 0px 0px 2px $focused-outline-color;
+      0 0px 0px 2px var(--focused-outline-color);
   }
 `;

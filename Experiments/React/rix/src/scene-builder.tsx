@@ -1,20 +1,20 @@
 "use client";
-import { Box, Typography, Button, Stack, styled } from "@mui/material";
+import { Typography, styled } from "@mui/material";
 import { SortableTree } from "./SortableTree";
 
 export function SceneBuilder() {
   return (
     <>
       <Header>
-        <Typography variant="h2" fontWeight="bold">
-          Scene Builder
+        <Typography variant="h3" fontWeight="bold">
+          Rix Scene Builder
         </Typography>
         <Typography variant="body1" color="text.secondary">
           Drag and drop elements to build your scene
         </Typography>
       </Header>
       <Main>
-        <SortableTree removable />
+        <SortableTree removable collapsible indicator />
       </Main>
     </>
   );
@@ -23,6 +23,7 @@ export function SceneBuilder() {
 const Main = styled("main")`
   display: flex;
   flex-direction: column;
+  gap: 5px;
   padding: 20px;
 `;
 

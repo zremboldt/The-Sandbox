@@ -1,3 +1,11 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -9,6 +17,33 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --primary: oklch(0.7 0.18 10);
+  --success: oklch(0.7 0.14 145);
+  --error: oklch(0.7 0.2 26);
+
+  /* Neutral color scale */
+  --neutralHue: 240;
+  --white: white;
+  --neutral-50: oklch(0.99 0.005 var(--neutralHue));
+  --neutral-100: oklch(0.95 0.008 var(--neutralHue));
+  --neutral-200: oklch(0.92 0.01 var(--neutralHue));
+  --neutral-300: oklch(0.84 0.012 var(--neutralHue));
+  --neutral-400: oklch(0.76 0.015 var(--neutralHue));
+  --neutral-500: oklch(0.66 0.015 var(--neutralHue));
+  --neutral-600: oklch(0.54 0.015 var(--neutralHue));
+  --neutral-700: oklch(0.44 0.015 var(--neutralHue));
+  --neutral-800: oklch(0.36 0.015 var(--neutralHue));
+  --neutral-900: oklch(0.28 0.015 var(--neutralHue));
+  --neutral-950: oklch(0.22 0.015 var(--neutralHue));
+  --black: black;
+
+  --text-primary: var(--neutral-900);
+  --text-secondary: var(--neutral-600);
+  --background: var(--neutral-50);
+  --border: var(--neutral-200);
+  --action-background: var(--neutral-50);
+  --action-hover: var(--neutral-100);
 }
 
 body {

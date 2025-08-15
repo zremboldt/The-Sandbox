@@ -16,7 +16,7 @@ const theme = createTheme({
       main: "#10b9a0",
     },
     background: {
-      default: "#F9FAFC",
+      default: "var(--background)",
     },
   },
   shape: {

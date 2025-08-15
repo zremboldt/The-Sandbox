@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import {
   Announcements,
@@ -36,115 +36,61 @@ import {
 } from "./utilities";
 import type { FlattenedItem, SensorContext, TreeItems } from "./types";
 import { sortableTreeKeyboardCoordinates } from "./keyboardCoordinates";
-import { SortableTreeItem } from "./components";
+import { SortableTreeItem } from "./components/TreeItem/SortableTreeItem";
 import { CSS } from "@dnd-kit/utilities";
-
-// scene:
-//   name: Name
-//   components:
-//     - type: layout
-//       spacing: 5
-//       components:
-//         # TODO:
-//         # - type: external_image
-//         #   src: point to partner logo on current environment
-//         #   alt: partnership logos
-//         #   width: "240"
-//         - type: layout
-//           spacing: 4
-//           components:
-//             - type: typography
-//               variant: h1
-//               text: Get a quote in less than 5 minutes.
-//             - type: accent_divider
-//             - type: layout
-//               spacing: 1
-//               components:
-//                 - type: typography
-//                   variant: h3
-//                   text: Let’s start with your name.
-//                 - type: typography
-//                   variant: body1
-//                   color: textSecondary
-//                   text: Please make sure it matches the information on your license.
-//         - type: form
-//           id: name_form
-//           components:
-//             - type: map
-//               scope: policy_holder_driver
-//               variable: driver
-//               components:
-//                 - type: layout
-//                   components:
-//                     - key: first_name
-//                       type: text_input
-//                       label: First name
-//                       variable: driver
-//                       validation_rules:
-//                         - type: data_type
-//                           value: string
-//                     - key: last_name
-//                       type: text_input
-//                       label: Last name
-//                       variable: driver
-//                       validation_rules:
-//                         - type: data_type
-//                           value: string
-//         - type: layout
-//           components:
-//             - type: submit_button
-//               label: Continue
-//               form_id: name_form
-//         - type: layout
-//           components:
-//             - type: typography
-//               variant: body2
-//               color: textSecondary
-//               align: center
-//               text: By continuing, you agree to our Privacy Policy, Terms & Conditions, FCRA Disclaimer, and Mobile App EULA. Please see our Fraud Disclaimer.
 
 const initialItems: TreeItems = [
   {
-    id: "Scene",
-    title: "Name",
+    type: "scene",
+    name: "name",
+    id: "0000",
+    display_name: "Name scene",
     children: [
       {
-        id: "Layout 1",
+        type: "layout",
+        id: "0001",
         spacing: 5,
         children: [
           {
-            id: "External Image",
+            type: "external_image",
+            id: "0002",
             src: "point to partner logo on current environment",
             alt: "partnership logos",
             width: "240",
             children: [],
           },
           {
-            id: "Layout 2",
+            type: "layout",
+            id: "0003",
             spacing: 4,
             children: [
               {
-                id: "Typography 1",
+                type: "typography",
+                id: "0004",
                 variant: "h1",
                 text: "Get a quote in less than 5 minutes.",
                 children: [],
               },
               {
-                id: "Accent Divider",
+                type: "accent_divider",
+                id: "0005",
                 children: [],
               },
               {
-                id: "Layout 3",
+                type: "layout",
+                id: "0006",
                 spacing: 1,
                 children: [
                   {
-                    id: "Typography 2",
+                    type: "typography",
+                    id: "0007",
                     variant: "h3",
                     text: "Let’s start with your name.",
                     children: [],
                   },
                   {
-                    id: "Typography 3",
+                    type: "typography",
+                    id: "0008",
                     variant: "body1",
                     color: "textSecondary",
                     text: "Please make sure it matches the information on your license.",
@@ -155,19 +101,23 @@ const initialItems: TreeItems = [
             ],
           },
           {
-            id: "Form",
+            type: "form",
+            id: "0009",
             formId: "name_form",
             children: [
               {
-                id: "Map",
+                type: "map",
+                id: "0010",
                 scope: "policy_holder_driver",
                 variable: "driver",
                 children: [
                   {
-                    id: "Layout 4",
+                    type: "layout",
+                    id: "0011",
                     children: [
                       {
-                        id: "Text Input",
+                        type: "text_input",
+                        id: "0012",
                         key: "first_name",
                         label: "First name",
                         variable: "driver",
@@ -180,7 +130,8 @@ const initialItems: TreeItems = [
                         children: [],
                       },
                       {
-                        id: "Text Input",
+                        type: "text_input",
+                        id: "0013",
                         key: "last_name",
                         label: "Last name",
                         variable: "driver",
@@ -197,10 +148,12 @@ const initialItems: TreeItems = [
                 ],
               },
               {
-                id: "Layout 5",
+                type: "layout",
+                id: "0014",
                 children: [
                   {
-                    id: "Submit Button",
+                    type: "submit_button",
+                    id: "0015",
                     label: "Continue",
                     formId: "name_form",
                     children: [],
@@ -208,10 +161,12 @@ const initialItems: TreeItems = [
                 ],
               },
               {
-                id: "Layout 6",
+                type: "layout",
+                id: "0016",
                 children: [
                   {
-                    id: "Typography 4",
+                    type: "typography",
+                    id: "0017",
                     variant: "body2",
                     color: "textSecondary",
                     align: "center",
@@ -269,7 +224,7 @@ export function SortableTree({
   collapsible,
   defaultItems = initialItems,
   indicator = false,
-  indentationWidth = 50,
+  indentationWidth = 30,
   removable,
 }: Props) {
   const [items, setItems] = useState(() => defaultItems);
@@ -364,23 +319,38 @@ export function SortableTree({
       onDragCancel={handleDragCancel}
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
-        {flattenedItems.map(({ id, children, collapsed, depth }) => (
-          <SortableTreeItem
-            key={id}
-            id={id}
-            value={id}
-            depth={id === activeId && projected ? projected.depth : depth}
-            indentationWidth={indentationWidth}
-            indicator={indicator}
-            collapsed={Boolean(collapsed && children.length)}
-            onCollapse={
-              collapsible && children.length
-                ? () => handleCollapse(id)
-                : undefined
-            }
-            onRemove={removable ? () => handleRemove(id) : undefined}
-          />
-        ))}
+        {flattenedItems.map(
+          ({
+            id,
+            children,
+            collapsed,
+            depth,
+            display_name,
+            type,
+            spacing,
+            text,
+          }) => (
+            <SortableTreeItem
+              key={id}
+              id={id}
+              value={id}
+              spacing={spacing}
+              depth={id === activeId && projected ? projected.depth : depth}
+              indentationWidth={indentationWidth}
+              indicator={indicator}
+              collapsed={Boolean(collapsed && children.length)}
+              displayName={display_name || type}
+              spacing={spacing}
+              text={text}
+              onCollapse={
+                collapsible && children.length
+                  ? () => handleCollapse(id)
+                  : undefined
+              }
+              onRemove={removable ? () => handleRemove(id) : undefined}
+            />
+          )
+        )}
         {createPortal(
           <DragOverlay
             dropAnimation={dropAnimationConfig}
