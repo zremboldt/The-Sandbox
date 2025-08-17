@@ -12,4 +12,237 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  padding: 2rem;
+  text-align: center;
+  border-bottom: 2px solid #333;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.app-header h1 {
+  margin: 0 0 0.5rem 0;
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.app-header h2 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.5rem;
+  color: #ccc;
+  font-weight: normal;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.play-button {
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.play-button:hover {
+  transform: scale(1.1);
+}
+
+.play-button:active {
+  transform: scale(0.95);
+}
+
+.rewind-button {
+  background: linear-gradient(45deg, #4ecdc4, #45b7aa);
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 10px rgba(78, 205, 196, 0.3);
+}
+
+.rewind-button:hover {
+  transform: scale(1.05);
+}
+
+.rewind-button:active {
+  transform: scale(0.95);
+}
+
+.forward-button {
+  background: linear-gradient(45deg, #ff9f43, #ee5a24);
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 10px rgba(255, 159, 67, 0.3);
+}
+
+.forward-button:hover {
+  transform: scale(1.05);
+}
+
+.forward-button:active {
+  transform: scale(0.95);
+}
+
+.time-display {
+  font-size: 1.4rem;
+  color: #4ecdc4;
+  font-family: "Courier New", monospace;
+  font-weight: 600;
+  text-align: center;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  background: rgba(78, 205, 196, 0.1);
+  border: 1px solid rgba(78, 205, 196, 0.3);
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.song-display {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: hidden;
+}
+
+.lines-container {
+  max-width: 800px;
+  width: 100%;
+}
+
+.song-line {
+  position: relative;
+  margin-bottom: 3rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  min-height: 120px;
+}
+
+.song-line.active {
+  background: rgba(255, 107, 107, 0.15);
+  border-color: #ff6b6b;
+  box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+  transform: scale(1.02);
+}
+
+.chord-line {
+  position: relative;
+  height: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.chord {
+  position: absolute;
+  top: 0;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #4ecdc4;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(78, 205, 196, 0.1);
+  border: 1px solid rgba(78, 205, 196, 0.3);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+
+.chord.highlighted {
+  color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.2);
+  border-color: #ff6b6b;
+  box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+  transform: translateX(-50%) scale(1.1);
+  font-weight: 900;
+}
+
+.lyrics-line {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.song-line.active .lyrics-line {
+  color: #fff;
+  font-weight: 600;
+}
+
+.section-label {
+  font-size: 0.9rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.song-line.active .section-label {
+  color: #ff6b6b;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .app-header {
+    padding: 1rem;
+  }
+
+  .app-header h1 {
+    font-size: 2rem;
+  }
+
+  .app-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .song-display {
+    padding: 1rem;
+  }
+
+  .song-line {
+    padding: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .lyrics-line {
+    font-size: 1.2rem;
+  }
+
+  .chord {
+    font-size: 1rem;
+  }
 }

@@ -1,619 +1,131 @@
 {
-  "version": "2.0",
-  "metadata": {
-    "title": "Blood of Jesus",
-    "artist": "UPPERROOM",
-    "bpm": 69,
-    "timeSignature": "4/4",
-    "key": "G",
-    "secondsPerBeat": 0.8695652173913043,
-    "beatsPerBar": 4
-  },
-  "lines": [
+  "title": "Blood of Jesus",
+  "artist": "UPPERROOM",
+  "audioFile": "Blood Of Jesus - UPPERROOM.m4a",
+  "startOffset": 7400,
+  "lyrics": [
     {
-      "id": "intro-1",
-      "section": "Intro",
-      "lyrics": "",
-      "duration": 4.0,
+      "text": "Where would I be without the cross",
+      "startTimestamp": 8000,
+      "endTimestamp": 14000,
       "chords": [
-        {
-          "symbol": "G",
-          "position": 0,
-          "startTime": 0,
-          "duration": 4.0,
-          "absoluteStart": 0.0,
-          "endTime": 4.0,
-          "absoluteEnd": 4.0,
-          "beatIndexFromZero": 0.0,
-          "barIndexFromZero": 0.0
-        }
-      ],
-      "start": 0.0,
-      "end": 4.0
+        { "symbol": "G", "position": 0.0 },
+        { "symbol": "C/G", "position": 0.77 }
+      ]
     },
     {
-      "id": "intro-2",
-      "section": "Intro",
-      "lyrics": "",
-      "duration": 4.0,
+      "text": "My sins were piled high with no way out",
+      "startTimestamp": 14000,
+      "endTimestamp": 20000,
       "chords": [
-        {
-          "symbol": "C/G",
-          "position": 0,
-          "startTime": 0,
-          "duration": 4.0,
-          "absoluteStart": 4.0,
-          "endTime": 4.0,
-          "absoluteEnd": 8.0,
-          "beatIndexFromZero": 4.6,
-          "barIndexFromZero": 1.15
-        }
-      ],
-      "start": 4.0,
-      "end": 8.0
+        { "symbol": "D", "position": 0.08 },
+        { "symbol": "C", "position": 0.43 },
+        { "symbol": "G", "position": 0.81 }
+      ]
     },
     {
-      "id": "verse1-1",
-      "section": "Verse 1",
-      "lyrics": "Where would I be without the cross",
-      "duration": 6.0,
-      "chords": [
-        {
-          "symbol": "G",
-          "position": 0,
-          "startTime": 0,
-          "duration": 3.0,
-          "absoluteStart": 8.0,
-          "endTime": 3.0,
-          "absoluteEnd": 11.0,
-          "beatIndexFromZero": 9.2,
-          "barIndexFromZero": 2.3
-        },
-        {
-          "symbol": "C/G",
-          "position": 26,
-          "startTime": 3.0,
-          "duration": 3.0,
-          "absoluteStart": 11.0,
-          "endTime": 6.0,
-          "absoluteEnd": 14.0,
-          "beatIndexFromZero": 12.65,
-          "barIndexFromZero": 3.163
-        }
-      ],
-      "start": 8.0,
-      "end": 14.0
+      "text": "Underneath the weight",
+      "startTimestamp": 20000,
+      "endTimestamp": 24000,
+      "chords": [{ "symbol": "G", "position": 0.0 }]
     },
     {
-      "id": "verse1-2",
-      "section": "Verse 1",
-      "lyrics": "My sins were piled high with no way out",
-      "duration": 6.0,
+      "text": "Of all my guilt and shame",
+      "startTimestamp": 24000,
+      "endTimestamp": 29000,
       "chords": [
-        {
-          "symbol": "D",
-          "position": 3,
-          "startTime": 0,
-          "duration": 2.0,
-          "absoluteStart": 14.0,
-          "endTime": 2.0,
-          "absoluteEnd": 16.0,
-          "beatIndexFromZero": 16.1,
-          "barIndexFromZero": 4.025
-        },
-        {
-          "symbol": "C",
-          "position": 16,
-          "startTime": 2.0,
-          "duration": 2.0,
-          "absoluteStart": 16.0,
-          "endTime": 4.0,
-          "absoluteEnd": 18.0,
-          "beatIndexFromZero": 18.4,
-          "barIndexFromZero": 4.6
-        },
-        {
-          "symbol": "G",
-          "position": 30,
-          "startTime": 4.0,
-          "duration": 2.0,
-          "absoluteStart": 18.0,
-          "endTime": 6.0,
-          "absoluteEnd": 20.0,
-          "beatIndexFromZero": 20.7,
-          "barIndexFromZero": 5.175
-        }
-      ],
-      "start": 14.0,
-      "end": 20.0
+        { "symbol": "C/G", "position": 0.13 },
+        { "symbol": "G", "position": 0.74 }
+      ]
     },
     {
-      "id": "verse1-3",
-      "section": "Verse 1",
-      "lyrics": "Underneath the weight",
-      "duration": 4.0,
+      "text": "Where would I be without the cross",
+      "startTimestamp": 29000,
+      "endTimestamp": 35000,
       "chords": [
-        {
-          "symbol": "G",
-          "position": 0,
-          "startTime": 0,
-          "duration": 4.0,
-          "absoluteStart": 20.0,
-          "endTime": 4.0,
-          "absoluteEnd": 24.0,
-          "beatIndexFromZero": 23.0,
-          "barIndexFromZero": 5.75
-        }
-      ],
-      "start": 20.0,
-      "end": 24.0
+        { "symbol": "Em7", "position": 0.0 },
+        { "symbol": "D(add4)", "position": 0.42 },
+        { "symbol": "G", "position": 0.85 }
+      ]
     },
     {
-      "id": "verse1-4",
-      "section": "Verse 1",
-      "lyrics": "Of all my guilt and shame",
-      "duration": 5.0,
+      "text": "You saved and redeemed",
+      "startTimestamp": 35000,
+      "endTimestamp": 39000,
       "chords": [
-        {
-          "symbol": "C/G",
-          "position": 3,
-          "startTime": 0,
-          "duration": 2.5,
-          "absoluteStart": 24.0,
-          "endTime": 2.5,
-          "absoluteEnd": 26.5,
-          "beatIndexFromZero": 27.6,
-          "barIndexFromZero": 6.9
-        },
-        {
-          "symbol": "G",
-          "position": 17,
-          "startTime": 2.5,
-          "duration": 2.5,
-          "absoluteStart": 26.5,
-          "endTime": 5.0,
-          "absoluteEnd": 29.0,
-          "beatIndexFromZero": 30.475,
-          "barIndexFromZero": 7.619
-        }
-      ],
-      "start": 24.0,
-      "end": 29.0
+        { "symbol": "C", "position": 0.0 },
+        { "symbol": "G", "position": 0.53 },
+        { "symbol": "D", "position": 0.74 }
+      ]
     },
     {
-      "id": "verse1-5",
-      "section": "Verse 1",
-      "lyrics": "Where would I be without the cross",
-      "duration": 6.0,
+      "text": "You delivered, You set free",
+      "startTimestamp": 39000,
+      "endTimestamp": 43000,
       "chords": [
-        {
-          "symbol": "Em7",
-          "position": 0,
-          "startTime": 0,
-          "duration": 2.0,
-          "absoluteStart": 29.0,
-          "endTime": 2.0,
-          "absoluteEnd": 31.0,
-          "beatIndexFromZero": 33.35,
-          "barIndexFromZero": 8.338
-        },
-        {
-          "symbol": "D(add4)",
-          "position": 14,
-          "startTime": 2.0,
-          "duration": 2.0,
-          "absoluteStart": 31.0,
-          "endTime": 4.0,
-          "absoluteEnd": 33.0,
-          "beatIndexFromZero": 35.65,
-          "barIndexFromZero": 8.912
-        },
-        {
-          "symbol": "G",
-          "position": 28,
-          "startTime": 4.0,
-          "duration": 2.0,
-          "absoluteStart": 33.0,
-          "endTime": 6.0,
-          "absoluteEnd": 35.0,
-          "beatIndexFromZero": 37.95,
-          "barIndexFromZero": 9.488
-        }
-      ],
-      "start": 29.0,
-      "end": 35.0
+        { "symbol": "Em7", "position": 0.58 },
+        { "symbol": "C", "position": 0.92 }
+      ]
     },
     {
-      "id": "chorus-1",
-      "section": "Chorus",
-      "lyrics": "You saved and redeemed",
-      "duration": 4.0,
+      "text": "You saved and redeemed",
+      "startTimestamp": 43000,
+      "endTimestamp": 47000,
       "chords": [
-        {
-          "symbol": "C",
-          "position": 0,
-          "startTime": 0,
-          "duration": 1.3,
-          "absoluteStart": 35.0,
-          "endTime": 1.3,
-          "absoluteEnd": 36.3,
-          "beatIndexFromZero": 40.25,
-          "barIndexFromZero": 10.062
-        },
-        {
-          "symbol": "G",
-          "position": 10,
-          "startTime": 1.3,
-          "duration": 1.3,
-          "absoluteStart": 36.3,
-          "endTime": 2.6,
-          "absoluteEnd": 37.6,
-          "beatIndexFromZero": 41.745,
-          "barIndexFromZero": 10.436
-        },
-        {
-          "symbol": "D",
-          "position": 14,
-          "startTime": 2.6,
-          "duration": 1.4,
-          "absoluteStart": 37.6,
-          "endTime": 4.0,
-          "absoluteEnd": 39.0,
-          "beatIndexFromZero": 43.24,
-          "barIndexFromZero": 10.81
-        }
-      ],
-      "start": 35.0,
-      "end": 39.0
+        { "symbol": "C", "position": 0.0 },
+        { "symbol": "G", "position": 0.53 },
+        { "symbol": "D", "position": 0.74 }
+      ]
     },
     {
-      "id": "chorus-2",
-      "section": "Chorus",
-      "lyrics": "You delivered, You set free",
-      "duration": 4.0,
-      "chords": [
-        {
-          "symbol": "Em7",
-          "position": 14,
-          "startTime": 0,
-          "duration": 2.0,
-          "absoluteStart": 39.0,
-          "endTime": 2.0,
-          "absoluteEnd": 41.0,
-          "beatIndexFromZero": 44.85,
-          "barIndexFromZero": 11.213
-        },
-        {
-          "symbol": "C",
-          "position": 22,
-          "startTime": 2.0,
-          "duration": 2.0,
-          "absoluteStart": 41.0,
-          "endTime": 4.0,
-          "absoluteEnd": 43.0,
-          "beatIndexFromZero": 47.15,
-          "barIndexFromZero": 11.787
-        }
-      ],
-      "start": 39.0,
-      "end": 43.0
+      "text": "You changed everything",
+      "startTimestamp": 47000,
+      "endTimestamp": 51000,
+      "chords": [{ "symbol": "C", "position": 0.63 }]
     },
     {
-      "id": "chorus-3",
-      "section": "Chorus",
-      "lyrics": "You saved and redeemed",
-      "duration": 4.0,
+      "text": "Where would I be without You, Jesus",
+      "startTimestamp": 59000,
+      "endTimestamp": 65000,
       "chords": [
-        {
-          "symbol": "C",
-          "position": 0,
-          "startTime": 0,
-          "duration": 1.3,
-          "absoluteStart": 43.0,
-          "endTime": 1.3,
-          "absoluteEnd": 44.3,
-          "beatIndexFromZero": 49.45,
-          "barIndexFromZero": 12.363
-        },
-        {
-          "symbol": "G",
-          "position": 10,
-          "startTime": 1.3,
-          "duration": 1.3,
-          "absoluteStart": 44.3,
-          "endTime": 2.6,
-          "absoluteEnd": 45.6,
-          "beatIndexFromZero": 50.945,
-          "barIndexFromZero": 12.736
-        },
-        {
-          "symbol": "D",
-          "position": 14,
-          "startTime": 2.6,
-          "duration": 1.4,
-          "absoluteStart": 45.6,
-          "endTime": 4.0,
-          "absoluteEnd": 47.0,
-          "beatIndexFromZero": 52.44,
-          "barIndexFromZero": 13.11
-        }
-      ],
-      "start": 43.0,
-      "end": 47.0
+        { "symbol": "G", "position": 0.0 },
+        { "symbol": "C", "position": 0.85 }
+      ]
     },
     {
-      "id": "chorus-4",
-      "section": "Chorus",
-      "lyrics": "You changed everything",
-      "duration": 4.0,
+      "text": "You have done what no one else could do",
+      "startTimestamp": 65000,
+      "endTimestamp": 71000,
       "chords": [
-        {
-          "symbol": "C",
-          "position": 12,
-          "startTime": 0,
-          "duration": 4.0,
-          "absoluteStart": 47.0,
-          "endTime": 4.0,
-          "absoluteEnd": 51.0,
-          "beatIndexFromZero": 54.05,
-          "barIndexFromZero": 13.513
-        }
-      ],
-      "start": 47.0,
-      "end": 51.0
+        { "symbol": "D", "position": 0.0 },
+        { "symbol": "C", "position": 0.47 },
+        { "symbol": "G", "position": 0.89 }
+      ]
     },
     {
-      "id": "turnaround-1",
-      "section": "Turnaround",
-      "lyrics": "",
-      "duration": 4.0,
-      "chords": [
-        {
-          "symbol": "G",
-          "position": 0,
-          "startTime": 0,
-          "duration": 4.0,
-          "absoluteStart": 51.0,
-          "endTime": 4.0,
-          "absoluteEnd": 55.0,
-          "beatIndexFromZero": 58.65,
-          "barIndexFromZero": 14.662
-        }
-      ],
-      "start": 51.0,
-      "end": 55.0
+      "text": "Your love reached for me",
+      "startTimestamp": 71000,
+      "endTimestamp": 75000,
+      "chords": [{ "symbol": "G", "position": 0.0 }]
     },
     {
-      "id": "turnaround-2",
-      "section": "Turnaround",
-      "lyrics": "",
-      "duration": 4.0,
+      "text": "And it's better than I dreamed",
+      "startTimestamp": 75000,
+      "endTimestamp": 80000,
       "chords": [
-        {
-          "symbol": "C/G",
-          "position": 0,
-          "startTime": 0,
-          "duration": 4.0,
-          "absoluteStart": 55.0,
-          "endTime": 4.0,
-          "absoluteEnd": 59.0,
-          "beatIndexFromZero": 63.25,
-          "barIndexFromZero": 15.812
-        }
-      ],
-      "start": 55.0,
-      "end": 59.0
+        { "symbol": "C", "position": 0.29 },
+        { "symbol": "G", "position": 0.71 }
+      ]
     },
     {
-      "id": "verse2-1",
-      "section": "Verse 2",
-      "lyrics": "Where would I be without You, Jesus",
-      "duration": 6.0,
+      "text": "Now my heart belongs to only You",
+      "startTimestamp": 80000,
+      "endTimestamp": 86000,
       "chords": [
-        {
-          "symbol": "G",
-          "position": 0,
-          "startTime": 0,
-          "duration": 3.0,
-          "absoluteStart": 59.0,
-          "endTime": 3.0,
-          "absoluteEnd": 62.0,
-          "beatIndexFromZero": 67.85,
-          "barIndexFromZero": 16.963
-        },
-        {
-          "symbol": "C",
-          "position": 29,
-          "startTime": 3.0,
-          "duration": 3.0,
-          "absoluteStart": 62.0,
-          "endTime": 6.0,
-          "absoluteEnd": 65.0,
-          "beatIndexFromZero": 71.3,
-          "barIndexFromZero": 17.825
-        }
-      ],
-      "start": 59.0,
-      "end": 65.0
-    },
-    {
-      "id": "verse2-2",
-      "section": "Verse 2",
-      "lyrics": "You have done what no one else could do",
-      "duration": 6.0,
-      "chords": [
-        {
-          "symbol": "D",
-          "position": 0,
-          "startTime": 0,
-          "duration": 2.0,
-          "absoluteStart": 65.0,
-          "endTime": 2.0,
-          "absoluteEnd": 67.0,
-          "beatIndexFromZero": 74.75,
-          "barIndexFromZero": 18.688
-        },
-        {
-          "symbol": "C",
-          "position": 18,
-          "startTime": 2.0,
-          "duration": 2.0,
-          "absoluteStart": 67.0,
-          "endTime": 4.0,
-          "absoluteEnd": 69.0,
-          "beatIndexFromZero": 77.05,
-          "barIndexFromZero": 19.262
-        },
-        {
-          "symbol": "G",
-          "position": 34,
-          "startTime": 4.0,
-          "duration": 2.0,
-          "absoluteStart": 69.0,
-          "endTime": 6.0,
-          "absoluteEnd": 71.0,
-          "beatIndexFromZero": 79.35,
-          "barIndexFromZero": 19.838
-        }
-      ],
-      "start": 65.0,
-      "end": 71.0
-    },
-    {
-      "id": "verse2-3",
-      "section": "Verse 2",
-      "lyrics": "Your love reached for me",
-      "duration": 4.0,
-      "chords": [
-        {
-          "symbol": "G",
-          "position": 0,
-          "startTime": 0,
-          "duration": 4.0,
-          "absoluteStart": 71.0,
-          "endTime": 4.0,
-          "absoluteEnd": 75.0,
-          "beatIndexFromZero": 81.65,
-          "barIndexFromZero": 20.413
-        }
-      ],
-      "start": 71.0,
-      "end": 75.0
-    },
-    {
-      "id": "verse2-4",
-      "section": "Verse 2",
-      "lyrics": "And it's better than I dreamed",
-      "duration": 5.0,
-      "chords": [
-        {
-          "symbol": "C",
-          "position": 8,
-          "startTime": 0,
-          "duration": 2.5,
-          "absoluteStart": 75.0,
-          "endTime": 2.5,
-          "absoluteEnd": 77.5,
-          "beatIndexFromZero": 86.25,
-          "barIndexFromZero": 21.562
-        },
-        {
-          "symbol": "G",
-          "position": 20,
-          "startTime": 2.5,
-          "duration": 2.5,
-          "absoluteStart": 77.5,
-          "endTime": 5.0,
-          "absoluteEnd": 80.0,
-          "beatIndexFromZero": 89.125,
-          "barIndexFromZero": 22.281
-        }
-      ],
-      "start": 75.0,
-      "end": 80.0
-    },
-    {
-      "id": "verse2-5",
-      "section": "Verse 2",
-      "lyrics": "Now my heart belongs to only You",
-      "duration": 6.0,
-      "chords": [
-        {
-          "symbol": "Em7",
-          "position": 0,
-          "startTime": 0,
-          "duration": 2.0,
-          "absoluteStart": 80.0,
-          "endTime": 2.0,
-          "absoluteEnd": 82.0,
-          "beatIndexFromZero": 92.0,
-          "barIndexFromZero": 23.0
-        },
-        {
-          "symbol": "D(add4)",
-          "position": 15,
-          "startTime": 2.0,
-          "duration": 2.0,
-          "absoluteStart": 82.0,
-          "endTime": 4.0,
-          "absoluteEnd": 84.0,
-          "beatIndexFromZero": 94.3,
-          "barIndexFromZero": 23.575
-        },
-        {
-          "symbol": "G",
-          "position": 29,
-          "startTime": 4.0,
-          "duration": 2.0,
-          "absoluteStart": 84.0,
-          "endTime": 6.0,
-          "absoluteEnd": 86.0,
-          "beatIndexFromZero": 96.6,
-          "barIndexFromZero": 24.15
-        }
-      ],
-      "start": 80.0,
-      "end": 86.0
+        { "symbol": "Em7", "position": 0.0 },
+        { "symbol": "D(add4)", "position": 0.47 },
+        { "symbol": "G", "position": 0.91 }
+      ]
     }
-  ],
-  "audio": {
-    "file": "Blood Of Jesus - UPPERROOM.m4a",
-    "startOffset": 0.0,
-    "duration": null
-  },
-  "sections": [
-    {
-      "section": "Intro",
-      "start": 0.0,
-      "end": 8.0
-    },
-    {
-      "section": "Verse 1",
-      "start": 8.0,
-      "end": 35.0
-    },
-    {
-      "section": "Chorus",
-      "start": 35.0,
-      "end": 51.0
-    },
-    {
-      "section": "Turnaround",
-      "start": 51.0,
-      "end": 59.0
-    },
-    {
-      "section": "Verse 2",
-      "start": 59.0,
-      "end": 86.0
-    }
-  ],
-  "playback": {
-    "scrollMode": "line",
-    "highlightLead": 0.15,
-    "highlightLag": 0.05,
-    "autoscrollPadding": 1.0,
-    "quantizeToBeats": false,
-    "loop": null
-  }
+  ]
 }
