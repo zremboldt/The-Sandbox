@@ -8,16 +8,20 @@ This allows us to write less in our prompts, more consistently getting the resul
 I want to create a web app, similar in many ways to the Guitar Hero game.
 The intention here is to create a fun and interactive way for users to learn and practice guitar chords.
 
-As a song plays, the user will see each line of the song in time with the music.
+A song file should play when the user presses play.
+As the song plays, the user will see each line of the song printed on the screen, in time with the music.
 The chords should appear above the lyrics that they align with.
 Chords should be highlighted at the moment that they should be played.
 As each line of the song passes, the next line should scroll up to take the place of the line before.
+On the screen, the user should at least be able to see the current line that's playing and the line that's coming up next.
 
-No need to listen to the user's performance.
-No need to provide feedback on their playing.
+No need for the app to listen to the user's performance.
+No need for the app to provide feedback on the user's playing.
 I just want the app to display the chords in time with the music.
 
-A song needs to be represented by a JSON data structure that includes the following information:
+A song needs to be represented by a JSON data structure.
+If there is a standardized structure for this kind of thing, please use it.
+The JSON will at least need to include the following information:
 
 - Title
 - Artist
