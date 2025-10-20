@@ -1,4 +1,6 @@
 import { Hono } from "hono";
+import { zValidator } from "@hono/zod-validator";
+import { z } from "zod";
 
 type Bindings = {
   DB: D1Database;
@@ -41,5 +43,44 @@ app.get("/customers/:id", async (c) => {
 
   return c.json(customer);
 });
+
+// Define validation schema for new customer
+const customerSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email address"),
+});
+
+// Route for adding a new customer
+app.post("/customers", zValidator("json", customerSchema), async (c) => {
+  const { name, email } = c.req.valid("json");
+
+  try {
+    const result = await c.env.DB.prepare(
+      "INSERT INTO customers (name, email) VALUES (?, ?)"
+    )
+      .bind(name, email || null)
+      .run();
+
+    if (result.success) {
+      return c.json(
+        {
+          message: "Customer created successfully",
+          id: result.meta.last_row_id,
+        },
+        201
+      );
+    } else {
+      return c.json({ error: "Failed to create customer" }, 500);
+    }
+  } catch (error) {
+    console.error("Database error:", error);
+    return c.json({ error: "Database error" }, 500);
+  }
+});
+
+// You can add a customer using curl like this:
+// curl -X POST http://localhost:8787/customers \
+//   -H "Content-Type: application/json" \
+//   -d '{"name":"David Martens","email":"david.martens@example.com"}'
 
 export default app;
