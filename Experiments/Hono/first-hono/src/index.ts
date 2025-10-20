@@ -28,7 +28,7 @@ app.get("/html", (c) => {
 });
 
 app.get("/customers", async (c) => {
-  const customers = await c.env.DB.prepare("select * from customers").all();
+  const customers = await c.env.DB.prepare("SELECT * FROM customers").all();
 
   return c.json(customers.results);
 });
@@ -36,7 +36,7 @@ app.get("/customers", async (c) => {
 app.get("/customers/:id", async (c) => {
   const customerId = c.req.param("id");
   const customer = await c.env.DB.prepare(
-    "select * from customers where id = ?"
+    "SELECT * FROM customers WHERE id = ?"
   )
     .bind(customerId)
     .first();
@@ -44,7 +44,7 @@ app.get("/customers/:id", async (c) => {
   return c.json(customer);
 });
 
-// Define validation schema for new customer
+// Validation schema for new customer
 const customerSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.email("Invalid email address"),
