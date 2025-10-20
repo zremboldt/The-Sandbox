@@ -47,7 +47,7 @@ app.get("/customers/:id", async (c) => {
 // Define validation schema for new customer
 const customerSchema = z.object({
   name: z.string().min(1, "Name is required"),
-  email: z.string().email("Invalid email address"),
+  email: z.email("Invalid email address"),
 });
 
 // Route for adding a new customer
