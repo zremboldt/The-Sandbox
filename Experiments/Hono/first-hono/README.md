@@ -1,8 +1,10 @@
+[This video](https://youtu.be/yPrQ7u3gWqk) was really helpful in walking me through how to get started with Hono and a Cloudflare D1 database.
+
 # How-to
 
 ## Run project locally
 
-```txt
+```shell
 pnpm i
 pnpm dev
 ```
@@ -12,18 +14,38 @@ pnpm dev
 First login to Cloudflare from your web browser.
 Then:
 
-```txt
+```shell
 pnpm wrangler login
 pnpm run deploy
 ```
 
-## Create a D1 database
+## Interacting with a D1 database
 
-https://developers.cloudflare.com/workers/wrangler/commands/#d1-create
+[Create a D1 database](https://developers.cloudflare.com/workers/wrangler/commands/#d1-create)
+[Execute a D1 database](https://developers.cloudflare.com/workers/wrangler/commands/#d1-execute)
 
-```txt
-npx wrangler d1 create <DATABASE_NAME>
+```shell
+# Create the database: local and remote
+npx wrangler d1 create first-hono-d1
+
+# Seed the database on local
+npx wrangler d1 execute first-hono-d1 --file=./schema.sql
+
+# Seed the database on remote
+npx wrangler d1 execute first-hono-d1 --remote --file=./schema.sql
+
+# Cleanup
+npx wrangler d1 delete first-hono-d1
+
 ```
+
+## Fixing Cloudflare types
+
+If you run into an issue with Typescript types on your Cloudflare code, run this command to generate types based on their latest spec:
+
+`pnpm wrangler types`
+
+https://developers.cloudflare.com/workers/languages/typescript/
 
 --
 

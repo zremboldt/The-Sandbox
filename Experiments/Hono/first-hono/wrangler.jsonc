@@ -1,45 +1,45 @@
 {
-	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "first-hono",
-	"main": "src/index.ts",
-	"compatibility_date": "2025-10-20",
-	// "compatibility_flags": [
-	//   "nodejs_compat"
-	// ],
-	"vars": {
-		"MY_VAR": "my-variable"
-	},
-	"d1_databases": [
-		{
-			"binding": "first_hono_d1",
-			"database_name": "first-hono-d1",
-			"database_id": "479bd2f0-5b68-45ba-ac1e-9cddc0ec65ba"
-		}
-	]
-	// "kv_namespaces": [
-	//   {
-	//     "binding": "MY_KV_NAMESPACE",
-	//     "id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-	//   }
-	// ],
-	// "r2_buckets": [
-	//   {
-	//     "binding": "MY_BUCKET",
-	//     "bucket_name": "my-bucket"
-	//   }
-	// ],
-	// "d1_databases": [
-	//   {
-	//     "binding": "MY_DB",
-	//     "database_name": "my-database",
-	//     "database_id": ""
-	//   }
-	// ],
-	// "ai": {
-	//   "binding": "AI"
-	// },
-	// "observability": {
-	//   "enabled": true,
-	//   "head_sampling_rate": 1
-	// }
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "first-hono",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-10-20",
+  // "compatibility_flags": [
+  //   "nodejs_compat"
+  // ],
+  "vars": {
+    "MY_VAR": "my-variable"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "first-hono-d1",
+      "database_id": "479bd2f0-5b68-45ba-ac1e-9cddc0ec65ba"
+    }
+  ]
+  // "kv_namespaces": [
+  //   {
+  //     "binding": "MY_KV_NAMESPACE",
+  //     "id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  //   }
+  // ],
+  // "r2_buckets": [
+  //   {
+  //     "binding": "MY_BUCKET",
+  //     "bucket_name": "my-bucket"
+  //   }
+  // ],
+  // "d1_databases": [
+  //   {
+  //     "binding": "MY_DB",
+  //     "database_name": "my-database",
+  //     "database_id": ""
+  //   }
+  // ],
+  // "ai": {
+  //   "binding": "AI"
+  // },
+  // "observability": {
+  //   "enabled": true,
+  //   "head_sampling_rate": 1
+  // }
 }

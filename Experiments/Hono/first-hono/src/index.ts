@@ -12,18 +12,21 @@ app.get("/", (c) => {
   return c.text("Hello Hono!");
 });
 
-app.get("/customers", (c) => {
-  return c.json([{ id: 1, name: "John" }]);
+app.get("/customers", async (c) => {
+  const customers = await c.env.DB.prepare("select * from customers").all();
+
+  return c.json(customers.results);
 });
 
-app.get("/customers/:id", (c) => {
+app.get("/customers/:id", async (c) => {
   const customerId = c.req.param("id");
-  return c.json([
-    {
-      id: customerId,
-      name: "John",
-    },
-  ]);
+  const customer = await c.env.DB.prepare(
+    "select * from customers where id = ?"
+  )
+    .bind(customerId)
+    .first();
+
+  return c.json(customer);
 });
 
 export default app;
