@@ -7,9 +7,22 @@ type Bindings = {
 
 const app = new Hono<{ Bindings: Bindings }>();
 
+app.notFound((c) => {
+  return c.text("404", 404);
+});
+
+app.onError((err, c) => {
+  console.error(`${err}`);
+  return c.text("There was an error! Check the console...", 500);
+});
+
 app.get("/", (c) => {
   console.log(`MY_VAR is: ${c.env.MY_VAR}`);
   return c.text("Hello Hono!");
+});
+
+app.get("/html", (c) => {
+  return c.html("<h1>Hello! Hono!</h1>");
 });
 
 app.get("/customers", async (c) => {
