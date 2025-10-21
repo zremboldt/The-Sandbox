@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import {
   createCustomer,
+  deleteCustomerById,
   getAllCustomers,
   getCustomerById,
 } from "./models/customer";
@@ -18,13 +19,10 @@ app.get("/", (c) => {
   return c.text("Hello, Hono!");
 });
 
-app.get("/html", (c) => {
-  return c.html("<h1>Hello, Hono!</h1>");
-});
-
 app.get("/customers", getAllCustomers);
 app.get("/customers/:id", getCustomerById);
 app.post("/customers", ...createCustomer);
+app.delete("/customers/:id", deleteCustomerById);
 
 app.get("/create-customer", (c) => {
   return c.html(<CreateCustomerScene />);
@@ -45,3 +43,6 @@ export default app;
 // curl -X POST http://localhost:8787/customers \
 //   -H "Content-Type: application/json" \
 //   -d '{"name":"Wouter Steegers","email":"wouter.steegers@example.com"}'
+
+// Or delete a customer by ID like this:
+// curl -X DELETE http://localhost:8787/customers/4

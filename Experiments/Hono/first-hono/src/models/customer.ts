@@ -46,9 +46,9 @@ async function insertCustomer(db: D1Database, customer: CustomerInput) {
 }
 
 export const createCustomer = factory.createHandlers(
-  zValidator("json", customerSchema),
+  zValidator("form", customerSchema),
   async (c) => {
-    const customerData = c.req.valid("json");
+    const customerData = c.req.valid("form");
 
     try {
       const customer = await insertCustomer(c.env.DB, customerData);
@@ -65,3 +65,18 @@ export const createCustomer = factory.createHandlers(
     }
   }
 );
+
+export const deleteCustomerById = async (
+  c: Context<{ Bindings: Bindings }>
+) => {
+  const customerId = c.req.param("id");
+  const result = await c.env.DB.prepare("DELETE FROM customers WHERE id = ?")
+    .bind(customerId)
+    .run();
+
+  if (result.success && result.meta.changes > 0) {
+    return c.json({ message: "Customer deleted successfully!" });
+  } else {
+    return c.json({ error: "Customer not found" }, 404);
+  }
+};
