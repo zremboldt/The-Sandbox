@@ -1,11 +1,8 @@
 import { Hono } from "hono";
-import { zValidator } from "@hono/zod-validator";
 import {
   createCustomer,
-  customerSchema,
   getAllCustomers,
   getCustomerById,
-  validateCustomer,
 } from "./models/customer";
 
 export type Bindings = {
@@ -26,12 +23,12 @@ app.get("/html", (c) => {
 
 app.get("/customers", getAllCustomers);
 app.get("/customers/:id", getCustomerById);
-app.post("/customers", validateCustomer, createCustomer);
+app.post("/customers", ...createCustomer);
 
 // You can add a customer using curl like this:
 // curl -X POST http://localhost:8787/customers \
 //   -H "Content-Type: application/json" \
-//   -d '{"name":"David Martens","email":"david.martens@example.com"}'
+//   -d '{"name":"Wouter Steegers","email":"wouter.steegers@example.com"}'
 
 app.notFound((c) => {
   return c.text("Endpoint not found", 404);
