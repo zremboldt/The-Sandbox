@@ -6,6 +6,6 @@ create table customers
 );
 
 insert into customers(name, email) values
-  ('John Doe', 'john.doe@example.com'),
-  ('Jane Smith', 'jane.smith@example.com'),
-  ('Mark Watney', 'mark.watney@example.com');
+  ('Mark Watney', 'mark.watney@example.com'),
+  ('David Martens', 'david.martens@example.com'),
+  ('Dustin Dalke', 'dustin.dalke@example.com');
