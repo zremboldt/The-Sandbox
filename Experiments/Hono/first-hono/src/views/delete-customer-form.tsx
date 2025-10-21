@@ -1,11 +1,11 @@
 import { css } from "hono/css";
 
-export const CreateCustomerForm = () => {
+export const DeleteCustomerForm = () => {
   return (
     <div class="card">
       <form
-        action="/customers"
         method="post"
+        onsubmit="this.action = '/customers/' + this.id.value"
         class={css`
           display: flex;
           flex-direction: column;
@@ -19,25 +19,21 @@ export const CreateCustomerForm = () => {
             gap: 0.5rem;
           `}
         >
-          <h2 style="margin-bottom: 0.5rem">Create customer</h2>
+          <h2 style="margin-bottom: 0.5rem">Delete customer</h2>
           <input
             type="text"
-            id="name"
-            name="name"
-            placeholder="Name"
+            id="id"
+            name="id"
+            placeholder="Customer ID"
             autocomplete="off"
             required
           />
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Email"
-            autocomplete="off"
-            required
-          />
+          {/* HTTP methods don't support DELETE in forms, so we use a hidden input to convey intent to the server */}
+          <input type="hidden" name="_method" value="DELETE" />
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" class="button-danger">
+          Submit
+        </button>
       </form>
     </div>
   );

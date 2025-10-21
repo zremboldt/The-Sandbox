@@ -5,7 +5,10 @@ import {
   getAllCustomers,
   getCustomerById,
 } from "./models/customer";
-import { CreateCustomerScene } from "./views/create-customer-form";
+import { CreateCustomerForm } from "./views/create-customer-form";
+import { Layout } from "./views/layout";
+import { DeleteCustomerForm } from "./views/delete-customer-form";
+import { methodOverride } from "hono/method-override";
 
 export type Bindings = {
   DB: D1Database;
@@ -13,6 +16,7 @@ export type Bindings = {
 };
 
 const app = new Hono<{ Bindings: Bindings }>();
+app.use("/customers/*", methodOverride({ app }));
 
 app.get("/", (c) => {
   console.log(`MY_VAR is: ${c.env.MY_VAR}`);
@@ -25,7 +29,12 @@ app.post("/customers", ...createCustomer);
 app.delete("/customers/:id", deleteCustomerById);
 
 app.get("/create-customer", (c) => {
-  return c.html(<CreateCustomerScene />);
+  return c.html(
+    <Layout>
+      <CreateCustomerForm />
+      <DeleteCustomerForm />
+    </Layout>
+  );
 });
 
 app.notFound((c) => {
