@@ -4,6 +4,7 @@ import {
   getAllCustomers,
   getCustomerById,
 } from "./models/customer";
+import { CreateCustomerScene } from "./views/create-customer-form";
 
 export type Bindings = {
   DB: D1Database;
@@ -25,10 +26,9 @@ app.get("/customers", getAllCustomers);
 app.get("/customers/:id", getCustomerById);
 app.post("/customers", ...createCustomer);
 
-// You can add a customer using curl like this:
-// curl -X POST http://localhost:8787/customers \
-//   -H "Content-Type: application/json" \
-//   -d '{"name":"Wouter Steegers","email":"wouter.steegers@example.com"}'
+app.get("/create-customer", (c) => {
+  return c.html(<CreateCustomerScene />);
+});
 
 app.notFound((c) => {
   return c.text("Endpoint not found", 404);
@@ -40,3 +40,8 @@ app.onError((err, c) => {
 });
 
 export default app;
+
+// You can also add a customer using curl like this:
+// curl -X POST http://localhost:8787/customers \
+//   -H "Content-Type: application/json" \
+//   -d '{"name":"Wouter Steegers","email":"wouter.steegers@example.com"}'
