@@ -32,7 +32,7 @@ export const DeleteCustomerForm = () => {
           <input type="hidden" name="_method" value="DELETE" />
         </div>
         <button type="submit" class="button-danger">
-          Submit
+          Delete
         </button>
       </form>
     </div>

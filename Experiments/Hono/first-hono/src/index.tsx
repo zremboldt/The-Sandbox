@@ -18,17 +18,12 @@ export type Bindings = {
 const app = new Hono<{ Bindings: Bindings }>();
 app.use("/customers/*", methodOverride({ app }));
 
-app.get("/", (c) => {
+app.get("/test", (c) => {
   console.log(`MY_VAR is: ${c.env.MY_VAR}`);
   return c.text("Hello, Hono!");
 });
 
-app.get("/customers", getAllCustomers);
-app.get("/customers/:id", getCustomerById);
-app.post("/customers", ...createCustomer);
-app.delete("/customers/:id", deleteCustomerById);
-
-app.get("/create-customer", (c) => {
+app.get("/", (c) => {
   return c.html(
     <Layout>
       <CreateCustomerForm />
@@ -36,6 +31,11 @@ app.get("/create-customer", (c) => {
     </Layout>
   );
 });
+
+app.get("/customers", getAllCustomers);
+app.get("/customers/:id", getCustomerById);
+app.post("/customers", ...createCustomer);
+app.delete("/customers/:id", deleteCustomerById);
 
 app.notFound((c) => {
   return c.text("Endpoint not found", 404);
