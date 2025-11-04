@@ -5,9 +5,33 @@ export const Layout: FC = (props) => {
   return (
     <html class={globalStyles}>
       <head>
-        <Style />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.indigo.min.css"
+        ></link>
+        {/* <Style /> */}
       </head>
-      <body>{props.children}</body>
+      <body>
+        <nav>
+          <ul>
+            <li>
+              <strong>Acme Corp</strong>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <a href="#">About</a>
+            </li>
+            <li>
+              <a href="#">Services</a>
+            </li>
+            <li>
+              <a href="#">Products</a>
+            </li>
+          </ul>
+        </nav>
+        <main class="container">{props.children}</main>
+      </body>
     </html>
   );
 };

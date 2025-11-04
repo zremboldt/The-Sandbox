@@ -1,10 +1,10 @@
 import { css } from "hono/css";
 
-export const CreateCustomerForm = () => {
+export const CreateUserForm = () => {
   return (
     <div class="card">
       <form
-        action="/customers"
+        action="/users"
         method="post"
         class={css`
           display: flex;
@@ -19,7 +19,7 @@ export const CreateCustomerForm = () => {
             gap: 0.5rem;
           `}
         >
-          <h2 style="margin-bottom: 0.5rem">Create customer</h2>
+          <h2 style="margin-bottom: 0.5rem">Create user</h2>
           <input
             type="text"
             id="name"

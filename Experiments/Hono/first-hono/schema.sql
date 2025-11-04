@@ -1,11 +1,11 @@
-create table customers
+create table users
 (
   id INTEGER primary key,
   name TEXT,
   email TEXT
 );
 
-insert into customers(name, email) values
+insert into users(name, email) values
   ('Mark Watney', 'mark.watney@example.com'),
   ('David Martens', 'david.martens@example.com'),
   ('Dustin Dalke', 'dustin.dalke@example.com');

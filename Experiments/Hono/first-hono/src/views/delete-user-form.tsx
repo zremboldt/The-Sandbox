@@ -1,11 +1,11 @@
 import { css } from "hono/css";
 
-export const DeleteCustomerForm = () => {
+export const DeleteUserForm = () => {
   return (
     <div class="card">
       <form
         method="post"
-        onsubmit="this.action = '/customers/' + this.id.value"
+        onsubmit="this.action = '/users/' + this.id.value"
         class={css`
           display: flex;
           flex-direction: column;
@@ -19,12 +19,12 @@ export const DeleteCustomerForm = () => {
             gap: 0.5rem;
           `}
         >
-          <h2 style="margin-bottom: 0.5rem">Delete customer</h2>
+          <h2 style="margin-bottom: 0.5rem">Delete user</h2>
           <input
             type="text"
             id="id"
             name="id"
-            placeholder="Customer ID"
+            placeholder="User ID"
             autocomplete="off"
             required
           />
