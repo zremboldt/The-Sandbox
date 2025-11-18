@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dice Golf Map Generator</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <canvas id="map"></canvas>
+    <script src="script.js"></script>
+    <script>
+      const TILE_SIZE = 20;
+      const MAP_WIDTH = 16; // in tile count
+      const MAP_HEIGHT = 26; // in tile count
+
+      function setupCanvas(canvas, width, height) {
+        const ctx = canvas.getContext("2d");
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        canvas.style.width = width + "px";
+        canvas.style.height = height + "px";
+        ctx.scale(dpr, dpr);
+        return ctx;
+      }
+
+      const canvas = document.getElementById("map");
+      const ctx = setupCanvas(
+        canvas,
+        MAP_WIDTH * TILE_SIZE,
+        MAP_HEIGHT * TILE_SIZE
+      );
+
+      function drawMap({ map, trees, decorations }) {
+        ctx.clearRect(0, 0, MAP_WIDTH * TILE_SIZE, MAP_HEIGHT * TILE_SIZE);
+
+        // Water background
+        ctx.fillStyle = "#a0d8ef";
+        ctx.fillRect(0, 0, MAP_WIDTH * TILE_SIZE, MAP_HEIGHT * TILE_SIZE);
+
+        // Grass
+        ctx.fillStyle = "#5daa66";
+        for (let y = 0; y < map.length; y++) {
+          for (let x = 0; x < map[0].length; x++) {
+            if (map[y][x] === 1) {
+              ctx.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+            }
+          }
+        }
+
+        // Trees (simple triangle)
+        ctx.fillStyle = "#2d5a2d";
+        for (const t of trees) {
+          ctx.beginPath();
+          ctx.moveTo(t.x * TILE_SIZE + TILE_SIZE / 2, t.y * TILE_SIZE);
+          ctx.lineTo(t.x * TILE_SIZE, t.y * TILE_SIZE + TILE_SIZE);
+          ctx.lineTo(t.x * TILE_SIZE + TILE_SIZE, t.y * TILE_SIZE + TILE_SIZE);
+          ctx.closePath();
+          ctx.fill();
+        }
+
+        // Decorations
+        for (const d of decorations) {
+          if (d.type === "rock") {
+            ctx.fillStyle = "#888";
+            ctx.fillRect(
+              d.x * TILE_SIZE,
+              d.y * TILE_SIZE,
+              TILE_SIZE,
+              TILE_SIZE
+            );
+          }
+          // add more as you like
+        }
+      }
+
+      // Generate and draw
+      drawMap(generateMap(MAP_WIDTH, MAP_HEIGHT));
+    </script>
+  </body>
+</html>
