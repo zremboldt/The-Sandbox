@@ -11,71 +11,122 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <canvas id="map"></canvas>
+    <div id="map-container"></div>
     <script src="script.js"></script>
     <script>
-      const TILE_SIZE = 20;
+      const TILE_SIZE = 30;
       const MAP_WIDTH = 16; // in tile count
       const MAP_HEIGHT = 26; // in tile count
 
-      function setupCanvas(canvas, width, height) {
-        const ctx = canvas.getContext("2d");
-        const dpr = window.devicePixelRatio || 1;
-        canvas.width = width * dpr;
-        canvas.height = height * dpr;
-        canvas.style.width = width + "px";
-        canvas.style.height = height + "px";
-        ctx.scale(dpr, dpr);
-        return ctx;
+      function createTile(type, content = "") {
+        const tile = document.createElement("div");
+        tile.className = `tile ${type}`;
+        if (content) {
+          tile.innerHTML = content;
+        }
+        return tile;
       }
 
-      const canvas = document.getElementById("map");
-      const ctx = setupCanvas(
-        canvas,
-        MAP_WIDTH * TILE_SIZE,
-        MAP_HEIGHT * TILE_SIZE
-      );
+      function createTreeSVG() {
+        const triangle = (pos) => `
+          <path d="M 20,
+            ${pos} L 10,
+            ${pos + 13} L 30,
+            ${pos + 13} Z" 
+          stroke-linejoin="round" stroke-width="3"/>
+        `;
 
-      function drawMap({ map, trees, decorations }) {
-        ctx.clearRect(0, 0, MAP_WIDTH * TILE_SIZE, MAP_HEIGHT * TILE_SIZE);
+        return `
+          <svg viewBox="0 0 40 40" class="tree-svg" fill="currentColor" stroke="currentColor">
+            ${triangle(8)}
+            ${triangle(18)}
+          </svg>
+        `;
+      }
 
-        // Water background
-        ctx.fillStyle = "#a0d8ef";
-        ctx.fillRect(0, 0, MAP_WIDTH * TILE_SIZE, MAP_HEIGHT * TILE_SIZE);
+      function createRockSVG() {
+        return `
+          <svg viewBox="0 0 40 40" class="rock-svg">
+            <circle cx="20" cy="20" r="8" fill="#888"/>
+          </svg>
+        `;
+      }
 
-        // Grass
-        ctx.fillStyle = "#5daa66";
+      function createBushSVG() {
+        return `
+          <svg viewBox="0 0 40 40" class="bush-svg">
+            <circle cx="15" cy="20" r="8" fill="#4a7c4a"/>
+            <circle cx="25" cy="20" r="8" fill="#4a7c4a"/>
+            <circle cx="20" cy="15" r="8" fill="#4a7c4a"/>
+          </svg>
+        `;
+      }
+
+      function createFlowerSVG() {
+        return `
+          <svg viewBox="0 0 40 40" class="flower-svg">
+            <circle cx="20" cy="20" r="4" fill="#ffeb3b"/>
+            <circle cx="20" cy="15" r="3" fill="#e91e63"/>
+            <circle cx="25" cy="20" r="3" fill="#e91e63"/>
+            <circle cx="20" cy="25" r="3" fill="#e91e63"/>
+            <circle cx="15" cy="20" r="3" fill="#e91e63"/>
+          </svg>
+        `;
+      }
+
+      function createSignSVG() {
+        return `
+          <svg viewBox="0 0 40 40" class="sign-svg">
+            <rect x="17" y="15" width="6" height="20" fill="#5c4033"/>
+            <rect x="10" y="10" width="20" height="10" rx="2" fill="#8b6f47"/>
+          </svg>
+        `;
+      }
+
+      function drawMap({ map, decorations }) {
+        const container = document.getElementById("map-container");
+        container.innerHTML = ""; // Clear previous content before drawing
+        container.style.gridTemplateColumns = `repeat(${MAP_WIDTH}, ${TILE_SIZE}px)`;
+        container.style.gridTemplateRows = `repeat(${MAP_HEIGHT}, ${TILE_SIZE}px)`;
+
+        // Create a lookup for decorations
+        const decorationMap = new Map();
+        decorations.forEach((d) => decorationMap.set(`${d.x},${d.y}`, d));
+
+        // Create tiles
         for (let y = 0; y < map.length; y++) {
           for (let x = 0; x < map[0].length; x++) {
-            if (map[y][x] === 1) {
-              ctx.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+            const isGrass = map[y][x] === 1;
+            const key = `${x},${y}`;
+            const decoration = decorationMap.get(key);
+
+            let tile;
+            if (decoration) {
+              let svg = "";
+              switch (decoration.type) {
+                case "tree":
+                  svg = createTreeSVG();
+                  break;
+                case "rock":
+                  svg = createRockSVG();
+                  break;
+                case "bush":
+                  svg = createBushSVG();
+                  break;
+                case "flower":
+                  svg = createFlowerSVG();
+                  break;
+                case "sign":
+                  svg = createSignSVG();
+                  break;
+              }
+              tile = createTile("grass", svg);
+            } else {
+              tile = createTile(isGrass ? "grass" : "water");
             }
-          }
-        }
 
-        // Trees (simple triangle)
-        ctx.fillStyle = "#2d5a2d";
-        for (const t of trees) {
-          ctx.beginPath();
-          ctx.moveTo(t.x * TILE_SIZE + TILE_SIZE / 2, t.y * TILE_SIZE);
-          ctx.lineTo(t.x * TILE_SIZE, t.y * TILE_SIZE + TILE_SIZE);
-          ctx.lineTo(t.x * TILE_SIZE + TILE_SIZE, t.y * TILE_SIZE + TILE_SIZE);
-          ctx.closePath();
-          ctx.fill();
-        }
-
-        // Decorations
-        for (const d of decorations) {
-          if (d.type === "rock") {
-            ctx.fillStyle = "#888";
-            ctx.fillRect(
-              d.x * TILE_SIZE,
-              d.y * TILE_SIZE,
-              TILE_SIZE,
-              TILE_SIZE
-            );
+            container.appendChild(tile);
           }
-          // add more as you like
         }
       }
 

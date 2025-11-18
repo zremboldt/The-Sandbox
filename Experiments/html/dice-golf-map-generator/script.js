@@ -34,8 +34,10 @@ function generateMap(width, height) {
   // Step 2: Clean up tiny isolated water pockets and tiny islands
   // (simple flood fill or just skip if you like noisy maps)
 
-  // Step 3: Place trees only on grass, preferring near water edges
-  const trees = [];
+  // Step 3: Place decorations (trees, rocks, flowers, signs)
+  const decorations = [];
+
+  // Add trees - preferring near water edges
   for (let y = 1; y < height - 1; y++) {
     for (let x = 1; x < width - 1; x++) {
       if (map[y][x] === 1) {
@@ -50,15 +52,13 @@ function generateMap(width, height) {
         // Higher chance near water, lower in open fields
         const treeChance = waterNearby > 0 ? 0.09 : 0.012;
         if (Math.random() < treeChance) {
-          trees.push({ x, y });
-          // Optional: clear 3x3 area around tree so they don't clump too hard
+          decorations.push({ x, y, type: "tree" });
         }
       }
     }
   }
 
-  // Step 4: Add a few decorative objects (rocks, flowers, signs)
-  const decorations = [];
+  // Add other decorative objects (rocks, flowers, signs, bushes)
   for (let i = 0; i < 20 + Math.random() * 30; i++) {
     const x = Math.floor(Math.random() * width);
     const y = Math.floor(Math.random() * height);
@@ -71,5 +71,5 @@ function generateMap(width, height) {
     }
   }
 
-  return { map, trees, decorations };
+  return { map, decorations };
 }
