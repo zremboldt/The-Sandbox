@@ -82,6 +82,14 @@ body {
   background-repeat: no-repeat;
 }
 
+.tile.arrow {
+  background-color: var(--fairway-color);
+  background-image: url('data:image/svg+xml,<svg viewBox="0 0 40 40" fill="%23444" stroke="%23444" xmlns="http://www.w3.org/2000/svg"><path d="M 20,13 L 10,26 L 30,26 Z" stroke-linejoin="round" stroke-width="3"/></svg>');
+  background-size: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .tile svg {
   position: absolute;
   inset: 0;

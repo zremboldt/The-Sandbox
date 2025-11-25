@@ -25,11 +25,14 @@
       const MAP_WIDTH = 16; // in tile count
       const MAP_HEIGHT = 26; // in tile count
 
-      function createTile(type, content = "") {
+      function createTile(type, content = "", rotation = 0) {
         const tile = document.createElement("div");
         tile.className = `tile ${type}`;
         if (content) {
           tile.innerHTML = content;
+        }
+        if (rotation !== 0) {
+          tile.style.transform = `rotate(${rotation}deg)`;
         }
         return tile;
       }
@@ -87,7 +90,7 @@
         `;
       }
 
-      function drawMap({ map }) {
+      function drawMap({ map, rotations }) {
         const container = document.getElementById("map-container");
         container.innerHTML = ""; // Clear previous content before drawing
         container.style.gridTemplateColumns = `repeat(${MAP_WIDTH}, ${TILE_SIZE}px)`;
@@ -97,10 +100,11 @@
         for (let y = 0; y < map.length; y++) {
           for (let x = 0; x < map[0].length; x++) {
             const terrainValue = map[y][x];
+            const rotation = rotations ? rotations[y][x] : 0;
             let tileType;
 
             // Determine terrain type
-            // 0 = rough, 1 = fairway, 2 = sand, 3 = water, 4 = tree, 5 = ball, 6 = hole
+            // 0 = rough, 1 = fairway, 2 = sand, 3 = water, 4 = tree, 5 = ball, 6 = hole, 7 = arrow
             switch (terrainValue) {
               case 1:
                 tileType = "fairway";
@@ -120,11 +124,14 @@
               case 6:
                 tileType = "hole";
                 break;
+              case 7:
+                tileType = "arrow";
+                break;
               default:
                 tileType = "rough";
             }
 
-            const tile = createTile(tileType);
+            const tile = createTile(tileType, "", rotation);
             container.appendChild(tile);
           }
         }

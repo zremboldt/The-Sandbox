@@ -7,6 +7,7 @@ const TERRAIN = {
   TREE: 4,
   BALL: 5,
   HOLE: 6,
+  ARROW: 7,
 };
 
 // Configuration constants
@@ -21,6 +22,7 @@ const CONFIG = {
 
 function generateMap(width, height) {
   const map = createEmptyMap(width, height);
+  const rotations = createEmptyMap(width, height); // Store rotations for each tile
 
   // Determine key positions first
   const ballPos = getBottomThirdPosition(width, height);
@@ -47,7 +49,10 @@ function generateMap(width, height) {
   map[ballPos.y][ballPos.x] = TERRAIN.BALL;
   map[holePos.y][holePos.x] = TERRAIN.HOLE;
 
-  return { map };
+  // Place arrows near the hole
+  placeArrowsNearHole(map, holePos, width, height, rotations);
+
+  return { map, rotations };
 }
 
 // ++++++++++ MAP CREATION ++++++++++
@@ -227,6 +232,25 @@ function ensureFairwaySurroundings(map, pos, width, height) {
       map[neighbor.y][neighbor.x] = TERRAIN.FAIRWAY;
       fairwayCount++;
     }
+  }
+}
+
+function placeArrowsNearHole(map, holePos, width, height, rotations) {
+  const arrowCount = randomInt(2, 5);
+  const neighbors = getNeighbors(holePos, width, height);
+
+  // Filter neighbors to only fairway or rough
+  const candidates = neighbors.filter(
+    (n) => map[n.y][n.x] === TERRAIN.FAIRWAY || map[n.y][n.x] === TERRAIN.ROUGH
+  );
+
+  // Randomly select positions for arrows
+  const shuffled = candidates.sort(() => Math.random() - 0.5);
+  for (let i = 0; i < Math.min(arrowCount, shuffled.length); i++) {
+    const pos = shuffled[i];
+    map[pos.y][pos.x] = TERRAIN.ARROW;
+    // Random rotation at 90° intervals (0, 90, 180, 270)
+    rotations[pos.y][pos.x] = randomInt(0, 3) * 90;
   }
 }
 
