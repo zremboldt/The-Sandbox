@@ -69,42 +69,62 @@
         `;
       }
 
-      function drawMap({ map, decorations }) {
+      function createBallSVG() {
+        return `
+          <svg viewBox="0 0 40 40" class="ball-svg">
+            <circle cx="20" cy="20" r="6" fill="white" stroke="#333" stroke-width="1"/>
+          </svg>
+        `;
+      }
+
+      function createHoleSVG() {
+        return `
+          <svg viewBox="0 0 40 40" class="hole-svg">
+            <circle cx="20" cy="20" r="5" fill="#000"/>
+            <line x1="20" y1="4" x2="20" y2="20" stroke="#000" stroke-width="1.5"/>
+            <polygon points="20,4 18,8 22,8" fill="red"/>
+          </svg>
+        `;
+      }
+
+      function drawMap({ map }) {
         const container = document.getElementById("map-container");
         container.innerHTML = ""; // Clear previous content before drawing
         container.style.gridTemplateColumns = `repeat(${MAP_WIDTH}, ${TILE_SIZE}px)`;
         container.style.gridTemplateRows = `repeat(${MAP_HEIGHT}, ${TILE_SIZE}px)`;
 
-        // Create a lookup for decorations
-        const decorationMap = new Map();
-        decorations.forEach((d) => decorationMap.set(`${d.x},${d.y}`, d));
-
         // Create tiles
         for (let y = 0; y < map.length; y++) {
           for (let x = 0; x < map[0].length; x++) {
-            const isFairway = map[y][x] === 1;
-            const key = `${x},${y}`;
-            const decoration = decorationMap.get(key);
+            const terrainValue = map[y][x];
+            let tileType;
 
-            let tile;
-            if (decoration) {
-              let svg = "";
-              switch (decoration.type) {
-                case "tree":
-                  svg = createTreeSVG();
-                  break;
-                case "rock":
-                  svg = createRockSVG();
-                  break;
-                case "bush":
-                  svg = createBushSVG();
-                  break;
-              }
-              tile = createTile("fairway", svg);
-            } else {
-              tile = createTile(isFairway ? "fairway" : "rough");
+            // Determine terrain type
+            // 0 = rough, 1 = fairway, 2 = sand, 3 = water, 4 = tree, 5 = ball, 6 = hole
+            switch (terrainValue) {
+              case 1:
+                tileType = "fairway";
+                break;
+              case 2:
+                tileType = "sand";
+                break;
+              case 3:
+                tileType = "water";
+                break;
+              case 4:
+                tileType = "tree";
+                break;
+              case 5:
+                tileType = "ball";
+                break;
+              case 6:
+                tileType = "hole";
+                break;
+              default:
+                tileType = "rough";
             }
 
+            const tile = createTile(tileType);
             container.appendChild(tile);
           }
         }
