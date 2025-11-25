@@ -12,13 +12,16 @@
   </head>
   <body>
     <div id="game-container">
+      <div id="seed-label"></div>
       <div id="map-container"></div>
       <div id="text-container">
-        <span class="text-hole">Hole: 1</span>
-        <span class="text-strokes">Strokes: /5</span>
+        <span class="text-hole">Hole:</span>
+        <span class="text-strokes">Strokes:</span>
         <span class="text-total">Total:</span>
       </div>
     </div>
+    <button id="new-map-btn">New map</button>
+    <button id="save-btn">Save</button>
     <script src="script.js"></script>
     <script>
       const TILE_SIZE = 30;
@@ -35,59 +38,6 @@
           tile.style.transform = `rotate(${rotation}deg)`;
         }
         return tile;
-      }
-
-      function createTreeSVG() {
-        const triangle = (pos) => `
-          <path d="M 20,
-            ${pos} L 10,
-            ${pos + 13} L 30,
-            ${pos + 13} Z" 
-          stroke-linejoin="round" stroke-width="3"/>
-        `;
-
-        return `
-          <svg viewBox="0 0 40 40" class="tree-svg" fill="currentColor" stroke="currentColor">
-            ${triangle(8)}
-            ${triangle(18)}
-          </svg>
-        `;
-      }
-
-      function createRockSVG() {
-        return `
-          <svg viewBox="0 0 40 40" class="rock-svg">
-            <circle cx="20" cy="20" r="8" fill="#888"/>
-          </svg>
-        `;
-      }
-
-      function createBushSVG() {
-        return `
-          <svg viewBox="0 0 40 40" class="bush-svg">
-            <circle cx="15" cy="20" r="8" fill="#4a7c4a"/>
-            <circle cx="25" cy="20" r="8" fill="#4a7c4a"/>
-            <circle cx="20" cy="15" r="8" fill="#4a7c4a"/>
-          </svg>
-        `;
-      }
-
-      function createBallSVG() {
-        return `
-          <svg viewBox="0 0 40 40" class="ball-svg">
-            <circle cx="20" cy="20" r="6" fill="white" stroke="#333" stroke-width="1"/>
-          </svg>
-        `;
-      }
-
-      function createHoleSVG() {
-        return `
-          <svg viewBox="0 0 40 40" class="hole-svg">
-            <circle cx="20" cy="20" r="5" fill="#000"/>
-            <line x1="20" y1="4" x2="20" y2="20" stroke="#000" stroke-width="1.5"/>
-            <polygon points="20,4 18,8 22,8" fill="red"/>
-          </svg>
-        `;
       }
 
       function drawMap({ map, rotations }) {
@@ -138,7 +88,64 @@
       }
 
       // Generate and draw
-      drawMap(generateMap(MAP_WIDTH, MAP_HEIGHT));
+      // Get seed and hole from URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const seedParam = urlParams.get("seed");
+      const seed = seedParam ? parseInt(seedParam) : null;
+      const holeParam = urlParams.get("hole");
+      let holeNumber = holeParam ? parseInt(holeParam) : 1;
+
+      const result = generateMap(MAP_WIDTH, MAP_HEIGHT, seed);
+      drawMap(result);
+
+      // Helper function to update URL with current parameters
+      function updateURL() {
+        const params = new URLSearchParams();
+        params.set("seed", result.seed);
+        params.set("hole", holeNumber);
+        const newURL = `${window.location.pathname}?${params.toString()}`;
+        window.history.replaceState({}, "", newURL);
+      }
+
+      // Display the seed on the page
+      const seedLabel = document.getElementById("seed-label");
+      seedLabel.textContent = `Seed: ${result.seed}`;
+
+      // Add click handler to save button to copy URL
+      const saveBtn = document.getElementById("save-btn");
+      saveBtn.addEventListener("click", async () => {
+        const url = `${window.location.origin}${window.location.pathname}?seed=${result.seed}&hole=${holeNumber}`;
+        try {
+          await navigator.clipboard.writeText(url);
+          const originalText = saveBtn.textContent;
+          saveBtn.textContent = "URL copied!";
+          setTimeout(() => {
+            saveBtn.textContent = originalText;
+          }, 1500);
+        } catch (err) {
+          console.error("Failed to copy:", err);
+        }
+      });
+
+      // Add click handler to update hole number
+      const holeLabel = document.querySelector(".text-hole");
+      holeLabel.textContent = `Hole: ${holeNumber}`;
+      holeLabel.style.cursor = "pointer";
+      holeLabel.addEventListener("click", () => {
+        holeNumber = (holeNumber % 18) + 1; // Cycle from 1 to 18
+        holeLabel.textContent = `Hole: ${holeNumber}`;
+        updateURL();
+      });
+
+      // Add click handler to new map button
+      const newMapBtn = document.getElementById("new-map-btn");
+      newMapBtn.addEventListener("click", () => {
+        const newSeed = Math.floor(Math.random() * 1000000);
+        window.location.href = `${window.location.pathname}?seed=${newSeed}&hole=${holeNumber}`;
+      });
+
+      // Set initial URL with parameters
+      updateURL();
     </script>
   </body>
 </html>

@@ -1,3 +1,17 @@
+// Seeded random number generator
+class SeededRandom {
+  constructor(seed) {
+    this.seed = seed;
+  }
+
+  random() {
+    const x = Math.sin(this.seed++) * 10000;
+    return x - Math.floor(x);
+  }
+}
+
+let rng = Math; // Default to Math.random
+
 // Terrain type constants for readability
 const TERRAIN = {
   ROUGH: 0,
@@ -20,7 +34,13 @@ const CONFIG = {
   MIN_FAIRWAY_AROUND_MARKERS: 3,
 };
 
-function generateMap(width, height) {
+function generateMap(width, height, seed = null) {
+  // Initialize random number generator with seed
+  if (seed === null) {
+    seed = Math.floor(Math.random() * 1000000);
+  }
+  rng = new SeededRandom(seed);
+
   const map = createEmptyMap(width, height);
   const rotations = createEmptyMap(width, height); // Store rotations for each tile
 
@@ -52,7 +72,7 @@ function generateMap(width, height) {
   // Place arrows near the hole
   placeArrowsNearHole(map, holePos, width, height, rotations);
 
-  return { map, rotations };
+  return { map, rotations, seed };
 }
 
 // ++++++++++ MAP CREATION ++++++++++
@@ -68,10 +88,10 @@ function createEmptyMap(width, height) {
 function getBottomThirdPosition(width, height) {
   const bottomThirdStart = Math.floor((height * 2) / 3);
   return {
-    x: Math.floor(width / 2 + (Math.random() - 0.5) * width * 0.3),
+    x: Math.floor(width / 2 + (rng.random() - 0.5) * width * 0.3),
     y:
       bottomThirdStart +
-      Math.floor(Math.random() * (height - bottomThirdStart - 2)) +
+      Math.floor(rng.random() * (height - bottomThirdStart - 2)) +
       1,
   };
 }
@@ -79,23 +99,23 @@ function getBottomThirdPosition(width, height) {
 function getTopThirdPosition(width, height) {
   const topThirdEnd = Math.floor(height / 3);
   return {
-    x: Math.floor(width / 2 + (Math.random() - 0.5) * width * 0.3),
-    y: Math.floor(Math.random() * (topThirdEnd - 2)) + 1,
+    x: Math.floor(width / 2 + (rng.random() - 0.5) * width * 0.3),
+    y: Math.floor(rng.random() * (topThirdEnd - 2)) + 1,
   };
 }
 
 function randomInt(min, max) {
-  return min + Math.floor(Math.random() * (max - min + 1));
+  return min + Math.floor(rng.random() * (max - min + 1));
 }
 
 function randomFloat(min, max) {
-  return min + Math.random() * (max - min);
+  return min + rng.random() * (max - min);
 }
 
 // ++++++++++ BLOB PLACEMENT ++++++++++
 
 function placeBlob(map, centerX, centerY, radiusX, radiusY, terrain) {
-  const rotation = Math.random() * Math.PI * 2;
+  const rotation = rng.random() * Math.PI * 2;
   const height = map.length;
   const width = map[0].length;
 
@@ -115,7 +135,7 @@ function isInsideEllipse(x, y, cx, cy, rx, ry, rotation) {
     (dx * Math.cos(rotation) + dy * Math.sin(rotation)) ** 2 / (rx * rx) +
       (dx * -Math.sin(rotation) + dy * Math.cos(rotation)) ** 2 / (ry * ry)
   );
-  const threshold = 1 + Math.random() * 0.4; // Fuzzy edges
+  const threshold = 1 + rng.random() * 0.4; // Fuzzy edges
   return dist < threshold;
 }
 
@@ -130,8 +150,8 @@ function placeFairwayAtPosition(map, pos, width, height) {
 function placeConnectingFairways(map, width, height) {
   const count = randomInt(CONFIG.FAIRWAY_BLOBS.min, CONFIG.FAIRWAY_BLOBS.max);
   for (let i = 0; i < count; i++) {
-    const x = Math.floor(Math.random() * width);
-    const y = Math.floor(Math.random() * height);
+    const x = Math.floor(rng.random() * width);
+    const y = Math.floor(rng.random() * height);
     const radiusX = randomFloat(2, 4);
     const radiusY = randomFloat(2, 4);
     placeBlob(map, x, y, radiusX, radiusY, TERRAIN.FAIRWAY);
@@ -141,8 +161,8 @@ function placeConnectingFairways(map, width, height) {
 function placeWaterBodies(map, width, height) {
   const count = randomInt(CONFIG.WATER_BODIES.min, CONFIG.WATER_BODIES.max);
   for (let i = 0; i < count; i++) {
-    const x = Math.floor(Math.random() * width);
-    const y = Math.floor(Math.random() * height);
+    const x = Math.floor(rng.random() * width);
+    const y = Math.floor(rng.random() * height);
     const radiusX = randomFloat(2, 4.5);
     const radiusY = randomFloat(2, 4.5);
     placeBlob(map, x, y, radiusX, radiusY, TERRAIN.WATER);
@@ -152,8 +172,8 @@ function placeWaterBodies(map, width, height) {
 function placeSandTraps(map, width, height) {
   const count = randomInt(CONFIG.SAND_TRAPS.min, CONFIG.SAND_TRAPS.max);
   for (let i = 0; i < count; i++) {
-    const x = Math.floor(Math.random() * width);
-    const y = Math.floor(Math.random() * height);
+    const x = Math.floor(rng.random() * width);
+    const y = Math.floor(rng.random() * height);
     const radiusX = randomFloat(1.5, 3);
     const radiusY = randomFloat(1.5, 3);
     placeBlob(map, x, y, radiusX, radiusY, TERRAIN.SAND);
@@ -163,8 +183,8 @@ function placeSandTraps(map, width, height) {
 function placeTreeClusters(map, width, height) {
   const count = randomInt(CONFIG.TREE_CLUSTERS.min, CONFIG.TREE_CLUSTERS.max);
   for (let i = 0; i < count; i++) {
-    const x = Math.floor(Math.random() * width);
-    const y = Math.floor(Math.random() * height);
+    const x = Math.floor(rng.random() * width);
+    const y = Math.floor(rng.random() * height);
     const radiusX = randomFloat(1.5, 3);
     const radiusY = randomFloat(1.5, 3);
     placeTreeBlob(map, x, y, radiusX, radiusY);
@@ -172,7 +192,7 @@ function placeTreeClusters(map, width, height) {
 }
 
 function placeTreeBlob(map, centerX, centerY, radiusX, radiusY) {
-  const rotation = Math.random() * Math.PI * 2;
+  const rotation = rng.random() * Math.PI * 2;
   const height = map.length;
   const width = map[0].length;
 
@@ -210,7 +230,7 @@ function enforceRoughPercentage(map, width, height, ballPos, holePos) {
       const isConvertible =
         map[y][x] === TERRAIN.SAND || map[y][x] === TERRAIN.TREE;
 
-      if (!nearMarker && isConvertible && Math.random() < 0.5) {
+      if (!nearMarker && isConvertible && rng.random() < 0.5) {
         map[y][x] = TERRAIN.ROUGH;
         converted++;
       }
@@ -225,7 +245,7 @@ function ensureFairwaySurroundings(map, pos, width, height) {
   ).length;
 
   // Convert random neighbors to fairway until we have enough
-  const shuffled = neighbors.sort(() => Math.random() - 0.5);
+  const shuffled = neighbors.sort(() => rng.random() - 0.5);
   for (const neighbor of shuffled) {
     if (fairwayCount >= CONFIG.MIN_FAIRWAY_AROUND_MARKERS) break;
     if (map[neighbor.y][neighbor.x] !== TERRAIN.FAIRWAY) {
@@ -245,7 +265,7 @@ function placeArrowsNearHole(map, holePos, width, height, rotations) {
   );
 
   // Randomly select positions for arrows
-  const shuffled = candidates.sort(() => Math.random() - 0.5);
+  const shuffled = candidates.sort(() => rng.random() - 0.5);
   for (let i = 0; i < Math.min(arrowCount, shuffled.length); i++) {
     const pos = shuffled[i];
     map[pos.y][pos.x] = TERRAIN.ARROW;
