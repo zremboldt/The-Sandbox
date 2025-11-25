@@ -1,3 +1,11 @@
+:root {
+  --fairway-color: hsl(0 0% 92%);
+  --rough-color: hsl(0 0% 100%);
+  --sand-color: hsl(0 0% 100%);
+  --water-color: hsl(0 0% 30%);
+  --tree-color: hsl(120 60% 40%);
+}
+
 body {
   display: flex;
   justify-content: center;
@@ -29,40 +37,46 @@ body {
 }
 
 .tile.rough {
-  background-color: white;
+  background-color: var(--rough-color);
+  --dot-color: hsl(0 0% 80%);
 }
 
 .tile.fairway {
-  background-color: hsl(0 0% 0% / 0.1);
+  background-color: var(--fairway-color);
+  --dot-color: hsl(0 0% 60%);
 }
 
 .tile.sand {
-  background-color: hsl(45 70% 85%);
+  background-color: white;
+  background-image: url('data:image/svg+xml,<svg width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="6" x2="6" y2="0" stroke="%23ccc" stroke-width="1"/></svg>');
+  background-size: 6px 6px;
+  --dot-color: hsl(0 0% 50%);
 }
 
 .tile.water {
-  background-color: hsl(200 60% 75%);
+  background-color: var(--water-color);
+  --dot-color: hsl(0, 0%, 82%);
 }
 
 .tile.tree {
   background-color: white;
-  background-image: url('data:image/svg+xml,<svg viewBox="0 0 40 40" fill="currentColor" stroke="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M 20,8 L 10,21 L 30,21 Z" stroke-linejoin="round" stroke-width="3"/><path d="M 20,18 L 10,31 L 30,31 Z" stroke-linejoin="round" stroke-width="3"/></svg>');
+  background-image: url('data:image/svg+xml,<svg viewBox="0 0 40 40" fill="%23444" stroke="%23444" xmlns="http://www.w3.org/2000/svg"><path d="M 20,8 L 10,21 L 30,21 Z" stroke-linejoin="round" stroke-width="3"/><path d="M 20,18 L 10,31 L 30,31 Z" stroke-linejoin="round" stroke-width="3"/></svg>');
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .tile.ball {
-  background-color: hsl(0 0% 0% / 0.1);
-  background-image: url('data:image/svg+xml,<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="6" fill="white" stroke="%23333" stroke-width="1"/></svg>');
+  background-color: var(--fairway-color);
+  background-image: url('data:image/svg+xml,<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="9" fill="white" stroke="%23444" stroke-width="4"/></svg>');
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .tile.hole {
-  background-color: hsl(0 0% 0% / 0.1);
-  background-image: url('data:image/svg+xml,<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="5" fill="%23000"/><line x1="20" y1="4" x2="20" y2="20" stroke="%23000" stroke-width="1.5"/><polygon points="20,4 18,8 22,8" fill="red"/></svg>');
+  background-color: var(--fairway-color);
+  background-image: url('data:image/svg+xml,<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="11" fill="%23444"/></svg>');
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -87,29 +101,4 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
-}
-
-.tile.rough {
-  --dot-color: rgba(0, 0, 0, 0.2);
-}
-
-.tile.fairway {
-  --dot-color: rgba(0, 0, 0, 0.4);
-}
-
-.tile.sand {
-  --dot-color: rgba(139, 119, 101, 0.3);
-}
-
-.tile.water {
-  --dot-color: rgba(0, 100, 150, 0.3);
-}
-
-.tile.tree {
-  --dot-color: rgba(0, 0, 0, 0.2);
-}
-
-.tile.ball,
-.tile.hole {
-  --dot-color: rgba(0, 0, 0, 0.4);
 }
