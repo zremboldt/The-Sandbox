@@ -38,18 +38,20 @@
         if (type === "sand") {
           // Create repeating diagonal lines directly
           const lines = [];
-          for (let i = 0; i < 10; i++) {
-            for (let j = 0; j < 10; j++) {
-              const x = i * 6;
-              const y = j * 6;
+          const spacing = 10; // Spacing between diagonal lines (must divide evenly into TILE_SIZE)
+          const repetitions = TILE_SIZE / spacing;
+          for (let i = 0; i <= repetitions; i++) {
+            for (let j = 0; j <= repetitions; j++) {
+              const x = i * spacing;
+              const y = j * spacing;
               lines.push(
-                `<line x1="${x}" y1="${y + 6}" x2="${
-                  x + 6
+                `<line x1="${x}" y1="${y + spacing}" x2="${
+                  x + spacing
                 }" y2="${y}" stroke="#ccc" stroke-width="1"/>`
               );
             }
           }
-          tile.innerHTML = `<svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;">${lines.join(
+          tile.innerHTML = `<svg width="${TILE_SIZE}" height="${TILE_SIZE}" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;">${lines.join(
             ""
           )}</svg>`;
         } else if (type === "tree") {
