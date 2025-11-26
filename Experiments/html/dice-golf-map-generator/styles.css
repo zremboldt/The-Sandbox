@@ -16,6 +16,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  padding: 20px;
 }
 
 #text-container {
@@ -57,8 +58,6 @@ body {
 
 .tile.sand {
   background-color: white;
-  background-image: url('data:image/svg+xml,<svg width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="6" x2="6" y2="0" stroke="%23ccc" stroke-width="1"/></svg>');
-  background-size: 6px 6px;
   --dot-color: hsl(0 0% 50%);
 }
 
@@ -69,34 +68,18 @@ body {
 
 .tile.tree {
   background-color: white;
-  background-image: url('data:image/svg+xml,<svg viewBox="0 0 40 40" fill="%23444" stroke="%23444" xmlns="http://www.w3.org/2000/svg"><path d="M 20,8 L 10,21 L 30,21 Z" stroke-linejoin="round" stroke-width="3"/><path d="M 20,18 L 10,31 L 30,31 Z" stroke-linejoin="round" stroke-width="3"/></svg>');
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .tile.ball {
   background-color: var(--fairway-color);
-  background-image: url('data:image/svg+xml,<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="9" fill="white" stroke="%23444" stroke-width="4"/></svg>');
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .tile.hole {
   background-color: var(--fairway-color);
-  background-image: url('data:image/svg+xml,<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="11" fill="%23444"/></svg>');
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .tile.arrow {
   background-color: var(--fairway-color);
-  background-image: url('data:image/svg+xml,<svg viewBox="0 0 40 40" fill="%23444" stroke="%23444" xmlns="http://www.w3.org/2000/svg"><path d="M 20,13 L 10,26 L 30,26 Z" stroke-linejoin="round" stroke-width="3"/></svg>');
-  background-size: 60%;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 /* Create dots */
@@ -127,7 +110,7 @@ button {
   }
 }
 
-#save-btn {
+#screenshot-btn {
   position: fixed;
   bottom: 10px;
   right: 10px;

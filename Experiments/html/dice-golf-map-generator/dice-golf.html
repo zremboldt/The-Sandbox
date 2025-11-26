@@ -21,19 +21,53 @@
       </div>
     </div>
     <button id="new-map-btn">New map</button>
-    <button id="save-btn">Save</button>
+    <button id="screenshot-btn">Screenshot</button>
+    <script src="https://cdn.jsdelivr.net/npm/dom-to-image-more@2.8.0/dist/dom-to-image-more.min.js"></script>
     <script src="script.js"></script>
     <script>
       const TILE_SIZE = 30;
       const MAP_WIDTH = 16; // in tile count
       const MAP_HEIGHT = 26; // in tile count
+      const SCREENSHOT_SCALE = 4; // Screenshot output scale multiplier
 
       function createTile(type, content = "", rotation = 0) {
         const tile = document.createElement("div");
         tile.className = `tile ${type}`;
-        if (content) {
+
+        // Add inline SVG for types that use background images
+        if (type === "sand") {
+          // Create repeating diagonal lines directly
+          const lines = [];
+          for (let i = 0; i < 10; i++) {
+            for (let j = 0; j < 10; j++) {
+              const x = i * 6;
+              const y = j * 6;
+              lines.push(
+                `<line x1="${x}" y1="${y + 6}" x2="${
+                  x + 6
+                }" y2="${y}" stroke="#ccc" stroke-width="1"/>`
+              );
+            }
+          }
+          tile.innerHTML = `<svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;">${lines.join(
+            ""
+          )}</svg>`;
+        } else if (type === "tree") {
+          tile.innerHTML =
+            '<svg viewBox="0 0 40 40" fill="#444" stroke="#444" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;top:0;left:0;"><path d="M 20,8 L 10,21 L 30,21 Z" stroke-linejoin="round" stroke-width="3"/><path d="M 20,18 L 10,31 L 30,31 Z" stroke-linejoin="round" stroke-width="3"/></svg>';
+        } else if (type === "ball") {
+          tile.innerHTML =
+            '<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;top:0;left:0;"><circle cx="20" cy="20" r="9" fill="white" stroke="#444" stroke-width="4"/></svg>';
+        } else if (type === "hole") {
+          tile.innerHTML =
+            '<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;top:0;left:0;"><circle cx="20" cy="20" r="11" fill="#444"/></svg>';
+        } else if (type === "arrow") {
+          tile.innerHTML =
+            '<svg viewBox="0 0 40 40" fill="#444" stroke="#444" xmlns="http://www.w3.org/2000/svg" style="width:60%;height:60%;position:absolute;top:20%;left:20%;"><path d="M 20,13 L 10,26 L 30,26 Z" stroke-linejoin="round" stroke-width="3"/></svg>';
+        } else if (content) {
           tile.innerHTML = content;
         }
+
         if (rotation !== 0) {
           tile.style.transform = `rotate(${rotation}deg)`;
         }
@@ -111,22 +145,6 @@
       const seedLabel = document.getElementById("seed-label");
       seedLabel.textContent = `Seed: ${result.seed}`;
 
-      // Add click handler to save button to copy URL
-      const saveBtn = document.getElementById("save-btn");
-      saveBtn.addEventListener("click", async () => {
-        const url = `${window.location.origin}${window.location.pathname}?seed=${result.seed}&hole=${holeNumber}`;
-        try {
-          await navigator.clipboard.writeText(url);
-          const originalText = saveBtn.textContent;
-          saveBtn.textContent = "URL copied!";
-          setTimeout(() => {
-            saveBtn.textContent = originalText;
-          }, 1500);
-        } catch (err) {
-          console.error("Failed to copy:", err);
-        }
-      });
-
       // Add click handler to update hole number
       const holeLabel = document.querySelector(".text-hole");
       holeLabel.textContent = `Hole: ${holeNumber}`;
@@ -142,6 +160,52 @@
       newMapBtn.addEventListener("click", () => {
         const newSeed = Math.floor(Math.random() * 1000000);
         window.location.href = `${window.location.pathname}?seed=${newSeed}&hole=${holeNumber}`;
+      });
+
+      // Add click handler to screenshot button
+      const screenshotBtn = document.getElementById("screenshot-btn");
+      screenshotBtn.addEventListener("click", async () => {
+        const gameContainer = document.getElementById("game-container");
+        const originalText = screenshotBtn.textContent;
+
+        screenshotBtn.textContent = "Generating...";
+
+        try {
+          // Allow UI to update before starting heavy operation (allows "Generating..." to show)
+          await new Promise((resolve) => setTimeout(resolve, 0));
+
+          // Use dom-to-image-more to capture the game-container (better SVG support)
+          const blob = await domtoimage.toBlob(gameContainer, {
+            bgcolor: "#ffffff",
+            width: gameContainer.offsetWidth * SCREENSHOT_SCALE,
+            height: gameContainer.offsetHeight * SCREENSHOT_SCALE,
+            style: {
+              transform: `scale(${SCREENSHOT_SCALE})`,
+              transformOrigin: "top left",
+              width: gameContainer.offsetWidth + "px",
+              height: gameContainer.offsetHeight + "px",
+            },
+          });
+
+          // Convert blob to download link
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = `dice-golf-hole-${holeNumber}-seed-${result.seed}.png`;
+          link.click();
+          URL.revokeObjectURL(url);
+
+          screenshotBtn.textContent = "Downloaded!";
+          setTimeout(() => {
+            screenshotBtn.textContent = originalText;
+          }, 1500);
+        } catch (err) {
+          console.error("Failed to capture screenshot:", err);
+          screenshotBtn.textContent = "Error!";
+          setTimeout(() => {
+            screenshotBtn.textContent = originalText;
+          }, 1500);
+        }
       });
 
       // Set initial URL with parameters
