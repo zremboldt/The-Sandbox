@@ -30,30 +30,32 @@
       const MAP_HEIGHT = 26; // in tile count
       const SCREENSHOT_SCALE = 4; // Screenshot output scale multiplier
 
+      const createSandPattern = () => {
+        // Create repeating diagonal lines
+        const lines = [];
+        const spacing = 10; // Spacing between diagonal lines (must divide evenly into TILE_SIZE)
+        const repetitions = TILE_SIZE / spacing;
+        for (let i = 0; i <= repetitions; i++) {
+          for (let j = 0; j <= repetitions; j++) {
+            const x = i * spacing;
+            const y = j * spacing;
+            lines.push(
+              `<line x1="${x}" y1="${y + spacing}" x2="${
+                x + spacing
+              }" y2="${y}" stroke="#ccc" stroke-width="1"/>`
+            );
+          }
+        }
+        return lines.join("");
+      };
+
       function createTile(type, content = "", rotation = 0) {
         const tile = document.createElement("div");
         tile.className = `tile ${type}`;
 
         // Add inline SVG for types that use background images
         if (type === "sand") {
-          // Create repeating diagonal lines directly
-          const lines = [];
-          const spacing = 10; // Spacing between diagonal lines (must divide evenly into TILE_SIZE)
-          const repetitions = TILE_SIZE / spacing;
-          for (let i = 0; i <= repetitions; i++) {
-            for (let j = 0; j <= repetitions; j++) {
-              const x = i * spacing;
-              const y = j * spacing;
-              lines.push(
-                `<line x1="${x}" y1="${y + spacing}" x2="${
-                  x + spacing
-                }" y2="${y}" stroke="#ccc" stroke-width="1"/>`
-              );
-            }
-          }
-          tile.innerHTML = `<svg width="${TILE_SIZE}" height="${TILE_SIZE}" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;">${lines.join(
-            ""
-          )}</svg>`;
+          tile.innerHTML = `<svg width="${TILE_SIZE}" height="${TILE_SIZE}" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;">${createSandPattern()}</svg>`;
         } else if (type === "tree") {
           tile.innerHTML =
             '<svg viewBox="0 0 40 40" fill="#444" stroke="#444" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;top:0;left:0;"><path d="M 20,8 L 10,21 L 30,21 Z" stroke-linejoin="round" stroke-width="3"/><path d="M 20,18 L 10,31 L 30,31 Z" stroke-linejoin="round" stroke-width="3"/></svg>';
