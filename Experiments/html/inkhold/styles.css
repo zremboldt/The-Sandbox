@@ -1,7 +1,32 @@
 :root {
-  --fairway-color: hsl(0 0% 92%);
-  --rough-color: hsl(0 0% 100%);
-  --water-color: hsl(0 0% 30%);
+  --black: hsl(0 0% 0%);
+  --gray-50: hsl(0 0% 5%);
+  --gray-100: hsl(0 0% 10%);
+  --gray-200: hsl(0 0% 20%);
+  --gray-300: hsl(0 0% 30%);
+  --gray-400: hsl(0 0% 40%);
+  --gray-500: hsl(0 0% 50%);
+  --gray-600: hsl(0 0% 60%);
+  --gray-700: hsl(0 0% 70%);
+  --gray-800: hsl(0 0% 80%);
+  --gray-900: hsl(0 0% 90%);
+  --gray-950: hsl(0 0% 95%);
+  --white: hsl(0 0% 100%);
+
+  /* --- */
+  --grid-color: var(--gray-900);
+  --plains-bg-color: var(--white);
+  --mountains-bg-color: var(--white);
+  --ruins-bg-color: var(--white);
+  --forest-bg-color: var(--gray-950);
+  --river-bg-color: var(--white);
+  --mountains-color: var(--gray-500);
+  --river-color: var(--gray-500);
+  --ruins-color: var(--gray-500);
+}
+
+html {
+  box-sizing: border-box;
 }
 
 body {
@@ -15,7 +40,7 @@ body {
 #game-container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px;
   padding: 20px;
 }
 
@@ -28,7 +53,9 @@ body {
 #map-container {
   display: grid;
   /* rows and columns are dynamically set in JS */
-  border: 0.5px solid hsl(0 0% 0% / 0.25);
+  gap: 1px;
+  background-color: var(--grid-color);
+  border: 1px solid var(--grid-color);
   border-radius: 4px;
   overflow: hidden;
 }
@@ -42,51 +69,42 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* border: 0.5px solid hsl(0 0% 0% / 0.1); */
 }
 
-.tile.rough {
-  background-color: var(--rough-color);
-  --dot-color: hsl(0 0% 80%);
+.tile.plains {
+  background-color: var(--plains-bg-color);
+  --dot-color: var(--gray-800);
 }
 
-.tile.fairway {
-  background-color: var(--fairway-color);
-  --dot-color: hsl(0 0% 60%);
+.tile.forest {
+  background-color: var(--forest-bg-color);
+  --dot-color: var(--gray-700);
 }
 
-.tile.sand {
-  background-color: white;
-  --dot-color: hsl(0 0% 50%);
+.tile.mountains {
+  background-color: var(--mountains-bg-color);
+  color: var(--mountains-color);
+  /* --dot-color: hsl(0 0% 85%); */
 }
 
-.tile.water {
-  background-color: var(--water-color);
-  --dot-color: hsl(0, 0%, 82%);
+.tile.river {
+  background-color: var(--river-bg-color);
+  color: var(--river-color);
+  /* --dot-color: hsl(0 0% 50%); */
 }
 
-.tile.tree {
-  background-color: white;
-}
-
-.tile.ball {
-  background-color: var(--fairway-color);
-}
-
-.tile.hole {
-  background-color: var(--fairway-color);
-}
-
-.tile.arrow {
-  background-color: var(--fairway-color);
+.tile.ruins {
+  background-color: var(--ruins-bg-color);
+  color: var(--ruins-color);
+  --dot-color: var(--gray-800);
 }
 
 /* Create dots */
 .tile::after {
   content: "";
   position: absolute;
-  width: 4px;
-  height: 4px;
+  width: 3px;
+  height: 3px;
   background-color: var(--dot-color);
   border-radius: 999px;
   top: 50%;
