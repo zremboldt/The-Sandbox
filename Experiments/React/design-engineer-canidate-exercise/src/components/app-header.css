@@ -1,0 +1,34 @@
+.app-header-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  padding-block: 1rem;
+  background-image: linear-gradient(
+    to bottom,
+    hsl(0 0% 100% / 1) 30%,
+    hsl(0 0% 100% / 0)
+  );
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    width: min(1180px, calc(100% - 2rem));
+    padding: 14px;
+    padding-left: 20px;
+    background-color: var(--white);
+    border: 1px solid var(--gray-85);
+    border-radius: 16px;
+    box-shadow: 0 6px 16px -3px hsla(200 8% 50% / 0.16);
+
+    & svg {
+      width: min(170px, 42vw);
+    }
+  }
+}

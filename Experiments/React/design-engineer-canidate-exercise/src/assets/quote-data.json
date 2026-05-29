@@ -1,0 +1,185 @@
+[
+  {
+    "id": "basic",
+    "name": "Basic",
+    "tagline": "Fulfills state minimum requirements",
+    "priceMonthly": 128.42,
+    "priceDisplay": "$128.42/mo",
+    "isRecommended": false,
+    "sections": {
+      "policyCoverages": [
+        { "label": "Bodily Injury", "value": "$25k/$50k", "included": true },
+        { "label": "Property Damage", "value": "$25k", "included": true },
+        {
+          "label": "Uninsured Motorist",
+          "value": "Not included",
+          "included": false
+        },
+        {
+          "label": "Medical Payments",
+          "value": "Not included",
+          "included": false
+        },
+        {
+          "label": "Personal Injury Protection",
+          "value": "Not included",
+          "included": false
+        }
+      ],
+      "vehicleCoverages": [
+        {
+          "label": "Comprehensive",
+          "value": "Not included",
+          "included": false
+        },
+        { "label": "Collision", "value": "Not included", "included": false }
+      ],
+      "extras": [
+        {
+          "label": "Roadside Assistance",
+          "value": "Not included",
+          "included": false
+        },
+        {
+          "label": "Rental Reimbursement",
+          "value": "Not included",
+          "included": false
+        },
+        { "label": "Glass Repair", "value": "Not included", "included": false },
+        {
+          "label": "New Car Replacement",
+          "value": "Not included",
+          "included": false
+        },
+        {
+          "label": "Accident Forgiveness",
+          "value": "Not included",
+          "included": false
+        }
+      ]
+    },
+    "ctaText": "View Plan"
+  },
+  {
+    "id": "recommended",
+    "name": "Recommended",
+    "tagline": "Here’s a plan that’s built for you",
+    "priceMonthly": 414.83,
+    "priceDisplay": "$414.83/mo",
+    "isRecommended": true,
+    "sections": {
+      "policyCoverages": [
+        { "label": "Bodily Injury", "value": "$250k/$500k", "included": true },
+        { "label": "Property Damage", "value": "$100k", "included": true },
+        {
+          "label": "Uninsured Motorist",
+          "value": "$250k/$500k",
+          "included": true
+        },
+        {
+          "label": "Medical Payments",
+          "value": "$2k per person",
+          "included": true
+        },
+        {
+          "label": "Personal Injury Protection",
+          "value": "$4.5k",
+          "included": true
+        }
+      ],
+      "vehicleCoverages": [
+        {
+          "label": "Comprehensive",
+          "value": "$1,000 deductible",
+          "included": true
+        },
+        { "label": "Collision", "value": "$1,000 deductible", "included": true }
+      ],
+      "extras": [
+        {
+          "label": "Roadside Assistance",
+          "value": "Not included",
+          "included": false
+        },
+        {
+          "label": "Rental Reimbursement",
+          "value": "Not included",
+          "included": false
+        },
+        { "label": "Glass Repair", "value": "Not included", "included": false },
+        {
+          "label": "New Car Replacement",
+          "value": "Not included",
+          "included": false
+        },
+        {
+          "label": "Accident Forgiveness",
+          "value": "Not included",
+          "included": false
+        }
+      ]
+    },
+    "ctaText": "View Plan"
+  },
+  {
+    "id": "best",
+    "name": "Best",
+    "tagline": "Comes with extra peace-of-mind",
+    "priceMonthly": 529.09,
+    "priceDisplay": "$529.09/mo",
+    "isRecommended": false,
+    "sections": {
+      "policyCoverages": [
+        { "label": "Bodily Injury", "value": "$500k/$500k", "included": true },
+        { "label": "Property Damage", "value": "$250k", "included": true },
+        {
+          "label": "Uninsured Motorist",
+          "value": "$500k/$500k",
+          "included": true
+        },
+        {
+          "label": "Medical Payments",
+          "value": "$5k per person",
+          "included": true
+        },
+        {
+          "label": "Personal Injury Protection",
+          "value": "$10k",
+          "included": true
+        }
+      ],
+      "vehicleCoverages": [
+        {
+          "label": "Comprehensive",
+          "value": "$500 deductible",
+          "included": true
+        },
+        { "label": "Collision", "value": "$500 deductible", "included": true }
+      ],
+      "extras": [
+        {
+          "label": "Roadside Assistance",
+          "value": "Included",
+          "included": true
+        },
+        {
+          "label": "Rental Reimbursement",
+          "value": "$50/day",
+          "included": true
+        },
+        { "label": "Glass Repair", "value": "No deductible", "included": true },
+        {
+          "label": "New Car Replacement",
+          "value": "Included",
+          "included": true
+        },
+        {
+          "label": "Accident Forgiveness",
+          "value": "Included",
+          "included": true
+        }
+      ]
+    },
+    "ctaText": "View Plan"
+  }
+]

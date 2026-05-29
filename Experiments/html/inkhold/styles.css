@@ -15,11 +15,7 @@
 
   /* --- */
   --grid-color: var(--gray-900);
-  --plains-bg-color: var(--white);
-  --mountains-bg-color: var(--white);
-  --ruins-bg-color: var(--white);
-  --forest-bg-color: var(--gray-950);
-  --river-bg-color: var(--white);
+  --forest-color: var(--gray-950);
   --mountains-color: var(--gray-500);
   --river-color: var(--gray-500);
   --ruins-color: var(--gray-500);
@@ -69,32 +65,29 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: var(--white);
 }
 
 .tile.plains {
-  background-color: var(--plains-bg-color);
   --dot-color: var(--gray-800);
 }
 
 .tile.forest {
-  background-color: var(--forest-bg-color);
+  background-color: var(--forest-color);
   --dot-color: var(--gray-700);
 }
 
 .tile.mountains {
-  background-color: var(--mountains-bg-color);
   color: var(--mountains-color);
   /* --dot-color: hsl(0 0% 85%); */
 }
 
 .tile.river {
-  background-color: var(--river-bg-color);
   color: var(--river-color);
   /* --dot-color: hsl(0 0% 50%); */
 }
 
 .tile.ruins {
-  background-color: var(--ruins-bg-color);
   color: var(--ruins-color);
   --dot-color: var(--gray-800);
 }

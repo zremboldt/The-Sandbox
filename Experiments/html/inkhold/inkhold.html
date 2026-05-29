@@ -58,16 +58,42 @@
         return lines.join("");
       };
 
-      function createTile(type, content = "", rotation = 0) {
+      const createDitherPattern = () => {
+        // Create a simple dithering pattern (Bayer matrix style)
+        const dots = [];
+        const spacing = 2; // Spacing between dots
+        const centerY = TILE_SIZE / 2; // 30 for 60px tile
+
+        for (let y = 0; y < TILE_SIZE; y += spacing) {
+          for (let x = 0; x < TILE_SIZE; x += spacing) {
+            // Checkerboard pattern
+            if ((x / spacing + y / spacing) % 2 === 0) {
+              // Skip the two center dots
+              if (y === centerY && x === 30) {
+                continue;
+              }
+              if (y === centerY - 2 && x === 28) {
+                continue;
+              }
+              dots.push(
+                `<rect x="${x}" y="${y}" width="1" height="1" fill="currentColor"/>`
+              );
+            }
+          }
+        }
+
+        return dots.join("");
+      };
+
+      function createTile(type, content = "") {
         const tile = document.createElement("div");
         tile.className = `tile ${type}`;
 
-        // Add inline SVG for types that use background images
         if (type === "mountains") {
           tile.innerHTML = `
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="${TILE_SIZE - 10}" 
+              width="${TILE_SIZE - 10}"
               height="${TILE_SIZE - 10}"
               viewBox="0 0 24 24"
               fill="none"
@@ -142,13 +168,10 @@
           tile.innerHTML = content;
         }
 
-        if (rotation !== 0) {
-          tile.style.transform = `rotate(${rotation}deg)`;
-        }
         return tile;
       }
 
-      function drawMap({ map, rotations }) {
+      function drawMap({ map }) {
         const container = document.getElementById("map-container");
         container.innerHTML = ""; // Clear previous content before drawing
         container.style.gridTemplateColumns = `repeat(${MAP_WIDTH}, ${TILE_SIZE}px)`;
@@ -158,7 +181,6 @@
         for (let y = 0; y < map.length; y++) {
           for (let x = 0; x < map[0].length; x++) {
             const terrainValue = map[y][x];
-            const rotation = rotations ? rotations[y][x] : 0;
             let tileType;
 
             // Determine terrain type
@@ -180,7 +202,7 @@
                 tileType = "plains";
             }
 
-            const tile = createTile(tileType, "", rotation);
+            const tile = createTile(tileType);
             container.appendChild(tile);
           }
         }

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -12,7 +12,10 @@
       }
       body {
         padding: 20px;
-        font-family: system-ui, -apple-system, sans-serif;
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -86,12 +89,7 @@
         count: 2,
       };
 
-      let itemBombs = {
-        x: null,
-        y: null,
-        size: 5,
-        count: 2,
-      };
+      let itemBombsList = [];
 
       let goal = {
         x: null,
@@ -135,7 +133,7 @@
                 0,
                 0,
                 canvas.width,
-                canvas.height
+                canvas.height,
               ).data;
 
               const grayscaleColors = [
@@ -143,6 +141,8 @@
                 [255, 255, 255, 255], // White
               ];
 
+              // First pass: identify red pixels and blue goal
+              const redPixels = new Set();
               for (let i = 0; i < mapData.length; i += 4) {
                 let colorIndex;
 
@@ -163,9 +163,8 @@
                   mapData[i + 2] = 255;
                   mapData[i + 3] = 255;
                 } else if (checkIsRed(mapData, i)) {
-                  // set itemBombs position to be the center of the blue pixel
-                  itemBombs.x = Math.floor((i / 4) % MAP_SIZE);
-                  itemBombs.y = Math.floor(i / 4 / MAP_SIZE);
+                  // Track red pixels for flood fill
+                  redPixels.add(i / 4);
 
                   // set pixel to be white
                   mapData[i] = 255;
@@ -180,6 +179,31 @@
                   mapData[i + 3] = grayscaleColors[colorIndex][3];
                 }
               }
+
+              // Second pass: find contiguous red regions and create bomb items
+              itemBombsList = [];
+              const visitedRedPixels = new Set();
+              redPixels.forEach((pixelPos) => {
+                if (!visitedRedPixels.has(pixelPos)) {
+                  const bomb = floodFillRed(redPixels, pixelPos * 4);
+                  itemBombsList.push(bomb);
+                  // Mark all pixels in this region as visited
+                  // (floodFillRed will have found them)
+                }
+              });
+
+              // Filter out bombs that are within 8 pixels of each other
+              itemBombsList = itemBombsList.filter((bomb, idx) => {
+                for (let i = 0; i < idx; i++) {
+                  const dx = bomb.x - itemBombsList[i].x;
+                  const dy = bomb.y - itemBombsList[i].y;
+                  const distance = Math.sqrt(dx * dx + dy * dy);
+                  if (distance < 8) {
+                    return false; // Skip this bomb
+                  }
+                }
+                return true;
+              });
 
               // Render player
               renderMap();
@@ -205,6 +229,61 @@
         return false;
       }
 
+      function floodFillRed(redPixels, startIdx) {
+        // Find all connected red pixels using flood fill
+        const visited = new Set();
+        const queue = [startIdx];
+        const connectedPixels = [];
+
+        while (queue.length > 0) {
+          const pixelIdx = queue.shift();
+          if (visited.has(pixelIdx)) continue;
+          visited.add(pixelIdx);
+          connectedPixels.push(pixelIdx);
+
+          // Check 4-connected neighbors
+          const pixelPos = pixelIdx / 4;
+          const x = pixelPos % MAP_SIZE;
+          const y = Math.floor(pixelPos / MAP_SIZE);
+
+          const neighbors = [
+            (y - 1) * MAP_SIZE + x, // up
+            (y + 1) * MAP_SIZE + x, // down
+            y * MAP_SIZE + (x - 1), // left
+            y * MAP_SIZE + (x + 1), // right
+          ];
+
+          neighbors.forEach((neighborPos) => {
+            const neighborIdx = neighborPos * 4;
+            if (
+              neighborIdx >= 0 &&
+              neighborIdx < mapData.length &&
+              redPixels.has(neighborPos)
+            ) {
+              if (!visited.has(neighborIdx)) {
+                queue.push(neighborIdx);
+              }
+            }
+          });
+        }
+
+        // Calculate center of connected region
+        let sumX = 0,
+          sumY = 0;
+        connectedPixels.forEach((pixelIdx) => {
+          const pixelPos = pixelIdx / 4;
+          sumX += pixelPos % MAP_SIZE;
+          sumY += Math.floor(pixelPos / MAP_SIZE);
+        });
+
+        return {
+          x: Math.round(sumX / connectedPixels.length),
+          y: Math.round(sumY / connectedPixels.length),
+          size: 5,
+          count: 2,
+        };
+      }
+
       function checkIsBlue(mapData, i) {
         if (
           mapData[i] < 60 &&
@@ -222,7 +301,7 @@
         ctx.putImageData(
           new ImageData(mapData, canvas.width, canvas.height),
           0,
-          0
+          0,
         );
       }
 
@@ -232,11 +311,10 @@
       }
 
       function renderItem() {
-        if (itemBombs.x === null) {
-          return;
-        }
-        ctx.fillStyle = "red";
-        ctx.fillRect(itemBombs.x, itemBombs.y, itemBombs.size, itemBombs.size);
+        itemBombsList.forEach((item) => {
+          ctx.fillStyle = "red";
+          ctx.fillRect(item.x, item.y, item.size, item.size);
+        });
       }
 
       function renderGoal() {
@@ -260,10 +338,10 @@
         // Calculate bomb explosion area
         const halfBlastSize = Math.floor(bomb.blastSize / 2);
         const explosionXArea = [...Array(bomb.blastSize)].map(
-          (_, i) => bomb.x - halfBlastSize + i
+          (_, i) => bomb.x - halfBlastSize + i,
         );
         const explosionYArea = [...Array(bomb.blastSize)].map(
-          (_, i) => (bomb.y - halfBlastSize + i) * MAP_SIZE
+          (_, i) => (bomb.y - halfBlastSize + i) * MAP_SIZE,
         );
 
         // Update map data
@@ -297,21 +375,21 @@
           direction === "right"
             ? player.speed
             : direction === "left"
-            ? -player.speed
-            : 0;
+              ? -player.speed
+              : 0;
         const dy =
           direction === "down"
             ? player.speed
             : direction === "up"
-            ? -player.speed
-            : 0;
+              ? -player.speed
+              : 0;
 
         // Calculate next player position
         const nextXArea = [...Array(player.size)].map(
-          (_, i) => player.x + i + dx
+          (_, i) => player.x + i + dx,
         );
         const nextYArea = [...Array(player.size)].map(
-          (_, i) => (player.y + i + dy) * MAP_SIZE
+          (_, i) => (player.y + i + dy) * MAP_SIZE,
         );
 
         let isWall = false;
@@ -334,9 +412,11 @@
               isWall = true;
             }
             // an item
-            if (pixelInPlayer === (itemBombs.y * MAP_SIZE + itemBombs.x) * 4) {
-              isItem = true;
-            }
+            itemBombsList.forEach((item, idx) => {
+              if (pixelInPlayer === (item.y * MAP_SIZE + item.x) * 4) {
+                isItem = idx; // Store the index of the item
+              }
+            });
             // if player is touching goal
             if (pixelInPlayer === (goal.y * MAP_SIZE + goal.x) * 4) {
               audioGoal.play();
@@ -360,14 +440,12 @@
         renderPlayer();
         renderGoal();
 
-        if (isItem) {
+        if (isItem !== false) {
           audioPickupItem.play();
 
-          bomb.count = bomb.count + itemBombs.count;
+          bomb.count = bomb.count + itemBombsList[isItem].count;
           bombCountEl.innerText = `Bombs: ${bomb.count}`;
-          itemBombs.x = null;
-          itemBombs.y = null;
-          itemBombs.size = null;
+          itemBombsList.splice(isItem, 1);
           renderItem();
         }
 

@@ -40,7 +40,6 @@ function generateMap(width, height, seed = null) {
 
   const totalTiles = width * height;
   const map = createEmptyMap(width, height);
-  const rotations = createEmptyMap(width, height);
 
   // Create a priority map (higher = more important/placed first)
   const priority = createEmptyMap(width, height);
@@ -94,7 +93,7 @@ function generateMap(width, height, seed = null) {
 
   // Everything else becomes plains (already initialized)
 
-  return { map, rotations, seed };
+  return { map, seed };
 }
 
 // ++++++++++ MAP CREATION ++++++++++
