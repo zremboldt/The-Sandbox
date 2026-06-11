@@ -1,316 +1,1294 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Colorado Family Vacation · July 26–31</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --ink: #26323d;
-    --ink-soft: #5e6e7c;
-    --muted: #8a96a3;
-    --paper: #f7f3ec;
-    --card: #ffffff;
-    --line: #e9e2d4;
-    --accent: #c4683a;
-    --accent-soft: #f8e7da;
-    --stay: #3f6e63;
-    --stay-soft: #e1eeea;
-  }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Inter', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.6; }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Colorado Family Vacation · July 26–31</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            :root {
+                --ink: #26323d;
+                --ink-soft: #5e6e7c;
+                --muted: #8a96a3;
+                --paper: #f7f3ec;
+                --card: #ffffff;
+                --line: #e9e2d4;
+                --accent: #c4683a;
+                --accent-soft: #f8e7da;
+                --stay: #3f6e63;
+                --stay-soft: #e1eeea;
+            }
+            html {
+                scroll-behavior: smooth;
+            }
+            body {
+                font-family: "Inter", sans-serif;
+                background: var(--paper);
+                color: var(--ink);
+                line-height: 1.6;
+            }
 
-  /* HERO */
-  .hero {
-    position: relative;
-    min-height: 62vh;
-    display: flex;
-    align-items: flex-end;
-    background:
-      linear-gradient(180deg, rgba(20,30,40,0.25) 0%, rgba(18,26,34,0.55) 60%, rgba(14,20,28,0.92) 100%),
-      url('img/sapphire-point.jpeg') center / cover no-repeat;
-    color: #fff;
-    padding: 4rem 2rem 2.5rem;
-  }
-  .hero-inner { max-width: 900px; margin: 0 auto; width: 100%; }
-  .hero-eyebrow { font-size: 0.8rem; letter-spacing: 0.25em; text-transform: uppercase; color: #f0d9c8; margin-bottom: 0.75rem; font-weight: 600; }
-  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.75rem, 7vw, 5rem); line-height: 1.05; margin-bottom: 1rem; }
-  .hero-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; }
-  .hero-dates { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.25); border-radius: 100px; padding: 0.45rem 1.25rem; font-size: 0.95rem; font-weight: 500; backdrop-filter: blur(4px); }
-  .hero-route { font-size: 0.85rem; color: #e8d8cc; letter-spacing: 0.02em; }
-  .hero-route .arrow { color: var(--accent); margin: 0 0.35rem; }
+            /* HERO */
+            .hero {
+                position: relative;
+                min-height: 62vh;
+                display: flex;
+                align-items: flex-end;
+                background:
+                    linear-gradient(
+                        180deg,
+                        rgba(20, 30, 40, 0.25) 0%,
+                        rgba(18, 26, 34, 0.55) 60%,
+                        rgba(14, 20, 28, 0.92) 100%
+                    ),
+                    url("img/sapphire-point.jpeg") center / cover no-repeat;
+                color: #fff;
+                padding: 4rem 2rem 2.5rem;
+            }
+            .hero-inner {
+                max-width: 900px;
+                margin: 0 auto;
+                width: 100%;
+            }
+            .hero-eyebrow {
+                font-size: 0.8rem;
+                letter-spacing: 0.25em;
+                text-transform: uppercase;
+                color: #f0d9c8;
+                margin-bottom: 0.75rem;
+                font-weight: 600;
+            }
+            .hero h1 {
+                font-family: "Playfair Display", serif;
+                font-size: clamp(2.75rem, 7vw, 5rem);
+                line-height: 1.05;
+                margin-bottom: 1rem;
+            }
+            .hero-meta {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 0.75rem 1rem;
+            }
+            .hero-dates {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                background: rgba(255, 255, 255, 0.14);
+                border: 1px solid rgba(255, 255, 255, 0.25);
+                border-radius: 100px;
+                padding: 0.45rem 1.25rem;
+                font-size: 0.95rem;
+                font-weight: 500;
+                backdrop-filter: blur(4px);
+            }
+            .hero-route {
+                font-size: 0.85rem;
+                color: #e8d8cc;
+                letter-spacing: 0.02em;
+            }
+            .hero-route .arrow {
+                color: var(--accent);
+                margin: 0 0.35rem;
+            }
 
-  /* DAY NAV */
-  .daynav { position: sticky; top: 0; z-index: 20; background: var(--ink); display: flex; overflow-x: auto; scrollbar-width: none; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
-  .daynav::-webkit-scrollbar { display: none; }
-  .daynav a { flex: none; display: flex; flex-direction: column; align-items: center; gap: 0.15rem; padding: 0.7rem 1.25rem; color: #b8c2cc; text-decoration: none; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; border-bottom: 3px solid transparent; transition: color 0.15s, border-color 0.15s, background 0.15s; }
-  .daynav a span { font-family: 'Playfair Display', serif; font-size: 1.1rem; letter-spacing: 0; text-transform: none; color: #fff; }
-  .daynav a:hover { color: var(--accent-soft); background: rgba(255,255,255,0.05); }
-  .daynav a:target,
-  .daynav a.active { color: var(--accent-soft); border-bottom-color: var(--accent); }
+            /* DAY NAV */
+            .daynav {
+                position: sticky;
+                top: 0;
+                z-index: 20;
+                background: var(--ink);
+                display: flex;
+                overflow-x: auto;
+                scrollbar-width: none;
+                box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+            }
+            .daynav::-webkit-scrollbar {
+                display: none;
+            }
+            .daynav a {
+                flex: none;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.15rem;
+                padding: 0.7rem 1.25rem;
+                color: #b8c2cc;
+                text-decoration: none;
+                font-size: 0.7rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                font-weight: 600;
+                border-bottom: 3px solid transparent;
+                transition:
+                    color 0.15s,
+                    border-color 0.15s,
+                    background 0.15s;
+            }
+            .daynav a span {
+                font-family: "Playfair Display", serif;
+                font-size: 1.1rem;
+                letter-spacing: 0;
+                text-transform: none;
+                color: #fff;
+            }
+            .daynav a:hover {
+                color: var(--accent-soft);
+                background: rgba(255, 255, 255, 0.05);
+            }
+            .daynav a:target,
+            .daynav a.active {
+                color: var(--accent-soft);
+                border-bottom-color: var(--accent);
+            }
 
-  /* LAYOUT */
-  .container { max-width: 900px; margin: 0 auto; padding: 3rem 1.5rem; }
+            /* LAYOUT */
+            .container {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 3rem 1.5rem;
+            }
 
-  /* DAY CARD */
-  .day { scroll-margin-top: 56px; background: var(--card); border-radius: 18px; overflow: hidden; margin-bottom: 2.5rem; box-shadow: 0 2px 20px rgba(38,50,61,0.06); border: 1px solid var(--line); }
-  .day-media { width: 100%; aspect-ratio: 16/7; overflow: hidden; }
-  .day-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+            /* DAY CARD */
+            .day {
+                scroll-margin-top: 56px;
+                background: var(--card);
+                border-radius: 18px;
+                overflow: hidden;
+                margin-bottom: 2.5rem;
+                box-shadow: 0 2px 20px rgba(38, 50, 61, 0.06);
+                border: 1px solid var(--line);
+            }
+            .day-media {
+                width: 100%;
+                aspect-ratio: 16/7;
+                overflow: hidden;
+            }
+            .day-media img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
 
-  .day-head { display: flex; align-items: center; gap: 1.25rem; padding: 1.5rem 2rem 0.5rem; flex-wrap: wrap; }
-  .day-badge { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 4.5rem; height: 4.5rem; border-radius: 14px; background: var(--accent-soft); }
-  .day-badge .num { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; line-height: 1; color: var(--accent); }
-  .day-badge .name { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; color: var(--ink-soft); margin-top: 0.2rem; }
-  .day-title { flex: 1; min-width: 200px; }
-  .day-title h2 { font-family: 'Playfair Display', serif; font-size: 1.55rem; color: var(--ink); line-height: 1.25; }
+            .day-head {
+                display: flex;
+                align-items: center;
+                gap: 1.25rem;
+                padding: 1.5rem 2rem 0.5rem;
+                flex-wrap: wrap;
+            }
+            .day-badge {
+                flex-shrink: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-width: 4.5rem;
+                height: 4.5rem;
+                padding: 0 0.5rem;
+                border-radius: 14px;
+                background: var(--accent-soft);
+            }
+            .day-badge .num {
+                font-family: "Playfair Display", serif;
+                font-size: 1.9rem;
+                font-weight: 700;
+                line-height: 1;
+                color: var(--accent);
+            }
+            .day-badge .name {
+                font-size: 0.62rem;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                font-weight: 700;
+                color: var(--ink-soft);
+                margin-top: 0.2rem;
+                white-space: nowrap;
+            }
+            .day-title {
+                flex: 1;
+                min-width: 200px;
+            }
+            .day-title h2 {
+                font-family: "Playfair Display", serif;
+                font-size: 1.55rem;
+                color: var(--ink);
+                line-height: 1.25;
+            }
 
-  .stay-pill { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--stay-soft); color: var(--stay); border-radius: 100px; padding: 0.35rem 0.9rem; font-size: 0.78rem; font-weight: 600; margin: 0.6rem 2rem 0; }
-  .stay-pill.done { background: var(--accent-soft); color: var(--accent); }
-  .stay-pill strong { font-weight: 700; }
+            .stay-pill {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.4rem;
+                background: var(--stay-soft);
+                color: var(--stay);
+                border-radius: 100px;
+                padding: 0.35rem 0.9rem;
+                font-size: 0.78rem;
+                font-weight: 600;
+                margin: 0.6rem 2rem 0;
+            }
+            .stay-pill.done {
+                background: var(--accent-soft);
+                color: var(--accent);
+            }
+            .stay-pill strong {
+                font-weight: 700;
+            }
 
-  .db { padding: 1.5rem 2rem 1.85rem; }
-  .sl { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin: 1.5rem 0 0.75rem; }
+            .db {
+                padding: 1.5rem 2rem 1.85rem;
+            }
+            .sl {
+                font-size: 0.7rem;
+                font-weight: 700;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                color: var(--muted);
+                margin: 1.5rem 0 0.75rem;
+            }
 
-  /* TIMELINE */
-  .timeline { position: relative; list-style: none; }
-  .timeline::before { content: ''; position: absolute; top: 1.125rem; bottom: 1.125rem; left: 1.125rem; width: 2px; background: var(--line); }
-  .titem { position: relative; display: flex; gap: 1rem; align-items: flex-start; }
-  .titem + .titem { margin-top: 1.1rem; }
-  .t-icon { position: relative; z-index: 1; flex-shrink: 0; width: 2.25rem; height: 2.25rem; border-radius: 50%; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; font-size: 1.05rem; }
-  .t-content { flex: 1; padding-top: 0.15rem; }
-  .t-title { font-weight: 600; font-size: 0.95rem; }
-  .t-desc { font-size: 0.84rem; color: var(--ink-soft); margin-top: 0.2rem; line-height: 1.55; }
-  .t-sub { font-size: 0.82rem; color: var(--ink-soft); margin-top: 0.4rem; padding-left: 0.6rem; border-left: 2px solid var(--line); list-style: none; }
-  .t-sub li { padding: 0.15rem 0; }
-  .t-sub li::before { content: "→ "; color: var(--accent); }
-  .todo-tag { display: inline-block; background: var(--accent); color: #fff; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; margin-bottom: 0.3rem; }
+            /* TIMELINE */
+            .timeline {
+                position: relative;
+                list-style: none;
+            }
+            .timeline::before {
+                content: "";
+                position: absolute;
+                top: 1.125rem;
+                bottom: 1.125rem;
+                left: 1.125rem;
+                width: 2px;
+                background: var(--line);
+            }
+            .titem {
+                position: relative;
+                display: flex;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            .titem + .titem {
+                margin-top: 1.1rem;
+            }
+            .t-icon {
+                position: relative;
+                z-index: 1;
+                flex-shrink: 0;
+                width: 2.25rem;
+                height: 2.25rem;
+                border-radius: 50%;
+                background: var(--accent-soft);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.05rem;
+            }
+            .t-content {
+                flex: 1;
+                padding-top: 0.15rem;
+            }
+            .t-title {
+                font-weight: 600;
+                font-size: 0.95rem;
+            }
+            .t-desc {
+                font-size: 0.84rem;
+                color: var(--ink-soft);
+                margin-top: 0.2rem;
+                line-height: 1.55;
+            }
+            .t-sub {
+                font-size: 0.82rem;
+                color: var(--ink-soft);
+                margin-top: 0.4rem;
+                padding-left: 0.6rem;
+                border-left: 2px solid var(--line);
+                list-style: none;
+            }
+            .t-sub li {
+                padding: 0.15rem 0;
+            }
+            .t-sub li::before {
+                content: "→ ";
+                color: var(--accent);
+            }
+            .todo-tag {
+                display: inline-block;
+                background: var(--accent);
+                color: #fff;
+                font-size: 0.65rem;
+                font-weight: 700;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                padding: 2px 8px;
+                border-radius: 4px;
+                margin-bottom: 0.3rem;
+            }
 
-  /* FOOD GRID */
-  .fg { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px, 1fr)); gap: 0.6rem; }
-  .fi { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 0.65rem 0.9rem; font-size: 0.84rem; }
-  .fi a { color: inherit; text-decoration: none; font-weight: 600; }
-  .fi a:hover { color: var(--accent); text-decoration: underline; }
-  .fnt { font-size: 0.76rem; color: var(--muted); margin-top: 0.15rem; }
+            /* FOOD GRID */
+            .fg {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+                gap: 0.6rem;
+            }
+            .fi {
+                background: var(--paper);
+                border: 1px solid var(--line);
+                border-radius: 10px;
+                padding: 0.65rem 0.9rem;
+                font-size: 0.84rem;
+            }
+            .fi a {
+                color: inherit;
+                text-decoration: none;
+                font-weight: 600;
+            }
+            .fi a:hover {
+                color: var(--accent);
+                text-decoration: underline;
+            }
+            .fnt {
+                font-size: 0.76rem;
+                color: var(--muted);
+                margin-top: 0.15rem;
+            }
 
-  /* ROUTE OPTIONS (Thursday) */
-  .options { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .option { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 1.1rem 1.25rem; border-top: 3px solid var(--accent); }
-  .option .ol { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
-  .option .ot { font-weight: 700; font-size: 1rem; margin-bottom: 0.35rem; font-family: 'Playfair Display', serif; }
-  .option .od { font-size: 0.85rem; color: var(--ink-soft); }
+            /* ROUTE OPTIONS (Thursday) */
+            .options {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+            .option {
+                background: var(--paper);
+                border: 1px solid var(--line);
+                border-radius: 12px;
+                padding: 1.1rem 1.25rem;
+                border-top: 3px solid var(--accent);
+            }
+            .option .ol {
+                font-size: 0.7rem;
+                font-weight: 700;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                color: var(--muted);
+                margin-bottom: 0.5rem;
+            }
+            .option .ot {
+                font-weight: 700;
+                font-size: 1rem;
+                margin-bottom: 0.35rem;
+                font-family: "Playfair Display", serif;
+            }
+            .option .od {
+                font-size: 0.85rem;
+                color: var(--ink-soft);
+            }
 
-  /* LINKS / CHIPS */
-  a.lk { color: inherit; text-decoration: none; border-bottom: 1px dashed var(--accent); }
-  a.lk:hover { border-bottom-color: var(--ink); color: var(--ink); }
-  a.map-chip { display: inline-flex; align-items: center; gap: 3px; font-size: 0.75rem; background: var(--stay-soft); color: var(--stay); border-radius: 100px; padding: 2px 9px; margin-left: 6px; text-decoration: none; vertical-align: middle; white-space: nowrap; font-weight: 600; }
-  a.map-chip:hover { background: #cfe6df; }
+            /* LINKS / CHIPS */
+            a.lk {
+                color: inherit;
+                text-decoration: none;
+                border-bottom: 1px dashed var(--accent);
+            }
+            a.lk:hover {
+                border-bottom-color: var(--ink);
+                color: var(--ink);
+            }
+            a.map-chip {
+                display: inline-flex;
+                align-items: center;
+                gap: 3px;
+                font-size: 0.75rem;
+                background: var(--stay-soft);
+                color: var(--stay);
+                border-radius: 100px;
+                padding: 2px 9px;
+                margin-left: 6px;
+                text-decoration: none;
+                vertical-align: middle;
+                white-space: nowrap;
+                font-weight: 600;
+            }
+            a.map-chip:hover {
+                background: #cfe6df;
+            }
 
-  /* TIPS */
-  .tips { background: var(--ink); color: #fff; border-radius: 18px; padding: 2.25rem 2rem; margin-top: 1rem; }
-  .tips h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 1.5rem; }
-  .tg { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; }
-  .tip { background: rgba(255,255,255,0.06); border-radius: 12px; padding: 1.1rem 1.2rem; font-size: 0.875rem; color: #d6dde3; border: 1px solid rgba(255,255,255,0.08); }
-  .tip strong { color: var(--accent-soft); display: block; margin-bottom: 0.35rem; font-size: 0.95rem; }
+            /* TIPS */
+            .tips {
+                background: var(--ink);
+                color: #fff;
+                border-radius: 18px;
+                padding: 2.25rem 2rem;
+                margin-top: 1rem;
+            }
+            .tips h3 {
+                font-family: "Playfair Display", serif;
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+            .tg {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+                gap: 1rem;
+            }
+            .tip {
+                background: rgba(255, 255, 255, 0.06);
+                border-radius: 12px;
+                padding: 1.1rem 1.2rem;
+                font-size: 0.875rem;
+                color: #d6dde3;
+                border: 1px solid rgba(255, 255, 255, 0.08);
+            }
+            .tip strong {
+                color: var(--accent-soft);
+                display: block;
+                margin-bottom: 0.35rem;
+                font-size: 0.95rem;
+            }
 
-  footer { text-align: center; padding: 2.5rem 1.5rem; font-size: 0.8rem; color: var(--muted); }
+            footer {
+                text-align: center;
+                padding: 2.5rem 1.5rem;
+                font-size: 0.8rem;
+                color: var(--muted);
+            }
 
-  @media (max-width: 600px) {
-    .hero { min-height: 48vh; padding: 2.5rem 1.25rem 2rem; }
-    .day-media { aspect-ratio: 4/3; }
-    .day-head { padding: 1.25rem 1.25rem 0.25rem; gap: 1rem; }
-    .day-badge { width: 3.75rem; height: 3.75rem; }
-    .day-badge .num { font-size: 1.6rem; }
-    .stay-pill { margin: 0.5rem 1.25rem 0; }
-    .db { padding: 1.25rem; }
-    .options { grid-template-columns: 1fr; }
-    .fg { grid-template-columns: 1fr 1fr; }
-  }
-</style>
-</head>
-<body>
+            @media (max-width: 600px) {
+                .hero {
+                    min-height: 48vh;
+                    padding: 2.5rem 1.25rem 2rem;
+                }
+                .day-media {
+                    aspect-ratio: 4/3;
+                }
+                .day-head {
+                    padding: 1.25rem 1.25rem 0.25rem;
+                    gap: 1rem;
+                }
+                .day-badge {
+                    width: 3.75rem;
+                    height: 3.75rem;
+                }
+                .day-badge .num {
+                    font-size: 1.6rem;
+                }
+                .stay-pill {
+                    margin: 0.5rem 1.25rem 0;
+                }
+                .db {
+                    padding: 1.25rem;
+                }
+                .options {
+                    grid-template-columns: 1fr;
+                }
+                .fg {
+                    grid-template-columns: 1fr 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header class="hero">
+            <div class="hero-inner">
+                <p class="hero-eyebrow">Family Vacation 2026</p>
+                <h1>Colorado<br />Adventure</h1>
+                <div class="hero-meta">
+                    <div class="hero-dates">📅 July 26 – 31, 2026</div>
+                    <div class="hero-route">
+                        Hillsboro<span class="arrow">→</span>Denver<span
+                            class="arrow"
+                            >→</span
+                        >St. Mary's Glacier<span class="arrow">→</span
+                        >Dillon<span class="arrow">→</span>Breckenridge<span
+                            class="arrow"
+                            >→</span
+                        >Home
+                    </div>
+                </div>
+            </div>
+        </header>
 
-<header class="hero">
-  <div class="hero-inner">
-    <p class="hero-eyebrow">Family Vacation 2026</p>
-    <h1>Colorado<br>Adventure</h1>
-    <div class="hero-meta">
-      <div class="hero-dates">📅 July 26 – 31, 2026</div>
-      <div class="hero-route">Hillsboro<span class="arrow">→</span>Denver<span class="arrow">→</span>St. Mary's Glacier<span class="arrow">→</span>Dillon<span class="arrow">→</span>Breckenridge<span class="arrow">→</span>Home</div>
-    </div>
-  </div>
-</header>
+        <nav class="daynav">
+            <a href="#d26"><span>26</span>Sun</a>
+            <a href="#d27"><span>27</span>Mon</a>
+            <a href="#d28"><span>28</span>Tue</a>
+            <a href="#d29"><span>29</span>Wed</a>
+            <a href="#d30"><span>30</span>Thu</a>
+            <a href="#d31"><span>31</span>Fri</a>
+        </nav>
 
-<nav class="daynav">
-  <a href="#d26"><span>26</span>Sun</a>
-  <a href="#d27"><span>27</span>Mon</a>
-  <a href="#d28"><span>28</span>Tue</a>
-  <a href="#d29"><span>29</span>Wed</a>
-  <a href="#d30"><span>30</span>Thu</a>
-  <a href="#d31"><span>31</span>Fri</a>
-</nav>
+        <div class="container">
+            <!-- SUNDAY -->
+            <div class="day" id="d26">
+                <div class="day-media">
+                    <img
+                        src="img/hyatt.png"
+                        alt="Hyatt Place Denver/Westminster"
+                        loading="lazy"
+                    />
+                </div>
+                <div class="day-head">
+                    <div class="day-badge">
+                        <span class="num">26</span
+                        ><span class="name">Sunday</span>
+                    </div>
+                    <div class="day-title">
+                        <h2>The Big Drive — Hillsboro to Denver</h2>
+                    </div>
+                </div>
+                <div class="stay-pill">
+                    🛏️ <strong>Tonight:</strong>&nbsp;Hyatt Place
+                    Denver/Westminster · Free breakfast included
+                </div>
+                <div class="db">
+                    <ul class="timeline">
+                        <li class="titem">
+                            <div class="t-icon">🚗</div>
+                            <div class="t-content">
+                                <div class="t-title">
+                                    <a
+                                        class="lk"
+                                        href="https://www.google.com/maps/dir/104+Wilson+St,+Hillsboro,+KS+67063-1651,+USA/Hyatt+Place+Denver+%2F+Westminster,+6865+W+103rd+Ave,+Westminster,+CO+80021/"
+                                        target="_blank"
+                                        >Drive to Westminster, CO</a
+                                    >
+                                </div>
+                                <div class="t-desc">
+                                    ~7 hours from Hillsboro · Stop and visit the
+                                    Lacys along the way
+                                </div>
+                            </div>
+                        </li>
+                        <li class="titem">
+                            <div class="t-icon">🏨</div>
+                            <div class="t-content">
+                                <div class="t-title">
+                                    <a
+                                        class="lk"
+                                        href="https://maps.app.goo.gl/WGxpFR9jomeREUsaA"
+                                        target="_blank"
+                                        >Check in: Hyatt Place
+                                        Denver/Westminster</a
+                                    >
+                                </div>
+                                <div class="t-desc">
+                                    6865 W 103rd Ave · Free breakfast included
+                                    in the morning ·
+                                    <a
+                                        class="lk"
+                                        href="https://mail.google.com/mail/u/0/#inbox/FMfcgzQgMCTtpfzvsCxQXLrmPmPbSplh"
+                                        target="_blank"
+                                        >Booking confirmation</a
+                                    >
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-<div class="container">
+            <!-- MONDAY -->
+            <div class="day" id="d27">
+                <div class="day-media">
+                    <img
+                        src="img/saint-marys-glacier.jpg"
+                        alt="Saint Mary's Glacier Colorado"
+                        loading="lazy"
+                    />
+                </div>
+                <div class="day-head">
+                    <div class="day-badge">
+                        <span class="num">27</span
+                        ><span class="name">Monday</span>
+                    </div>
+                    <div class="day-title">
+                        <h2>St. Mary's Glacier Hike & Arrive in Dillon</h2>
+                    </div>
+                </div>
+                <div class="stay-pill">
+                    🛏️ <strong>Tonight:</strong>&nbsp;Condo in Dillon (Airbnb) ·
+                    Night 1 of 3
+                </div>
+                <div class="db">
+                    <ul class="timeline">
+                        <li class="titem">
+                            <div class="t-icon">🥾</div>
+                            <div class="t-content">
+                                <div class="t-title">
+                                    <a
+                                        class="lk"
+                                        href="https://www.alltrails.com/trail/us/colorado/st-mary-s-glacier"
+                                        target="_blank"
+                                        >Hike St. Mary's Glacier</a
+                                    ><a
+                                        class="map-chip"
+                                        href="https://maps.app.goo.gl/NjuCB6yvsGuXEDZc6"
+                                        target="_blank"
+                                        >📍 Map</a
+                                    >
+                                </div>
+                                <div class="t-desc">
+                                    1 mile up to the glacier lake · Snow, water
+                                    &amp; mountain views ·
+                                    <a
+                                        class="lk"
+                                        href="https://www.google.com/maps/dir/Hyatt+Place+Denver+%2F+Westminster,+6865+W+103rd+Ave,+Westminster,+CO+80021/St.+Mary%27s+Glacier,+Colorado+80452/"
+                                        target="_blank"
+                                        >1 hr drive from hotel</a
+                                    >
+                                </div>
+                            </div>
+                        </li>
+                        <li class="titem">
+                            <div class="t-icon">🧺</div>
+                            <div class="t-content">
+                                <div class="todo-tag">📋 To-Do</div>
+                                <div class="t-title">
+                                    Pack a picnic lunch for the lake
+                                </div>
+                                <div class="t-desc">
+                                    Eat at the top! Don't forget sunscreen ☀️ —
+                                    high altitude UV is no joke
+                                </div>
+                            </div>
+                        </li>
+                        <li class="titem">
+                            <div class="t-icon">🏠</div>
+                            <div class="t-content">
+                                <div class="t-title">
+                                    <a
+                                        class="lk"
+                                        href="https://www.airbnb.com/rooms/851410937010620689"
+                                        target="_blank"
+                                        >Drive to Dillon Airbnb</a
+                                    >
+                                    — Check-in at 4:00 PM<a
+                                        class="map-chip"
+                                        href="https://www.google.com/maps/dir/St.+Mary%27s+Glacier,+Colorado+80452/160+La+Bonte+St,+Dillon,+CO+80435/"
+                                        target="_blank"
+                                        >🗺 Directions</a
+                                    >
+                                </div>
+                                <div class="t-desc">
+                                    160 La Bonte St · ~1 hr drive from glacier ·
+                                    3 nights
+                                </div>
+                            </div>
+                        </li>
+                        <li class="titem">
+                            <div class="t-icon">🍬</div>
+                            <div class="t-content">
+                                <div class="t-title">
+                                    If early to check-in: Silverthorne treats +
+                                    Target run
+                                </div>
+                                <div class="t-desc">
+                                    <a
+                                        class="lk"
+                                        href="https://www.google.com/maps/place/Rocky+Mountain+Chocolate+Factory+of+Silverthorne,+CO/@39.630267,-106.071327"
+                                        target="_blank"
+                                        >Rocky Mountain Chocolate Factory</a
+                                    >
+                                    in Silverthorne · Grab a fun toy for the
+                                    kids!
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <p class="sl">🍽️ Dinner options nearby</p>
+                    <div class="fg">
+                        <div class="fi">
+                            <a
+                                href="https://www.google.com/maps/place/Log+Cabin+Breakfast+Burritos/@39.628378,-106.0447336"
+                                target="_blank"
+                                >Log Cabin Breakfast Burritos</a
+                            >
+                            <div class="fnt">
+                                Walking distance from Airbnb · Dillon
+                            </div>
+                        </div>
+                        <div class="fi">
+                            <a
+                                href="https://www.google.com/maps/place/El+Sazon+Salvador+Mex+Grill/data=!4m2!3m1!1s0x876a5b00630c666f:0x7ce19baf03f7e1bf"
+                                target="_blank"
+                                >El Sazon Salvador Mex Grill</a
+                            >
+                            <div class="fnt">Dillon</div>
+                        </div>
+                        <div class="fi">
+                            <a
+                                href="https://www.google.com/maps/place/Sunshine+Caf%C3%A9/data=!4m2!3m1!1s0x876a5b80eaa6badf:0x84ebe698e666890a"
+                                target="_blank"
+                                >Sunshine Café</a
+                            >
+                            <div class="fnt">Silverthorne</div>
+                        </div>
+                        <div class="fi">
+                            <a
+                                href="https://www.google.com/maps/place/Mercado+La+Perla/@39.6426528,-106.0784262"
+                                target="_blank"
+                                >Mercado La Perla</a
+                            >
+                            <div class="fnt">Silverthorne</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-  <!-- SUNDAY -->
-  <div class="day" id="d26">
-    <div class="day-media">
-      <img src="img/hyatt.png" alt="Hyatt Place Denver/Westminster" loading="lazy">
-    </div>
-    <div class="day-head">
-      <div class="day-badge"><span class="num">26</span><span class="name">Sunday</span></div>
-      <div class="day-title"><h2>The Big Drive — Hillsboro to Denver</h2></div>
-    </div>
-    <div class="stay-pill">🛏️ <strong>Tonight:</strong>&nbsp;Hyatt Place Denver/Westminster · Free breakfast included</div>
-    <div class="db">
-      <ul class="timeline">
-        <li class="titem"><div class="t-icon">🚗</div><div class="t-content"><div class="t-title"><a class="lk" href="https://www.google.com/maps/dir/104+Wilson+St,+Hillsboro,+KS+67063-1651,+USA/Hyatt+Place+Denver+%2F+Westminster,+6865+W+103rd+Ave,+Westminster,+CO+80021/" target="_blank">Drive to Westminster, CO</a></div><div class="t-desc">~7 hours from Hillsboro · Stop and visit the Lacys along the way</div></div></li>
-        <li class="titem"><div class="t-icon">🏨</div><div class="t-content"><div class="t-title"><a class="lk" href="https://maps.app.goo.gl/WGxpFR9jomeREUsaA" target="_blank">Check in: Hyatt Place Denver/Westminster</a></div><div class="t-desc">6865 W 103rd Ave · Free breakfast included in the morning · <a class="lk" href="https://mail.google.com/mail/u/0/#inbox/FMfcgzQgMCTtpfzvsCxQXLrmPmPbSplh" target="_blank">Booking confirmation</a></div></div></li>
-      </ul>
-    </div>
-  </div>
+            <!-- TUESDAY -->
+            <div class="day" id="d28">
+                <div class="day-media">
+                    <img
+                        src="img/sapphire-point.jpeg"
+                        alt="Sapphire Point Overlook"
+                        loading="lazy"
+                    />
+                </div>
+                <div class="day-head">
+                    <div class="day-badge">
+                        <span class="num">28</span
+                        ><span class="name">Tuesday</span>
+                    </div>
+                    <div class="day-title">
+                        <h2>
+                            Sapphire Point, Butterhorn Bakery & Pontoon Boat Day
+                        </h2>
+                    </div>
+                </div>
+                <div class="stay-pill">
+                    🛏️ <strong>Tonight:</strong>&nbsp;Dillon Airbnb · Night 2 of
+                    3
+                </div>
+                <div class="db">
+                    <ul class="timeline">
+                        <li class="titem">
+                            <div class="t-icon">🌄</div>
+                            <div class="t-content">
+                                <div class="t-title">
+                                    <a
+                                        class="lk"
+                                        href="https://www.alltrails.com/trail/us/colorado/sapphire-point-overlook-trail"
+                                        target="_blank"
+                                        >Early hike: Sapphire Point Overlook</a
+                                    ><a
+                                        class="map-chip"
+                                        href="https://maps.app.goo.gl/av3kwtPyQytPS6Gz5"
+                                        target="_blank"
+                                        >📍 Map</a
+                                    >
+                                </div>
+                                <div class="t-desc">
+                                    Flat, easy 0.6-mile loop · Breathtaking
+                                    views of Dillon Reservoir · Perfect for
+                                    sunrise!
+                                </div>
+                            </div>
+                        </li>
+                        <li class="titem">
+                            <div class="t-icon">🥐</div>
+                            <div class="t-content">
+                                <div class="t-title">
+                                    Breakfast: Butterhorn Bakery & Cafe — Frisco
+                                </div>
+                                <div class="t-desc">
+                                    Near the trailhead · Perfect post-hike
+                                    reward
+                                </div>
+                            </div>
+                        </li>
+                        <li class="titem">
+                            <div class="t-icon">⛵</div>
+                            <div class="t-content">
+                                <div class="t-title">
+                                    Pontoon Boat Rental — 3 hours on Lake Dillon
+                                </div>
+                                <div class="t-desc">
+                                    Pack a picnic on the water! Stunning 360°
+                                    mountain views.
+                                </div>
+                                <ul class="t-sub">
+                                    <li>
+                                        <a
+                                            class="lk"
+                                            href="https://www.townoffrisco.com/things-to-do/frisco-bay-marina/rentals/power-boats/"
+                                            target="_blank"
+                                            >Frisco Bay Marina</a
+                                        >: $265 for 3 hours
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="lk"
+                                            href="https://www.townofdillon.com/marina/boat-rentals"
+                                            target="_blank"
+                                            >Dillon Marina</a
+                                        >: $229 for 2 hours
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="titem">
+                            <div class="t-icon">🎲</div>
+                            <div class="t-content">
+                                <div class="t-title">
+                                    Downtime at the Airbnb
+                                </div>
+                                <div class="t-desc">
+                                    Seafarers Catan · Taco Cat Goat cards ·
+                                    <a
+                                        class="lk"
+                                        href="https://www.google.com/maps/place/Marina+Park+Playground/data=!4m2!3m1!1s0x876a5b94419e1063:0xc2603ae728d14846"
+                                        target="_blank"
+                                        >Marina Park playground</a
+                                    >
+                                    is right next door!
+                                </div>
+                            </div>
+                        </li>
+                        <li class="titem">
+                            <div class="t-icon">🥾</div>
+                            <div class="t-content">
+                                <div class="t-title">
+                                    <a
+                                        class="lk"
+                                        href="https://www.alltrails.com/trail/us/colorado/lily-pad-lake-trail"
+                                        target="_blank"
+                                        >Optional: Lily Pad Lake Trail</a
+                                    >
+                                </div>
+                                <div class="t-desc">
+                                    3.2-mile round trip · Beaver ponds + a lake
+                                    covered in yellow lily pads · Very
+                                    manageable for a 5-year-old with snack
+                                    breaks
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <p class="sl">🍽️ Dinner options</p>
+                    <div class="fg">
+                        <div class="fi">
+                            <a
+                                href="https://www.google.com/maps/place/India%E2%80%99s+spice/@39.5779866,-106.1013802"
+                                target="_blank"
+                                >India's Spice</a
+                            >
+                            <div class="fnt">Frisco</div>
+                        </div>
+                        <div class="fi">
+                            <a
+                                href="https://www.google.com/maps/place/El+Sazon+Salvador+Mex+Grill/data=!4m2!3m1!1s0x876a5b00630c666f:0x7ce19baf03f7e1bf"
+                                target="_blank"
+                                >El Sazon Salvador Mex Grill</a
+                            >
+                            <div class="fnt">Dillon</div>
+                        </div>
+                        <div class="fi">
+                            <a
+                                href="https://www.google.com/maps/place/Dillon+Coffee+Lab+%26+Espresso+Bar/data=!4m2!3m1!1s0x876a5bec7c74b20d:0xb847a6e0a299c763"
+                                target="_blank"
+                                >Dillon Coffee Lab &amp; Espresso Bar</a
+                            >
+                            <div class="fnt">Walking distance · Dillon</div>
+                        </div>
+                        <div class="fi">
+                            <a
+                                href="https://www.google.com/maps/place/Summit+Scoops/@39.6309666,-106.0740127"
+                                target="_blank"
+                                >🍦 Summit Scoops</a
+                            >
+                            <div class="fnt">Silverthorne</div>
+                        </div>
+                        <div class="fi">
+                            <a
+                                href="https://www.google.com/maps/place/Rocky+Mountain+Chocolate+Factory+of+Breckenridge,+CO+on+Main+Street/@39.4799434,-106.0454081"
+                                target="_blank"
+                                >🍫 Rocky Mountain Chocolate Factory</a
+                            >
+                            <div class="fnt">Silverthorne</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-  <!-- MONDAY -->
-  <div class="day" id="d27">
-    <div class="day-media">
-      <img src="img/saint-marys-glacier.png" alt="Saint Mary's Glacier Colorado" loading="lazy">
-    </div>
-    <div class="day-head">
-      <div class="day-badge"><span class="num">27</span><span class="name">Monday</span></div>
-      <div class="day-title"><h2>St. Mary's Glacier Hike & Arrive in Dillon</h2></div>
-    </div>
-    <div class="stay-pill">🛏️ <strong>Tonight:</strong>&nbsp;Condo in Dillon (Airbnb) · Night 1 of 3</div>
-    <div class="db">
-      <ul class="timeline">
-        <li class="titem"><div class="t-icon">🥾</div><div class="t-content"><div class="t-title"><a class="lk" href="https://www.alltrails.com/trail/us/colorado/st-mary-s-glacier" target="_blank">Hike St. Mary's Glacier</a><a class="map-chip" href="https://maps.app.goo.gl/NjuCB6yvsGuXEDZc6" target="_blank">📍 Map</a></div><div class="t-desc">1 mile up to the glacier lake · Snow, water &amp; mountain views · <a class="lk" href="https://www.google.com/maps/dir/Hyatt+Place+Denver+%2F+Westminster,+6865+W+103rd+Ave,+Westminster,+CO+80021/St.+Mary%27s+Glacier,+Colorado+80452/" target="_blank">1 hr drive from hotel</a></div></div></li>
-        <li class="titem"><div class="t-icon">🧺</div><div class="t-content"><div class="todo-tag">📋 To-Do</div><div class="t-title">Pack a picnic lunch for the lake</div><div class="t-desc">Eat at the top! Don't forget sunscreen ☀️ — high altitude UV is no joke</div></div></li>
-        <li class="titem"><div class="t-icon">🏠</div><div class="t-content"><div class="t-title"><a class="lk" href="https://www.airbnb.com/rooms/851410937010620689" target="_blank">Drive to Dillon Airbnb</a> — Check-in at 4:00 PM<a class="map-chip" href="https://www.google.com/maps/dir/St.+Mary%27s+Glacier,+Colorado+80452/160+La+Bonte+St,+Dillon,+CO+80435/" target="_blank">🗺 Directions</a></div><div class="t-desc">160 La Bonte St · ~1 hr drive from glacier · 3 nights</div></div></li>
-        <li class="titem"><div class="t-icon">🍬</div><div class="t-content"><div class="t-title">If early to check-in: Silverthorne treats + Target run</div><div class="t-desc"><a class="lk" href="https://www.google.com/maps/place/Rocky+Mountain+Chocolate+Factory+of+Silverthorne,+CO/@39.630267,-106.071327" target="_blank">Rocky Mountain Chocolate Factory</a> in Silverthorne · Grab a fun toy for the kids!</div></div></li>
-      </ul>
-      <p class="sl">🍽️ Dinner options nearby</p>
-      <div class="fg">
-        <div class="fi"><a href="https://www.google.com/maps/place/Log+Cabin+Breakfast+Burritos/@39.628378,-106.0447336" target="_blank">Log Cabin Breakfast Burritos</a><div class="fnt">Walking distance from Airbnb · Dillon</div></div>
-        <div class="fi"><a href="https://www.google.com/maps/place/El+Sazon+Salvador+Mex+Grill/data=!4m2!3m1!1s0x876a5b00630c666f:0x7ce19baf03f7e1bf" target="_blank">El Sazon Salvador Mex Grill</a><div class="fnt">Dillon</div></div>
-        <div class="fi"><a href="https://www.google.com/maps/place/Sunshine+Caf%C3%A9/data=!4m2!3m1!1s0x876a5b80eaa6badf:0x84ebe698e666890a" target="_blank">Sunshine Café</a><div class="fnt">Silverthorne</div></div>
-        <div class="fi"><a href="https://www.google.com/maps/place/Mercado+La+Perla/@39.6426528,-106.0784262" target="_blank">Mercado La Perla</a><div class="fnt">Silverthorne</div></div>
-      </div>
-    </div>
-  </div>
+            <!-- WEDNESDAY -->
+            <div class="day" id="d29">
+                <div class="day-media">
+                    <img
+                        src="img/breckconnect-gondola.jpeg"
+                        alt="Breckenridge gondola summer"
+                        loading="lazy"
+                    />
+                </div>
+                <div class="day-head">
+                    <div class="day-badge">
+                        <span class="num">29</span
+                        ><span class="name">Wednesday</span>
+                    </div>
+                    <div class="day-title">
+                        <h2>
+                            Breckenridge Gondola, Blue River Bike Ride & the
+                            Troll
+                        </h2>
+                    </div>
+                </div>
+                <div class="stay-pill">
+                    🛏️ <strong>Tonight:</strong>&nbsp;Dillon Airbnb · Last
+                    night!
+                </div>
+                <div class="db">
+                    <ul class="timeline">
+                        <li class="titem">
+                            <div class="t-icon">🚌</div>
+                            <div class="t-content">
+                                <div class="t-title">
+                                    <a
+                                        class="lk"
+                                        href="https://www.google.com/maps/dir/Dillon,+Colorado/Breckenridge+Ski+Resort,+Breckenridge,+CO+80424/"
+                                        target="_blank"
+                                        >Free Summit Stage shuttle: Frisco →
+                                        Breckenridge</a
+                                    >
+                                </div>
+                                <div class="t-desc">
+                                    No parking stress — take the free bus!
+                                </div>
+                            </div>
+                        </li>
+                        <li class="titem">
+                            <div class="t-icon">🚡</div>
+                            <div class="t-content">
+                                <div class="t-title">
+                                    <a
+                                        class="lk"
+                                        href="https://www.tripadvisor.com/Attraction_Review-g33327-d2290650-Reviews-Breckenridge_Gondola-Breckenridge_Colorado.html"
+                                        target="_blank"
+                                        >BreckConnect Gondola ride (Free!)</a
+                                    >
+                                </div>
+                                <div class="t-desc">
+                                    Stunning views of the ski resort and valley
+                                    · Ride up, explore, ride back down
+                                </div>
+                            </div>
+                        </li>
+                        <li class="titem">
+                            <div class="t-icon">🚲</div>
+                            <div class="t-content">
+                                <div class="t-title">
+                                    <a
+                                        class="lk"
+                                        href="https://www.alltrails.com/trail/us/colorado/blue-river-bikeway"
+                                        target="_blank"
+                                        >Blue River Bikeway</a
+                                    >
+                                    — Breckenridge to Frisco
+                                </div>
+                                <div class="t-desc">
+                                    9 miles one-way · Fully paved, no highway
+                                    traffic · 525 ft gentle downhill — a cruise
+                                    for kids! · 1–2 hrs for kids, under 3 hrs
+                                    with breaks
+                                </div>
+                                <ul class="t-sub">
+                                    <li>
+                                        Rent from
+                                        <a
+                                            class="lk"
+                                            href="https://www.elevationskiandbike.com/summer-bike-rentals"
+                                            target="_blank"
+                                            >Elevation Ski &amp; Bike</a
+                                        >
+                                        <a
+                                            class="map-chip"
+                                            href="https://maps.app.goo.gl/kNnsDgJnoMZKSCzX8"
+                                            target="_blank"
+                                            >📍 Map</a
+                                        >
+                                        · Consider Trail-a-Bike for Nora
+                                    </li>
+                                    <li>
+                                        Stop at
+                                        <a
+                                            class="lk"
+                                            href="https://maps.app.goo.gl/ReW7W9fgxN2D3Gdm9"
+                                            target="_blank"
+                                            >River Park &amp; Playground</a
+                                        >
+                                        along the way
+                                    </li>
+                                    <li>
+                                        Leave bikes with their
+                                        <a
+                                            class="lk"
+                                            href="https://www.elevationskiandbike.com/copy-of-bike-tuning-services"
+                                            target="_blank"
+                                            >pickup service</a
+                                        >
+                                        in Frisco
+                                    </li>
+                                    <li>
+                                        Optional add-on:
+                                        <a
+                                            class="lk"
+                                            href="https://www.alltrails.com/trail/us/colorado/dillon-reservoir-lakeshore-perimeter-trail"
+                                            target="_blank"
+                                            >Dillon Reservoir Lakeshore
+                                            Perimeter Trail</a
+                                        >
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="titem">
+                            <div class="t-icon">🧌</div>
+                            <div class="t-content">
+                                <div class="t-title">
+                                    <a
+                                        class="lk"
+                                        href="https://www.tripadvisor.com/Attraction_Review-g33327-d17759649-Reviews-Isak_Heartstone-Breckenridge_Colorado.html"
+                                        target="_blank"
+                                        >Find Isak Heartstone — the 15-ft wooden
+                                        troll!</a
+                                    >
+                                </div>
+                                <div class="t-desc">
+                                    Famous troll sculpture hidden in the woods
+                                    near Breckenridge · The kids will love it
+                                </div>
+                            </div>
+                        </li>
+                        <li class="titem">
+                            <div class="t-icon">🛍️</div>
+                            <div class="t-content">
+                                <div class="t-title">
+                                    Shopping &amp; dining on historic Main
+                                    Street Frisco
+                                </div>
+                                <div class="t-desc">
+                                    After the bike ride ends in Frisco — explore
+                                    the town!
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <p class="sl">🍽️ Food in Breckenridge &amp; Frisco</p>
+                    <div class="fg">
+                        <div class="fi">
+                            <a
+                                href="https://www.google.com/maps/place/Empire+Burger/data=!4m2!3m1!1s0x876af661484d4d4d:0x74a99366639888a"
+                                target="_blank"
+                                >Empire Burger</a
+                            >
+                            <div class="fnt">Breckenridge</div>
+                        </div>
+                        <div class="fi">
+                            <a
+                                href="https://www.google.com/maps/place/Tin+Plate+Pizza/@39.4816944,-106.044524"
+                                target="_blank"
+                                >Tin Plate Pizza</a
+                            >
+                            <div class="fnt">Breckenridge</div>
+                        </div>
+                        <div class="fi">
+                            <a
+                                href="https://www.google.com/maps/place/Columbine+Caf%C3%A9/@39.4818667,-106.0464698"
+                                target="_blank"
+                                >Columbine Café</a
+                            >
+                            <div class="fnt">Breckenridge</div>
+                        </div>
+                        <div class="fi">
+                            <a
+                                href="https://www.google.com/maps/place/Motherloaded+Tavern/@39.4820288,-106.0463019"
+                                target="_blank"
+                                >Motherloaded Tavern</a
+                            >
+                            <div class="fnt">Breckenridge</div>
+                        </div>
+                        <div class="fi">
+                            <a
+                                href="https://www.google.com/maps/place/The+Shifty+Lifty+-+Gondola+Bar/@39.4846753,-106.0468488"
+                                target="_blank"
+                                >The Shifty Lifty</a
+                            >
+                            <div class="fnt">Gondola Bar · Breckenridge</div>
+                        </div>
+                        <div class="fi">
+                            <a
+                                href="https://www.google.com/maps/place/Mimi+%26+Pin+churros+and+donuts/@39.4846895,-106.0468966"
+                                target="_blank"
+                                >Mimi &amp; Pin Churros &amp; Donuts</a
+                            >
+                            <div class="fnt">Breckenridge</div>
+                        </div>
+                        <div class="fi">
+                            <a
+                                href="https://www.google.com/maps/place/Rocky+Mountain+Chocolate+Factory+of+Breckenridge,+CO+on+Main+Street/@39.4799434,-106.0454081"
+                                target="_blank"
+                                >🍫 Rocky Mountain Chocolate Factory</a
+                            >
+                            <div class="fnt">Breckenridge</div>
+                        </div>
+                        <div class="fi">
+                            <a
+                                href="https://www.google.com/maps/place/Butterhorn+Bakery+%26+Cafe/@39.5758261,-106.0969951"
+                                target="_blank"
+                                >Butterhorn Bakery &amp; Cafe</a
+                            >
+                            <div class="fnt">Frisco</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-  <!-- TUESDAY -->
-  <div class="day" id="d28">
-    <div class="day-media">
-      <img src="img/sapphire-point.jpeg" alt="Sapphire Point Overlook" loading="lazy">
-    </div>
-    <div class="day-head">
-      <div class="day-badge"><span class="num">28</span><span class="name">Tuesday</span></div>
-      <div class="day-title"><h2>Sapphire Point, Butterhorn Bakery & Pontoon Boat Day</h2></div>
-    </div>
-    <div class="stay-pill">🛏️ <strong>Tonight:</strong>&nbsp;Dillon Airbnb · Night 2 of 3</div>
-    <div class="db">
-      <ul class="timeline">
-        <li class="titem"><div class="t-icon">🌄</div><div class="t-content"><div class="t-title"><a class="lk" href="https://www.alltrails.com/trail/us/colorado/sapphire-point-overlook-trail" target="_blank">Early hike: Sapphire Point Overlook</a><a class="map-chip" href="https://maps.app.goo.gl/av3kwtPyQytPS6Gz5" target="_blank">📍 Map</a></div><div class="t-desc">Flat, easy 0.6-mile loop · Breathtaking views of Dillon Reservoir · Perfect for sunrise!</div></div></li>
-        <li class="titem"><div class="t-icon">🥐</div><div class="t-content"><div class="t-title">Breakfast: Butterhorn Bakery & Cafe — Frisco</div><div class="t-desc">Near the trailhead · Perfect post-hike reward</div></div></li>
-        <li class="titem"><div class="t-icon">⛵</div><div class="t-content"><div class="t-title">Pontoon Boat Rental — 3 hours on Lake Dillon</div><div class="t-desc">Pack a picnic on the water! Stunning 360° mountain views.</div><ul class="t-sub"><li><a class="lk" href="https://www.townoffrisco.com/things-to-do/frisco-bay-marina/rentals/power-boats/" target="_blank">Frisco Bay Marina</a>: $265 for 3 hours</li><li><a class="lk" href="https://www.townofdillon.com/marina/boat-rentals" target="_blank">Dillon Marina</a>: $229 for 2 hours</li></ul></div></li>
-        <li class="titem"><div class="t-icon">🎲</div><div class="t-content"><div class="t-title">Downtime at the Airbnb</div><div class="t-desc">Seafarers Catan · Taco Cat Goat cards · <a class="lk" href="https://www.google.com/maps/place/Marina+Park+Playground/data=!4m2!3m1!1s0x876a5b94419e1063:0xc2603ae728d14846" target="_blank">Marina Park playground</a> is right next door!</div></div></li>
-        <li class="titem"><div class="t-icon">🥾</div><div class="t-content"><div class="t-title"><a class="lk" href="https://www.alltrails.com/trail/us/colorado/lily-pad-lake-trail" target="_blank">Optional: Lily Pad Lake Trail</a></div><div class="t-desc">3.2-mile round trip · Beaver ponds + a lake covered in yellow lily pads · Very manageable for a 5-year-old with snack breaks</div></div></li>
-      </ul>
-      <p class="sl">🍽️ Dinner options</p>
-      <div class="fg">
-        <div class="fi"><a href="https://www.google.com/maps/place/India%E2%80%99s+spice/@39.5779866,-106.1013802" target="_blank">India's Spice</a><div class="fnt">Frisco</div></div>
-        <div class="fi"><a href="https://www.google.com/maps/place/El+Sazon+Salvador+Mex+Grill/data=!4m2!3m1!1s0x876a5b00630c666f:0x7ce19baf03f7e1bf" target="_blank">El Sazon Salvador Mex Grill</a><div class="fnt">Dillon</div></div>
-        <div class="fi"><a href="https://www.google.com/maps/place/Dillon+Coffee+Lab+%26+Espresso+Bar/data=!4m2!3m1!1s0x876a5bec7c74b20d:0xb847a6e0a299c763" target="_blank">Dillon Coffee Lab &amp; Espresso Bar</a><div class="fnt">Walking distance · Dillon</div></div>
-        <div class="fi"><a href="https://www.google.com/maps/place/Summit+Scoops/@39.6309666,-106.0740127" target="_blank">🍦 Summit Scoops</a><div class="fnt">Silverthorne</div></div>
-        <div class="fi"><a href="https://www.google.com/maps/place/Rocky+Mountain+Chocolate+Factory+of+Breckenridge,+CO+on+Main+Street/@39.4799434,-106.0454081" target="_blank">🍫 Rocky Mountain Chocolate Factory</a><div class="fnt">Silverthorne</div></div>
-      </div>
-    </div>
-  </div>
+            <!-- THURSDAY -->
+            <div class="day" id="d30">
+                <div class="day-media">
+                    <img
+                        src="img/canon-city.jpeg"
+                        alt="Cañon City scenic drive"
+                        loading="lazy"
+                    />
+                </div>
+                <div class="day-head">
+                    <div class="day-badge">
+                        <span class="num">30</span
+                        ><span class="name">Thursday</span>
+                    </div>
+                    <div class="day-title">
+                        <h2>Head Home — Choose Your Route</h2>
+                    </div>
+                </div>
+                <div class="stay-pill">
+                    🛏️ <strong>Tonight:</strong>&nbsp;Denver or Garden City, KS
+                    · Depending on your route
+                </div>
+                <div class="db">
+                    <div class="options">
+                        <div class="option">
+                            <div class="ol">Option A</div>
+                            <div class="ot">🏙️ Denver overnight</div>
+                            <div class="od">
+                                Shorter drive, relax in Denver, easy final leg
+                                home on Friday
+                            </div>
+                        </div>
+                        <div class="option">
+                            <div class="ol">Option B</div>
+                            <div class="ot">🏜️ South through Cañon City</div>
+                            <div class="od">
+                                ~6.5 hrs to Garden City, KS · Scenic Cañon City
+                                drive · Overnight in Garden City ·
+                                <a
+                                    class="lk"
+                                    href="https://www.google.com/maps/dir/160+La+Bonte+St,+Dillon,+CO+80435/Garden+City,+Kansas+67846/"
+                                    target="_blank"
+                                    >View route</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-  <!-- WEDNESDAY -->
-  <div class="day" id="d29">
-    <div class="day-media">
-      <img src="img/breckconnect-gondola.jpeg" alt="Breckenridge gondola summer" loading="lazy">
-    </div>
-    <div class="day-head">
-      <div class="day-badge"><span class="num">29</span><span class="name">Wednesday</span></div>
-      <div class="day-title"><h2>Breckenridge Gondola, Blue River Bike Ride & the Troll</h2></div>
-    </div>
-    <div class="stay-pill">🛏️ <strong>Tonight:</strong>&nbsp;Dillon Airbnb · Last night!</div>
-    <div class="db">
-      <ul class="timeline">
-        <li class="titem"><div class="t-icon">🚌</div><div class="t-content"><div class="t-title"><a class="lk" href="https://www.google.com/maps/dir/Dillon,+Colorado/Breckenridge+Ski+Resort,+Breckenridge,+CO+80424/" target="_blank">Free Summit Stage shuttle: Frisco → Breckenridge</a></div><div class="t-desc">No parking stress — take the free bus!</div></div></li>
-        <li class="titem"><div class="t-icon">🚡</div><div class="t-content"><div class="t-title"><a class="lk" href="https://www.tripadvisor.com/Attraction_Review-g33327-d2290650-Reviews-Breckenridge_Gondola-Breckenridge_Colorado.html" target="_blank">BreckConnect Gondola ride (Free!)</a></div><div class="t-desc">Stunning views of the ski resort and valley · Ride up, explore, ride back down</div></div></li>
-        <li class="titem"><div class="t-icon">🚲</div><div class="t-content"><div class="t-title"><a class="lk" href="https://www.alltrails.com/trail/us/colorado/blue-river-bikeway" target="_blank">Blue River Bikeway</a> — Breckenridge to Frisco</div><div class="t-desc">9 miles one-way · Fully paved, no highway traffic · 525 ft gentle downhill — a cruise for kids! · 1–2 hrs for kids, under 3 hrs with breaks</div><ul class="t-sub"><li>Rent from <a class="lk" href="https://www.elevationskiandbike.com/summer-bike-rentals" target="_blank">Elevation Ski &amp; Bike</a> <a class="map-chip" href="https://maps.app.goo.gl/kNnsDgJnoMZKSCzX8" target="_blank">📍 Map</a> · Consider Trail-a-Bike for Nora</li><li>Stop at <a class="lk" href="https://maps.app.goo.gl/ReW7W9fgxN2D3Gdm9" target="_blank">River Park &amp; Playground</a> along the way</li><li>Leave bikes with their <a class="lk" href="https://www.elevationskiandbike.com/copy-of-bike-tuning-services" target="_blank">pickup service</a> in Frisco</li><li>Optional add-on: <a class="lk" href="https://www.alltrails.com/trail/us/colorado/dillon-reservoir-lakeshore-perimeter-trail" target="_blank">Dillon Reservoir Lakeshore Perimeter Trail</a></li></ul></div></li>
-        <li class="titem"><div class="t-icon">🧌</div><div class="t-content"><div class="t-title"><a class="lk" href="https://www.tripadvisor.com/Attraction_Review-g33327-d17759649-Reviews-Isak_Heartstone-Breckenridge_Colorado.html" target="_blank">Find Isak Heartstone — the 15-ft wooden troll!</a></div><div class="t-desc">Famous troll sculpture hidden in the woods near Breckenridge · The kids will love it</div></div></li>
-        <li class="titem"><div class="t-icon">🛍️</div><div class="t-content"><div class="t-title">Shopping &amp; dining on historic Main Street Frisco</div><div class="t-desc">After the bike ride ends in Frisco — explore the town!</div></div></li>
-      </ul>
-      <p class="sl">🍽️ Food in Breckenridge &amp; Frisco</p>
-      <div class="fg">
-        <div class="fi"><a href="https://www.google.com/maps/place/Empire+Burger/data=!4m2!3m1!1s0x876af661484d4d4d:0x74a99366639888a" target="_blank">Empire Burger</a><div class="fnt">Breckenridge</div></div>
-        <div class="fi"><a href="https://www.google.com/maps/place/Tin+Plate+Pizza/@39.4816944,-106.044524" target="_blank">Tin Plate Pizza</a><div class="fnt">Breckenridge</div></div>
-        <div class="fi"><a href="https://www.google.com/maps/place/Columbine+Caf%C3%A9/@39.4818667,-106.0464698" target="_blank">Columbine Café</a><div class="fnt">Breckenridge</div></div>
-        <div class="fi"><a href="https://www.google.com/maps/place/Motherloaded+Tavern/@39.4820288,-106.0463019" target="_blank">Motherloaded Tavern</a><div class="fnt">Breckenridge</div></div>
-        <div class="fi"><a href="https://www.google.com/maps/place/The+Shifty+Lifty+-+Gondola+Bar/@39.4846753,-106.0468488" target="_blank">The Shifty Lifty</a><div class="fnt">Gondola Bar · Breckenridge</div></div>
-        <div class="fi"><a href="https://www.google.com/maps/place/Mimi+%26+Pin+churros+and+donuts/@39.4846895,-106.0468966" target="_blank">Mimi &amp; Pin Churros &amp; Donuts</a><div class="fnt">Breckenridge</div></div>
-        <div class="fi"><a href="https://www.google.com/maps/place/Rocky+Mountain+Chocolate+Factory+of+Breckenridge,+CO+on+Main+Street/@39.4799434,-106.0454081" target="_blank">🍫 Rocky Mountain Chocolate Factory</a><div class="fnt">Breckenridge</div></div>
-        <div class="fi"><a href="https://www.google.com/maps/place/Butterhorn+Bakery+%26+Cafe/@39.5758261,-106.0969951" target="_blank">Butterhorn Bakery &amp; Cafe</a><div class="fnt">Frisco</div></div>
-      </div>
-    </div>
-  </div>
+            <!-- FRIDAY -->
+            <div class="day" id="d31">
+                <div class="day-media">
+                    <img
+                        src="img/garden-city.jpg"
+                        alt="Garden City, Kansas"
+                        loading="lazy"
+                    />
+                </div>
+                <div class="day-head">
+                    <div class="day-badge">
+                        <span class="num">31</span
+                        ><span class="name">Friday</span>
+                    </div>
+                    <div class="day-title">
+                        <h2>Drive Home to Hillsboro 🏡</h2>
+                    </div>
+                </div>
+                <div class="stay-pill done">
+                    🏡 <strong>Welcome home!</strong>&nbsp;Trip complete
+                </div>
+                <div class="db">
+                    <ul class="timeline">
+                        <li class="titem">
+                            <div class="t-icon">🛣️</div>
+                            <div class="t-content">
+                                <div class="t-title">
+                                    Last leg home to Hillsboro, Kansas
+                                </div>
+                                <div class="t-desc">
+                                    Bring back Colorado memories, mountain
+                                    snacks &amp; tired-happy kids
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-  <!-- THURSDAY -->
-  <div class="day" id="d30">
-    <div class="day-media">
-      <img src="https://images.unsplash.com/photo-1489549132488-d00b7eee80f1?w=900&q=85" alt="Colorado canyon scenic drive" loading="lazy">
-    </div>
-    <div class="day-head">
-      <div class="day-badge"><span class="num">30</span><span class="name">Thursday</span></div>
-      <div class="day-title"><h2>Head Home — Choose Your Route</h2></div>
-    </div>
-    <div class="stay-pill">🛏️ <strong>Tonight:</strong>&nbsp;Denver or Garden City, KS · Depending on your route</div>
-    <div class="db">
-      <div class="options">
-        <div class="option"><div class="ol">Option A</div><div class="ot">🏙️ Denver overnight</div><div class="od">Shorter drive, relax in Denver, easy final leg home on Friday</div></div>
-        <div class="option"><div class="ol">Option B</div><div class="ot">🏜️ South through Cañon City</div><div class="od">~6.5 hrs to Garden City, KS · Scenic Cañon City drive · Overnight in Garden City · <a class="lk" href="https://www.google.com/maps/dir/160+La+Bonte+St,+Dillon,+CO+80435/Garden+City,+Kansas+67846/" target="_blank">View route</a></div></div>
-      </div>
-    </div>
-  </div>
+            <!-- REMINDERS -->
+            <div class="tips">
+                <h3>⛰️ Trip Reminders</h3>
+                <div class="tg">
+                    <div class="tip">
+                        <strong>Sunscreen!</strong>High altitude = stronger UV.
+                        Apply before St. Mary's Glacier and every outdoor day.
+                    </div>
+                    <div class="tip">
+                        <strong>Altitude</strong>Dillon &amp; Breckenridge are
+                        at 9,000+ ft. Drink extra water the first couple of
+                        days.
+                    </div>
+                    <div class="tip">
+                        <strong>Picnic Planning</strong>Pack the St. Mary's
+                        Glacier picnic Monday morning before leaving the hotel.
+                    </div>
+                    <div class="tip">
+                        <strong>Trail-a-Bike for Nora</strong>Consider renting
+                        one from Elevation Ski &amp; Bike for the Blue River
+                        Bikeway ride.
+                    </div>
+                    <div class="tip">
+                        <strong>Free Shuttle</strong>Summit Stage bus from
+                        Frisco → Breckenridge is free. Skip the Breck parking
+                        hassle!
+                    </div>
+                    <div class="tip">
+                        <strong>Games to Pack</strong>Seafarers Catan + Taco Cat
+                        Goat Cheese Pizza cards for Airbnb downtime.
+                    </div>
+                    <div class="tip">
+                        <strong>Check-in Time</strong>Airbnb check-in is 4:00 PM
+                        on Monday — head to Silverthorne fudge if you're early!
+                    </div>
+                    <div class="tip">
+                        <strong>Marina Park</strong>Playground is right next to
+                        the Airbnb — easy afternoon activity for the kids.
+                    </div>
+                </div>
+            </div>
+        </div>
 
-  <!-- FRIDAY -->
-  <div class="day" id="d31">
-    <div class="day-media">
-      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=85" alt="Road trip home" loading="lazy">
-    </div>
-    <div class="day-head">
-      <div class="day-badge"><span class="num">31</span><span class="name">Friday</span></div>
-      <div class="day-title"><h2>Drive Home to Hillsboro 🏡</h2></div>
-    </div>
-    <div class="stay-pill done">🏡 <strong>Welcome home!</strong>&nbsp;Trip complete</div>
-    <div class="db">
-      <ul class="timeline">
-        <li class="titem"><div class="t-icon">🛣️</div><div class="t-content"><div class="t-title">Last leg home to Hillsboro, Kansas</div><div class="t-desc">Bring back Colorado memories, mountain snacks &amp; tired-happy kids</div></div></li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- REMINDERS -->
-  <div class="tips">
-    <h3>⛰️ Trip Reminders</h3>
-    <div class="tg">
-      <div class="tip"><strong>Sunscreen!</strong>High altitude = stronger UV. Apply before St. Mary's Glacier and every outdoor day.</div>
-      <div class="tip"><strong>Altitude</strong>Dillon &amp; Breckenridge are at 9,000+ ft. Drink extra water the first couple of days.</div>
-      <div class="tip"><strong>Picnic Planning</strong>Pack the St. Mary's Glacier picnic Monday morning before leaving the hotel.</div>
-      <div class="tip"><strong>Trail-a-Bike for Nora</strong>Consider renting one from Elevation Ski &amp; Bike for the Blue River Bikeway ride.</div>
-      <div class="tip"><strong>Free Shuttle</strong>Summit Stage bus from Frisco → Breckenridge is free. Skip the Breck parking hassle!</div>
-      <div class="tip"><strong>Games to Pack</strong>Seafarers Catan + Taco Cat Goat Cheese Pizza cards for Airbnb downtime.</div>
-      <div class="tip"><strong>Check-in Time</strong>Airbnb check-in is 4:00 PM on Monday — head to Silverthorne fudge if you're early!</div>
-      <div class="tip"><strong>Marina Park</strong>Playground is right next to the Airbnb — easy afternoon activity for the kids.</div>
-    </div>
-  </div>
-
-</div>
-
-<footer>Colorado Family Vacation · July 26–31, 2026 · Hillsboro, KS → Denver → Dillon → Breckenridge → Home</footer>
-</body>
+        <footer>
+            Colorado Family Vacation · July 26–31, 2026 · Hillsboro, KS → Denver
+            → Dillon → Breckenridge → Home
+        </footer>
+    </body>
 </html>
